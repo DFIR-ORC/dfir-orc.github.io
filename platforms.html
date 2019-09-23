@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Requirements &amp; Supported Platforms &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DFIR ORC Design and Architecture" href="intro_to_data_collection.html" />
+    <link rel="prev" title="Introduction" href="index.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="intro_to_data_collection.html" title="DFIR ORC Design and Architecture"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="index.html" title="Introduction"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="requirements-supported-platforms">
+<h1>Requirements &amp; Supported Platforms<a class="headerlink" href="#requirements-supported-platforms" title="Permalink to this headline">¶</a></h1>
+<p>DFIR ORC requires <em>administrative</em> privileges. Indeed, data accessed is privileged.
+However, the embedded tool suite does not go through the permission system of Microsoft Windows to access
+files. It rather interacts at a lower level, using devices, thus preventing access denials on files already in use, locked, etc.
+This enables to collect critical artefacts, such as hives, event logs and pagefiles.</p>
+<p>DFIR ORC is tested on the following platforms:</p>
+<ul class="simple">
+<li><p>Microsoft Windows XP SP2 (32 bits)</p></li>
+<li><p>Microsoft Windows XP SP3 (32 bits)</p></li>
+<li><p>Microsoft Windows Server 2003 (R2) SP3 (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows Vista SP2 (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows Server 2008 SP2 (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows 7 SP1 (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows Server 2008 R2 (64 bits)</p></li>
+<li><p>Microsoft Windows 8 (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows Server 2012 (64 bits)</p></li>
+<li><p>Microsoft Windows 8.1 (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows 8.1 Update (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows Server 2012 R2 (64 bits)</p></li>
+<li><p>Microsoft Windows 10 (32&amp;64 bits)</p></li>
+<li><p>Microsoft Windows Server 2016 (64 bits)</p></li>
+<li><p>Microsoft Windows Server 2019 (64 bits)</p></li>
+</ul>
+<p>DFIR ORC creates processes for data collection and assigns them to run within a Windows Job Object.
+This job object allows to control and monitor resources used by the tools (memory, IO, UI, …).
+DFIR ORC needs to create this job object <em>and</em> be able to assign processes to it.</p>
+<p>Depending on the deployment method used and Windows versions, it is possible that the <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> process is created within a job
+object. When this is the case, the process must be allowed to “break away from the job” (JOB_OBJECT_LIMIT_BREAKAWAY_OK).
+If this fails, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> will attempt to create a nested job object and run processes into this object.</p>
+<div class="warning admonition">
+<p class="admonition-title">Warning for Windows 7, XP SP3, Vista, and Windows Server 2003, 2008, 2008 R2</p>
+<p>In these versions of Windows, a process can be associated with only one job: jobs cannot be nested.
+The ability to nest jobs was added in Windows 8 and Windows Server 2012.
+If <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> is running inside a job object that does not have the permission “break way from job”, and nested jobs are not available, then DFIR ORC will attempt to temporarily modify the job to allow its children to break away. It that attempt fails, DFIR ORC will be unable to launch processes and will fail. At this time, there is no known configuration where DFIR ORC fails for this reason but this corner case could still occur. In such a case, an appropriate error message is displayed.</p>
+</div>
+<p>More information on <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/procthread/job-objects">job objects on MSDN</a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="intro_to_data_collection.html" title="DFIR ORC Design and Architecture"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="index.html" title="Introduction"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

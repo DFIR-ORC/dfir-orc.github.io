@@ -1,0 +1,103 @@
+Configure tools’ output
+-----------------------
+
+Tools configure their output in a unified way.
+The syntax is simple and straightforward:
+* Command line argument:
+
+    ::
+
+        /out=<My output>
+
+* Config file XML statement:
+
+    .. code-block: xml
+
+        <output>MyOutput </output>
+
+Where <My Output> can be a file (typically CSV), a directory, an archive or a connection string to a database server.
+
+.. note:: "out" in /out can vary from tool to tools typically for tools with more than one output like ntfsinfo (see MyTool.exe –h for details).
+
+
+File output
+```````````
+
+The simplest form of output:
+
+.. code:: bat
+    
+    MyTool.exe /out=c:\temp\foo.csv
+    
+    C:\temp must exist, be a directory and writeable.
+    Foo.csv must not exist.
+
+Directory output
+````````````````
+
+Directory output takes the form:
+
+.. code:: bat
+
+    MyTool.exe /out=c:\temp\test
+
+    C:\temp\test must exist, be a directory and writeable.
+
+Archive output
+``````````````
+
+The simplest form of output for an archive is:
+
+.. code:: bat
+
+    MyTool.exe /out=c:\temp\foo.zip
+
+    C:\temp must exist, be a directory and writeable.
+    foo.zip must not exist.
+
+The archive format is selected based on extension of foo:
+* Foo.zip selects the zip format.
+* Foo.7z selects the LZMA/7zip format (www.7zip.org).
+* Foo.cab select the MSCF Microsoft cabinet format.
+* Foo.<ext> selects the format if supported in 7zip library for archive creation.
+
+The following tools support output in archive files:
+* NTFSInfo
+* USNInfo
+* GetThis
+* GetSamples
+
+SQL Server output
+`````````````````
+
+The simplest form of SQL server output is:
+
+.. code:: bat
+    
+    MyTool.exe /out=<MySQLConnectionString>#<MyTable>
+
+<MySQLConnectionString> must be a valid connection string:
+
+::
+
+    Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;DSN=myDsn
+    <MyTable> must be an existing table with the appropriate column definition
+
+File character encoding
+```````````````````````
+
+To reduce output file size and ease file analysis on Linux systems (that seems to have issues with UTF16), the default encoding for CSV is  now UTF8.
+The command line options /utf8 and /utf16 can be used to explicitely control the output encoding.
+Also, XML configuration files elements outputfile and outputdir can have an optional attribute “encoding”:
+
+.. code:: xml
+
+    <output encoding="UTF16">c:\temp</output>
+  
+Or
+
+.. code:: xml
+    
+    <output encoding="UTF8" >c:\temp\test.csv</output>
+
+

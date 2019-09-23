@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>ToolEmbed &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DFIR ORC Local Configuration File" href="orc_local_config.html" />
+    <link rel="prev" title="WolfLauncher Configuration File" href="wolf_config.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="orc_local_config.html" title="DFIR ORC Local Configuration File"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="wolf_config.html" title="WolfLauncher Configuration File"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" accesskey="U">DFIR ORC Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tuto.html">Getting Started With DFIR ORC Configuration Files: A Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Referencing resources in configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_options.html">DFIR ORC Command-line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wolf_config.html">WolfLauncher Configuration File</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ToolEmbed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orc_local_config.html">DFIR ORC Local Configuration File</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="toolembed">
+<h1>ToolEmbed<a class="headerlink" href="#toolembed" title="Permalink to this headline">¶</a></h1>
+<p id="anchor-root-toolembed">ToolEmbed is used to add resources (binaries, configuration files) to a DFIR ORC binary. It takes an XML configuration file as input.
+To understand why this is nedded and what happens when <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> is executed, please refer to <a class="reference internal" href="architecture.html"><span class="doc">DFIR ORC Architecture</span></a>.</p>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#toolembed-element">toolembed</a> attributes=”…” &gt;</div>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#input-element">input</a> &gt; <em>value</em> &lt;/input&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#output-element">output</a> &gt; <em>value</em> &lt;/output&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#run32-element">run32</a> attributes=”…”&gt;&lt;/run32&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#run64-element">run64</a> attributes=”…”&gt;&lt;/run64&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#file-element">file</a> attributes=”…” /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#pair-element">pair</a> attributes=”…” /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#archive-element">archive</a> attributes=”…” &gt;</div>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#archive-file-element">file</a> attributes=”…” /&gt;</div>
+</div>
+<div class="line">&lt;<a class="reference external" href="#archive-element">/archive</a>&gt;</div>
+</div>
+<div class="line">&lt;<a class="reference external" href="#toolembed-element">/toolembed</a>&gt;</div>
+</div>
+<p>Here is a typical ToolEmbed configuration file.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;toolembed&gt;</span>
+    <span class="nt">&lt;input&gt;</span>.\tools\DFIR-Orc_x86.exe<span class="nt">&lt;/input&gt;</span>
+    <span class="nt">&lt;output&gt;</span>.\output\%ORC_OUTPUT%<span class="nt">&lt;/output&gt;</span>
+
+    <span class="nt">&lt;run64</span> <span class="na">args=</span><span class="s">&quot;WolfLauncher&quot;</span><span class="nt">&gt;</span>7z:#Tools|DFIR-Orc_x64.exe<span class="nt">&lt;/run64&gt;</span>
+    <span class="nt">&lt;run32</span> <span class="na">args=</span><span class="s">&quot;WolfLauncher&quot;</span><span class="nt">&gt;</span>self:#<span class="nt">&lt;/run32&gt;</span>
+
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;WOLFLAUNCHER_CONFIG&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\DFIR-ORC_config.xml&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;GetHives_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetHives_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;GetUserHives_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetUserHives_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;GetSamHive_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetSamHive_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;GetEvents_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetEvents_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;NTFSInfo_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\NTFSInfo_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;NTFSInfoHashPE_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\NTFSInfoHashPE_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;FatInfo_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\FatInfo_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;FatInfoHashPE_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\FatInfoHashPE_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;GetArtefacts_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetArtefacts_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;GetYaraSamples_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetYaraSamples_config.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;ruleset.yara&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\ruleset.yara&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&quot;Tools&quot;</span> <span class="na">format=</span><span class="s">&quot;7z&quot;</span> <span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;DFIR-Orc_x64.exe&quot;</span> <span class="na">path=</span><span class="s">&quot;.\tools\DFIR-Orc_x64.exe&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;autorunsc.exe&quot;</span> <span class="na">path=</span><span class="s">&quot;.\tools\autorunsc.exe&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/archive&gt;</span>
+<span class="nt">&lt;/toolembed&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="toolembed-element">
+<h2><code class="docutils literal notranslate"><span class="pre">toolembed</span></code> Element<a class="headerlink" href="#toolembed-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=no, default=N/A</em></p>
+<p>Root element.</p>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="input-element">
+<h2><code class="docutils literal notranslate"><span class="pre">input</span></code> Element<a class="headerlink" href="#input-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=no, default=N/A</em></p>
+<p>This element contains the path to the binary which ToolEmbed uses as a base.
+This base is augmented with new resources to create the output of ToolEmbed.
+This input file remains unmodified by ToolEmbed.
+Environment variables will be substituted.</p>
+<div class="section" id="id5">
+<h3>Attributes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;input&gt;</span>.\tools\DFIR-Orc_x86.exe<span class="nt">&lt;/input&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="output-element">
+<h2><code class="docutils literal notranslate"><span class="pre">output</span></code> Element<a class="headerlink" href="#output-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=no, default=N/A</em></p>
+<p>This element contains the path to the output file created by ToolEmbed.
+It is first created as a copy of the input file and, then, the specified resources are added.
+Environment variables will be substituted.</p>
+<div class="section" id="id7">
+<h3>Attributes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+<div class="section" id="id8">
+<h3>Example<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output&gt;</span>.\output\%ORC_OUTPUT%<span class="nt">&lt;/output&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="run32-element">
+<h2><code class="docutils literal notranslate"><span class="pre">run32</span></code> Element<a class="headerlink" href="#run32-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em></p>
+<p>This element specifies the unconfigured binary which should run on 32-bit platforms. See <a class="reference internal" href="architecture.html"><span class="doc">DFIR ORC Architecture</span></a> for details.</p>
+<div class="section" id="id10">
+<h3>Attributes<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>args</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>The optional args attribute allows the addition of arguments. This yields a command line starting with the specified binary, followed by the optional args, then potentially followed by arguments passed on by Mothership.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h3>Example<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">input</span><span class="o">&gt;.</span>\<span class="n">tools</span>\<span class="n">DFIR</span><span class="o">-</span><span class="n">Orc_x86</span><span class="o">.</span><span class="n">exe</span><span class="o">&lt;/</span><span class="nb">input</span><span class="o">&gt;</span>
+<span class="o">...</span>
+<span class="o">&lt;</span><span class="n">run32</span> <span class="n">args</span><span class="o">=</span><span class="s2">&quot;WolfLauncher&quot;</span><span class="o">&gt;</span><span class="bp">self</span><span class="p">:</span><span class="c1">#&lt;/run32&gt;</span>
+</pre></div>
+</div>
+<p>This example will result in the Mothership binary relaunching itself with the added argument “WolfLancher”. Notation <code class="docutils literal notranslate"><span class="pre">self:#</span></code> and resources are documented
+in <a class="reference internal" href="resources.html"><span class="doc">Referencing resources in configurations</span></a>.</p>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="run64-element">
+<h2><code class="docutils literal notranslate"><span class="pre">run64</span></code> Element<a class="headerlink" href="#run64-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em></p>
+<p>This element specifies the unconfigured binary which should run on 64-bit platforms. See <a class="reference internal" href="architecture.html"><span class="doc">DFIR ORC Architecture</span></a> for details.</p>
+<div class="section" id="id13">
+<h3>Attributes<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>args</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>The optional args attribute allows the addition of an argument (before all transmitted arguments)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h3>Example:<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">run64</span> <span class="n">args</span><span class="o">=</span><span class="s2">&quot;WolfLauncher&quot;</span><span class="o">&gt;</span><span class="mi">7</span><span class="n">z</span><span class="p">:</span><span class="c1">#Tools|Orc_x64.exe&lt;/run64&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="pair-element">
+<h2><code class="docutils literal notranslate"><span class="pre">pair</span></code> Element<a class="headerlink" href="#pair-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em></p>
+<p>The pair element allows to create a level of indirection between a tool’s binary code and the configured resources.
+Basically, it is a kind of aliasing. Typically, this enables tools to reference an external dependency
+regardless of how it is made available (as a file, as a file resource, embedded in an archive embedded in a resource).</p>
+<div class="section" id="id16">
+<h3>Example:<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">pair</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;XMLLITE_X86DLL&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;7z:#Tools|xmllite.dll&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>This line creates a resource named XMLLITE_X86DLL of type “VALUES” which contains the string “7z:#Tools|xmllite.dll”</p>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="file-element">
+<h2><code class="docutils literal notranslate"><span class="pre">file</span></code> Element<a class="headerlink" href="#file-element" title="Permalink to this headline">¶</a></h2>
+<p>The file element provides a simple way to embed a file as a resource in the destination binary.</p>
+<div class="section" id="id18">
+<h3>Attributes<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>The name attribute is the name of the resource to be created in the target binary</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>path</strong>   <em>(optional=no, default=N/A)</em></dt><dd><p>The file system path to the file to be added to the resource</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h3>Example:<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;WOLFLAUNCHER_CONFIG&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\DFIR-ORC_config.xml&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>This creates a resource named WOLFLAUNCHER_CONFIG of type “BINARY” which contains the <code class="docutils literal notranslate"><span class="pre">.\%ORC_CONFIG_FOLDER%\DFIR-ORC_config.xml</span></code> file.</p>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="archive-element">
+<h2><code class="docutils literal notranslate"><span class="pre">archive</span></code> Element<a class="headerlink" href="#archive-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em></p>
+<p>The archive element provides the ability to embed files in a resource but in a compressed archive (to minimize the size of the resulting binary).</p>
+<div class="section" id="id21">
+<h3>Attributes<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>The name attribute is the name of the resource to be created in the target binary</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>format</strong>   <em>(optional=no, default=”cab”)</em></dt><dd><p>The archive format to use to archive the files. Allowed values are:</p>
+<ul>
+<li><p>cab</p></li>
+<li><p>zip</p></li>
+<li><p>7z</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>compression</strong> <em>(optional=no, default=”fast”)</em></dt><dd><p>The level of compression in the archive (for zip and 7zip format). Supported values are:</p>
+<ul>
+<li><p>None</p></li>
+<li><p>Fastest</p></li>
+<li><p>Fast</p></li>
+<li><p>Normal</p></li>
+<li><p>Maximum</p></li>
+<li><p>Ultra</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id22">
+<h3>Example:<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&quot;Tools&quot;</span> <span class="na">format=</span><span class="s">&quot;7z&quot;</span> <span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
+        ...
+<span class="nt">&lt;/archive&gt;</span>
+</pre></div>
+</div>
+<p>This will create a resource in the output file named “Tools” of type “BINARY” in the 7zip archive file format.</p>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="archive-file-element">
+<h2><code class="docutils literal notranslate"><span class="pre">archive</span></code> <code class="docutils literal notranslate"><span class="pre">file</span></code> Element<a class="headerlink" href="#archive-file-element" title="Permalink to this headline">¶</a></h2>
+<p>The file element provides a simple way to embed a file in an archive in the configured binary.</p>
+<div class="section" id="id24">
+<h3>Attributes<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>The name attribute is the name of the resource to be created in the target binary</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>path</strong>   <em>(optional=no, default=N/A)</em></dt><dd><p>The file system path to the file to be added to the resource relative to the current directory.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id25">
+<h3>Example:<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&quot;Tools&quot;</span> <span class="na">format=</span><span class="s">&quot;7z&quot;</span> <span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;DFIR-Orc_x64.exe&quot;</span> <span class="na">path=</span><span class="s">&quot;.\tools\DFIR-Orc_x64.exe&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;autorunsc.exe&quot;</span> <span class="na">path=</span><span class="s">&quot;.\tools\autorunsc.exe&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/archive&gt;</span>
+</pre></div>
+</div>
+<p>This will create a resource named “Tools” of type “BINARY” in 7zip file format. This archive will contain two entries:</p>
+<ul class="simple">
+<li><p><cite>DFIR-Orc_x64.exe</cite> created from <cite>.\tools\DFIR-Orc_x64.exe</cite></p></li>
+<li><p><cite>autorunsc.exe</cite> created from <cite>.\tools\autorunsc.exe</cite>.</p></li>
+</ul>
+<p>These paths are relative to the current working directory where <cite>DFIR-ORC.exe toolembed</cite> starts.</p>
+<p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="orc_local_config.html" title="DFIR ORC Local Configuration File"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="wolf_config.html" title="WolfLauncher Configuration File"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" >DFIR ORC Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

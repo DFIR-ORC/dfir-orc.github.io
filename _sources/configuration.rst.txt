@@ -1,0 +1,24 @@
+DFIR ORC Configuration
+======================
+
+As explained in the section :doc:`intro_to_data_collection`, the configuration of DFIR ORC consists in the list of programs to run and the name of the archive in which to add the output data.  
+
+Any functional ready-to-use binary ``DFIR-Orc.exe`` embeds such a configuration as an XML resource. This latter is refered to as :doc:`a wolflauncher configuration file <wolf_config>`, and is embedded using a tool called... ToolEmbed. On top of this, ToolEmbed can be used to extract the configuration from a DFIR ORC binary and rebuild a new binary once the configuration has been modified.
+
+Once a configuration is embedded, it is practical to be able to influence the execution of ``DFIR-Orc.exe``, at least to some extent, without having to rebuild it! Hence, two other ways to provide configuration options exist. Firstly, options can be gathered in a local configuration file to add or override configuration elements. 
+Secondly, command-line options override both other levels of configuration.
+
+Understanding how to configure of DFIR ORC is the key to unleashing its full potential. 
+To help getting started, a tutorial describes step by step a few scenarios.
+
+
+.. toctree::
+    :maxdepth: 1
+
+    tuto
+    resources
+    cli_options
+    wolf_config
+    ToolEmbed
+    orc_local_config   
+   

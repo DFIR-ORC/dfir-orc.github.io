@@ -1,0 +1,73 @@
+Referencing resources in configurations
+=======================================
+
+Syntax
+------
+
+The section :ref:`architecture-config-process` explains the embedding of tools as resources of configured and unconfigured binaries.
+To reference an embedded resource, Mothership and WolfLauncher use the syntaxes below. Configuration files rely on these notations.
+
+* For a resource directly available "in clear text" (as opposed to inside an archive like 7zip or cab):
+
+  .. code::
+
+    res:#ressource_name
+
+  For example, the string ``res:#getthis_evt`` references the resource named getthis_evt in the Embed configuration file for Mothership. Such a resource is created by the following :doc:`ToolEmbed` xml configuration:
+
+  .. code::
+
+      <file name="getthis_evt" path=".\%ORC_CONFIG_FOLDER%\GetEvents_config.xml"/>
+
+  See :doc:`ToolEmbed` for more examples.
+
+
+* To reference a resource via a entry into an archive embedded in Mothership:
+
+  .. code::
+
+    archive_format:#archive_name|resource_name
+
+  For example, the string ``7z:#Tools|autorunsc.exe`` will reference the resource autorunsc.exe in the 7zip archive named Tools. Such a resource is created by the following :doc:`ToolEmbed` xml configuration:
+
+    .. code:: xml
+
+      <archive name="Tools" format="7z" compression="Ultra">
+              <file name="autorunsc.exe" path=".\tools\autorunsc.exe"/>
+      </archive>
+
+  See :doc:`ToolEmbed` for more examples.
+
+
+* Lastly, it is possible to invoke one of the embedded tools, e.g. NTFSInfo, by writing ``run=self:#NTFSInfo``. The ``self:#`` string 
+  refers to the unconfigured binary used to run WolfLauncher, e.g. ``DFIR-Orc_x86.exe``. Thus, when ``run=self:#NTFSInfo`` is used 
+  in configurations, WolfLauncher creates a new process using its unconfigured binary, ``DFIR-Orc_x86.exe`` in our example, and passes it 
+  the name of the tool as argument. Hence, the command line of the new process would be ``DFIR-Orc_x86.exe NTFSInfo``, with maybe other arguments added in the configuration. As explained in :ref:`architecture-tools-cli`, such a line runs the embedded tool NTFSInfo.  
+
+
+Well-known Resources or Variables
+---------------------------------
+
+Below are listed well-known resources and variables defined in DFIR-ORC.
+
+.. csv-table::
+    :header: "Name", "Description", "Typical content"
+    :widths: 20, 40, 20
+
+    WOLFLAUNCHER_CONFIG,Default DFIR-ORC configuration to execute,""
+    WOLFLAUNCHER_SQLSCHEMA,DFIR-ORC output’s schema,"WolfLauncherSqlSchema.xml"
+    FASTFIND_SQLSCHEMA,DFIR-ORC output’s schema,""
+    GETSAMPLES_SQLSCHEMA,GetSamples output’s schema,GetSamplesSchema.xml
+    GETTHIS_SQLSCHEMA,GetThis output’s schema,GetThisSqlSchema.xml
+    IMPORTCSV_SQLSCHEMA,ImportCSV output’s schema,empty
+    REGINFO_SQLSCHEMA,RegInfo output’s schema,RegInfoSqlSchema.xml
+    USNINFO_SQLSCHEMA,USNInfo output’s schema,USNInfoSqlSchema.xml
+    NTFSINFO_SQLSCHEMA,NTFSInfo output’s schema,NTFSInfoSqlSchema.xml
+    TOOLEMBED_SQLSCHEMA,ToolEmbed output’s schema,empty
+    OBJINFO_SCHEMA,ObjInfo output’s schema,ObjInfoSchema.xml
+    DBGHELP_X86DLL,Reference to the x86 dbgeng.dll resource,""
+    DBGHELP_X64DLL,Reference to the x64 dbgeng.dll resource,
+    XMLLITE_X86DLL,XmlLite is missing on XP SP2. We embark it and this is the reference to it.,res:#XMLLITE_X86_XPSP2
+    XMLLITE_X86_XPSP2,This is XP SP2’s redist of xmllite.dll,..\\XmlLite\\xmllite.dll
+
+

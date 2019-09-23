@@ -1,0 +1,318 @@
+
+Configuring ntfs_find/ntfs_exclude attributes
+---------------------------------------------
+
+FastFind, RegInfo and GetThis can select file system entries based on multiple indicators to allow precise definition of what you may be looking for.
+You can combine attributes of different class (file/hash/size/header/ads/ea/attribute) to specify an AND condition for this indicator. A Yara scan can also be used.
+For instance:
+
+.. code:: xml
+
+    <ntfs_find name="quickfix.dat" size="104857600" />
+
+Indicates the looked after file should be named « quickfix.dat » AND its size be 104857600 bytes to trigger a detection.
+
+The table below describes the attributes that can be used to describe the indicators:
+
+* ``name``
+    File name compares to the supplied string
+    ::
+
+        name="quickfix.dat"
+
+* ``name_match``
+    File name matches the supplied string
+    ::
+
+        name_match="quick*.dat"
+
+* ``name_regex``
+    File name matches the regular expression
+    ::
+
+        name_regex="quick.*\.dat"
+
+* ``path``
+    File full path compares to the supplied string
+    ::
+    
+        path="\Windows\System32\drivers\partmgr.sys"
+
+* ``path_match``
+    File full path matches the supplied string
+    ::
+
+        path_match="\Windows\System32\*\partmgr.s?s"
+
+* ``path_regex``
+    File full path matches the regular expression
+    ::
+
+        path_regex="\Windows\System32\.*\partmgr.s.?s"
+
+* ``size``
+    File size equals the supplied integer.
+    Multipliers can be use:
+    * 1K for 1024 bytes
+    * 1M for 1024 Kbytes
+    * 1G for 1024 Mbytes
+
+    ::
+
+        size="5M"
+
+* ``size_gt``
+    File size is greater than the supplied integer
+    
+    ::
+
+        size_gt="5M"
+
+* ``size_ge``
+    File size is greater or equal than the supplied integer
+    
+    ::
+    
+        size_ge="5M"
+
+* ``size_lt``
+    File size is less than the supplied integer
+    
+    ::
+
+        size_lt="5M"
+
+* ``size_le``
+    File size is less or equal than the supplied integer
+    
+    ::
+    
+        size_le="5M"
+
+* ``md5``
+    File MD5 hash is the supplied value
+    
+    ::
+    
+        md5="b092e1d683fc21cea137dba2a8b4b08b"
+
+* ``sha1``
+    File SHA1 hash is the supplied value
+    
+    ::
+
+        sha1=" be0ccf54cdb3ec100de233b393d936d2ee1c33a3 "
+
+* ``sha256``
+    File SHA256 hash is the supplied value
+    
+    ::
+    
+        sha256="4cdb3ec100de233b393d936d2ee1c33a3…"
+
+* ``header``
+    Header compares to the supplied string (ANSI encoding). Up to 128 bytes.
+    
+    ::
+
+        header="MZ"
+
+* ``header_hex``
+    Header compares to the supplied hex encoded bytes.
+    “0x” prefix can be used and is optional. Up to 128 bytes
+    
+    ::
+
+        header_hex="ccf54cdb"
+
+* ``header_regex``
+    Header matches the regular expression. 
+    Regex will be matched against header_len bytes from the file.
+    
+    ::
+
+        header_regex="M[X-Y]"
+
+* ``header_length``
+    Length of the header to read to do the comparison (in bytes).
+    
+    ::
+
+        header_length="1024"
+
+* ``ads``
+    ADS compares to the supplied string
+    
+    ::
+
+        ads="MyAds"
+
+* ``ads_match``
+    ADS matches the supplied string
+    
+    ::
+
+        ads_match="My?ds"
+
+* ``ads_regex``
+    ADS matches the regular expression
+    
+    ::
+
+        ads_regex="My.ds"
+
+* ``ea``
+    EA compares to the supplied string
+    
+    ::
+
+        ea=”MyEA”
+
+* ``ea_match``
+    EA matches the supplied string
+    
+    ::
+
+        ea_match="My?A"
+
+* ``ea_regex``
+    EA matches the regular expression
+    
+    ::
+
+        ea_regex="My.A"
+
+* ``attr_name``
+    Attribute name compares to the supplied string
+    
+    ::
+    
+        attr_name="$I30"
+
+* ``attr_match``
+    Attribute name matches the supplied string
+    
+    ::
+        
+        attr_match="?I30"
+
+* ``attr_regex``
+    Attribute name matches the regular expression
+    
+    ::
+    
+        attr_regex=".I30"
+
+* ``attr_type``
+    Attribute type is one of:
+
+    * $STANDARD_INFORMATION
+    * $ATTRIBUTE_LIST
+    * $FILE_NAME
+    * $OBJECT_ID
+    * $SECURITY_DESCRIPTOR
+    * $VOLUME_NAME
+    * $VOLUME_INFORMATION
+    * $DATA
+    * $INDEX_ROOT
+    * $INDEX_ALLOCATION
+    * $BITMAP
+    * $REPARSE_POINT
+    * $EA_INFORMATION
+    * $EA
+    * $LOGGED_UTILITY_STREAM
+    * $FIRST_USER_DEFINED_ATTRIBUTE
+    * $END
+    * Or a custom integer value.
+    
+    ::
+
+        attr_type="$STANDARD_INFORMATION"
+        attr_type="16"
+
+* ``contains``
+    All $DATA attributes are searched if their content contains a specific string (ASCII)
+    
+    ::
+    
+        contains=”Hello World”
+
+* ``contains_hex``
+    All $DATA attributes are searched if their content contains a specific binary array
+    
+    ::
+    
+        contains_hex=”0x0BADF00DBAADF000D”
+
+* ``yara``
+    Specifies a yara “source” file from which rules can be used to match file’s content.
+    Can be either a file name or a reference to a embedded resource.
+    
+    ::
+    
+        yara=”res:#MyYaraFile”
+
+* ``yara_rule``
+    Specifies a comma or semi-colon separated list of yara rule specification.
+    Rule specification may use * or ? to match arbitrary characters
+    
+    ::
+    
+        yara_rule=”is_dll;apt??_rat”
+
+.. important:: Attributes evaluation order is based on cost. For instance, size is a very cheap indicator to evaluate. Hash value is very expensive. So the evaluator will first test file size and then (if size matches) will evaluate the file’s hash value. This means that coupling a size indicator to a hash one will dramatically enhance the performance of the search.
+.. important:: At least one yara rule (matching the file’s content) should match at least one of the rules specification for the file match to succeed (i.e. if the file’s content matches arbitrary yara rules not mentioned in the yara_rule attribute, then the match will fail for this file. For a successful yara scan to always succeed, please use the yara_rule=”*” specification.
+
+ntfs_exclude
+````````````
+
+ntfs_exclude elements can be used to exclude specific matches. 
+Once a match is found using a ntfs_find term, exclusion terms are evaluated. 
+When a match matches all attributes of an exclusion term, the complete match is excluded.
+For instance, you could be interested in getting all explorer.exe files except the one located in \Windows\explorer.exe.
+This would make:
+
+.. code:: xml
+
+    <ntfs_find name="explorer.exe" />
+    <ntfs_exclude name="\Windows\explorer.exe" />
+
+Or, considering the Windows catalogs, while excluding known ones:
+
+.. code:: xml
+
+    <ntfs_find path_match="\Windows\System32\catroot\*\*.cat" />
+    <ntfs_exclude size="138618" md5="d2182e5de2b13d2e68ee66d1bb44fe34" />
+
+.. note:: All ntfs_find attributes are supported by ntfs_exclude **except** extended attributes related ones (ea, ea_match, ea_regex).
+
+ntfs_find examples
+``````````````````
+
+To specify system’s registry hives, the FileFind element would be :
+
+.. code:: xml
+
+    <ntfs_find path="\Windows\System32\config\SOFTWARE" />
+    <nffs_find path="\Windows\System32\config\SYSTEM" />
+
+To specify all user registry hives:
+
+.. code:: xml
+
+    <ntfs_find path_match="\Users\*\NTUSER.DAT" />
+    <ntfs_find path_match="\Documents and Settings\*\NTUSER.DAT" />
+
+To specify Internet Explorer temporary files:
+
+.. code:: xml
+
+    <ntfs_find path_match="*\Temporary Internet Files\*" />
+
+To specify a file name quickfix.dat whose size is 104857600 and sha1 is 7894ec01651ff3fcdf9d117f416875bbaef03b6d:
+
+.. code:: xml
+
+    <ntfs_find name="quickfix.dat" size="104857600" sha1="7894ec01651ff3fcdf9d117f416875bbaef03b6d" />
+
+

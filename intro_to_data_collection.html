@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>DFIR ORC Design and Architecture &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Design Principles" href="design_principles.html" />
+    <link rel="prev" title="Requirements &amp; Supported Platforms" href="platforms.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="design_principles.html" title="Design Principles"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="platforms.html" title="Requirements &amp; Supported Platforms"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DFIR ORC Design and Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design_principles.html">Design Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">DFIR ORC Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dfir-orc-design-and-architecture">
+<h1>DFIR ORC Design and Architecture<a class="headerlink" href="#dfir-orc-design-and-architecture" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation aims to explain the basics of the inner workings of the DFIR ORC framework.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="design_principles.html">Design Principles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design_principles.html#the-approach-one-binary-to-run-them-all">The Approach: One Binary to Run Them All</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_principles.html#choosing-your-arsenal-tools-to-embed">Choosing Your Arsenal: Tools To Embed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_principles.html#a-configurable-framework">A Configurable Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">DFIR ORC Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#dfir-orc-configuration-process">DFIR ORC Configuration Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#tools-invoked-directly-from-command-line">Tools Invoked Directly From Command-line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#dfir-orc-deployment-specific-configuration">DFIR ORC Deployment-specific Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#dfir-orc-execution">DFIR ORC Execution</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="design_principles.html" title="Design Principles"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="platforms.html" title="Requirements &amp; Supported Platforms"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

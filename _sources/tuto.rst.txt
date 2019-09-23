@@ -1,0 +1,6 @@
+Getting Started With DFIR ORC Configuration Files: A Tutorial
+=============================================================
+
+Understanding how to configure DFIR ORC isn't so simple. We are preparing a tutorial with a few examples to help get you started.
+
+Stay tuned, it will be online shortly!

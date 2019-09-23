@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Configuring Console Output, Logging &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuring-console-output-logging">
+<h1>Configuring Console Output, Logging<a class="headerlink" href="#configuring-console-output-logging" title="Permalink to this headline">¶</a></h1>
+<p>Tools default console output is sent to the default output console (CONOUT$).
+It can be configured to log into a file, output verbose logs, or print information to an attached debugger console.
+These modes are configured using the optional statements:</p>
+<ul>
+<li><p>Log to a file</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;logging</span> <span class="na">file=</span><span class="s">&quot;&lt;path to file&gt;&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">logfile</span><span class="o">=&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">file</span><span class="o">&gt;</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>default: None</p>
+</div></blockquote>
+</li>
+<li><p>Console output</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;logging</span> <span class="na">noconsole=</span><span class="s">&quot;&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>::</dt><dd><p>/noconsole</p>
+</dd>
+</dl>
+<p>default: Console output is enabled</p>
+</div></blockquote>
+</li>
+<li><p>Verbose output</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;logging</span> <span class="na">verbose=</span><span class="s">&quot;&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">verbose</span>
+</pre></div>
+</div>
+<p>default: Verbose logging is disabled</p>
+</div></blockquote>
+</li>
+<li><p>Debug log level</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">logging</span> <span class="n">debug</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p>default: Debug logging is disabled</p>
+</div></blockquote>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>NTFSInfo.exe /noconsole /debug /logfile=c:\temp\ntfsinfo.log
+</pre></div>
+</div>
+<p>will not output anything to the console (quiet mode), log information directly into an attached debugger and create c:tempntfsinfo.log containing the console output.</p>
+<p>The equivalent XML syntax is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;logging</span> <span class="na">file=</span><span class="s">&quot;c:\temp\ntfsinfo.log&quot;</span> <span class="na">noconsole=</span><span class="s">&quot;&quot;</span> <span class="na">debug=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="debug-mode">
+<h2>Debug Mode<a class="headerlink" href="#debug-mode" title="Permalink to this headline">¶</a></h2>
+<p>The debug mode will also add debug related traces like source file name and line number where the output is logged.
+Example of debug logging:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">NTFSInfo_Output</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">86</span><span class="p">]</span> <span class="n">Orc</span><span class="o">.</span><span class="n">Exe</span> <span class="n">Version</span> <span class="mf">10.0</span>
+<span class="p">[</span><span class="n">NTFSInfo_Output</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">87</span><span class="p">]</span> <span class="n">Start</span> <span class="n">time</span><span class="p">:</span> <span class="mi">10</span><span class="o">/</span><span class="mi">08</span><span class="o">/</span><span class="mi">2019</span> <span class="mi">12</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mf">50.159</span> <span class="p">(</span><span class="n">UTC</span><span class="p">)</span>
+<span class="p">[</span><span class="n">NTFSInfo_Output</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">89</span><span class="p">]</span> <span class="n">Walker</span> <span class="n">used</span>  <span class="p">:</span> <span class="n">MFT</span>
+<span class="p">[</span><span class="n">NTFSInfo_Output</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">90</span><span class="p">]</span> <span class="n">Output</span> <span class="n">file</span>  <span class="p">:</span> <span class="n">NTFSInfo</span><span class="o">.</span><span class="n">csv</span>
+<span class="p">[</span><span class="n">NTFSInfo_Output</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">94</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="log-file">
+<h2>Log file<a class="headerlink" href="#log-file" title="Permalink to this headline">¶</a></h2>
+<p>The log file will be created if it does not exist or truncated if it does.
+The containing folder must exist and be writeable (or no logging is performed).
+The logging will only be written to the file every 1048576 bytes (or 1MB) and at the end of the tool’s execution.
+This implies that tool’s progress cannot be followed from log file using “tail –f” tools.
+Console output is logged immediately.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

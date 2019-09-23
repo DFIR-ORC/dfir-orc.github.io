@@ -1,0 +1,233 @@
+DFIR ORC Command-line Options
+==============================
+
+DFIR ORC cannot be solely configured using command-line options. It never was and never will be possible.
+DFIR ORC is configured using XML configuration files. Command-line options are too often misused, misspelled or misunderstood 
+by users and/or administrators. DFIR ORC aims to be error resilient and deliver its output no matter what.
+That being said, command-line options can be used to change certain behaviors of a configured binary.
+
+.. note:: Options are case insensitive.
+
+/Out Option
+-----------
+
+This option is used to modify the output location of the archives. This must be an existing directory with write access for the user running ``DFIR-Orc.exe``.
+
+.. code:: bat
+
+    /out=<OutputFolder>	
+    /out=\\myServer\MyShare\OutputFolder
+
+By default, outputs are written in the current directory a.k.a. '.'
+
+This option overrides the output location setting defined by the :ref:`output element <orc_local_config-output-element>` in a local configuration file.
+ 
+.. note:: This option won’t affect the upload location.
+
+/TempDir Option
+---------------
+
+Used to change the temporary folder used for temporary files.
+
+.. code:: bat
+
+    /tempdir=<OutputFolder>
+    /tempdir=%temp%\MyTemp	
+
+By default, %TEMP%\\WorkingTemp\\ is used.
+
+This options overrides the directory defined in the :ref:`temporary element <orc_local_config-temporary-element>` in a local configuration file.
+
+/Keys Option
+------------
+
+The option /Keys can be used to visualize the archives and commands of a configured binary ``DFIR-Orc.exe``. 
+When /Keys is used, no command is executed, no archives are created.
+
+.. code:: bat
+
+    /Keys
+
+.. note:: /Keys can used in conjunction with /Key, /+Key and /-Key to visualize the command and archives actually selected to be collected.
+
+/Key=<Keyword>, /+Key=<Keyword> and /-Key=<Keyword> Options
+-----------------------------------------------------------
+
+The /Key options allow to select only specific commands to be executed or archives to be generated. All non-matching keywords or archives are not executed or generated (and no warning message displayed).
+
+The /+Key option will enable an optional archive or command (cf. :ref:`archive element <wolf_config-archive-element>`, :ref:`command element <wolf_config-command-element>`).
+
+The /-Key option will disable an archive generation or command execution.
+
+/+Key and /-Key can be combined and  repeated on the command line. /+Key options take effect first and then the /-Key ones. The <Keyword> parameter can be a comma separated list of keywords.
+
+.. note:: Keywords are case insensitive.
+
+.. code:: bat
+
+    /Key=<Keyword>
+    /Key=Main
+
+    /+Key=<Keyword>
+    /+Key=GetYara
+
+    /-Key=<Keyword>	
+    /-Key=Hives,NTFSInfo
+
+By default, all non-optional archives and commands are generated.
+
+This option overrides the attributes of the :ref:`archive element <wolf_config-archive-element>` and the :ref:`command element <wolf_config-command-element>`.
+
+It also overrides optional settings using :ref:`key, enable_key and disable_key elements <orc_local_config-key-element>` in a local configuration file.
+
+.. note:: “c++” syntax /Key+=<keyword> and /Key-=<keyword> is also supported.
+
+/NoChildDebug and /ChildDebug Options
+-------------------------------------
+
+This option disables the debugger of DFIR ORC.
+
+.. code:: bat
+
+    /NoChildDebug
+    /ChildDebug
+
+The debugger is disabled by default.
+
+This option overrides the "ChildDebug" attribute set in the :ref:`wolf element <wolf_config-wolf-element>`.
+
+/Once, /Overwrite and /CreateNew Options
+----------------------------------------
+
+These options control the behavior of the launcher when the output archives are already present in the output or upload location (cf. :ref:`archive element <wolf_config-archive-element>`).
+
+These options apply to all archives created by the execution of ``DFIR-Orc.exe``.
+
+.. code:: bat
+
+    /Once
+    /OverWrite
+    /CreateNew
+
+This option overrides the attribute *repeat* set in the :ref:`archive element <wolf_config-archive-element>` in a WolfLauncher configuration file.
+
+/Compression Option
+-------------------
+
+This option controls the level of compression for generated archives.
+Allowed values are: None, Fastest, Fast, Normal, Maximum, Ultra.
+
+The override applies to all archives created by the DFIR ORC execution.
+
+.. code:: bat
+
+    /Compression=<Value>
+    /compression=Fast
+    
+By default, level “Normal” is used.
+
+This option overrides the attribute *compression* set in the :ref:`archive element <wolf_config-archive-element>` in a WolfLauncher configuration file.
+
+/archive_timeout Option
+-----------------------
+
+This option configures the number of minutes during which the archive is allowed to run _after\_ the last command finishes. In other words, this parameter is the timeout after which the archive is cancelled at the end of command execution.
+
+.. code:: bat
+
+    /archive_timeout=<Value>
+    /archive_timeout=10	In config file
+
+By default, an archive creation has to complete within 5 minutes after the last command terminates.
+
+This option overrides the *archive_timeout* attribute set in the :ref:`archive element <wolf_config-archive-element>` in a WolfLauncher configuration file.
+
+/command_timeout Option
+-----------------------
+
+This option configures the time span (in minutes) during which the command engine is allowed to run. In other words, this parameter configures the total amount of time, per archive, the commands can take to execute.
+
+.. code:: bat
+
+    /command_timeout=<Value>
+    /command_timeout=180
+
+By default, after 3 hours, any pending command is killed, the archive is properly completed and closed.
+
+This option overrides the attribute *command_timeout* of the :ref:`archive element <wolf_config-archive-element>` in a WolfLauncher configuration file.
+
+
+/tee_cleartext Option
+---------------------
+
+This option is for *testing/debugging purposes only*. It will create a clear text file alongside the encrypted file when DFIR ORC is encrypting its output (cf :ref:`wolf recipient element <wolf_config-recipient-element>`).
+
+/no_journaling Option
+---------------------
+
+This option disables the journal format inside PKCS#7 CMS messages (for encrypted archives), thus directly creating the enveloped archive inside the CMS message (at the expense of a temporary clear text file created on disk).
+
+/WERDontShowUI Option
+---------------------
+
+When ``DFIR-Orc.exe`` and children crash (no matter whether child debug is enabled), it may happen that a user interface is shown to the user, asking for interaction.
+
+This results in a loss of concurrent execution and ``DFIR-Orc.exe`` eventually hangs (when all concurrent runs are blocked by this UI). To prevent this, the WERDontShowUI option temporarily disables WER UI (Microsoft Windows Error Reporting). When DFIR ORC ends, we reset this parameter to its previous value.
+
+.. warning:: Using this option may modify twice the registry value of ``HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Error Reporting,DontShowUI``.
+
+By default, it is disabled (WER prompts are shown).
+
+This option overrides the attribute *werdontshowui* of the :ref:`wolf element <wolf_config-wolf-element>`.
+
+/Priority Option
+----------------
+
+To avoid impact on the user experience during the tool execution, ``DFIR-Orc.exe`` can be launched with a modified priority (typically below normal).
+
+Available priority values are:
+
+.. csv-table::
+
+    /priority=low,BELOW_NORMAL_PRIORITY_CLASS
+    /priority=normal,NORMAL_PRIORITY_CLASS
+    /priority=high,ABOVE_NORMAL_PRIORITY_CLASS
+
+This option overrides the attribute *priority* of the :ref:`dfir-orc element <orc_local_config-dfir-orc-element>` in a local configuration file.
+
+/PowerState Option
+------------------
+
+To avoid letting the computer sleep (a.k.a. going to StandBy or S3 power mode) when the user is away, this option can be used with the following values:
+
+* SystemRequired
+* DisplayRequired
+* UserPresent
+* AwayMode
+
+To only prevent sleep, recommended value for this option is: SystemRequired,AwayMode.
+
+This option overrides the *powerstate* attribute of the :ref:`dfir-orc element <orc_local_config-dfir-orc-element>` in a local configuration file.
+
+
+Mothership Specific Command-line Options
+----------------------------------------
+
+The :ref:`Mothership mechanism <architecture-exec>` allows DFIR ORC to be executed in any compatible context (Scheduled Task, Logon Script, Startup script, x86/x64...). The configuration allows the Mothership to launch the subsequent execution which suits the context. Specific command-line options can be used to customize this behavior.
+
+-NoWait Option
+``````````````
+
+With this option, the mothership will execute the command engine (i.e. WolfLauncher) with appropriate options (CREATE_SUSPENDED|CREATE_BREAKAWAY_FROM_JOB) and return immediately. This option is typically used in startup scripts which could limit the time ``DFIR-Orc.exe`` is allowed to run.
+
+-WMI Option
+```````````
+
+With this option, the mothership will execute the command engine (i.e. WolfLauncher) using WMI (the Win32_Process::Create method). 
+
+-PreserveJob Option
+```````````````````
+
+With this option, the mothership will _not\_ alter the job under which it executes. By default, the mothership will attempt to modify the current job (if needed, typically to allow JOB_OBJECT_LIMIT_BREAKAWAY_OK).
+
+.. warning:: Using this option may lead to a failure in WolfLauncher command engine if BreakAwayFromJob is not allowed. See :doc:`platforms` for more details.

@@ -1,0 +1,59 @@
+Configuring the yara scanner
+----------------------------
+
+FastFind, RegInfo and GetThis can use libyara to scan for matches on disk. 
+
+This scan can be configured with a <yara /> element :
+    | <yara
+    |      `source <#anchor-yara-source>`_
+    |      `block <#anchor-yara-block>`_
+    |      `overlap <#anchor-yara-overlap>`_
+    |      `timeout <#anchor-yara-timeout>`_
+    |      `scan_method <#anchor-yara-scan-method>`_
+    | />
+
+
+.. code:: xml
+
+    <yara source="IOC.yara" block="2M" timeout="120" overlap="8192" />
+
+Attributes that can be used to describe the parameters:
+
+.. anchor-yara-source_::
+
+* **source**
+    
+    Comma (or semicolon) list of yara files. These can be actual file names or refererences to embedded ressources
+    
+    Example: source=”res:#MyYaraContent”
+
+* **block**
+
+    Size of the granularity for yara scan. Files will be scanned in blocks of this size.
+    
+    Example: block=”2M”
+
+* **overlap**
+
+    Size of the overlapping block created to scan for content that may match bytes in the region between two blocks.
+    
+    Example: overlap=”4K”
+
+* **timeout**
+
+    Time out for the scan. After this amount of *seconds*, the scan will be aborted.
+    
+    Example: timeout=”120”
+
+* **scan_method**
+
+    When reading large files, we can them in blocks or as one big chunk of data. Select:
+        - “blocks” to scan in blocks 
+        - “filemapping” to use a pagefile backed filemapping of the file. 
+
+    Example: scan_method=”Blocks”
+
+    .. note:: Please note that the “filemapping” option allows to scan for rules using the file size or the hash of the entire file (but consumes much more process working set)
+
+
+

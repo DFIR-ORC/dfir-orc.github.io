@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Configuring the yara scanner &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuring-the-yara-scanner">
+<h1>Configuring the yara scanner<a class="headerlink" href="#configuring-the-yara-scanner" title="Permalink to this headline">¶</a></h1>
+<p>FastFind, RegInfo and GetThis can use libyara to scan for matches on disk.</p>
+<dl>
+<dt>This scan can be configured with a &lt;yara /&gt; element :</dt><dd><div class="line-block">
+<div class="line">&lt;yara</div>
+<div class="line-block">
+<div class="line"><a class="reference external" href="#anchor-yara-source">source</a></div>
+<div class="line"><a class="reference external" href="#anchor-yara-block">block</a></div>
+<div class="line"><a class="reference external" href="#anchor-yara-overlap">overlap</a></div>
+<div class="line"><a class="reference external" href="#anchor-yara-timeout">timeout</a></div>
+<div class="line"><a class="reference external" href="#anchor-yara-scan-method">scan_method</a></div>
+</div>
+<div class="line">/&gt;</div>
+</div>
+</dd>
+</dl>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;yara</span> <span class="na">source=</span><span class="s">&quot;IOC.yara&quot;</span> <span class="na">block=</span><span class="s">&quot;2M&quot;</span> <span class="na">timeout=</span><span class="s">&quot;120&quot;</span> <span class="na">overlap=</span><span class="s">&quot;8192&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Attributes that can be used to describe the parameters:</p>
+<ul>
+<li><p><strong>source</strong></p>
+<blockquote>
+<div><p>Comma (or semicolon) list of yara files. These can be actual file names or refererences to embedded ressources</p>
+<p>Example: source=”res:#MyYaraContent”</p>
+</div></blockquote>
+</li>
+<li><p><strong>block</strong></p>
+<blockquote>
+<div><p>Size of the granularity for yara scan. Files will be scanned in blocks of this size.</p>
+<p>Example: block=”2M”</p>
+</div></blockquote>
+</li>
+<li><p><strong>overlap</strong></p>
+<blockquote>
+<div><p>Size of the overlapping block created to scan for content that may match bytes in the region between two blocks.</p>
+<p>Example: overlap=”4K”</p>
+</div></blockquote>
+</li>
+<li><p><strong>timeout</strong></p>
+<blockquote>
+<div><p>Time out for the scan. After this amount of <em>seconds</em>, the scan will be aborted.</p>
+<p>Example: timeout=”120”</p>
+</div></blockquote>
+</li>
+<li><p><strong>scan_method</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>When reading large files, we can them in blocks or as one big chunk of data. Select:</dt><dd><ul class="simple">
+<li><p>“blocks” to scan in blocks</p></li>
+<li><p>“filemapping” to use a pagefile backed filemapping of the file.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example: scan_method=”Blocks”</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that the “filemapping” option allows to scan for rules using the file size or the hash of the entire file (but consumes much more process working set)</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

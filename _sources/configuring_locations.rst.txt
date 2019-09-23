@@ -1,0 +1,390 @@
+Configuring Locations
+=====================
+
+Tools can selectively collect information in specific folders inside a volume.
+The list of locations to inspect is simply passed as parameters:
+
+.. code:: bat
+
+    Orc.Exe NTFSInfo c:\Windows f:\Users
+
+Equivalent XML syntax is:
+
+.. code:: xml
+
+    <location>C:\Windows</location>
+    <location>F:\Users</location>
+
+This will cause tools to collect information only for entries are sub entities of the selected folders (recursively).
+A special wildcard * can be used to specify to inspect all mounted volumes on the system.
+
+.. code:: bat
+
+    Orc.Exe NTFSInfo *
+
+Or
+
+.. code:: xml
+
+    <location>*</location>
+
+When this wildcard is specified, NTFSInfo will enumerate and parse all mounted NTFS volumes.
+
+Location’s altitude selection
+`````````````````````````````
+Location’s altitude is the access path chosen to access a specific volume. Typically, access path can be:
+
+* Mounted volume paths (highest):
+
+    * \\\\\\\\.\\HarddiskVolume6
+
+    * E:\\
+
+    * \\\\\\\\?\\Volume{3f0e57c9-debc-403d-b614-feb223750981}
+
+    * \\\\\\\\.\\Harddisk0Partition4
+
+* System storage path:
+
+    * \\\\\\\\.\\STORAGE#Volume#...
+
+* Physical drive paths:
+
+    * \\\\\\\\.\\PHYSICALDRIVE0,offset=512,size=2199023255040,sector=512
+
+* Interface paths:
+
+    * \\\\\\\\.\\IDE#DiskVBOX_HARDDISK...offset=105906176,size=37474009088,sector=512
+
+    + \\\\\\\\.\\USBSTOR#Disk&Ven_Kingston&...,offset=1048576,size=62007541760,sector=512
+
+    + \\\\\\\\.\\SCSI#Disk&Ven_Msft&...,offset=1048576,size=136362065920,sector=512
+
+* Offline path (lowest):
+
+    + MyImage.dd
+
+Tools will automatically select an “optimal” path based on the altitude specification. If I specify the E:\\ location, by default the tool will select the lowest available path to this volume (\\\\\\\\.\\IDE#DiskVBOX_HARDDISK... if available).
+
+There are three choices for the altitude :
+
+* Lowest (default): will select the lowest available path
+
+* Highest : will select the highest available path
+
+* Exact: will not attempt altitude translation of location
+
+Under the current implementation, different factors can influence the altitude selection :
+
+* BitLocker: if the volume is BitLocker encrypted, physical drive and interface paths won’t be selected. Only mounted volume paths will be available
+
+* GPT: the current implementation does not support reading GPT partition table and so will not select interface or physical drive partitions
+
+
+Altitude selection can be configured in the command line:
+
+.. code:: bat
+
+    /Altitude=Exact|Highest|Lowest
+
+Or via a location’s element attribute:
+
+.. code:: xml
+
+    <location altitude=”highest”>C:\Windows</location>
+
+Please note that event if the attribute can be set on any location element in a location set, only the last one will be taken into account for the complete location set.
+
+Locations from mounted volumes
+``````````````````````````````
+
+Locations are simply added using full path names:
+
+.. code:: xml
+
+    <location>C:\Windows</location>
+    <location>D:\MyFiles</location>
+    <location>G:\Documents</location>
+
+File System Entries will be enumerated recursively for the specified locations.
+The locations list is reduced to root folders. So, specifying:
+
+.. code:: xml
+
+    <location>C:\Windows</location>
+    <location>C:\Windows\System32</location>
+    <location>C:\Windows\System32\drivers</location>
+
+will be reduced to c:\Windows.
+
+The MFT parser has the ability to parse the mounted volume without using the drive letter convention. Typically, one can refer to a volume using the volume ID convention:
+    \\\\\\\\?\\Volume{4564119e-eb6c-11e0-92aa-442a60da9b94}
+
+This syntax can be used as a command line argument:
+
+.. code:: bat
+
+    Orc.exe NTFSInfo \\?\Volume{4564119e-eb6c-11e0-92aa-442a60da9b94} 
+
+Or in a configuration file as follows:
+
+.. code:: xml
+
+    <location>\\?\Volume{4564119e-eb6c-11e0-92aa-442a60da9b94}</location>
+
+Mounted volumes can also be specified using syntax:
+
+    '\\\\\\\\?\\GLOBALROOT\\Device\\HarddiskVolume3'
+
+Known Locations
+```````````````
+
+NTFSInfo also provides a /knownlocations that will collect information on typical malware locations i.e.:
+
+.. csv-table::
+    :header: "Identifier", "Typical path"
+    :widths: 20, 40
+
+    "CSIDL_PROGRAMS","Start Menu\\Programs"
+    "CSIDL_FAVORITES","<user name>\\Favorites"
+    "SIDL_STARTUP","Start Menu\\Programs\\Startup"
+    "SIDL_BITBUCKET","<desktop>\\Recycle Bin"
+    "CSIDL_STARTMENU","<user name>\\Start Menu"
+    "CSIDL_DESKTOPDIRECTORY","<user name>\\Desktop"
+    "CSIDL_COMMON_STARTMENU","All Users\\Start Menu"
+    "CSIDL_COMMON_PROGRAMS","All Users\\Start Menu\\Programs"
+    "CSIDL_COMMON_STARTUP","All Users\\Startup"
+    "CSIDL_COMMON_DESKTOPDIRECTORY","All Users\\Desktop"
+    "CSIDL_APPDATA","<user name>\\Application Data"
+    "CSIDL_LOCAL_APPDATA","<user name>\\Local Settings\\Applicaton Data (non roaming)"
+    "CSIDL_ALTSTARTUP","non localized startup"
+    "CSIDL_COMMON_ALTSTARTUP","non localized common startup"
+    "CSIDL_COMMON_FAVORITES",""
+    "CSIDL_INTERNET_CACHE",""
+    "CSIDL_COOKIES",""
+    "CSIDL_HISTORY",""
+    "CSIDL_COMMON_APPDATA","All Users\\Application Data"
+    "CSIDL_WINDOWS","GetWindowsDirectory()"
+    "CSIDL_PROGRAM_FILES","C:\\Program Files"
+    "CSIDL_PROFILE","%USERPROFILE%"
+    "CSIDL_PROGRAM_FILESX86","C:\\Program Files"
+    "CSIDL_PROGRAM_FILES_COMMON","C:\\Program Files\\Common"
+    "CSIDL_COMMON_DOCUMENTS","All Users\\Documents"
+    "CSIDL_COMMON_ADMINTOOLS","All Users\\Start Menu\\Programs\\Administrative Tools"
+    "CSIDL_ADMINTOOLS","<user name>\\Start Menu\\Programs\\Administrative Tools"
+    "%Path%","Each directory is added"
+    "%ALLUSERSPROFILE%","All User profile"
+    "temp%","If exists, %temp% is added"
+    "%tmp%","If exists, %tmp% is added"
+    "%APPDATA%",""
+
+For more information, you can refer to `KnownLocations`_ for details.
+
+.. _KnownLocations: https://docs.microsoft.com/en-us/windows/win32/shell/csidl
+
+
+Locations from physical drive
+`````````````````````````````
+
+The MFT parser has the ability to parse the physical drive (non mounted volumes). 
+When the syntax \\\\\\\\.\\PhysicalDrive0 is used, then the partitions of the disk are enumerated and all NTFS volumes are parsed.
+One can also refer to a specifc NTFS partition on a drive using convention:
+
+    \\\\\\\\.\\PhysicalDrive0,part=3
+    (Where 0 is the physical drive number and 3 is the enumerated partition number)
+
+This syntax can be used as a command line argument:
+
+.. code:: bat
+
+    Orc.exe NTFSInfo \\.\PhysicalDrive0,part=3
+
+Or in a configuration file as follows:
+
+.. code:: xml
+
+    <location>\\.\\PhysicalDrive0,part=3</location>
+
+In case the partion table is invalid or missing, one can use the following syntax:
+
+.. code:: xml
+
+    <location>\\.\PhysicalDrive0,offset=1048576,size=214748364800,sector=512</location>
+
+Where :
+    offset=1048576: represents the location of the NTFS volume (in bytes); 
+    size=214748364800: is the size (in bytes of the partition), this is optional;
+    sector=512: is the size in bytes of the physical sector, this is optional.
+
+.. warning:: Please note that the order is mandatory: offset, size, sector!
+
+Locations from disk image (.dd)
+```````````````````````````````
+
+The MFT parser has the ability to parse full disk images. 
+This syntax can be used as a command line argument:
+
+.. code:: bat
+
+    Orc.exe NTFSInfo "F:\TestCases\disk_image.dd"
+
+Or in a configuration file as follows:
+
+.. code:: xml
+
+    <location>F:\TestCases\disk_image.dd</location>
+
+Image’s partition table will be located, parsed and all NTFS partitions will be parsed.
+
+Locations from volume/partition image (.dd)
+```````````````````````````````````````````
+
+The MFT parser has the ability to parse partition images (raw or dd images). 
+This syntax can be used as a command line argument:
+
+.. code:: bat
+
+    Orc.exe NTFSInfo "F:\TestCases\d_image.dd"
+
+Or in a configuration file as follows:
+
+.. code:: xml
+
+    <location>F:\TestCases\d_image.dd</location>
+
+The determination if this file can be parsed is based on the presence of the “NTFS” signature in the header of the image.
+When the image file is a disk image file, it can be parsed using the syntax:
+
+.. code:: bat
+
+    NTFSInfo.exe "F:\TestCases\d_image.dd,part=N"
+    (which will parse partition N in the order of the table)
+
+Or the following:
+
+.. code:: bat
+
+    NTFSInfo.exe "F:\TestCases\d_image.dd,offset=<offset>,length=<length>,sector=<size>"
+
+This syntax will parse the volume locate at <offset>, whose size is <length> bytes and considering a sector size of <size> bytes.
+
+.. warning:: Please note that the order is mandatory: offset, size, sector!
+
+Locations from Volume Shadow Copies
+```````````````````````````````````
+
+Explicit Volume Shadow Copy
+"""""""""""""""""""""""""""
+
+The MFT parser has the ability to parse Volume Shadow Copies (`<http://en.wikipedia.org/wiki/Shadow_Copy>` ). 
+This syntax can be used as a command line argument:
+
+.. code:: bat
+
+    NTFSInfo.exe \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10
+
+Or in a configuration file as follows:
+
+.. code:: xml
+
+    <location>\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10</location>
+
+On a VSS supported version of Windows, Volume Shadow Copies can be enumerated using command line syntax: “vssadmin list shadows”
+This command typically returns information in the form:
+
+.. code::
+
+    vssadmin 1.1 - Volume Shadow Copy Service administrative command-line tool
+    (C) Copyright 2001-2005 Microsoft Corp.
+
+    Contents of shadow copy set ID: {c7b58bc4-6d31-4bd1-a4c1-b21d9af079f9}
+    Contained 1 shadow copies at creation time: 1/6/2012 12:00:09 AM
+        Shadow Copy ID: {4d541160-75f7-4055-925b-75362756fb93}
+            Original Volume: (C:)\\?\Volume{160dcffe-eb69-11e0-963e-806e6f6e6963}\
+            Shadow Copy Volume: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10
+            Originating Machine: GautierMac
+            Service Machine: GautierMac
+            Provider: 'Microsoft Software Shadow Copy provider 1.0'
+            Type: ClientAccessibleWriters
+            Attributes: Persistent, Client-accessible, No auto release, Differential, Auto recovered
+
+Volume Shadow copies are very interesting to the forensics analysist as the will provide detailed information about the system at a specific date in the past (the copy creation time).
+Shadow copies are typically created when using Windows Restore Points (for instance Windows Update installations first trigger restore points creation).
+
+Automatic Shadow copies addition
+""""""""""""""""""""""""""""""""
+
+The volume shadow copies can be enumerated and added to the list of parsed locations.
+This feature can be enabled by adding an shadows=”yes” attribute in a <location> element:
+
+.. code:: xml
+
+    <location shadows="yes">c:\</location>
+
+The location must be a mounted volume (i.e. parsing shadow copies is not supported for physical drive, raw disk images, interfaces.).
+
+The “all mounted volumes” syntax (*) is also supported:
+
+.. code:: xml
+
+    <location shadows="yes">*</location>
+
+The feature can also be enabled with the /shadows command line switch. In this case, it applies to all mounted volumes otherwise selected.
+
+Locations from Offline MFT
+``````````````````````````
+
+The MFT parser has the ability to parse an offline Master File Table. The volume does not have to be parsed or present to be parsed. This allow to capture the MFT (for example using GetThis.exe /sample=$Mft /outdir=d:\temp syntax) and parse it offline with NTFSInfo.
+This allows the MFT to be parsed without malware potentially intervening in the parsing (could still intervene in the capture phase though).
+
+This features can only be configured using XML configuration files for NTFSInfo.
+The syntax is as follows:
+
+.. code:: xml
+
+    <location>g:\temp\c_____MFT.sample</location>
+
+The parser may need the following parameters:
+
+    +-------------------------------+---------------+-----------------+
+    | Name                          | Default Value | XML Attribute   |
+    +===============================+===============+=================+
+    | Bytes per Sector              | 0x200         | bytespersector  |
+    +-------------------------------+---------------+-----------------+
+    | Bytes per Cluster             | 0x1000        | bytespercluster |
+    +-------------------------------+---------------+-----------------+
+    | Bytes per File Record Segment | 0x400         | bytesperfrs     |
+    +-------------------------------+---------------+-----------------+
+    | Original Volume Letter        | C             | originalvolume  |
+    +-------------------------------+---------------+-----------------+
+
+So, these attributes can configured as follows:
+
+.. code:: xml
+
+    <location bytesperfrs="1024" bytespersector="512" bytespercluster="4096" originalvolume="d">
+        F:\Users\jeanga\Desktop\d_____MFT.0.sample
+    </location>
+
+These parameters can be obtained by using the command:
+
+.. code:: bat
+
+    fsutil fsinfo ntfsinfo c:
+
+    NTFS Volume Serial Number :       0x1004183c041826ee
+    Version :                         3.1
+    Number Sectors :                  0x00000000077fffff
+    Total Clusters :                  0x0000000000efffff
+    Free Clusters  :                  0x000000000018f87a
+    Total Reserved :                  0x0000000000000810
+    Bytes Per Sector  :               512
+    Bytes Per Cluster :               4096
+    Bytes Per FileRecord Segment    : 1024
+    Clusters Per FileRecord Segment : 0
+    Mft Valid Data Length :           0x0000000009a00000
+    Mft Start Lcn  :                  0x00000000000c0000
+    Mft2 Start Lcn :                  0x0000000000000002
+    Mft Zone Start :                  0x0000000000afe3c0
+    Mft Zone End   :                  0x0000000000b0abe0
+    RM Identifier:        2F2785D8-16C2-19DF-92C3-00247EE052B6

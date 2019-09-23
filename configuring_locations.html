@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Configuring Locations &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuring-locations">
+<h1>Configuring Locations<a class="headerlink" href="#configuring-locations" title="Permalink to this headline">¶</a></h1>
+<p>Tools can selectively collect information in specific folders inside a volume.
+The list of locations to inspect is simply passed as parameters:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Orc.Exe NTFSInfo c:\Windows f:\Users
+</pre></div>
+</div>
+<p>Equivalent XML syntax is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>C:\Windows<span class="nt">&lt;/location&gt;</span>
+<span class="nt">&lt;location&gt;</span>F:\Users<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>This will cause tools to collect information only for entries are sub entities of the selected folders (recursively).
+A special wildcard * can be used to specify to inspect all mounted volumes on the system.</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Orc.Exe NTFSInfo *
+</pre></div>
+</div>
+<p>Or</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>*<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>When this wildcard is specified, NTFSInfo will enumerate and parse all mounted NTFS volumes.</p>
+<div class="section" id="locations-altitude-selection">
+<h2>Location’s altitude selection<a class="headerlink" href="#locations-altitude-selection" title="Permalink to this headline">¶</a></h2>
+<p>Location’s altitude is the access path chosen to access a specific volume. Typically, access path can be:</p>
+<ul>
+<li><p>Mounted volume paths (highest):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>\\.\HarddiskVolume6</p></li>
+<li><p>E:\</p></li>
+<li><p>\\?\Volume{3f0e57c9-debc-403d-b614-feb223750981}</p></li>
+<li><p>\\.\Harddisk0Partition4</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>System storage path:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>\\.\STORAGE#Volume#…</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Physical drive paths:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>\\.\PHYSICALDRIVE0,offset=512,size=2199023255040,sector=512</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Interface paths:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>\\.\IDE#DiskVBOX_HARDDISK…offset=105906176,size=37474009088,sector=512</p></li>
+</ul>
+<ul class="simple">
+<li><p>\\.\USBSTOR#Disk&amp;Ven_Kingston&amp;…,offset=1048576,size=62007541760,sector=512</p></li>
+<li><p>\\.\SCSI#Disk&amp;Ven_Msft&amp;…,offset=1048576,size=136362065920,sector=512</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Offline path (lowest):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>MyImage.dd</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Tools will automatically select an “optimal” path based on the altitude specification. If I specify the E:\ location, by default the tool will select the lowest available path to this volume (\\.\IDE#DiskVBOX_HARDDISK… if available).</p>
+<p>There are three choices for the altitude :</p>
+<ul class="simple">
+<li><p>Lowest (default): will select the lowest available path</p></li>
+<li><p>Highest : will select the highest available path</p></li>
+<li><p>Exact: will not attempt altitude translation of location</p></li>
+</ul>
+<p>Under the current implementation, different factors can influence the altitude selection :</p>
+<ul class="simple">
+<li><p>BitLocker: if the volume is BitLocker encrypted, physical drive and interface paths won’t be selected. Only mounted volume paths will be available</p></li>
+<li><p>GPT: the current implementation does not support reading GPT partition table and so will not select interface or physical drive partitions</p></li>
+</ul>
+<p>Altitude selection can be configured in the command line:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/Altitude=Exact<span class="p">|</span>Highest<span class="p">|</span>Lowest
+</pre></div>
+</div>
+<p>Or via a location’s element attribute:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">altitude=</span><span class="s">”highest”</span><span class="nt">&gt;</span>C:\Windows<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>Please note that event if the attribute can be set on any location element in a location set, only the last one will be taken into account for the complete location set.</p>
+</div>
+<div class="section" id="locations-from-mounted-volumes">
+<h2>Locations from mounted volumes<a class="headerlink" href="#locations-from-mounted-volumes" title="Permalink to this headline">¶</a></h2>
+<p>Locations are simply added using full path names:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>C:\Windows<span class="nt">&lt;/location&gt;</span>
+<span class="nt">&lt;location&gt;</span>D:\MyFiles<span class="nt">&lt;/location&gt;</span>
+<span class="nt">&lt;location&gt;</span>G:\Documents<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>File System Entries will be enumerated recursively for the specified locations.
+The locations list is reduced to root folders. So, specifying:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>C:\Windows<span class="nt">&lt;/location&gt;</span>
+<span class="nt">&lt;location&gt;</span>C:\Windows\System32<span class="nt">&lt;/location&gt;</span>
+<span class="nt">&lt;location&gt;</span>C:\Windows\System32\drivers<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>will be reduced to c:Windows.</p>
+<dl class="simple">
+<dt>The MFT parser has the ability to parse the mounted volume without using the drive letter convention. Typically, one can refer to a volume using the volume ID convention:</dt><dd><p>\\?\Volume{4564119e-eb6c-11e0-92aa-442a60da9b94}</p>
+</dd>
+</dl>
+<p>This syntax can be used as a command line argument:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Orc.exe NTFSInfo \\?\Volume{4564119e-eb6c-11e0-92aa-442a60da9b94}
+</pre></div>
+</div>
+<p>Or in a configuration file as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>\\?\Volume{4564119e-eb6c-11e0-92aa-442a60da9b94}<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>Mounted volumes can also be specified using syntax:</p>
+<blockquote>
+<div><p>‘\\?\GLOBALROOT\Device\HarddiskVolume3’</p>
+</div></blockquote>
+</div>
+<div class="section" id="known-locations">
+<h2>Known Locations<a class="headerlink" href="#known-locations" title="Permalink to this headline">¶</a></h2>
+<p>NTFSInfo also provides a /knownlocations that will collect information on typical malware locations i.e.:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Identifier</p></th>
+<th class="head"><p>Typical path</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CSIDL_PROGRAMS</p></td>
+<td><p>Start Menu\Programs</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_FAVORITES</p></td>
+<td><p>&lt;user name&gt;\Favorites</p></td>
+</tr>
+<tr class="row-even"><td><p>SIDL_STARTUP</p></td>
+<td><p>Start Menu\Programs\Startup</p></td>
+</tr>
+<tr class="row-odd"><td><p>SIDL_BITBUCKET</p></td>
+<td><p>&lt;desktop&gt;\Recycle Bin</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_STARTMENU</p></td>
+<td><p>&lt;user name&gt;\Start Menu</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_DESKTOPDIRECTORY</p></td>
+<td><p>&lt;user name&gt;\Desktop</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_COMMON_STARTMENU</p></td>
+<td><p>All Users\Start Menu</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_COMMON_PROGRAMS</p></td>
+<td><p>All Users\Start Menu\Programs</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_COMMON_STARTUP</p></td>
+<td><p>All Users\Startup</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_COMMON_DESKTOPDIRECTORY</p></td>
+<td><p>All Users\Desktop</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_APPDATA</p></td>
+<td><p>&lt;user name&gt;\Application Data</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_LOCAL_APPDATA</p></td>
+<td><p>&lt;user name&gt;\Local Settings\Applicaton Data (non roaming)</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_ALTSTARTUP</p></td>
+<td><p>non localized startup</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_COMMON_ALTSTARTUP</p></td>
+<td><p>non localized common startup</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_COMMON_FAVORITES</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_INTERNET_CACHE</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_COOKIES</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_HISTORY</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_COMMON_APPDATA</p></td>
+<td><p>All Users\Application Data</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_WINDOWS</p></td>
+<td><p>GetWindowsDirectory()</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_PROGRAM_FILES</p></td>
+<td><p>C:\Program Files</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_PROFILE</p></td>
+<td><p>%USERPROFILE%</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_PROGRAM_FILESX86</p></td>
+<td><p>C:\Program Files</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_PROGRAM_FILES_COMMON</p></td>
+<td><p>C:\Program Files\Common</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_COMMON_DOCUMENTS</p></td>
+<td><p>All Users\Documents</p></td>
+</tr>
+<tr class="row-odd"><td><p>CSIDL_COMMON_ADMINTOOLS</p></td>
+<td><p>All Users\Start Menu\Programs\Administrative Tools</p></td>
+</tr>
+<tr class="row-even"><td><p>CSIDL_ADMINTOOLS</p></td>
+<td><p>&lt;user name&gt;\Start Menu\Programs\Administrative Tools</p></td>
+</tr>
+<tr class="row-odd"><td><p>%Path%</p></td>
+<td><p>Each directory is added</p></td>
+</tr>
+<tr class="row-even"><td><p>%ALLUSERSPROFILE%</p></td>
+<td><p>All User profile</p></td>
+</tr>
+<tr class="row-odd"><td><p>temp%</p></td>
+<td><p>If exists, %temp% is added</p></td>
+</tr>
+<tr class="row-even"><td><p>%tmp%</p></td>
+<td><p>If exists, %tmp% is added</p></td>
+</tr>
+<tr class="row-odd"><td><p>%APPDATA%</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>For more information, you can refer to <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/shell/csidl">KnownLocations</a> for details.</p>
+</div>
+<div class="section" id="locations-from-physical-drive">
+<h2>Locations from physical drive<a class="headerlink" href="#locations-from-physical-drive" title="Permalink to this headline">¶</a></h2>
+<p>The MFT parser has the ability to parse the physical drive (non mounted volumes).
+When the syntax \\.\PhysicalDrive0 is used, then the partitions of the disk are enumerated and all NTFS volumes are parsed.
+One can also refer to a specifc NTFS partition on a drive using convention:</p>
+<blockquote>
+<div><p>\\.\PhysicalDrive0,part=3
+(Where 0 is the physical drive number and 3 is the enumerated partition number)</p>
+</div></blockquote>
+<p>This syntax can be used as a command line argument:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Orc.exe NTFSInfo \\.\PhysicalDrive0,part=3
+</pre></div>
+</div>
+<p>Or in a configuration file as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>\\.\\PhysicalDrive0,part=3<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>In case the partion table is invalid or missing, one can use the following syntax:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>\\.\PhysicalDrive0,offset=1048576,size=214748364800,sector=512<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Where :</dt><dd><p>offset=1048576: represents the location of the NTFS volume (in bytes);
+size=214748364800: is the size (in bytes of the partition), this is optional;
+sector=512: is the size in bytes of the physical sector, this is optional.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that the order is mandatory: offset, size, sector!</p>
+</div>
+</div>
+<div class="section" id="locations-from-disk-image-dd">
+<h2>Locations from disk image (.dd)<a class="headerlink" href="#locations-from-disk-image-dd" title="Permalink to this headline">¶</a></h2>
+<p>The MFT parser has the ability to parse full disk images.
+This syntax can be used as a command line argument:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Orc.exe NTFSInfo <span class="s2">&quot;F:\TestCases\disk_image.dd&quot;</span>
+</pre></div>
+</div>
+<p>Or in a configuration file as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>F:\TestCases\disk_image.dd<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>Image’s partition table will be located, parsed and all NTFS partitions will be parsed.</p>
+</div>
+<div class="section" id="locations-from-volume-partition-image-dd">
+<h2>Locations from volume/partition image (.dd)<a class="headerlink" href="#locations-from-volume-partition-image-dd" title="Permalink to this headline">¶</a></h2>
+<p>The MFT parser has the ability to parse partition images (raw or dd images).
+This syntax can be used as a command line argument:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Orc.exe NTFSInfo <span class="s2">&quot;F:\TestCases\d_image.dd&quot;</span>
+</pre></div>
+</div>
+<p>Or in a configuration file as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>F:\TestCases\d_image.dd<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>The determination if this file can be parsed is based on the presence of the “NTFS” signature in the header of the image.
+When the image file is a disk image file, it can be parsed using the syntax:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>NTFSInfo.exe <span class="s2">&quot;F:\TestCases\d_image.dd,part=N&quot;</span>
+<span class="p">(</span>which will parse partition N in the order of the table<span class="p">)</span>
+</pre></div>
+</div>
+<p>Or the following:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>NTFSInfo.exe <span class="s2">&quot;F:\TestCases\d_image.dd,offset=&lt;offset&gt;,length=&lt;length&gt;,sector=&lt;size&gt;&quot;</span>
+</pre></div>
+</div>
+<p>This syntax will parse the volume locate at &lt;offset&gt;, whose size is &lt;length&gt; bytes and considering a sector size of &lt;size&gt; bytes.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that the order is mandatory: offset, size, sector!</p>
+</div>
+</div>
+<div class="section" id="locations-from-volume-shadow-copies">
+<h2>Locations from Volume Shadow Copies<a class="headerlink" href="#locations-from-volume-shadow-copies" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="explicit-volume-shadow-copy">
+<h3>Explicit Volume Shadow Copy<a class="headerlink" href="#explicit-volume-shadow-copy" title="Permalink to this headline">¶</a></h3>
+<p>The MFT parser has the ability to parse Volume Shadow Copies (<cite>&lt;http://en.wikipedia.org/wiki/Shadow_Copy&gt;</cite> ).
+This syntax can be used as a command line argument:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>NTFSInfo.exe \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10
+</pre></div>
+</div>
+<p>Or in a configuration file as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>On a VSS supported version of Windows, Volume Shadow Copies can be enumerated using command line syntax: “vssadmin list shadows”
+This command typically returns information in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>vssadmin 1.1 - Volume Shadow Copy Service administrative command-line tool
+(C) Copyright 2001-2005 Microsoft Corp.
+
+Contents of shadow copy set ID: {c7b58bc4-6d31-4bd1-a4c1-b21d9af079f9}
+Contained 1 shadow copies at creation time: 1/6/2012 12:00:09 AM
+    Shadow Copy ID: {4d541160-75f7-4055-925b-75362756fb93}
+        Original Volume: (C:)\\?\Volume{160dcffe-eb69-11e0-963e-806e6f6e6963}\
+        Shadow Copy Volume: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10
+        Originating Machine: GautierMac
+        Service Machine: GautierMac
+        Provider: &#39;Microsoft Software Shadow Copy provider 1.0&#39;
+        Type: ClientAccessibleWriters
+        Attributes: Persistent, Client-accessible, No auto release, Differential, Auto recovered
+</pre></div>
+</div>
+<p>Volume Shadow copies are very interesting to the forensics analysist as the will provide detailed information about the system at a specific date in the past (the copy creation time).
+Shadow copies are typically created when using Windows Restore Points (for instance Windows Update installations first trigger restore points creation).</p>
+</div>
+<div class="section" id="automatic-shadow-copies-addition">
+<h3>Automatic Shadow copies addition<a class="headerlink" href="#automatic-shadow-copies-addition" title="Permalink to this headline">¶</a></h3>
+<p>The volume shadow copies can be enumerated and added to the list of parsed locations.
+This feature can be enabled by adding an shadows=”yes” attribute in a &lt;location&gt; element:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">shadows=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>c:\<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>The location must be a mounted volume (i.e. parsing shadow copies is not supported for physical drive, raw disk images, interfaces.).</p>
+<p>The “all mounted volumes” syntax (*) is also supported:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">shadows=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>*<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>The feature can also be enabled with the /shadows command line switch. In this case, it applies to all mounted volumes otherwise selected.</p>
+</div>
+</div>
+<div class="section" id="locations-from-offline-mft">
+<h2>Locations from Offline MFT<a class="headerlink" href="#locations-from-offline-mft" title="Permalink to this headline">¶</a></h2>
+<p>The MFT parser has the ability to parse an offline Master File Table. The volume does not have to be parsed or present to be parsed. This allow to capture the MFT (for example using GetThis.exe /sample=$Mft /outdir=d:temp syntax) and parse it offline with NTFSInfo.
+This allows the MFT to be parsed without malware potentially intervening in the parsing (could still intervene in the capture phase though).</p>
+<p>This features can only be configured using XML configuration files for NTFSInfo.
+The syntax is as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>g:\temp\c_____MFT.sample<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>The parser may need the following parameters:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 24%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Default Value</p></th>
+<th class="head"><p>XML Attribute</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bytes per Sector</p></td>
+<td><p>0x200</p></td>
+<td><p>bytespersector</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bytes per Cluster</p></td>
+<td><p>0x1000</p></td>
+<td><p>bytespercluster</p></td>
+</tr>
+<tr class="row-even"><td><p>Bytes per File Record Segment</p></td>
+<td><p>0x400</p></td>
+<td><p>bytesperfrs</p></td>
+</tr>
+<tr class="row-odd"><td><p>Original Volume Letter</p></td>
+<td><p>C</p></td>
+<td><p>originalvolume</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>So, these attributes can configured as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">bytesperfrs=</span><span class="s">&quot;1024&quot;</span> <span class="na">bytespersector=</span><span class="s">&quot;512&quot;</span> <span class="na">bytespercluster=</span><span class="s">&quot;4096&quot;</span> <span class="na">originalvolume=</span><span class="s">&quot;d&quot;</span><span class="nt">&gt;</span>
+    F:\Users\jeanga\Desktop\d_____MFT.0.sample
+<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>These parameters can be obtained by using the command:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>fsutil fsinfo ntfsinfo c:
+
+NTFS Volume Serial Number :       0x1004183c041826ee
+Version :                         3.1
+Number Sectors :                  0x00000000077fffff
+Total Clusters :                  0x0000000000efffff
+Free Clusters  :                  0x000000000018f87a
+Total Reserved :                  0x0000000000000810
+Bytes Per Sector  :               512
+Bytes Per Cluster :               4096
+Bytes Per FileRecord Segment    : 1024
+Clusters Per FileRecord Segment : 0
+Mft Valid Data Length :           0x0000000009a00000
+Mft Start Lcn  :                  0x00000000000c0000
+Mft2 Start Lcn :                  0x0000000000000002
+Mft Zone Start :                  0x0000000000afe3c0
+Mft Zone End   :                  0x0000000000b0abe0
+RM Identifier:        2F2785D8-16C2-19DF-92C3-00247EE052B6
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

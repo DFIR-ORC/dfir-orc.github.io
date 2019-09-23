@@ -1,0 +1,37 @@
+Configuration file reader
+-------------------------
+
+ORC tools read XML Config files without relying on the host system’s installed XML parsers by using its own internal/static parser. 
+This XML config file can be passed to the tool using the /config switch:
+.. code:: bat
+    
+    GetThis.exe /config=GetThisConfig.xml
+
+To ease deployment and minimize risk of errors, configuration for tools can also be embedded into the binary ressources.
+
+To embed configuration files into a binary, two methods are available:
+
+In a tool’s resource file (tool.rc), add the line:
+
+::
+
+    <TOOLNAME>_CONFIG   BINARY      "<ConfigFileName>.xml"
+
+Or, a posteriori, you can embed the config file using ToolEmbed:
+
+.. code:: xml
+
+    <toolembed>
+
+    <input>Tool.exe</input>
+    <output>ConfiguredTool.exe</output>
+
+    <pair name="<TOOLNAME>_CONFIG" value="res:#tool_config" />
+    <file name="tool_config" path="ToolConfiguration.xml" />
+    
+    </toolembed>
+
+Upon startup, tools will locate their associated <TOOLNAME>_CONFIG resource to find their configuration in resource. 
+
+.. note:: no temporary files are created and configuration xml is read directly from the resource. 
+

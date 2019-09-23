@@ -1,0 +1,285 @@
+=========
+ToolEmbed
+=========
+
+
+.. _Anchor-root-toolembed:
+
+ToolEmbed is used to add resources (binaries, configuration files) to a DFIR ORC binary. It takes an XML configuration file as input. 
+To understand why this is nedded and what happens when ``DFIR-Orc.exe`` is executed, please refer to :doc:`architecture`. 
+
+
+| <`toolembed <#toolembed-element>`_ attributes="..." > 
+|    <`input <#input-element>`_ > *value* </input> 
+|    <`output <#output-element>`_ > *value* </output>
+|    <`run32 <#run32-element>`_ attributes="..."></run32>
+|    <`run64 <#run64-element>`_ attributes="..."></run64>
+|    <`file <#file-element>`_ attributes="..." />
+|    <`pair <#pair-element>`_ attributes="..." />
+|    <`archive <#archive-element>`_ attributes="..." >
+|        <`file  <#archive-file-element>`_ attributes="..." />
+|    <`/archive <#archive-element>`_>
+| <`/toolembed <#toolembed-element>`_>       
+
+
+Here is a typical ToolEmbed configuration file.
+
+.. code:: xml
+
+    <toolembed>
+        <input>.\tools\DFIR-Orc_x86.exe</input>
+        <output>.\output\%ORC_OUTPUT%</output>
+    
+        <run64 args="WolfLauncher">7z:#Tools|DFIR-Orc_x64.exe</run64>
+        <run32 args="WolfLauncher">self:#</run32>
+    
+        <file name="WOLFLAUNCHER_CONFIG" path=".\%ORC_CONFIG_FOLDER%\DFIR-ORC_config.xml"/>
+    
+        <file name="GetHives_config.xml" path=".\%ORC_CONFIG_FOLDER%\GetHives_config.xml"/>
+        <file name="GetUserHives_config.xml" path=".\%ORC_CONFIG_FOLDER%\GetUserHives_config.xml"/>
+        <file name="GetSamHive_config.xml" path=".\%ORC_CONFIG_FOLDER%\GetSamHive_config.xml"/>
+        <file name="GetEvents_config.xml" path=".\%ORC_CONFIG_FOLDER%\GetEvents_config.xml"/>
+        <file name="NTFSInfo_config.xml" path=".\%ORC_CONFIG_FOLDER%\NTFSInfo_config.xml"/>
+        <file name="NTFSInfoHashPE_config.xml" path=".\%ORC_CONFIG_FOLDER%\NTFSInfoHashPE_config.xml"/>
+        <file name="FatInfo_config.xml" path=".\%ORC_CONFIG_FOLDER%\FatInfo_config.xml"/>
+        <file name="FatInfoHashPE_config.xml" path=".\%ORC_CONFIG_FOLDER%\FatInfoHashPE_config.xml"/>
+        <file name="GetArtefacts_config.xml" path=".\%ORC_CONFIG_FOLDER%\GetArtefacts_config.xml"/>
+        <file name="GetYaraSamples_config.xml" path=".\%ORC_CONFIG_FOLDER%\GetYaraSamples_config.xml"/>
+        <file name="ruleset.yara" path=".\%ORC_CONFIG_FOLDER%\ruleset.yara"/>
+    
+        <archive name="Tools" format="7z" compression="Ultra">
+            <file name="DFIR-Orc_x64.exe" path=".\tools\DFIR-Orc_x64.exe"/>
+            <file name="autorunsc.exe" path=".\tools\autorunsc.exe"/>
+        </archive>
+    </toolembed>
+    
+ 
+
+``toolembed`` Element
+=====================
+
+*optional=no, default=N/A*
+
+Root element.
+
+Attributes
+-----------
+
+None
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``input`` Element
+=================
+
+*optional=no, default=N/A*
+
+This element contains the path to the binary which ToolEmbed uses as a base.
+This base is augmented with new resources to create the output of ToolEmbed.
+This input file remains unmodified by ToolEmbed.
+Environment variables will be substituted. 
+
+Attributes
+-----------
+
+None
+
+Example
+-------
+
+.. code:: xml
+
+    <input>.\tools\DFIR-Orc_x86.exe</input>
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``output`` Element
+==================
+
+*optional=no, default=N/A*
+
+This element contains the path to the output file created by ToolEmbed.
+It is first created as a copy of the input file and, then, the specified resources are added.
+Environment variables will be substituted.
+
+Attributes
+-----------
+
+None
+
+Example
+-------
+
+.. code:: xml
+
+    <output>.\output\%ORC_OUTPUT%</output>
+
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``run32`` Element
+=================
+
+*optional=yes, default=N/A*
+
+This element specifies the unconfigured binary which should run on 32-bit platforms. See :doc:`architecture` for details.
+
+Attributes
+-----------
+* **args** *(optional=yes, default=N/A)* 
+        The optional args attribute allows the addition of arguments. This yields a command line starting with the specified binary, followed by the optional args, then potentially followed by arguments passed on by Mothership.
+
+Example
+-------
+
+.. code::
+
+    <input>.\tools\DFIR-Orc_x86.exe</input>
+    ...
+    <run32 args="WolfLauncher">self:#</run32>
+    
+This example will result in the Mothership binary relaunching itself with the added argument "WolfLancher". Notation ``self:#`` and resources are documented
+in :doc:`resources`. 
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``run64`` Element
+=================
+
+*optional=yes, default=N/A*
+
+This element specifies the unconfigured binary which should run on 64-bit platforms. See :doc:`architecture` for details.
+
+Attributes
+-----------
+* **args** *(optional=yes, default=N/A)* 
+        The optional args attribute allows the addition of an argument (before all transmitted arguments) 
+
+Example:
+--------
+
+.. code::
+    
+    <run64 args="WolfLauncher">7z:#Tools|Orc_x64.exe</run64>
+
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``pair`` Element
+================
+
+*optional=yes, default=N/A*
+
+The pair element allows to create a level of indirection between a tool's binary code and the configured resources.
+Basically, it is a kind of aliasing. Typically, this enables tools to reference an external dependency 
+regardless of how it is made available (as a file, as a file resource, embedded in an archive embedded in a resource).
+
+Example:
+--------
+
+.. code::
+    
+    <pair name="XMLLITE_X86DLL" value="7z:#Tools|xmllite.dll" />
+
+This line creates a resource named XMLLITE_X86DLL of type “VALUES” which contains the string “7z:#Tools|xmllite.dll”
+
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``file`` Element
+================
+
+The file element provides a simple way to embed a file as a resource in the destination binary.
+
+Attributes
+-----------
+
+* **name** *(optional=no, default=N/A)* 
+        The name attribute is the name of the resource to be created in the target binary
+* **path**   *(optional=no, default=N/A)*
+        The file system path to the file to be added to the resource
+
+Example:
+--------
+
+.. code:: xml
+   
+   <file name="WOLFLAUNCHER_CONFIG" path=".\%ORC_CONFIG_FOLDER%\DFIR-ORC_config.xml"/> 
+
+This creates a resource named WOLFLAUNCHER_CONFIG of type “BINARY” which contains the ``.\%ORC_CONFIG_FOLDER%\DFIR-ORC_config.xml`` file.
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``archive`` Element
+===================
+
+*optional=yes, default=N/A*
+
+The archive element provides the ability to embed files in a resource but in a compressed archive (to minimize the size of the resulting binary).
+
+Attributes
+-----------
+
+* **name** *(optional=no, default=N/A)* 
+        The name attribute is the name of the resource to be created in the target binary
+* **format**   *(optional=no, default="cab")*
+        The archive format to use to archive the files. Allowed values are:
+
+        * cab
+        * zip
+        * 7z
+* **compression** *(optional=no, default="fast")*
+        The level of compression in the archive (for zip and 7zip format). Supported values are:
+
+        * None
+        * Fastest
+        * Fast
+        * Normal
+        * Maximum
+        * Ultra
+
+Example:
+--------
+
+.. code:: xml
+
+    <archive name="Tools" format="7z" compression="Ultra">
+            ...
+    </archive>
+
+This will create a resource in the output file named “Tools” of type “BINARY” in the 7zip archive file format. 
+
+
+`Back to Root <#anchor-root-toolembed>`_
+
+``archive`` ``file`` Element
+============================
+
+The file element provides a simple way to embed a file in an archive in the configured binary.
+
+Attributes
+-----------
+
+* **name** *(optional=no, default=N/A)* 
+        The name attribute is the name of the resource to be created in the target binary
+* **path**   *(optional=no, default=N/A)*
+        The file system path to the file to be added to the resource relative to the current directory.
+
+Example:
+--------
+
+.. code:: xml
+
+    <archive name="Tools" format="7z" compression="Ultra">
+            <file name="DFIR-Orc_x64.exe" path=".\tools\DFIR-Orc_x64.exe"/>
+            <file name="autorunsc.exe" path=".\tools\autorunsc.exe"/>
+    </archive>
+
+This will create a resource named “Tools” of type “BINARY” in 7zip file format. This archive will contain two entries:
+
+- `DFIR-Orc_x64.exe` created from `.\\tools\\DFIR-Orc_x64.exe` 
+- `autorunsc.exe` created from `.\\tools\\autorunsc.exe`.
+
+These paths are relative to the current working directory where `DFIR-ORC.exe toolembed` starts.
+
+`Back to Root <#anchor-root-toolembed>`_

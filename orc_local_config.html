@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>DFIR ORC Local Configuration File &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DFIR ORC Embedded Tool Suite" href="tool_list.html" />
+    <link rel="prev" title="ToolEmbed" href="ToolEmbed.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="tool_list.html" title="DFIR ORC Embedded Tool Suite"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="ToolEmbed.html" title="ToolEmbed"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" accesskey="U">DFIR ORC Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tuto.html">Getting Started With DFIR ORC Configuration Files: A Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Referencing resources in configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_options.html">DFIR ORC Command-line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wolf_config.html">WolfLauncher Configuration File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ToolEmbed.html">ToolEmbed</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DFIR ORC Local Configuration File</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dfir-orc-local-configuration-file">
+<h1>DFIR ORC Local Configuration File<a class="headerlink" href="#dfir-orc-local-configuration-file" title="Permalink to this headline">¶</a></h1>
+<p>DFIR ORC can be locally configured to specify a limited set of configuration elements. Typically, those elements are the client’s specific configuration options (like the upload method, priority, temp folder, etc…). The local configuration can be specified using:</p>
+<blockquote>
+<div><ul>
+<li><p>The /local=&lt;MyLocalconfigFile&gt; command line option</p></li>
+<li><p>A file in the same directory as DFIR ORC, with the same base name and .xml extension:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>&lt;SomeDirectory&gt;\DFIR-ORC.exe</p></li>
+<li><p>&lt;SomeDirectory&gt;\DFIR-ORC.xml</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p id="anchor-root">The index of this sections consists in the following XML skeleton file, which features all the elements that can appear
+in a real configuration file.
+It is not a usable configuration, in the sense that it does not contain any attribute key or value, and can exhibit incompatible elements.
+Its point is to be exhaustive from the point of view of existing usable elements.</p>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#dfir-orc-element">dfir-orc</a> <em>attributes=”…”</em>&gt;</div>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#temporary-element">temporary</a>&gt; <em>value</em> &lt;<a class="reference external" href="#temporary-element">/temporary</a>&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#output-element">output</a>&gt; <em>value</em> &lt;<a class="reference external" href="#output-element">/output</a>&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#upload-element">upload</a> <em>attributes=”…”</em> /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#recipient-element">recipient</a> <em>attributes=”…”</em>&gt; <em>value</em> &lt;<a class="reference external" href="#recipient-element">/recipient</a>&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#key-element">key</a>&gt; <em>value</em>  &lt;<a class="reference external" href="#key-element">/key</a>&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#enable-key-and-disable-key-elements">enable_key</a>&gt; <em>value</em> &lt;<a class="reference external" href="#enable-key-and-disable-key-elements">/enable_key</a>&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#enable-key-and-disable-key-elements">disable_key</a>&gt; <em>value</em> &lt;<a class="reference external" href="#enable-key-and-disable-key-elements">/disable_key</a>&gt;</div>
+</div>
+<div class="line">&lt;<a class="reference external" href="#dfir-orc-element">/dfir-orc</a>&gt;</div>
+</div>
+<div class="section" id="dfir-orc-element">
+<span id="orc-local-config-dfir-orc-element"></span><h2><code class="docutils literal notranslate"><span class="pre">dfir-orc</span></code> Element<a class="headerlink" href="#dfir-orc-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=no, default=N/A</em></p>
+<p>Root element</p>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="simple">
+<dt><strong>priority</strong> <em>(optional=yes, default=normal)</em></dt><dd><p>Configures Windows process (and thread) priority class. Available values for this attribute are: Low, Normal &amp; High.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>powerstate</strong> <em>(optional=yes, default=unmodified power state)</em></dt><dd><p>Configures DFIR ORC’s main thread power state to optionally prevent the system from going to sleep when DFIR ORC is running. Allowed value is a comma separated list of</p>
+<ul class="simple">
+<li><p>SystemRequired</p></li>
+<li><p>Displayrequired</p></li>
+<li><p>UserPresent</p></li>
+<li><p>AwayMode.</p></li>
+</ul>
+<p>When only looking to prevent sleep, recommended value for this option is SystemRequired,AwayMode.
+More information on power states: <a class="reference external" href="https://docs.microsoft.com/en-us/windows/desktop/api/winbase/nf-winbase-setthreadexecutionstate">https://docs.microsoft.com/en-us/windows/desktop/api/winbase/nf-winbase-setthreadexecutionstate</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="temporary-element">
+<span id="orc-local-config-temporary-element"></span><h2><code class="docutils literal notranslate"><span class="pre">temporary</span></code> Element<a class="headerlink" href="#temporary-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=%temp%</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
+<p>This element configures the location of temporary files created by the tool. The inner text of this element contains the name of the folder. Environment variables will be substituted.</p>
+<div class="section" id="id8">
+<h3>Attributes<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;temporary&gt;</span>%Temp%\WorkingTemp<span class="nt">&lt;/temporary&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="output-element">
+<span id="orc-local-config-output-element"></span><h2><code class="docutils literal notranslate"><span class="pre">output</span></code> Element<a class="headerlink" href="#output-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=no, default=’.’</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
+<p>This element configures the folder where the various archives will be created. A local drive or a remote SMB share can be specified (in the latter, the upload syntax should be privileged to reduce network congestion). Environment variables will be substituted.</p>
+<div class="section" id="id11">
+<h3>Attributes<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+<div class="section" id="id12">
+<h3>Example<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output&gt;</span>%Temp%<span class="nt">&lt;/output&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="upload-element">
+<h2><code class="docutils literal notranslate"><span class="pre">upload</span></code> Element<a class="headerlink" href="#upload-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=no upload</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
+<p>The upload element is used to configure an optional upload operation when an archive is created.</p>
+<div class="section" id="id15">
+<h3>Attributes<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>job</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Describes the upload operation.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>method</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Describes the method to upload the files. Currently only “filecopy” (uses SMB) or “BITS” are allowed values.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>server</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Specifies the server name (e.g. <cite>file://servername</cite> or <cite>http://servername</cite>, or <cite>https://servername</cite>) when using BITS or SMB.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>path</strong> <em>(optional=no, default= / or \ depending on the method)</em></dt><dd><p>Specifies the file share or folder where the upload are directed</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>user</strong> <em>(optional=yes, default=the current user (executing DFIR ORC))</em></dt><dd><p>Specifies the user name to be used to connect to the remote server.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>password</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>Specifies the password to use (for the user defined above)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>authscheme</strong> <em>(optional=yes, default=Negotiate (if a user name is specified, anonymous otherwise))</em></dt><dd><p>Specifies the authentication scheme for the connection. Possible scheme values are:</p>
+<ul>
+<li><p>Anonymous</p></li>
+<li><p>Basic</p></li>
+<li><p>NTLM</p></li>
+<li><p>Kerberos</p></li>
+<li><p>Negotiate</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>operation</strong> <em>(optional=yes, default=copy)</em></dt><dd><p>“copy” or “move” the archives to the upload server.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>mode</strong> <em>(optional=yes, default=sync)</em></dt><dd><p>“sync” or “async”: upload can be synchronous or asynchronous (asynchronous allows DFIR ORC to exit prior to BITS jobs completes). “async” is <strong>not</strong> supported for “filecopy” method.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h3>Example<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;upload</span> <span class="na">job=</span><span class="s">&quot;DFIR-ORC&quot;</span> <span class="na">method=</span><span class="s">&quot;BITS&quot;</span>
+  <span class="na">server=</span><span class="s">&quot;http://MyBits.MyOrg.com&quot;</span>
+  <span class="na">path=</span><span class="s">&quot;\upload&quot;</span>
+  <span class="na">user=</span><span class="s">&quot;MyORG\BITSUploadClient&quot;</span> <span class="na">password=</span><span class="s">&quot;P@ssw0rd!&quot;</span>
+  <span class="na">operation=</span><span class="s">&quot;move&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="recipient-element">
+<h2><code class="docutils literal notranslate"><span class="pre">recipient</span></code> Element<a class="headerlink" href="#recipient-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
+<p>The recipient element is used to create the list of recipients able to open the enveloped CMS archives. It basically consists of a list of encoded certificates. This element is used to add a recipient’s certificate to the list of possible recipients for individual archives. This element implies encryption of the archives specified in its compulsory archive attribute.</p>
+<div class="section" id="id19">
+<h3>Attributes<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Name of the recipient</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>archive</strong> <em>(optional=no, default=Does not encrypt any archive)</em></dt><dd><p>Comma separated list of archive keyword specs to match against archive names. Specifies one or more archives encrypted in a CMS PKCS#7 message (cf <a class="reference external" href="http://tools.ietf.org/html/rfc2315">http://tools.ietf.org/html/rfc2315</a> )</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3>Example<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;recipient</span> <span class="na">name=</span><span class="s">&#39;certfr&#39;</span> <span class="na">archive=</span><span class="s">&#39;*&#39;</span> <span class="nt">&gt;</span>
+  -----BEGIN CERTIFICATE-----
+  MIIC7TCCAdmgAwIBAgIQR5AF92Ti8qtEwuT3PMVrJzAJBgUrDgMCHQUAMBIxEDAO
+  BgNVBAMTB0NFUlQtRlIwHhcNMDQxMjMxMjIwMDAwWhcNMTQxMjMxMjIwMDAwWjAS
+  MRAwDgYDVQQDEwdDRVJULUZSMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+  AQEAiufyRATXw5Kc/DUcEr/5nNygcbluyS5gkUd1pGaUqKHMSMEVOBzYqcvq3cMw
+  4shAL3TSgYdoOJaLG4ErvyRU87fWYRcwiHzGdFg89E3pBEWnyV3j3fR0fVB5t3MD
+  jbooTGI/qQGl1l3MZ+bOiHkYcIG50R5343VT5vjRLmPv16iopGczLXKkNFxN480f
+  BnCF8HcJesFiMIDUI+d9OWpLJNDSCerouMr75HVD47+gBKKgH2PrxWozk2L6R9gQ
+  l8/6xzM4VKiNt4BTGfChG8AnO8sJzPETjJaDXrIGaYVLxU4OxFh/a9x61dlM/5A/
+  TASXpLhXrsi+ib3YLLl+pNh+aQIDAQABo0cwRTBDBgNVHQEEPDA6gBD47GaJKs91
+  qsThQIQ7f8Y5oRQwEjEQMA4GA1UEAxMHQ0VSVC1GUoIQR5AF92Ti8qtEwuT3PMVr
+  JzAJBgUrDgMCHQUAA4IBAQBgvEE7qyLVV+Y5B0sR5VuPmfeqakOxBxLmb8VoTNKn
+  /7ai1XwtJeWD1vumKx5Q29GiUfVhvBgn0zhjM5syVDFCqEcp+eu6l2XbN8uvllCY
+  daTOT/9UylLxu1L/epiWiYtqRZOO/9i1fyqrkguIww7EjXXT3ybL5U/BakEC2Yg5
+  6vUoxbo2EbA1UoMWurRxYNYxyFfHpvBYXFf4uDaAFIVMtEgH5VkKyM3Kj2hi/PJH
+  /a30ndTWVSY/82hoRGCa+SkevR5VbDsxTqHtEHys4K+ETVTNXp29HwG+1YG7BTTc
+  4VdFRqUm7e3o6VUArFar8I01oHiHzqKJiu1Omm2Fkmc1
+  -----END CERTIFICATE-----
+<span class="nt">&lt;/recipient&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="key-element">
+<span id="orc-local-config-key-element"></span><h2><code class="docutils literal notranslate"><span class="pre">key</span></code> Element<a class="headerlink" href="#key-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
+<p>The key element allows to select only specific commands to be executed or archives to be generated. All non-matching keywords or archives are not executed or generated. This element is exclusive with enable_key and disable_key.</p>
+<div class="section" id="id23">
+<h3>Attributes<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+<div class="section" id="id24">
+<h3>Example<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc&gt;</span>
+  <span class="nt">&lt;key&gt;</span>ORC_Quick<span class="nt">&lt;/ key&gt;</span>
+  <span class="nt">&lt;key&gt;</span>GetRam_winpmem1,Flashback<span class="nt">&lt;/key&gt;</span>
+<span class="nt">&lt;/dfir-orc&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
+<div class="section" id="enable-key-and-disable-key-elements">
+<h2><code class="docutils literal notranslate"><span class="pre">enable_key</span></code> and <code class="docutils literal notranslate"><span class="pre">disable_key</span></code> Elements<a class="headerlink" href="#enable-key-and-disable-key-elements" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
+<p>The enable_key element will enable an optional archive or command (cf. <a class="reference external" href="wolf_config.html#the-archive-element">archive element</a> , <a class="reference external" href="wolf_config.html#command-element">command element</a>).
+The disable_key element will disable an archive generation or command execution. Elements enable_key and disable_key can be combined and repeated. All enable_key elements take effect before the disable_key elements. Keywords are case insensitive. The data in the element can be a comma separated list of keywords.</p>
+<div class="section" id="id27">
+<h3>Attributes<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+<div class="section" id="id28">
+<h3>Example<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc&gt;</span>
+    <span class="nt">&lt;disable_key&gt;</span>DFIR-ORC_Detail<span class="nt">&lt;/disable_key&gt;</span>
+    <span class="nt">&lt;enable_key&gt;</span>GetRam_winpmem1<span class="nt">&lt;/enable_key&gt;</span>
+<span class="nt">&lt;/dfir-orc&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="tool_list.html" title="DFIR ORC Embedded Tool Suite"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="ToolEmbed.html" title="ToolEmbed"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" >DFIR ORC Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Configure tools’ output &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configure-tools-output">
+<h1>Configure tools’ output<a class="headerlink" href="#configure-tools-output" title="Permalink to this headline">¶</a></h1>
+<p>Tools configure their output in a unified way.
+The syntax is simple and straightforward:
+* Command line argument:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">out</span><span class="o">=&lt;</span><span class="n">My</span> <span class="n">output</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Config file XML statement:</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+</ul>
+<p>Where &lt;My Output&gt; can be a file (typically CSV), a directory, an archive or a connection string to a database server.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>“out” in /out can vary from tool to tools typically for tools with more than one output like ntfsinfo (see MyTool.exe –h for details).</p>
+</div>
+<div class="section" id="file-output">
+<h2>File output<a class="headerlink" href="#file-output" title="Permalink to this headline">¶</a></h2>
+<p>The simplest form of output:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.csv
+
+C<span class="p">:</span><span class="nl">\temp</span><span class="c1"> must exist, be a directory and writeable.</span>
+Foo.csv must not exist.
+</pre></div>
+</div>
+</div>
+<div class="section" id="directory-output">
+<h2>Directory output<a class="headerlink" href="#directory-output" title="Permalink to this headline">¶</a></h2>
+<p>Directory output takes the form:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\test
+
+C<span class="p">:</span><span class="nl">\temp\test</span><span class="c1"> must exist, be a directory and writeable.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="archive-output">
+<h2>Archive output<a class="headerlink" href="#archive-output" title="Permalink to this headline">¶</a></h2>
+<p>The simplest form of output for an archive is:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.zip
+
+C<span class="p">:</span><span class="nl">\temp</span><span class="c1"> must exist, be a directory and writeable.</span>
+foo.zip must not exist.
+</pre></div>
+</div>
+<p>The archive format is selected based on extension of foo:
+* Foo.zip selects the zip format.
+* Foo.7z selects the LZMA/7zip format (www.7zip.org).
+* Foo.cab select the MSCF Microsoft cabinet format.
+* Foo.&lt;ext&gt; selects the format if supported in 7zip library for archive creation.</p>
+<p>The following tools support output in archive files:
+* NTFSInfo
+* USNInfo
+* GetThis
+* GetSamples</p>
+</div>
+<div class="section" id="sql-server-output">
+<h2>SQL Server output<a class="headerlink" href="#sql-server-output" title="Permalink to this headline">¶</a></h2>
+<p>The simplest form of SQL server output is:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=<span class="p">&lt;</span>MySQLConnectionString<span class="p">&gt;</span>#<span class="p">&lt;</span>MyTable&gt;
+</pre></div>
+</div>
+<p>&lt;MySQLConnectionString&gt; must be a valid connection string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Server</span><span class="o">=</span><span class="n">myServerAddress</span><span class="p">;</span><span class="n">Database</span><span class="o">=</span><span class="n">myDataBase</span><span class="p">;</span><span class="n">Trusted_Connection</span><span class="o">=</span><span class="kc">True</span><span class="p">;</span><span class="n">DSN</span><span class="o">=</span><span class="n">myDsn</span>
+<span class="o">&lt;</span><span class="n">MyTable</span><span class="o">&gt;</span> <span class="n">must</span> <span class="n">be</span> <span class="n">an</span> <span class="n">existing</span> <span class="n">table</span> <span class="k">with</span> <span class="n">the</span> <span class="n">appropriate</span> <span class="n">column</span> <span class="n">definition</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-character-encoding">
+<h2>File character encoding<a class="headerlink" href="#file-character-encoding" title="Permalink to this headline">¶</a></h2>
+<p>To reduce output file size and ease file analysis on Linux systems (that seems to have issues with UTF16), the default encoding for CSV is  now UTF8.
+The command line options /utf8 and /utf16 can be used to explicitely control the output encoding.
+Also, XML configuration files elements outputfile and outputdir can have an optional attribute “encoding”:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;UTF16&quot;</span><span class="nt">&gt;</span>c:\temp<span class="nt">&lt;/output&gt;</span>
+</pre></div>
+</div>
+<p>Or</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;UTF8&quot;</span> <span class="nt">&gt;</span>c:\temp\test.csv<span class="nt">&lt;/output&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>
