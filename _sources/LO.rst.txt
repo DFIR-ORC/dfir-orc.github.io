@@ -54,7 +54,7 @@ La présente licence est régie par le droit français.
 Compatibilité de la présente licence
 ````````````````````````````````````
 
-Elle a été conçue pour être compatible avec toute licence libre qui exige _a minima_ la mention de paternité. Elle est notamment compatible avec la version antérieure de la présente licence ainsi qu’avec les licences « Open Government Licence » (OGL) du Royaume-Uni, « Creative Commons Attribution » (CC-BY) de Creative Commons et « Open Data Commons Attribution » (ODC-BY) de l’Open Knowledge Foundation.
+Elle a été conçue pour être compatible avec toute licence libre qui exige *a minima* la mention de paternité. Elle est notamment compatible avec la version antérieure de la présente licence ainsi qu’avec les licences « Open Government Licence » (OGL) du Royaume-Uni, « Creative Commons Attribution » (CC-BY) de Creative Commons et « Open Data Commons Attribution » (ODC-BY) de l’Open Knowledge Foundation.
 
 Définitions
 -----------

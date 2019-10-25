@@ -1,39 +1,51 @@
-Configure tools’ output
------------------------
+=======================
+Configuring Tool Output
+=======================
 
-Tools configure their output in a unified way.
+DFIR ORC tools configure their output in a unified way.
 The syntax is simple and straightforward:
+
 * Command line argument:
 
-    ::
+    .. code:: bat
 
-        /out=<My output>
+        /out=<MyOutput>
 
-* Config file XML statement:
+* XML configuration file:
 
-    .. code-block: xml
+    .. code:: xml
 
-        <output>MyOutput </output>
+        <output>MyOutput</output>
 
-Where <My Output> can be a file (typically CSV), a directory, an archive or a connection string to a database server.
+Where <MyOutput> can be a file (usually CSV), a directory or an archive.
 
-.. note:: "out" in /out can vary from tool to tools typically for tools with more than one output like ntfsinfo (see MyTool.exe –h for details).
+.. note:: The option ``/out`` can vary in some tools typically when they have more than one output like NTFSInfo (see MyTool.exe -h for details).
 
-
-File output
-```````````
+File Output
+===========
 
 The simplest form of output:
 
 .. code:: bat
-    
-    MyTool.exe /out=c:\temp\foo.csv
-    
-    C:\temp must exist, be a directory and writeable.
-    Foo.csv must not exist.
 
-Directory output
-````````````````
+    MyTool.exe /out=c:\temp\foo.csv
+
+In this example, if ``C:\temp`` directory doesn't exist, it is created. If the directory already exists, it must be writable. If the output file already exists, it is overwritten.
+
+
+The CSV file is only written to every 1048576 bytes (or 1 MB) and at the end of the tool execution.
+This implies that tool progress cannot be followed using tools like "tail -f".
+
+The following tools do not support this output:
+
+* :doc:`GetSectors`,
+* :doc:`GetThis`,
+* :doc:`GetSamples`,
+* :doc:`NTFSUtil`,
+* :doc:`RegInfo`.
+
+Directory Output
+================
 
 Directory output takes the form:
 
@@ -41,10 +53,15 @@ Directory output takes the form:
 
     MyTool.exe /out=c:\temp\test
 
-    C:\temp\test must exist, be a directory and writeable.
+In this example, if ``C:\temp\test`` directory doesn't exist, it is created. If a parent directory doesn't exist, it is also created. Already existing directories must be writable.
 
-Archive output
-``````````````
+The following tools do not support this output:
+
+* :doc:`FastFind`,
+* :doc:`NTFSUtil`.
+
+Archive Output
+==============
 
 The simplest form of output for an archive is:
 
@@ -52,52 +69,75 @@ The simplest form of output for an archive is:
 
     MyTool.exe /out=c:\temp\foo.zip
 
-    C:\temp must exist, be a directory and writeable.
-    foo.zip must not exist.
+In this example, if ``C:\temp`` directory doesn't exist, it is created. If the directory already exists, it must be writable. If the output archive already exists, it is overwritten.
 
-The archive format is selected based on extension of foo:
+The archive format is selected based on extension of "foo":
+
 * Foo.zip selects the zip format.
 * Foo.7z selects the LZMA/7zip format (www.7zip.org).
-* Foo.cab select the MSCF Microsoft cabinet format.
-* Foo.<ext> selects the format if supported in 7zip library for archive creation.
+* Foo.cab selects the MSCF Microsoft cabinet format.
 
-The following tools support output in archive files:
-* NTFSInfo
-* USNInfo
-* GetThis
-* GetSamples
+The following tools do not follow this output syntax:
 
-SQL Server output
-`````````````````
+* :doc:`FastFind`,
+* :doc:`NTFSUtil`,
+* :doc:`RegInfo`.
 
-The simplest form of SQL server output is:
+Compression (only for zip and 7z Format)
+----------------------------------------
 
-.. code:: bat
-    
-    MyTool.exe /out=<MySQLConnectionString>#<MyTable>
+The level of compression in the archive can be specified using either an XML configuration file (with a ``compression`` attribute) or a command-line option (with the ``/compression`` option).
+Supported values are:
 
-<MySQLConnectionString> must be a valid connection string:
-
-::
-
-    Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;DSN=myDsn
-    <MyTable> must be an existing table with the appropriate column definition
-
-File character encoding
-```````````````````````
-
-To reduce output file size and ease file analysis on Linux systems (that seems to have issues with UTF16), the default encoding for CSV is  now UTF8.
-The command line options /utf8 and /utf16 can be used to explicitely control the output encoding.
-Also, XML configuration files elements outputfile and outputdir can have an optional attribute “encoding”:
+* None
+* Fastest
+* Fast
+* Normal
+* Maximum
+* Ultra
 
 .. code:: xml
 
-    <output encoding="UTF16">c:\temp</output>
-  
+    <output compression="fast">MyOutput.7z</output>
+
+.. code:: bat
+        
+    MyTool.exe /out=c:\temp\foo.zip /compression=Normal
+
+.. _cfg-tool-output-pwd:
+
+Password (only for zip and 7z Format)
+-------------------------------------
+
+.. warning:: The only tools supporting this option are GetThis and GetSamples.
+
+The output archive can be password protected by providing either the ``/password`` option or a ``password`` attribute for the ``output`` element in an XML configuration file.
+
+.. code:: xml
+
+    <output password="avproof">MyOutput.7z</output>
+    
+.. code:: bat
+
+    MyTool.exe /out=MyOutput.7z /password="avproof"
+    
+This password should not be regarded as a security feature but can be used to evade anti-viruses when collecting malicious samples.
+In order to encrypt archives, one should use the corresponding feature in :ref:`wolf_config <wolf_config-recipient-element>`.
+
+File Character Encoding
+=======================
+
+To reduce output file size and ease file analysis on Linux systems (that seems to have issues with UTF16), the default encoding for CSV is UTF8.
+The command-line options ``/utf8`` and ``/utf16`` can be used to explicitly control the encoding of the output.
+
+Also, XML configuration files elements ``output`` can have an optional attribute ``encoding``:
+
+.. code:: xml
+
+    <output encoding="utf16">c:\temp</output>
+
 Or
 
 .. code:: xml
-    
-    <output encoding="UTF8" >c:\temp\test.csv</output>
 
-
+    <output encoding="utf8">c:\temp\test.csv</output>

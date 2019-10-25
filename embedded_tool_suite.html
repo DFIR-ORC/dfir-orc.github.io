@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Embedded Tool Suite &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Common Options &amp; Properties" href="info_tools.html" />
+    <link rel="prev" title="DFIR ORC Local Configuration File" href="orc_local_config.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="info_tools.html" title="Common Options &amp; Properties"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="orc_local_config.html" title="DFIR ORC Local Configuration File"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Embedded Tool Suite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="embedded-tool-suite">
+<h1>Embedded Tool Suite<a class="headerlink" href="#embedded-tool-suite" title="Permalink to this headline">¶</a></h1>
+<p>The DFIR ORC framework relies on a suite of tools to parse and collect artefacts in a reliable manner.
+This part of the documentation provides details about their behavior and configuration.</p>
+<p>Utility tools embedded in DFIR ORC binaries are listed below. There is another tool which is not related to collection per se: <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a>.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="FatInfo.html"><span class="doc">FatInfo</span></a>: Collects FAT metadata from the file system (file names, hashes, authenticode data, etc.)</p></li>
+<li><p><a class="reference internal" href="FastFind.html"><span class="doc">FastFind</span></a>: Locate and report on Indicators of Compromise</p></li>
+<li><p><a class="reference internal" href="GetSamples.html"><span class="doc">GetSamples</span></a>: Automated sample collection</p></li>
+<li><p><a class="reference internal" href="GetSectors.html"><span class="doc">GetSectors</span></a>: Collects MBR, VBR and partition slack space</p></li>
+<li><p><a class="reference internal" href="GetThis.html"><span class="doc">GetThis</span></a>: Collects sample data from the file system (files, ADS, Extended Attributes, etc.)</p></li>
+<li><p><a class="reference internal" href="NTFSInfo.html"><span class="doc">NTFSInfo</span></a>: Collects NTFS metadata (file entries, timestamps, file hashes, authenticode data, etc.)</p></li>
+<li><p><a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a>: NTFS Master File Table inspector</p></li>
+<li><p><a class="reference internal" href="ObjInfo.html"><span class="doc">ObjInfo</span></a>: Collects the named object list (named pipes, mutexes, etc.)</p></li>
+<li><p><a class="reference internal" href="RegInfo.html"><span class="doc">RegInfo</span></a>: Collects registry related information (without mounting hives)</p></li>
+<li><p><a class="reference internal" href="USNInfo.html"><span class="doc">USNInfo</span></a>: Collects USN journal</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="info_tools.html" title="Common Options &amp; Properties"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="orc_local_config.html" title="DFIR ORC Local Configuration File"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

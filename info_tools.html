@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Common Options &amp; Properties &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Implementation Details About Parsers" href="fs_implem_details.html" />
+    <link rel="prev" title="Embedded Tool Suite" href="embedded_tool_suite.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="fs_implem_details.html" title="Implementation Details About Parsers"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="embedded_tool_suite.html" title="Embedded Tool Suite"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" accesskey="U">Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="common-options-properties">
+<h1>Common Options &amp; Properties<a class="headerlink" href="#common-options-properties" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="supported-versions">
+<h2>Supported Versions<a class="headerlink" href="#supported-versions" title="Permalink to this headline">¶</a></h2>
+<p>File system related tools are entirely implemented in native C++, compiled with Visual Studio 2017 Update 9 and do not require any installation prior to execution on the currently <a class="reference internal" href="platforms.html"><span class="doc">supported versions of Windows</span></a>.</p>
+</div>
+<div class="section" id="help">
+<h2>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
+<p>Getting help can be done using <code class="docutils literal notranslate"><span class="pre">/help</span></code> or <code class="docutils literal notranslate"><span class="pre">/?</span></code>, for configured and unconfigured binaries.</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe /help
+DFIR-Orc_x64.exe NTFSUtil /?
+</pre></div>
+</div>
+<p>For any tool embedded by default, the same options apply. For example, both of the following commands display the help menu for NTFSUtil:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe NTFSUtil /help
+DFIR-Orc.exe NTFSUtil /?
+</pre></div>
+</div>
+</div>
+<div class="section" id="table-of-contents-of-common-options-properties">
+<h2>Table of Contents of Common Options &amp; Properties<a class="headerlink" href="#table-of-contents-of-common-options-properties" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fs_implem_details.html">Implementation Details About Parsers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fs_implem_details.html#mft-parser">MFT Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fs_implem_details.html#usn-parser">USN Parser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_locations.html">Configuring Locations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuring_locations.html#locations">Locations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#locations-for-mounted-volumes">Locations for Mounted Volumes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#locations-for-physical-drives">Locations for Physical Drives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#locations-for-disk-images-dd">Locations for Disk Images (.dd)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#locations-for-volumes-and-partitions-of-an-image-dd">Locations for Volumes and Partitions of an Image (.dd)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#locations-for-volume-shadow-copies">Locations for Volume Shadow Copies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuring_locations.html#explicit-volume-shadow-copy">Explicit Volume Shadow Copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_locations.html#automatic-shadow-copies-addition">Automatic Shadow Copies Addition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#locations-for-offline-mft">Locations for Offline MFT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_locations.html#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#altitude-attribute-altitude-strategy-option"><code class="docutils literal notranslate"><span class="pre">altitude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Altitude=&lt;Strategy&gt;</span></code> Option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#knownlocations-attribute-knownlocations-option"><code class="docutils literal notranslate"><span class="pre">knownlocations</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/knownlocations</span></code> Option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#shadows-attribute-shadows-option"><code class="docutils literal notranslate"><span class="pre">shadows</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> Option</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_yara.html">Configuring the Yara Scanner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuring_yara.html#source-attribute"><code class="docutils literal notranslate"><span class="pre">source</span></code> Attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_yara.html#scan-method-attribute"><code class="docutils literal notranslate"><span class="pre">scan_method</span></code> Attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_yara.html#block-attribute"><code class="docutils literal notranslate"><span class="pre">block</span></code> Attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_yara.html#overlap-attribute"><code class="docutils literal notranslate"><span class="pre">overlap</span></code> Attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_yara.html#timeout-attribute"><code class="docutils literal notranslate"><span class="pre">timeout</span></code> Attribute</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_ntfs_opt.html">Configuring Attributes of <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuring_ntfs_opt.html#search-algorithm-and-result-of-a-search">Search Algorithm and Result of a Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_ntfs_opt.html#possible-attributes-of-a-ntfs-find-element">Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> Element</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_ntfs_opt.html#possible-attributes-of-a-ntfs-exclude-element">Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Element</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_ntfs_opt.html#order-of-evaluation-of-attributes-in-clauses">Order of Evaluation of Attributes in Clauses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_ntfs_opt.html#typical-usage-examples">Typical Usage Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_console_output.html">Configuring Console Output, Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuring_console_output.html#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#file-attribute-logfile-file-option"><code class="docutils literal notranslate"><span class="pre">file</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/logfile=&lt;File&gt;</span></code> Option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#noconsole-attribute-noconsole-option"><code class="docutils literal notranslate"><span class="pre">noconsole</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/noconsole</span></code> Option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#verbose-attribute-verbose-option"><code class="docutils literal notranslate"><span class="pre">verbose</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/verbose</span></code> Option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#debug-attribute-debug-option"><code class="docutils literal notranslate"><span class="pre">debug</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/debug</span></code> Option</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_console_output.html#typical-usage-example">Typical Usage Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_process.html">Configuring Process Priority</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_tool_output.html">Configuring Tool Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuring_tool_output.html#file-output">File Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_tool_output.html#directory-output">Directory Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_tool_output.html#archive-output">Archive Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuring_tool_output.html#compression-only-for-zip-and-7z-format">Compression (only for zip and 7z Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_tool_output.html#password-only-for-zip-and-7z-format">Password (only for zip and 7z Format)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_tool_output.html#file-character-encoding">File Character Encoding</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="fs_implem_details.html" title="Implementation Details About Parsers"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="embedded_tool_suite.html" title="Embedded Tool Suite"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

@@ -40,10 +40,11 @@
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="licenses.html">Licenses</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="open-license.html">English version</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">French version</a></li>
@@ -51,6 +52,16 @@
 </li>
 </ul>
 
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -101,7 +112,7 @@
 <p>La présente licence est régie par le droit français.</p>
 <div class="section" id="compatibilite-de-la-presente-licence">
 <h3>Compatibilité de la présente licence<a class="headerlink" href="#compatibilite-de-la-presente-licence" title="Permalink to this headline">¶</a></h3>
-<p>Elle a été conçue pour être compatible avec toute licence libre qui exige _a <a href="#id1"><span class="problematic" id="id2">minima_</span></a> la mention de paternité. Elle est notamment compatible avec la version antérieure de la présente licence ainsi qu’avec les licences « Open Government Licence » (OGL) du Royaume-Uni, « Creative Commons Attribution » (CC-BY) de Creative Commons et « Open Data Commons Attribution » (ODC-BY) de l’Open Knowledge Foundation.</p>
+<p>Elle a été conçue pour être compatible avec toute licence libre qui exige <em>a minima</em> la mention de paternité. Elle est notamment compatible avec la version antérieure de la présente licence ainsi qu’avec les licences « Open Government Licence » (OGL) du Royaume-Uni, « Creative Commons Attribution » (CC-BY) de Creative Commons et « Open Data Commons Attribution » (ODC-BY) de l’Open Knowledge Foundation.</p>
 </div>
 </div>
 <div class="section" id="definitions">
@@ -152,9 +163,16 @@
           <li class="nav-item nav-item-1"><a href="licenses.html" >Licenses</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
   </body>
 </html>

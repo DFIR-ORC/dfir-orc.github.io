@@ -36,7 +36,7 @@
           
         
         <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="configuration.html" accesskey="U">DFIR ORC Configuration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="configuration.html" accesskey="U">Configuration</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -47,21 +47,31 @@
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="tuto.html">Getting Started With DFIR ORC Configuration Files: A Tutorial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="resources.html">Referencing resources in configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="configuration.html">Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Referencing Resources in Configurations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cli_options.html">DFIR ORC Command-line Options</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">WolfLauncher Configuration File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ToolEmbed.html">ToolEmbed</a></li>
 <li class="toctree-l2"><a class="reference internal" href="orc_local_config.html">DFIR ORC Local Configuration File</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -109,17 +119,17 @@ Its point is to be exhaustive from the point of view of existing usable elements
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>command_timeout</strong> <em>(optional=yes, default=3 hours)</em></dt><dd><p>Configures the time (in minutes) the engine will wait for the last command(s) to complete. Upon time out, the command engine will stop, kill any pending process and move on with archive completion.</p>
+<dt><strong>command_timeout</strong> <em>(optional=yes, default=3 hours)</em></dt><dd><p>Configures the time (in minutes) the engine will wait for the last command(s) to complete. Upon timeout, the command engine will stop, kill any pending process and move on with archive completion.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>archive_timeout</strong> <em>(optional=yes, default=5 minutes)</em></dt><dd><p>Configures the time (in minutes) the engine will wait for the archive to complete. Upon time out, this archive will be canceled.</p>
+<dt><strong>archive_timeout</strong> <em>(optional=yes, default=5 minutes)</em></dt><dd><p>Configures the time (in minutes) the engine will wait for the archive to complete. Upon timeout, this archive will be canceled.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>werdontshowui</strong> <em>(optional=yes , default=WER UI will appear)</em></dt><dd><p>Configures Windows Error Reporting to prevent blocking UI in case of a crash during DFIR ORC execution. WER previous configuration is restored at the end of DFIR ORC execution.</p>
+<dt><strong>werdontshowui</strong> <em>(optional=yes, default=WER UI will appear)</em></dt><dd><p>Configures Windows Error Reporting to prevent blocking UI in case of a crash during DFIR ORC execution. WER previous configuration is restored at the end of DFIR ORC execution.</p>
 </dd>
 </dl>
 </li>
@@ -279,12 +289,12 @@ Its point is to be exhaustive from the point of view of existing usable elements
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>command_timeout</strong> <em>(optional=yes, default=3 hours)</em></dt><dd><p>Per archive, override the global configured time (in minutes) the engine will wait for the last command(s) to complete. Upon time out, the command engine will stop, kill any pending process and move on with archive completion.</p>
+<dt><strong>command_timeout</strong> <em>(optional=yes, default=3 hours)</em></dt><dd><p>Per archive, override the global configured time (in minutes) the engine will wait for the last command(s) to complete. Upon timeout, the command engine will stop, kill any pending process and move on with archive completion.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>archive_timeout</strong> <em>(optional=yes, default=5 minutes)</em></dt><dd><p>Per archive, override the global configured time (in minutes) the engine will wait for the archive to complete. Upon time out, this archive will be canceled.</p>
+<dt><strong>archive_timeout</strong> <em>(optional=yes, default=5 minutes)</em></dt><dd><p>Per archive, override the global configured time (in minutes) the engine will wait for the archive to complete. Upon timeout, this archive will be canceled.</p>
 </dd>
 </dl>
 </li>
@@ -354,8 +364,8 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <p><em>optional=no, default=N/A,</em> <a class="reference external" href="#the-archive-element">parent element: archive</a></p>
 <p>The command executed is created with the command element. This section of the configuration describes:</p>
 <ul class="simple">
-<li><p>the resources needed to execute: binary, pre-requisites;</p></li>
-<li><p>the arguments passed to the command line;</p></li>
+<li><p>the resources needed to execute: binary, prerequisites,</p></li>
+<li><p>the arguments passed to the command line, and</p></li>
 <li><p>the output expected upon completion of the task.</p></li>
 </ul>
 <div class="section" id="id19">
@@ -370,8 +380,8 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <dt><strong>winver</strong> <em>(optional=yes, default=always execute)</em></dt><dd><p>Limits the execution of this command to one or several specific versions of Windows.
 The valid values of this attribute are:</p>
 <ul class="simple">
-<li><p>winver=”X.x”: this command will only execute on Windows major version X and minor x;</p></li>
-<li><p>winver=”X.x+”: this command will only execute on Windows version “X.x” and successors;</p></li>
+<li><p>winver=”X.x”: this command will only execute on Windows major version X and minor x,</p></li>
+<li><p>winver=”X.x+”: this command will only execute on Windows version “X.x” and successors,</p></li>
 <li><p>winver=”X.x-“: this command will only execute on Windows version “X.x” and predecessors.</p></li>
 </ul>
 </dd>
@@ -381,7 +391,7 @@ The valid values of this attribute are:</p>
 <dt><strong>queue</strong> <em>(optional=yes, default=queue)</em></dt><dd><p>Configures the behavior of the archive engine for the output of this command.
 The available values for this attribute are as follows.</p>
 <ul class="simple">
-<li><p>flush: the command produces a lot of output the engine must archive immediately;</p></li>
+<li><p>flush: the command produces a lot of output the engine must archive immediately,</p></li>
 <li><p>Any other value will configure the output of this command to be queued until the next flush or the end of all the commands.</p></li>
 </ul>
 </dd>
@@ -422,14 +432,14 @@ The available values for this attribute are:</p>
 </div>
 </div>
 <div class="section" id="execute-element">
-<h2><code class="docutils literal notranslate"><span class="pre">execute</span></code> Element<a class="headerlink" href="#execute-element" title="Permalink to this headline">¶</a></h2>
+<span id="wolf-config-execute-element"></span><h2><code class="docutils literal notranslate"><span class="pre">execute</span></code> Element<a class="headerlink" href="#execute-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=no, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
 <p>Configures the program to be executed.
 It can be a local command from the file system or an embedded resource.
 On 64-bit platforms, the run64 attribute is evaluated first and used if available.
-If not, <code class="docutils literal notranslate"><span class="pre">DFIR-ORC.exe</span> <span class="pre">WolfLauncher</span></code> evaluates the run attribute.</p>
+If not, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">WolfLauncher</span></code> evaluates the run attribute.</p>
 <p>Similarly, on 32-bit platforms, the run32 attribute is evaluated first and used if available.
-If not, <code class="docutils literal notranslate"><span class="pre">DFIR-ORC.exe</span> <span class="pre">WolfLauncher</span></code> evaluates the run attribute.
+If not, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">WolfLauncher</span></code> evaluates the run attribute.
 Attributes named run, run32 and run64 can use the <a class="reference internal" href="resources.html"><span class="doc">resource syntax</span></a> or directly reference a file on the live system (environment variables are expanded).</p>
 <div class="section" id="id22">
 <h3>Attributes<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
@@ -590,12 +600,19 @@ Command-line arguments to further specify the output can be passed to a tool usi
           
         
         <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="configuration.html" >DFIR ORC Configuration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="configuration.html" >Configuration</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
   </body>
 </html>

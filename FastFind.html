@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>FastFind &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GetThis" href="GetThis.html" />
+    <link rel="prev" title="FatInfo" href="FatInfo.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="GetThis.html" title="GetThis"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="FatInfo.html" title="FatInfo"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" accesskey="U">Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fastfind">
+<h1>FastFind<a class="headerlink" href="#fastfind" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of FastFind is to check for the presence of known indicators on large installed bases.</p>
+<p>Since FastFind aims to analyze thousands of systems, it requires minimal interaction.
+To achieve this goal, FastFind uses an XML configuration file embedded as a resource to specify the indicators to look for.
+FastFind can leverage a collection of indicators to enable sophisticated indicator search.</p>
+<p>FastFind can</p>
+<ul class="simple">
+<li><p>look up mounted file systems for known files using multiple indicators,</p></li>
+<li><p>look up registry hives from known signature (keys, values, …), and</p></li>
+<li><p>look up Windows object directory for known objects (Pipes, Events, …).</p></li>
+</ul>
+<p>FastFind does <strong>not</strong></p>
+<ul class="simple">
+<li><p>find sophisticated rootkits,</p></li>
+<li><p>collect data for ulterior analysis, and</p></li>
+<li><p>find traces of any other system compromise (i.e. it only searches for specific known threats).</p></li>
+</ul>
+<p>FastFind is a standalone executable: it does not require any installation prior to execution. It is currently supported by the following Windows versions:</p>
+<ul class="simple">
+<li><p>Windows XP SP2 (Win32, x64),</p></li>
+<li><p>Windows Server 2003 SP3 (Win32, x64),</p></li>
+<li><p>Windows Vista SP1, SP2 (Win32, x64),</p></li>
+<li><p>Windows Server 2008 SP1, SP2 (Win32, x64),</p></li>
+<li><p>Windows Server 2012 (Win32, x64),</p></li>
+<li><p>Windows 7 RTM, SP1 (Win32, x64),</p></li>
+<li><p>Windows 8 RTM (Win32, x64),</p></li>
+<li><p>Windows Server 2012 NTFS volumes (Win32, x64),</p></li>
+<li><p>Windows 8.1 RTM (Win32, x64),</p></li>
+<li><p>Windows Server 2012 R2 (x64),</p></li>
+<li><p>Windows Server 2016,</p></li>
+<li><p>Windows Server 2019, and</p></li>
+<li><p>Windows 10 RTM … 1903 (Win32, x64).</p></li>
+</ul>
+<p>FastFind is using the same MFT parser as NTFSInfo but specifically targets indicator lookup.
+For details on the MFT parser, please refer to <a class="reference internal" href="fs_implem_details.html"><span class="doc">MFT parser configuration for details</span></a>.</p>
+</div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>Upon successful execution, FastFind outputs the result of its findings in an XML file, with one element per file system, registry or Windows object match.
+It can also output up to two CSV files: one for the file system matches and one for the object matches.</p>
+<p>Here is a sample XML output from the tool:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;fast_find</span> <span class="na">computer=</span><span class="s">&quot;JEANGABOOK&quot;</span> <span class="na">os=</span><span class="s">&quot;Microsoft Windows 10 Enterprise Edition (build 18362), 64-bit&quot;</span> <span class="na">role=</span><span class="s">&quot;WorkStation&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;output&gt;</span>C:\temp\FastFind_output.xml<span class="nt">&lt;/output&gt;</span>
+    <span class="nt">&lt;filesystem&gt;</span>
+        <span class="nt">&lt;filefind_match</span> <span class="na">description=</span><span class="s">&quot;SHA256=E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;record</span> <span class="na">frn=</span><span class="s">&quot;0x00080000000E75BC&quot;</span> <span class="na">volume_id=</span><span class="s">&quot;0xD2501A75501A6091&quot;</span> <span class="na">snapshot_id=</span><span class="s">&quot;{00000000-0000-0000-0000-000000000000}&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;standardinformation</span> <span class="na">creation=</span><span class="s">&quot;2019-09-30 13:29:17.691&quot;</span> <span class="na">lastmodification=</span><span class="s">&quot;2019-09-30 13:33:16.007&quot;</span> <span class="na">lastaccess=</span><span class="s">&quot;2019-09-30 13:33:16.007&quot;</span> <span class="na">lastentrychange=</span><span class="s">&quot;2019-09-30 13:38:18.941&quot;</span> <span class="na">attributes=</span><span class="s">&quot;A............&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;filename</span> <span class="na">fullname=</span><span class="s">&quot;\temp\test.xml&quot;</span> <span class="na">creation=</span><span class="s">&quot;2019-09-30 13:29:17.691&quot;</span> <span class="na">lastmodification=</span><span class="s">&quot;2019-09-30 13:29:17.691&quot;</span> <span class="na">lastaccess=</span><span class="s">&quot;2019-09-30 13:29:17.691&quot;</span> <span class="na">lastentrychange=</span><span class="s">&quot;2019-09-30 13:29:17.691&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;data</span> <span class="na">filesize=</span><span class="s">&quot;0&quot;</span> <span class="na">MD5=</span><span class="s">&quot;D41D8CD98F00B204E9800998ECF8427E&quot;</span> <span class="na">SHA1=</span><span class="s">&quot;DA39A3EE5E6B4B0D3255BFEF95601890AFD80709&quot;</span> <span class="na">SHA256=</span><span class="s">&quot;E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/record&gt;</span>
+        <span class="nt">&lt;/filefind_match&gt;</span>
+        <span class="nt">&lt;filefind_match</span> <span class="na">description=</span><span class="s">&quot;Name matches gdi*.dll&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;record</span> <span class="na">frn=</span><span class="s">&quot;0x0000000000000000&quot;</span> <span class="na">volume_id=</span><span class="s">&quot;0xB80097BC00978054&quot;</span> <span class="na">snapshot_id=</span><span class="s">&quot;{00000000-0000-0000-0000-000000000000}&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;i30</span> <span class="na">fullname=</span><span class="s">&quot;\Windows\SysWOW64\gdi32full.dll&quot;</span> <span class="na">parentfrn=</span><span class="s">&quot;0x00030000000789D7&quot;</span> <span class="na">creation=</span><span class="s">&quot;2019-07-30 12:01:07.896&quot;</span> <span class="na">lastmodification=</span><span class="s">&quot;2019-07-30 12:01:07.927&quot;</span> <span class="na">lastaccess=</span><span class="s">&quot;2019-07-30 12:04:46.430&quot;</span> <span class="na">lastentrychange=</span><span class="s">&quot;2019-07-30 12:05:26.670&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/record&gt;</span>
+        <span class="nt">&lt;/filefind_match&gt;</span>
+    <span class="nt">&lt;/filesystem&gt;</span>
+    <span class="nt">&lt;registry&gt;</span>
+        <span class="nt">&lt;hive</span> <span class="na">volume_id=</span><span class="s">&quot;0xB80097BC00978054&quot;</span> <span class="na">snapshot_id=</span><span class="s">&quot;{00000000-0000-0000-0000-000000000000}&quot;</span> <span class="na">hive_path=</span><span class="s">&quot;\Windows\System32\config\SOFTWARE&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;regfind_match</span> <span class="na">description=</span><span class="s">&quot;KeyPath is \Microsoft\Windows\CurrentVersion\Run, Name is SecurityHealth&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;value</span> <span class="na">key=</span><span class="s">&quot;\Microsoft\Windows\CurrentVersion\Run&quot;</span> <span class="na">value=</span><span class="s">&quot;SecurityHealth&quot;</span> <span class="na">type=</span><span class="s">&quot;REG_EXPAND_SZ&quot;</span> <span class="na">lastmodified_key=</span><span class="s">&quot;2019-10-02 15:14:29.043&quot;</span> <span class="na">data_size=</span><span class="s">&quot;88&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/regfind_match&gt;</span>
+        <span class="nt">&lt;/hive&gt;</span>
+    <span class="nt">&lt;/registry&gt;</span>
+    <span class="nt">&lt;object&gt;</span>
+        <span class="nt">&lt;object_match</span> <span class="na">description=</span><span class="s">&quot;SymbolicLink&#39;name is Partition0&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;object</span> <span class="na">type=</span><span class="s">&quot;SymbolicLink&quot;</span> <span class="na">name=</span><span class="s">&quot;Partition0&quot;</span> <span class="na">path=</span><span class="s">&quot;\Device\Harddisk0\Partition0&quot;</span> <span class="na">link_target=</span><span class="s">&quot;\Device\Harddisk0\Partition0&quot;</span> <span class="na">link_creationtime=</span><span class="s">&quot;2019-10-10 00:17:49.107&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/object_match&gt;</span>
+        <span class="nt">&lt;object_match</span> <span class="na">description=</span><span class="s">&quot;Driver&#39;name is CNG&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;object</span> <span class="na">type=</span><span class="s">&quot;Driver&quot;</span> <span class="na">name=</span><span class="s">&quot;CNG&quot;</span> <span class="na">path=</span><span class="s">&quot;\Driver\CNG&quot;</span> <span class="na">link_target=</span><span class="s">&quot;\Driver\CNG&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/object_match&gt;</span>
+    <span class="nt">&lt;/object&gt;</span>
+<span class="nt">&lt;/fast_find&gt;</span>
+</pre></div>
+</div>
+<p>The output XML file is separated in three sections: <code class="docutils literal notranslate"><span class="pre">filesystem</span></code>, <code class="docutils literal notranslate"><span class="pre">registry</span></code> and <code class="docutils literal notranslate"><span class="pre">object</span></code>.</p>
+<div class="section" id="file-system-match">
+<h3>File System Match<a class="headerlink" href="#file-system-match" title="Permalink to this headline">¶</a></h3>
+<p>In the XML file, each file system match is enclosed inside a <code class="docutils literal notranslate"><span class="pre">filefind_match</span></code> element. This element has an attribute <code class="docutils literal notranslate"><span class="pre">description</span></code> that reports the rule which matched.</p>
+<p>In both CSV and XML outputs, the following information is retrieved for a file system match:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>CSV ColumnName</p></th>
+<th class="head"><p>XML Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>computer (<code class="docutils literal notranslate"><span class="pre">fast_find</span></code> element)</p></td>
+<td><p>Name of the computer</p></td>
+</tr>
+<tr class="row-odd"><td><p>VolumeID</p></td>
+<td><p>volume_id (<code class="docutils literal notranslate"><span class="pre">record</span></code> element)</p></td>
+<td><p>Id of the volume</p></td>
+</tr>
+<tr class="row-even"><td><p>SnapshotID</p></td>
+<td><p>snapshot_id (<code class="docutils literal notranslate"><span class="pre">record</span></code> element)</p></td>
+<td><p>Snapshot associated with this entry</p></td>
+</tr>
+<tr class="row-odd"><td><p>FRN</p></td>
+<td><p>frn (<code class="docutils literal notranslate"><span class="pre">record</span></code> element)</p></td>
+<td><p>FRN of this entry</p></td>
+</tr>
+<tr class="row-even"><td><p>ParentFRN</p></td>
+<td><p>parentfrn (<code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">i30</span></code> element)</p></td>
+<td><p>FRN of the parent directory</p></td>
+</tr>
+<tr class="row-odd"><td><p>FullName</p></td>
+<td><p>fullname (<code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">i30</span></code> element)</p></td>
+<td><p>Full pathname for this entry</p></td>
+</tr>
+<tr class="row-even"><td><p>SizeInBytes</p></td>
+<td><p>filesize (<code class="docutils literal notranslate"><span class="pre">data</span></code> element)</p></td>
+<td><p>File size in bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>description (<code class="docutils literal notranslate"><span class="pre">filefind_match</span></code> element)</p></td>
+<td><p>The rule that matched this entry</p></td>
+</tr>
+<tr class="row-even"><td><p>CreationDate</p></td>
+<td><p>creation (<code class="docutils literal notranslate"><span class="pre">standardinformation</span></code> element)</p></td>
+<td><p>File creation date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LastModificationDate</p></td>
+<td><p>lastmodification (<code class="docutils literal notranslate"><span class="pre">standardinformation</span></code> element)</p></td>
+<td><p>File last write date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-even"><td><p>LastAccessDate</p></td>
+<td><p>lastaccess (<code class="docutils literal notranslate"><span class="pre">standardinformation</span></code> element)</p></td>
+<td><p>File last read access date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LastAttrChangeDate</p></td>
+<td><p>lastentrychange (<code class="docutils literal notranslate"><span class="pre">standardinformation</span></code> element)</p></td>
+<td><p>File last attribute change date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-even"><td><p>FileNameCreationDate</p></td>
+<td><p>creation (<code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">i30</span></code> element)</p></td>
+<td><p>File name (hard link) creation date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>FileNameLastModificationDate</p></td>
+<td><p>lastmodification (<code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">i30</span></code> element)</p></td>
+<td><p>File name (hard link) last modification date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-even"><td><p>FileNameLastAccessDate</p></td>
+<td><p>lastaccess (<code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">i30</span></code> element)</p></td>
+<td><p>File name (hard link) last read access date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>FileNameLastAttrChangeDate</p></td>
+<td><p>lastentrychange (<code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">i30</span></code> element)</p></td>
+<td><p>File name (hard link) last attribute change date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-even"><td><p>MD5</p></td>
+<td><p>MD5 (<code class="docutils literal notranslate"><span class="pre">data</span></code> element)</p></td>
+<td><p>Cryptographic MD5 hash</p></td>
+</tr>
+<tr class="row-odd"><td><p>SHA1</p></td>
+<td><p>SHA1 (<code class="docutils literal notranslate"><span class="pre">data</span></code> element)</p></td>
+<td><p>Cryptographic SHA1 hash</p></td>
+</tr>
+<tr class="row-even"><td><p>SHA256</p></td>
+<td><p>SHA256 (<code class="docutils literal notranslate"><span class="pre">data</span></code> element)</p></td>
+<td><p>Cryptographic SHA256 hash</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="registry-match">
+<h3>Registry Match<a class="headerlink" href="#registry-match" title="Permalink to this headline">¶</a></h3>
+<p>In the XML output file, each parsed hive, whether FastFind found a match in it or not, is listed in a <code class="docutils literal notranslate"><span class="pre">hive</span></code> element.
+If a match was found, it is enclosed inside a <code class="docutils literal notranslate"><span class="pre">regfind_match</span></code> element.
+This element has an attribute <code class="docutils literal notranslate"><span class="pre">description</span></code> that reports the rule which matched.</p>
+<p>The following information is retrieved for a file system match:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>XML Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>computer (<code class="docutils literal notranslate"><span class="pre">fast_find</span></code> element)</p></td>
+<td><p>Name of the computer</p></td>
+</tr>
+<tr class="row-odd"><td><p>volume_id (<code class="docutils literal notranslate"><span class="pre">hive</span></code> element)</p></td>
+<td><p>Id of the volume</p></td>
+</tr>
+<tr class="row-even"><td><p>snapshot_id (<code class="docutils literal notranslate"><span class="pre">hive</span></code> element)</p></td>
+<td><p>Snapshot associated with this entry</p></td>
+</tr>
+<tr class="row-odd"><td><p>hive_path (<code class="docutils literal notranslate"><span class="pre">hive</span></code> element)</p></td>
+<td><p>Full path of the hive</p></td>
+</tr>
+<tr class="row-even"><td><p>description (<code class="docutils literal notranslate"><span class="pre">regfind_match</span></code> element)</p></td>
+<td><p>The rule that matched this entry</p></td>
+</tr>
+<tr class="row-odd"><td><p>key (<code class="docutils literal notranslate"><span class="pre">value</span></code> element)</p></td>
+<td><p>Registry key (full path)</p></td>
+</tr>
+<tr class="row-even"><td><p>value (<code class="docutils literal notranslate"><span class="pre">value</span></code> element)</p></td>
+<td><p>Key value</p></td>
+</tr>
+<tr class="row-odd"><td><p>type (<code class="docutils literal notranslate"><span class="pre">value</span></code> element)</p></td>
+<td><p>Type of the key data</p></td>
+</tr>
+<tr class="row-even"><td><p>lastmodified_key (<code class="docutils literal notranslate"><span class="pre">value</span></code> element)</p></td>
+<td><p>Registry key last modification date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>data_size (<code class="docutils literal notranslate"><span class="pre">value</span></code> element)</p></td>
+<td><p>Size of the data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="windows-object-match">
+<h3>Windows Object Match<a class="headerlink" href="#windows-object-match" title="Permalink to this headline">¶</a></h3>
+<p>In the XML file, each object match is enclosed inside an <code class="docutils literal notranslate"><span class="pre">object_match</span></code> element. This element has an attribute <code class="docutils literal notranslate"><span class="pre">description</span></code> that reports the rule which matched.</p>
+<p>In both CSV and XML outputs, the following information is retrieved for a file system match:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>CSV ColumnName</p></th>
+<th class="head"><p>XML Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>computer (<code class="docutils literal notranslate"><span class="pre">fast_find</span></code> element)</p></td>
+<td><p>Name of the computer</p></td>
+</tr>
+<tr class="row-odd"><td><p>OperatingSystem</p></td>
+<td><p>os (<code class="docutils literal notranslate"><span class="pre">fast_find</span></code> element)</p></td>
+<td><p>OS version (full string)</p></td>
+</tr>
+<tr class="row-even"><td><p>Description</p></td>
+<td><p>description (<code class="docutils literal notranslate"><span class="pre">object_match</span></code> element)</p></td>
+<td><p>The rule that matched this entry</p></td>
+</tr>
+<tr class="row-odd"><td><p>ObjectType</p></td>
+<td><p>type (<code class="docutils literal notranslate"><span class="pre">object</span></code> element)</p></td>
+<td><p>Type of the object (Mutex Driver etc.)</p></td>
+</tr>
+<tr class="row-even"><td><p>ObjectName</p></td>
+<td><p>name (<code class="docutils literal notranslate"><span class="pre">object</span></code> element)</p></td>
+<td><p>Name of the object</p></td>
+</tr>
+<tr class="row-odd"><td><p>ObjectPath</p></td>
+<td><p>path (<code class="docutils literal notranslate"><span class="pre">object</span></code> element)</p></td>
+<td><p>Path of the object</p></td>
+</tr>
+<tr class="row-even"><td><p>LinkTarget</p></td>
+<td><p>link_target (<code class="docutils literal notranslate"><span class="pre">object</span></code> element)</p></td>
+<td><p>Target for the symbolic link (when the object is a symbolic link)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LinkCreationTime</p></td>
+<td><p>link_creationtime (<code class="docutils literal notranslate"><span class="pre">object</span></code> element)</p></td>
+<td><p>Link creation date (yyyy-MM-dd hh:mm:ss.SSS)</p></td>
+</tr>
+</tbody>
+</table>
+<p>As for every tool, an output for logging is also available from the command line. The syntax can be found in <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>FastFind can be used from the command line using the following syntax:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe FastFind /config=fastfind.xml /out=fastfind_output.xml
+</pre></div>
+</div>
+<div class="section" id="config-path-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/config=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#config-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=no, default=N/A</em></p>
+<p>Takes an XML configuration file as argument.</p>
+<p>A typical XML configuration file looks like the following:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;fastfind</span> <span class="na">version=</span><span class="s">&quot;Test 2.0&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;filesystem&gt;</span>
+        <span class="nt">&lt;location</span> <span class="na">shadows=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>%SystemDrive%<span class="nt">&lt;/location&gt;</span>
+        <span class="nt">&lt;yara</span> <span class="na">source=</span><span class="s">yara.rules</span> <span class="na">block=</span><span class="s">&quot;2M&quot;</span> <span class="na">timeout=</span><span class="s">&quot;120&quot;</span> <span class="na">overlap=</span><span class="s">&quot;8192&quot;</span> <span class="na">scan_method=</span><span class="s">&quot;filemapping&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_find</span> <span class="na">size=</span><span class="s">&quot;694160&quot;</span> <span class="na">md5=</span><span class="s">&quot;1CECAFE147F1CC3E2B9804B8CDA593C9&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;ntdll.dll&quot;</span> <span class="na">yara_rule=</span><span class="s">&quot;is_dll&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_find</span> <span class="na">name_match=</span><span class="s">&quot;gdi*.dll&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_exclude</span> <span class="na">path=</span><span class="s">&quot;\Windows\System32\ntdll.dll&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_exclude</span> <span class="na">path_match=</span><span class="s">&quot;\Windows\System32\gdi*.dll&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_exclude</span> <span class="na">sha1=</span><span class="s">&quot;c766364efd9c9b5aa3a7140a69f0cf5b147bc476&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_exclude</span> <span class="na">size=</span><span class="s">&quot;14966411&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;ntfs_exclude</span> <span class="na">contains=</span><span class="s">&quot;bcryptprimitives.pdb&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/filesystem&gt;</span>
+    <span class="nt">&lt;registry&gt;</span>
+        <span class="nt">&lt;location&gt;</span>%SystemDrive%\<span class="nt">&lt;/location&gt;</span>
+        <span class="nt">&lt;hive</span> <span class="na">name=</span><span class="s">&quot;NTUSER&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;NTUSER.DAT&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;registry_find</span> <span class="na">key_path=</span><span class="s">&quot;\Software\Microsoft\Internet Explorer\Main&quot;</span> <span class="na">value=</span><span class="s">&quot;Check_Associations&quot;</span> <span class="na">data=</span><span class="s">&quot;no&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/hive&gt;</span>
+        <span class="nt">&lt;hive</span> <span class="na">name=</span><span class="s">&quot;SOFTWARE&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;SOFTWARE&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;registry_find</span> <span class="na">key_path=</span><span class="s">&quot;\Microsoft\Windows\CurrentVersion\Run&quot;</span> <span class="na">value=</span><span class="s">&quot;SecurityHealth&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/hive&gt;</span>
+    <span class="nt">&lt;/registry&gt;</span>
+    <span class="nt">&lt;object&gt;</span>
+        <span class="nt">&lt;object_find</span> <span class="na">type=</span><span class="s">&quot;Mutant&quot;</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;object_find</span> <span class="na">type=</span><span class="s">&quot;File&quot;</span> <span class="na">name=</span><span class="s">&quot;foobar&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/object&gt;</span>
+<span class="nt">&lt;/fastfind&gt;</span>
+</pre></div>
+</div>
+<p>The XML configuration file for FastFind contains:</p>
+<ul class="simple">
+<li><p>A root element <code class="docutils literal notranslate"><span class="pre">&lt;fastfind&gt;</span></code> with a <code class="docutils literal notranslate"><span class="pre">version</span></code> attribute that is displayed when the tool runs (typically identifying the campaign),</p></li>
+<li><p>A section <code class="docutils literal notranslate"><span class="pre">&lt;filesystem&gt;</span></code> to look for specific files,</p></li>
+<li><p>A section <code class="docutils literal notranslate"><span class="pre">&lt;registry&gt;</span></code> to look for registry keys or values,</p></li>
+<li><p>A section <code class="docutils literal notranslate"><span class="pre">&lt;object&gt;</span></code> to look for windows objects.</p></li>
+</ul>
+<p>In each of these sections, three additional elements can be specified:</p>
+<ul class="simple">
+<li><p>locations to specify where to look for, following the syntax described in <a class="reference internal" href="configuring_locations.html"><span class="doc">Configuring Locations</span></a>,</p></li>
+<li><p>yara rules, following the syntax described in <a class="reference internal" href="configuring_yara.html"><span class="doc">Configuring Yara scanner</span></a>, and</p></li>
+<li><dl class="simple">
+<dt>a collection of indicators to search for:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements for file system indicators. The syntax is detailed in the <a class="reference internal" href="configuring_ntfs_opt.html"><span class="doc">ntfs_find documentation</span></a>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">registry_find</span></code> elements for registry indicators. The syntax is detailed in the <a class="reference internal" href="RegInfo.html#reginfo-registryfind"><span class="std std-ref">RegInfo</span></a>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object_find</span></code> elements for object indicators. The syntax is detailed in the <a class="reference internal" href="ObjInfo.html"><span class="doc">ObjInfo</span></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="out-path-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#out-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>This option allows to specify a XML file or a directory to output results.
+For details on the <code class="docutils literal notranslate"><span class="pre">/out</span></code> option syntax, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
+<p>Whether this option is used or not, the tool outputs its result to the console.</p>
+</div>
+<div class="section" id="filesystem-path-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/filesystem=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#filesystem-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>Adds matching indicator information about the file system in a CSV file. File name provided in <code class="docutils literal notranslate"><span class="pre">&lt;Path&gt;</span></code> value must have a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> extension and if a full path is not specified, file is created in the current directory.</p>
+</div>
+<div class="section" id="object-path-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/object=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#object-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>Adds matching indicator information about Windows objects in a CSV file. File name provided in <code class="docutils literal notranslate"><span class="pre">&lt;Path&gt;</span></code> value must have a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> extension and if a full path is not specified, file is created in the current directory.</p>
+</div>
+<div class="section" id="skipdeleted-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/SkipDeleted</span></code> Option<a class="headerlink" href="#skipdeleted-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=Inactive</em></p>
+<p>Ignores deleted files. They are matched against by default.</p>
+</div>
+<div class="section" id="names-file1-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/Names=&lt;File1&gt;,...</span></code> Option<a class="headerlink" href="#names-file1-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>Adds one or more filenames to the list of indicators.</p>
+<blockquote>
+<div><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/Names=MyFile.txt,My*.sys,*.txt#EAName
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="version-versionstring-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/Version=&lt;VersionString&gt;</span></code> Option<a class="headerlink" href="#version-versionstring-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>Specifies a version string. Overrides the value in XML file.</p>
+<blockquote>
+<div><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/Version=<span class="s2">&quot;Diskpart V1.0&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="yara-yarafile1-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/Yara=&lt;YaraFile1&gt;,...</span></code> Option<a class="headerlink" href="#yara-yarafile1-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>This option allows to provide a comma-separated or semicolon-separated list of yara files. Those rules are added to the ones specified in the configuration file if they exist.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="GetThis.html" title="GetThis"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="FatInfo.html" title="FatInfo"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

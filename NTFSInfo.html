@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>NTFSInfo &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NTFSUtil" href="NTFSUtil.html" />
+    <link rel="prev" title="GetSectors" href="GetSectors.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="NTFSUtil.html" title="NTFSUtil"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="GetSectors.html" title="GetSectors"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" accesskey="U">Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ntfsinfo">
+<h1>NTFSInfo<a class="headerlink" href="#ntfsinfo" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>NTFSInfo is intended to collect details on data stored on NTFS mounted volumes, raw disk images or Volume Shadow Copies.
+Basically, the tool enumerates the file system entries and outputs user-specified details to collect in one or more CSV file.</p>
+<p>NTFSInfo can walk the file system using two different techniques: the USN journal enumeration or raw MFT parsing. Their implementation is detailed in <a class="reference internal" href="fs_implem_details.html"><span class="doc">parser implementation details</span></a>.</p>
+<p>While the two parsers (MFT and USN) enumerate the file system entries, there are key differences between the two approaches:</p>
+<ul>
+<li><dl>
+<dt>USN parser creates one line per USN record returned. The MFT parser, however, can potentially create multiple lines per MFT record:</dt><dd><ul class="simple">
+<li><p>One line per <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> attribute (hard links)</p></li>
+<li><p>One line per <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> attribute (ADSs)</p></li>
+</ul>
+<p>One can identify the lines referencing the same MFT record by looking at the FRN column.</p>
+<p>For example, below, FRN 0x00DB00000002442B, which has two names (one long, one short) and one Alternate Data Stream, NTFSInfo output looks like:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>FRN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GETTHI~2.ZIP</p></td>
+<td><p>0x00DB00000002442B</p></td>
+</tr>
+<tr class="row-odd"><td><p>GETTHI~2.ZIP:Zone.Identifier</p></td>
+<td><p>0x00DB00000002442B</p></td>
+</tr>
+<tr class="row-even"><td><p>GetThis (3).zip</p></td>
+<td><p>0x00DB00000002442B</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetThis (3).zip:Zone.Identifier</p></td>
+<td><p>0x00DB00000002442B</p></td>
+</tr>
+</tbody>
+</table>
+<p>If several attributes (whether <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> or <code class="docutils literal notranslate"><span class="pre">$DATA</span></code>) are present inside the USN record, only one line is written by the USN parser.
+In particular, the <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> attribute is selected by the system and not the tool.</p>
+</dd>
+</dl>
+</li>
+<li><p>The USN parser can enumerate Alternate Data Streams in the ADS column, one line per ADS. However, only the MFT parser will provide details on the ADS itself (size, hashes, PE Header, etc.). The USN parser will only detail the default stream.</p></li>
+</ul>
+</div>
+<div class="section" id="output">
+<span id="ntfsinfo-output"></span><h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>NTFSInfo can collect up to five different types of information:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ntfsinfo-fileinfo"><span class="std std-ref">FileInfo</span></a>,</p></li>
+<li><p><a class="reference internal" href="#ntfsinfo-attrinfo"><span class="std std-ref">AttrInfo</span></a>,</p></li>
+<li><p><a class="reference internal" href="#ntfsinfo-i30info"><span class="std std-ref">I30Info</span></a>,</p></li>
+<li><p><a class="reference internal" href="#ntfsinfo-timeline"><span class="std std-ref">TimeLine</span></a>, and</p></li>
+<li><p><a class="reference internal" href="#ntfsinfo-secdescr"><span class="std std-ref">SecDescr</span></a>.</p></li>
+</ul>
+<p>Data is stored in <strong>CSV</strong> files.</p>
+<p>If no output option is specified, only the <code class="docutils literal notranslate"><span class="pre">FileInfo</span></code> information is collected in <code class="docutils literal notranslate"><span class="pre">NTFSInfo.csv</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For verbose logging output refer to <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
+</div>
+<div class="section" id="fileinfo">
+<span id="ntfsinfo-fileinfo"></span><h3>FileInfo<a class="headerlink" href="#fileinfo" title="Permalink to this headline">¶</a></h3>
+<p>This file contains the following information on files and folders:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Volume Identification:</strong></dt><dd><ul>
+<li><p><strong>ComputerName:</strong> Name of the computer</p></li>
+<li><p><strong>VolumeID:</strong> Id of the volume</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Standard Information:</strong></dt><dd><ul>
+<li><p><strong>FullName:</strong> Full-path name</p></li>
+<li><p><strong>File:</strong> Name of the file</p></li>
+<li><p><strong>ParentName:</strong> Name of the parent folder</p></li>
+<li><p><strong>Extension:</strong> Optional file name extension (split path)</p></li>
+<li><p><strong>Attributes:</strong> FAT file system attributes</p></li>
+<li><p><strong>SizeInBytes:</strong> File size in bytes</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Date Information:</strong></dt><dd><ul>
+<li><p><strong>CreationDate:</strong> File creation date <em>“mm/dd/yyyy hh:mm:ss.000”</em></p></li>
+<li><p><strong>LastModificationDate:</strong> File last write date <em>“mm/dd/yyyy hh:mm:ss.000”</em></p></li>
+<li><p><strong>LastAccessDate:</strong> File last read access date</p></li>
+<li><p><strong>LastAttrChangeDate:</strong> Last Attribute change date (MFT information changed) <em>“mm/dd/yyyy hh:mm:ss.000”</em></p></li>
+<li><p><strong>FileNameCreationDate:</strong> File name (hard link) creation date</p></li>
+<li><p><strong>FileNameLastAccessDate:</strong> File name (hard link) access date</p></li>
+<li><p><strong>FileNameLastDataModificationDate:</strong> File name (hard link) last date <em>data</em> was modified</p></li>
+<li><p><strong>FileNameLastAttrModificationDate:</strong> File name (hard link) last date MFT <em>attribute</em> was modified</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>FirstBytes:</strong> First 16 bytes (in hex) of the <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> attribute content.</p></li>
+<li><dl class="simple">
+<dt><strong>Security:</strong></dt><dd><ul>
+<li><p><strong>OwnerSID:</strong> SID of the owner for this entry</p></li>
+<li><p><strong>Owner:</strong> Name of the owner for this entry</p></li>
+<li><p><strong>SecDescrID</strong> ID of security descriptor for the file</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>PE Header related information:</strong></dt><dd><ul>
+<li><p><strong>Platform:</strong> PE Header platform</p></li>
+<li><p><strong>TimeStamp:</strong> PE Header timestamp</p></li>
+<li><p><strong>SubSystem:</strong> PE Header SubSystem</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Version Information:</strong></dt><dd><ul>
+<li><p><strong>FileOS:</strong> VersionInfo OS tag</p></li>
+<li><p><strong>FileType:</strong> VersionInfo type</p></li>
+<li><p><strong>Version:</strong> VersionInfo file version</p></li>
+<li><p><strong>CompanyName:</strong> VersionInfo company name</p></li>
+<li><p><strong>ProductName:</strong> VersionInfo product name</p></li>
+<li><p><strong>OriginalFileName:</strong> VersionInfo original file name</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>ShortName:</strong></dt><dd><ul>
+<li><p><strong>Short Name</strong> (8.3) if any</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Cryptographic/Authenticode Information:</strong></dt><dd><ul>
+<li><p><strong>MD5:</strong> Cryptographic MD5 hash (in hex)</p></li>
+<li><p><strong>SHA1:</strong> Cryptographic SHA1 hash (in hex)</p></li>
+<li><p><strong>SHA256:</strong> Cryptographic SHA256 hash (in hex)</p></li>
+<li><p><strong>PeMD5:</strong> Authenticode (PE) file MD5 hash</p></li>
+<li><p><strong>PeSHA1:</strong> Authenticode (PE) file SHA1 hash</p></li>
+<li><p><strong>PeSHA256:</strong> Authenticode (PE) file SHA256 hash</p></li>
+<li><dl class="simple">
+<dt><strong>AuthenticodeStatus:</strong> Status of the authenticode signature for the file. Possible values are:</dt><dd><ul>
+<li><p><strong>Unknown:</strong> Status failed to be determined</p></li>
+<li><p><strong>Empty string:</strong> File is not a PE</p></li>
+<li><p><strong>SignedVerified:</strong> File is signed and the signature verified</p></li>
+<li><p><strong>CatalogSignedVerified:</strong> File hash is listed in a catalog</p></li>
+<li><p><strong>SignedNotVerified:</strong> File signature does _not_ verify</p></li>
+<li><p><strong>NotSigned:</strong> No signature or catalog could be found for this file</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>AuthenticodeSigner:</strong> Signer’s certificate (value of the first occurrence of the attributes szOID_COMMON_NAME, szOID_ORGANIZATIONAL_UNIT_NAME, szOID_ORGANIZATION_NAME, or szOID_RSA_emailAddr)</p></li>
+<li><p><strong>AuthenticodeSignerThumbprint:</strong> Signer’s certificate hash</p></li>
+<li><p><strong>AuthenticodeCA:</strong> Signer’s root CA certificate (value of the first occurrence of the attributes szOID_COMMON_NAME, szOID_ORGANIZATIONAL_UNIT_NAME, szOID_ORGANIZATION_NAME, or szOID_RSA_emailAddr)</p></li>
+<li><p><strong>AuthenticodeCAThumbprint:</strong> Signer’s root CA certificate hash</p></li>
+<li><p><strong>SecurityDirectory</strong> Base64 encoded security directory of the PE file (if present)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Alternate Storage areas:</strong></dt><dd><ul>
+<li><p><strong>ADS:</strong> Alternate Data Stream Information</p></li>
+<li><p><strong>ExtendedAttribute:</strong> Colon separated names of the extended attributes (<code class="docutils literal notranslate"><span class="pre">$EA</span></code> attribute content)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Reference Numbers</strong></dt><dd><ul>
+<li><p><strong>USN:</strong> Update Sequence Number (last USN added in the journal for this entry)</p></li>
+<li><p><strong>FRN:</strong> File Reference Number (version index of the entry in the MFT)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>RecordInUse:</strong> Boolean which indicates if this record was in use or free (i.e. deleted)</p></li>
+<li><p><strong>FilenameFlags:</strong> Type of file name (POSIX=0,WIN32=1,DOS83=2)</p></li>
+<li><p><strong>FilenameID:</strong> Attribute ID for this <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code></p></li>
+<li><p><strong>DataID:</strong> Attribute ID for this <code class="docutils literal notranslate"><span class="pre">$DATA</span></code></p></li>
+<li><p><strong>Status:</strong> File lock status (per CreateFile return value, if available)</p></li>
+<li><p><strong>OwnerID:</strong> Owner ID for this entry (ID for quotas, not security)</p></li>
+<li><p><strong>FilenameIndex:</strong> Index of this <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> in this record</p></li>
+<li><p><strong>DataIndex:</strong> Index of this <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> in this record</p></li>
+<li><p><strong>SnapshotID:</strong> Snapshot associated with this entry</p></li>
+<li><p><strong>SSDeep:</strong> Fuzzyhash SSDeep</p></li>
+<li><p><strong>TLSH:</strong> Trend Micro’s TLSH</p></li>
+<li><p><strong>SignedHash:</strong> Signed hash inside the security directory of the PE</p></li>
+</ul>
+<p>The Attributes column may contain the following flags:</p>
+<blockquote>
+<div><table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Flag</p></th>
+<th class="head"><p>Letter used (in this order)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FILE_ATTRIBUTE_ARCHIVE</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-odd"><td><p>FILE_ATTRIBUTE_COMPRESSED</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-even"><td><p>FILE_ATTRIBUTE_DIRECTORY</p></td>
+<td><p>D</p></td>
+</tr>
+<tr class="row-odd"><td><p>FILE_ATTRIBUTE_ENCRYPTED</p></td>
+<td><p>E</p></td>
+</tr>
+<tr class="row-even"><td><p>FILE_ATTRIBUTE_HIDDEN</p></td>
+<td><p>H</p></td>
+</tr>
+<tr class="row-odd"><td><p>FILE_ATTRIBUTE_NORMAL</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-even"><td><p>FILE_ATTRIBUTE_OFFLINE</p></td>
+<td><p>O</p></td>
+</tr>
+<tr class="row-odd"><td><p>FILE_ATTRIBUTE_READONLY</p></td>
+<td><p>R</p></td>
+</tr>
+<tr class="row-even"><td><p>FILE_ATTRIBUTE_REPARSE_POINT</p></td>
+<td><p>L</p></td>
+</tr>
+<tr class="row-odd"><td><p>FILE_ATTRIBUTE_SPARSE_FILE</p></td>
+<td><p>P</p></td>
+</tr>
+<tr class="row-even"><td><p>FILE_ATTRIBUTE_SYSTEM</p></td>
+<td><p>S</p></td>
+</tr>
+<tr class="row-odd"><td><p>FILE_ATTRIBUTE_TEMPORARY</p></td>
+<td><p>T</p></td>
+</tr>
+<tr class="row-even"><td><p>FILE_ATTRIBUTE_VIRTUAL</p></td>
+<td><p>V</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Detailed documentation of these flags can be found at: <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/fileio/file-attribute-constants">https://docs.microsoft.com/en-us/windows/win32/fileio/file-attribute-constants</a></p>
+</div>
+<div class="section" id="attrinfo">
+<span id="ntfsinfo-attrinfo"></span><h3>AttrInfo<a class="headerlink" href="#attrinfo" title="Permalink to this headline">¶</a></h3>
+<p>This file contains NTFS attributes related information. The output CSV file contains the following information:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>Name of the computer</p></td>
+</tr>
+<tr class="row-odd"><td><p>VolumeID</p></td>
+<td><p>ID of the volume</p></td>
+</tr>
+<tr class="row-even"><td><p>FRN</p></td>
+<td><p>FRN for this attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p>HostFRN</p></td>
+<td><p>FRN hosting this attribute (if HostFRN != FRN then this attribute is hosted in a child MFT record)</p></td>
+</tr>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>Type of the attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Attribute name</p></td>
+</tr>
+<tr class="row-even"><td><p>Form</p></td>
+<td><p>Resident or NonResident</p></td>
+</tr>
+<tr class="row-odd"><td><p>Size</p></td>
+<td><p>Attribute size</p></td>
+</tr>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>Attribute flags</p></td>
+</tr>
+<tr class="row-odd"><td><p>Instance</p></td>
+<td><p>Unique instance for this attribute in the file record</p></td>
+</tr>
+<tr class="row-even"><td><p>Index</p></td>
+<td><p>Attribute index for this attribute type</p></td>
+</tr>
+<tr class="row-odd"><td><p>LowestVCN</p></td>
+<td><p>Lowest virtual cluster number (VCN) covered by this attribute record.</p></td>
+</tr>
+<tr class="row-even"><td><p>SnapshotID</p></td>
+<td><p>ID of the snapshot</p></td>
+</tr>
+</tbody>
+</table>
+<p>The Type column can have the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$UNUSED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$STANDARD_INFORMATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ATTRIBUTE_LIST</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$OBJECT_ID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$SECURITY_DESCRIPTOR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$VOLUME_NAME</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$VOLUME_INFORMATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$DATA</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$INDEX_ROOT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$INDEX_ALLOCATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$BITMAP</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$REPARSE_POINT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$EA_INFORMATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$EA</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$LOGGED_UTILITY_STREAM</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$FIRST_USER_DEFINED_ATTRIBUTE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$END</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Flags</span></code> attribute can have the following <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/devnotes/attribute-record-header">values</a>:</p>
+<ul class="simple">
+<li><p>ATTRIBUTE_FLAG_COMPRESSION_MASK (0x00FF)</p></li>
+<li><p>ATTRIBUTE_FLAG_SPARSE (0x8000)</p></li>
+<li><p>ATTRIBUTE_FLAG_ENCRYPTED (0x4000)</p></li>
+</ul>
+</div>
+<div class="section" id="i30info">
+<span id="ntfsinfo-i30info"></span><h3>I30Info<a class="headerlink" href="#i30info" title="Permalink to this headline">¶</a></h3>
+<p>This file contains information from the volume <code class="docutils literal notranslate"><span class="pre">$I30</span></code> attributes (directories) stored <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> copies:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>Name of the computer</p></td>
+</tr>
+<tr class="row-odd"><td><p>VolumeID</p></td>
+<td><p>ID of the volume</p></td>
+</tr>
+<tr class="row-even"><td><p>CarvedEntry</p></td>
+<td><p>“Y” or “N” depending on whether this entry was carved</p></td>
+</tr>
+<tr class="row-odd"><td><p>FRN</p></td>
+<td><p>File Reference Number (version index of the entry in the MFT)</p></td>
+</tr>
+<tr class="row-even"><td><p>ParentFRN</p></td>
+<td><p>FRN of the parent directory</p></td>
+</tr>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>File name</p></td>
+</tr>
+<tr class="row-even"><td><p>FilenameID</p></td>
+<td><p>Attribute ID for this <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>FileNameCreationDate</p></td>
+<td><p>File name (hard link) creation date</p></td>
+</tr>
+<tr class="row-even"><td><p>FileNameLastModificationDate</p></td>
+<td><p>File name (hard link) access date</p></td>
+</tr>
+<tr class="row-odd"><td><p>FileNameLastAccessDate</p></td>
+<td><p>File name (hard link) last date data was modified</p></td>
+</tr>
+<tr class="row-even"><td><p>FileNameLastAttrModificationDate</p></td>
+<td><p>File name (hard link) last date MFT attribute was modified</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnapshotID</p></td>
+<td><p>ID of the VSS snapshot</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="timeline">
+<span id="ntfsinfo-timeline"></span><h3>TimeLine<a class="headerlink" href="#timeline" title="Permalink to this headline">¶</a></h3>
+<p>This file contains information one “date/time” per line.
+This file is <strong>not</strong> sorted.</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>Name of the computer</p></td>
+</tr>
+<tr class="row-odd"><td><p>VolumeID</p></td>
+<td><p>ID of the volume</p></td>
+</tr>
+<tr class="row-even"><td><p>KindOfDate</p></td>
+<td><p>Nature of the date reported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TimeStamp</p></td>
+<td><p>Timestamp for this event</p></td>
+</tr>
+<tr class="row-even"><td><p>FRN</p></td>
+<td><p>File Reference Number</p></td>
+</tr>
+<tr class="row-odd"><td><p>FilenameID</p></td>
+<td><p>ID of the <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> associated with this event</p></td>
+</tr>
+<tr class="row-even"><td><p>SnapshotID</p></td>
+<td><p>ID of the VSS snapshot</p></td>
+</tr>
+</tbody>
+</table>
+<p>The KindOfDate column can hold the following values:</p>
+<ul class="simple">
+<li><p>CreationTime</p></li>
+<li><p>LastModificationTime</p></li>
+<li><p>LastAccessTime</p></li>
+<li><p>LastChangeTime</p></li>
+<li><p>FileNameCreationDate</p></li>
+<li><p>FileNameLastModificationDate</p></li>
+<li><p>FileNameLastAccessDate</p></li>
+<li><p>FileNameLastAttrModificationDate</p></li>
+</ul>
+</div>
+<div class="section" id="secdescr">
+<span id="ntfsinfo-secdescr"></span><h3>SecDescr<a class="headerlink" href="#secdescr" title="Permalink to this headline">¶</a></h3>
+<p>This file contains Security Descriptors information (as stored in the <code class="docutils literal notranslate"><span class="pre">$SDS</span></code> data stream for the volume):</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>Name of the computer</p></td>
+</tr>
+<tr class="row-odd"><td><p>VolumeID</p></td>
+<td><p>ID of the volume</p></td>
+</tr>
+<tr class="row-even"><td><p>ID</p></td>
+<td><p>ID of this Security Descriptor (as referred to by <a class="reference internal" href="#ntfsinfo-fileinfo"><span class="std std-ref">SecDescrID in FileInfo</span></a> column)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hash</p></td>
+<td><p>Hash (<em>not</em> a Cryptographic hash)</p></td>
+</tr>
+<tr class="row-even"><td><p>SDDL</p></td>
+<td><p>Security descriptor in <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/secauthz/security-descriptor-definition-language">SDDL format</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>SecDescrSize</p></td>
+<td><p>Declared size of the security descriptor (per <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-getsecuritydescriptorlength">GetSecurityDescriptorLength</a>)</p></td>
+</tr>
+<tr class="row-even"><td><p>NormalisedSize</p></td>
+<td><p>Normalised size of the SD (per <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/api/sddl/nf-sddl-convertstringsecuritydescriptortosecuritydescriptorw">ConvertStringSecurityDescriptorToSecurityDescriptor</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DataSize</p></td>
+<td><p>Actual stored blob size in <code class="docutils literal notranslate"><span class="pre">$SDS</span></code> stream (<a class="reference external" href="http://www.ntfs.com/ntfs-permissions-security-descriptor.htm">http://www.ntfs.com/ntfs-permissions-security-descriptor.htm</a>)</p></td>
+</tr>
+<tr class="row-even"><td><p>SnapshotId</p></td>
+<td><p>VSS Snapshot ID</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>NTFSInfo can be used from command line or with XML configuration file. Both provide (mostly) identical access to NTFSInfo functionality even if the configuration files allow for more complexity.</p>
+<ul class="simple">
+<li><p>Command-line parameters example:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo <span class="s2">&quot;</span><span class="nv">%SystemDrive%</span><span class="s2">\Program Files&quot;</span> /fileinfo=<span class="nv">%TEMP%</span>\test.csv /logfile=<span class="nv">%TEMP%</span>\NTFSInfo.log /Dates,File,ParentName,USN,FRN,LastAttrChangeDate,ADS,SizeInBytes
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>XML configuration file example:</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfsinfo</span> <span class="na">walker=</span><span class="s">&quot;MFT&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fileinfo&gt;</span>%TEMP%\test.csv<span class="nt">&lt;/fileinfo&gt;</span>
+    <span class="nt">&lt;logging</span> <span class="na">file=</span><span class="s">&quot;%TEMP%\NTFSInfo.log&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;location&gt;</span>%SystemDrive%\Program files<span class="nt">&lt;/location&gt;</span>
+    <span class="nt">&lt;columns&gt;</span>
+        <span class="nt">&lt;default&gt;</span>Dates<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;default&gt;</span>File<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;default&gt;</span>ParentName<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;default&gt;</span>USN,FRN<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;default&gt;</span>LastAttrChangeDate<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;default&gt;</span>ADS<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;default&gt;</span>SizeInBytes<span class="nt">&lt;/default&gt;</span>
+    <span class="nt">&lt;/columns&gt;</span>
+<span class="nt">&lt;/ntfsinfo&gt;</span>
+</pre></div>
+</div>
+<p>The XML configuration file is provided by using the parameter <code class="docutils literal notranslate"><span class="pre">/config</span></code>:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo /config=<span class="nv">%TEMP%</span>\NTFSInfoConfig.xml
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All output related parameters (in the configuration file and in the command line) can use environment variables.</p>
+</div>
+<div class="section" id="ntfsinfo-element">
+<h3><code class="docutils literal notranslate"><span class="pre">ntfsinfo</span></code> Element<a class="headerlink" href="#ntfsinfo-element" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=no, default=N/A</em></p>
+<p>Root element.</p>
+<div class="section" id="attributes">
+<h4>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p><strong>walker</strong> <em>(optional=no, default=MFT)</em>, <code class="docutils literal notranslate"><span class="pre">/Walker</span></code> Option:</p></li>
+</ul>
+<p>NTFSInfo can only use one parser per execution. The choice of the parser is very important as it impacts the CSV output.</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>USN</p></td>
+<td><p>The <em>USN parser</em> can be faster under certain circumstances and is maintained only for completeness.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MFT</p></td>
+<td><p>The <em>MFT parser</em> is the most complete with detailed ADS and hard links in the output.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>The <em>USN Parser</em> option is <strong>DEPRECATED</strong></p></li>
+<li><p>The <em>USN Parser</em> can be very slow on recent NTFS volumes.</p></li>
+</ul>
+</div>
+<p>Configuring the parser to parse deleted entries</p>
+<ul class="simple">
+<li><p><strong>ResurrectRecords</strong> <em>(optional=yes, default=no)</em>, <code class="docutils literal notranslate"><span class="pre">/ResurrectRecords=&lt;yes|no&gt;</span></code> Option</p></li>
+</ul>
+<p>The MFT parser can be configured to include deleted records. This option can provide information about recently deleted file system entries.
+This can, by design, incur unpredictable results (as we are using unreliable or partially deleted information). One can generally assume that resident attributes for those entries are valid unlike nonresident attributes that are most likely quickly invalidated after the entry deletion.</p>
+<p>The technique is called <em>record resurrection</em>.</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>yes</em></p></td>
+<td><p>Enable deleted record recovery</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>no</em></p></td>
+<td><p>Do not try to recover deleted records</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="location-element">
+<h3><code class="docutils literal notranslate"><span class="pre">location</span></code> Element<a class="headerlink" href="#location-element" title="Permalink to this headline">¶</a></h3>
+<p>Specify the parsed system. For details on the syntax, please refer to the <a class="reference internal" href="configuring_locations.html"><span class="doc">configuring locations documentation</span></a>.</p>
+<p>When using the command line, this element must be provided in the form of a space separated list, as an argument at the end of the command:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo <span class="p">&lt;</span>Location1<span class="p">&gt;</span> &lt;Location2&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="fileinfo-element-fileinfo-path-option">
+<h3><code class="docutils literal notranslate"><span class="pre">FileInfo</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/FileInfo=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#fileinfo-element-fileinfo-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=NTFSInfo.csv</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">FileInfo</span></code> contains general file information about the files in one or more volumes.</p>
+<p>The syntax is similar to the <code class="docutils literal notranslate"><span class="pre">output</span></code> element or <code class="docutils literal notranslate"><span class="pre">\out</span></code> option used in other tools, described in the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
+<p>When provided with a directory or an archive, it creates one file per NTFS volume instead of one unique file.</p>
+<p>If no output option is specified, only the <code class="docutils literal notranslate"><span class="pre">FileInfo</span></code> information is collected in a file called <code class="docutils literal notranslate"><span class="pre">NTFSInfo.csv</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">/out</span></code> has the same behavior as <code class="docutils literal notranslate"><span class="pre">/fileinfo</span></code>.</p>
+</div>
+</div>
+<div class="section" id="attrinfo-element-attrinfo-path-option">
+<span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">AttrInfo</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/AttrInfo=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#attrinfo-element-attrinfo-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">AttrInfo</span></code> contains detail information about the attributes in <code class="docutils literal notranslate"><span class="pre">$MFT</span></code>.</p>
+<p>The syntax is similar to the <code class="docutils literal notranslate"><span class="pre">output</span></code> element or <code class="docutils literal notranslate"><span class="pre">\out</span></code> option used in other tools, described in the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
+<p>When provided with a directory or an archive, it creates one file per NTFS volume instead of one unique file.</p>
+</div>
+<div class="section" id="i30info-element-i30info-path-option">
+<span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">I30info</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/I30info=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#i30info-element-i30info-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">I30Info</span></code> contains detailed information about the data stored inside <code class="docutils literal notranslate"><span class="pre">$I30</span></code> attributes.</p>
+<p>The syntax is similar to the <code class="docutils literal notranslate"><span class="pre">output</span></code> element or <code class="docutils literal notranslate"><span class="pre">\out</span></code> option used in other tools, described in the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
+<p>When provided with a directory or an archive, it creates one file per NTFS volume instead of one unique file.</p>
+</div>
+<div class="section" id="timeline-element-timeline-path-option">
+<span id="id3"></span><h3><code class="docutils literal notranslate"><span class="pre">TimeLine</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/TimeLine=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#timeline-element-timeline-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">TimeLine</span></code> contains a unique view of all dated information in <code class="docutils literal notranslate"><span class="pre">$MFT</span></code> (<code class="docutils literal notranslate"><span class="pre">$STANDARD_INFORMATION</span></code> and <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code>)</p>
+<p>The syntax is similar to the <code class="docutils literal notranslate"><span class="pre">output</span></code> element or <code class="docutils literal notranslate"><span class="pre">\out</span></code> option used in other tools, described in the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
+<p>When provided with a directory or an archive, it creates one file per NTFS volume instead of one unique file.</p>
+</div>
+<div class="section" id="secdescr-element-secdescr-path-option">
+<span id="id4"></span><h3><code class="docutils literal notranslate"><span class="pre">SecDescr</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/SecDescr=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#secdescr-element-secdescr-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">SecDescr</span></code> contains the security descriptors for the parsed volumes.</p>
+<p>The syntax is similar to the <code class="docutils literal notranslate"><span class="pre">output</span></code> element or <code class="docutils literal notranslate"><span class="pre">\out</span></code> option used in other tools, described in the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
+<p>When provided with a directory or an archive, it creates one file per NTFS volume instead of one unique file.</p>
+</div>
+<div class="section" id="columns-element">
+<h3><code class="docutils literal notranslate"><span class="pre">Columns</span></code> Element<a class="headerlink" href="#columns-element" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>This element is a container for sub-elements that allow to define the information NTFSInfo must collect or not.</p>
+</div>
+<div class="section" id="default-element-in-columns-defaultcolumnselection-option">
+<h3><code class="docutils literal notranslate"><span class="pre">Default</span></code> Element (in <code class="docutils literal notranslate"><span class="pre">Columns</span></code>), <code class="docutils literal notranslate"><span class="pre">/&lt;DefaultColumnSelection&gt;,...</span></code> Option<a class="headerlink" href="#default-element-in-columns-defaultcolumnselection-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=Default</em> (see “Default” alias)</p>
+<p>NTFSInfo allows fine grained selection of information collected in <code class="docutils literal notranslate"><span class="pre">FileInfo</span></code> output CSVs. This allows groups of columns to be specified in a way you find convenient.</p>
+<p>Selection is specified using a comma-separated list of columns.</p>
+<p>The following example will output the file name, its parent full-path, and its MD5 hash.</p>
+<ul class="simple">
+<li><p>Command-line parameter:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/File,ParentName,MD5
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>XML elements:</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;columns&gt;</span>
+    <span class="nt">&lt;default&gt;</span>File,ParentName,MD5<span class="nt">&lt;/default&gt;</span>
+<span class="nt">&lt;/columns&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Option</em> or <em>Element</em> can be specified multiple times</p>
+</div>
+<p>Here is a complete list of the available columns:</p>
+<blockquote>
+<div><table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADS</p></td>
+<td><p>Alternate Data Stream Information</p></td>
+</tr>
+<tr class="row-odd"><td><p>Attributes</p></td>
+<td><p>FAT file system attributes</p></td>
+</tr>
+<tr class="row-even"><td><p>AuthenticodeCA</p></td>
+<td><p>Authority of signer of this file’s signature</p></td>
+</tr>
+<tr class="row-odd"><td><p>AuthenticodeCAThumbprint</p></td>
+<td><p>Thumbprint of the authority of the signer of this file’s signer</p></td>
+</tr>
+<tr class="row-even"><td><p>AuthenticodeSigner</p></td>
+<td><p>Signer of this file’s signature</p></td>
+</tr>
+<tr class="row-odd"><td><p>AuthenticodeSignerThumbprint</p></td>
+<td><p>Thumbprint of the signer of this file’s signer</p></td>
+</tr>
+<tr class="row-even"><td><p>AuthenticodeStatus</p></td>
+<td><p>Status of this file regarding authenticode signature (SignedVerified,SignedNotVerified,NotSigned)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CompanyName</p></td>
+<td><p>VersionInfo company name</p></td>
+</tr>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>Computer name</p></td>
+</tr>
+<tr class="row-odd"><td><p>CreationDate</p></td>
+<td><p>File creation date</p></td>
+</tr>
+<tr class="row-even"><td><p>DataID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$DATA</span></code> Attribute Instance ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>DataIndex</p></td>
+<td><p>Index of this <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> in this record</p></td>
+</tr>
+<tr class="row-even"><td><p>EASize</p></td>
+<td><p>Size in bytes of the extended attributes (if present)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ExtendedAttribute</p></td>
+<td><p>Extended Attribute Information</p></td>
+</tr>
+<tr class="row-even"><td><p>Extension</p></td>
+<td><p>Optional file name extension (split path)</p></td>
+</tr>
+<tr class="row-odd"><td><p>File</p></td>
+<td><p>Name of the file</p></td>
+</tr>
+<tr class="row-even"><td><p>FileNameCreationDate</p></td>
+<td><p>Indicates when this file created using this name</p></td>
+</tr>
+<tr class="row-odd"><td><p>FilenameFlags</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> Attribute Flags (POSIX=0, WIN32=1, DOS83=2)</p></td>
+</tr>
+<tr class="row-even"><td><p>FilenameID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> Attribute Instance ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>FilenameIndex</p></td>
+<td><p>Index of this <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> in this record</p></td>
+</tr>
+<tr class="row-even"><td><p>FileNameLastAccessDate</p></td>
+<td><p>Indicates when this file was last read using this name</p></td>
+</tr>
+<tr class="row-odd"><td><p>FileNameLastAttrModificationDate</p></td>
+<td><p>Indicates when this file’s attributes were last modified using this name</p></td>
+</tr>
+<tr class="row-even"><td><p>FileNameLastModificationDate</p></td>
+<td><p>Indicates when this file’s data was last modified using this name</p></td>
+</tr>
+<tr class="row-odd"><td><p>FileOS</p></td>
+<td><p>VersionInfo OS tag</p></td>
+</tr>
+<tr class="row-even"><td><p>FileType</p></td>
+<td><p>VersionInfo type</p></td>
+</tr>
+<tr class="row-odd"><td><p>FirstBytes</p></td>
+<td><p>First bytes of the data stream</p></td>
+</tr>
+<tr class="row-even"><td><p>FRN</p></td>
+<td><p>File Reference Number</p></td>
+</tr>
+<tr class="row-odd"><td><p>FullName</p></td>
+<td><p>Full-path name</p></td>
+</tr>
+<tr class="row-even"><td><p>LastAccessDate</p></td>
+<td><p>File last read date (pre-vista)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LastAttrChangeDate</p></td>
+<td><p>Last Attribute Change Date</p></td>
+</tr>
+<tr class="row-even"><td><p>LastModificationDate</p></td>
+<td><p>File last write date</p></td>
+</tr>
+<tr class="row-odd"><td><p>MD5</p></td>
+<td><p>Cryptographic MD5 hash (in hex)</p></td>
+</tr>
+<tr class="row-even"><td><p>OriginalFileName</p></td>
+<td><p>VersionInfo original file name</p></td>
+</tr>
+<tr class="row-odd"><td><p>Owner</p></td>
+<td><p>File owner</p></td>
+</tr>
+<tr class="row-even"><td><p>OwnerId</p></td>
+<td><p>File owner’s unique ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>OwnerSid</p></td>
+<td><p>File owner’s SID</p></td>
+</tr>
+<tr class="row-even"><td><p>ParentFRN</p></td>
+<td><p>Parent Folder Reference Number</p></td>
+</tr>
+<tr class="row-odd"><td><p>ParentName</p></td>
+<td><p>Name of the parent folder</p></td>
+</tr>
+<tr class="row-even"><td><p>PeMD5</p></td>
+<td><p>MD5 of PE file</p></td>
+</tr>
+<tr class="row-odd"><td><p>PeSHA1</p></td>
+<td><p>SHA1 of PE file</p></td>
+</tr>
+<tr class="row-even"><td><p>PeSHA256</p></td>
+<td><p>SHA256 of a PE file</p></td>
+</tr>
+<tr class="row-odd"><td><p>Platform</p></td>
+<td><p>PE Header platform</p></td>
+</tr>
+<tr class="row-even"><td><p>ProductName</p></td>
+<td><p>VersionInfo product name</p></td>
+</tr>
+<tr class="row-odd"><td><p>RecordInUse</p></td>
+<td><p>Indicates if the record is in use (or freed/deleted)</p></td>
+</tr>
+<tr class="row-even"><td><p>SecDescrID</p></td>
+<td><p>ID of security descriptor for the file</p></td>
+</tr>
+<tr class="row-odd"><td><p>SecurityDirectory</p></td>
+<td><p>Base64 encoded security directory of the PE file (if present)</p></td>
+</tr>
+<tr class="row-even"><td><p>SHA1</p></td>
+<td><p>Cryptographic SHA1 hash (in hex)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SHA256</p></td>
+<td><p>SHA256</p></td>
+</tr>
+<tr class="row-even"><td><p>ShortName</p></td>
+<td><p>Short Name (8.3) if any</p></td>
+</tr>
+<tr class="row-odd"><td><p>SignedHash</p></td>
+<td><p>The signed hash inside the security directory of the PE</p></td>
+</tr>
+<tr class="row-even"><td><p>SizeInBytes</p></td>
+<td><p>File size in bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p>SnapshotID</p></td>
+<td><p>Snapshot associated with this entry</p></td>
+</tr>
+<tr class="row-even"><td><p>SSDeep</p></td>
+<td><p>Fuzzyhash SSDeep</p></td>
+</tr>
+<tr class="row-odd"><td><p>SubSystem</p></td>
+<td><p>PE Header SubSystem</p></td>
+</tr>
+<tr class="row-even"><td><p>TimeStamp</p></td>
+<td><p>PE Header timestamp</p></td>
+</tr>
+<tr class="row-odd"><td><p>TLSH</p></td>
+<td><p>Trend Micro’s TLSH</p></td>
+</tr>
+<tr class="row-even"><td><p>USN</p></td>
+<td><p>Update Sequence Number</p></td>
+</tr>
+<tr class="row-odd"><td><p>Version</p></td>
+<td><p>VersionInfo file version</p></td>
+</tr>
+<tr class="row-even"><td><p>VolumeID</p></td>
+<td><p>Volume ID</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Instead of column names, aliases can also be used. They simplify the syntax by regrouping a set of related columns.</p>
+<p>Here is a complete list of available aliases:</p>
+<blockquote>
+<div><table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alias</p></th>
+<th class="head"><p>Columns name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Default</p></td>
+<td><p>File, ParentName, Extension, SizeInBytes, Attributes, CreationDate, LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate, USN, FRN, ParentFRN, ExtendedAttribute, ADS, FilenameID, DataID, RecordInUse, OwnerId, FilenameFlags, SecDescrID, FilenameIndex, DataIndex, SnapshotID</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeepScan</p></td>
+<td><p>File, ParentName, Extension, SizeInBytes, Attributes, CreationDate, LastModificationDate, LastAccessDate, ShortName, MD5, SHA1, Owner, Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS</p></td>
+</tr>
+<tr class="row-even"><td><p>Details</p></td>
+<td><p>Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hashes</p></td>
+<td><p>MD5, SHA1, SHA256</p></td>
+</tr>
+<tr class="row-even"><td><p>Fuzzy</p></td>
+<td><p>SSDeep, TLSH</p></td>
+</tr>
+<tr class="row-odd"><td><p>PeHashes</p></td>
+<td><p>PeSHA1, PeSHA256, PeMD5</p></td>
+</tr>
+<tr class="row-even"><td><p>Dates</p></td>
+<td><p>CreationDate, LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate</p></td>
+</tr>
+<tr class="row-odd"><td><p>RefNums</p></td>
+<td><p>USN, FRN, ParentFRN</p></td>
+</tr>
+<tr class="row-even"><td><p>Authenticode</p></td>
+<td><p>AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, SignedHash</p></td>
+</tr>
+<tr class="row-odd"><td><p>All</p></td>
+<td><p>LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate, USN, FRN, ParentFRN, ExtendedAttribute, ADS, FilenameID, DataID, RecordInUse, ShortName, MD5, SHA1, FirstBytes, OwnerId, OwnerSid, Owner, Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS, FilenameFlags, SHA256, PeSHA1, PeSHA256, SecDescrID, EASize, SecurityDirectory, AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, PeMD5, FilenameIndex, DataIndex, SnapshotID, SSDeep, TLSH, SignedHash</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The command <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">ntfsinfo</span> <span class="pre">/?</span></code> will print all column definitions along with the definition of aliases.</p>
+</div>
+</div>
+<div class="section" id="add-and-omit-elements-in-columns-columnselection-criteria-value-option">
+<h3><code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">omit</span></code> Elements (in <code class="docutils literal notranslate"><span class="pre">Columns</span></code>), <code class="docutils literal notranslate"><span class="pre">/(+|-)&lt;ColumnSelection&gt;:criteria=&lt;value&gt;</span></code> Option<a class="headerlink" href="#add-and-omit-elements-in-columns-columnselection-criteria-value-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>NTFSInfo allows to selectively add or remove columns content depending on a filter.
+Filtering column content can help reduce resource consumption for some columns (e.g. MD5, AuthenticodeStatus).</p>
+<p>A filter is built on an <em>action</em>, a <em>criterion</em> and the targeted column.</p>
+<ul>
+<li><p>Available <em>criteria</em>:</p>
+<blockquote>
+<div><table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criteria</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>HasVersionInfo</p></td>
+<td><p>The file has a VERSION_INFO resource</p></td>
+</tr>
+<tr class="row-odd"><td><p>HasPE</p></td>
+<td><p>The file has a valid PE header</p></td>
+</tr>
+<tr class="row-even"><td><p>ExtBinary</p></td>
+<td><p>The file has an executable extension (like .exe, .dll, .scr, .sys, …)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ExtArchive</p></td>
+<td><p>The file has a archive extension (like .zip, .cab, …)</p></td>
+</tr>
+<tr class="row-even"><td><p>Ext=.Ext1,.Ext2,…</p></td>
+<td><p>The file has extension in .Ext1,.Ext2,…</p></td>
+</tr>
+<tr class="row-odd"><td><p>SizeLT=size, SizeGT=size</p></td>
+<td><p>The file is smaller or bigger than a specified size. Note that size can be expressed in KB (i.e. SizeGT=25K…) or in MB (i.e. SizeLT=5M etc…)</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p>Available <em>actions</em>:</p>
+<blockquote>
+<div><table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>add / +</p></td>
+<td><p>Computes the column content</p></td>
+</tr>
+<tr class="row-odd"><td><p>remove / -</p></td>
+<td><p>Do not compute the column content</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ul>
+<p>Example 1: only computes the column SHA1 if the file size is smaller than 1 MB.</p>
+<ul>
+<li><p>Command-line parameter:</p>
+<blockquote>
+<div><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/+SHA1:SizeLT=1M
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>XML element:</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;columns&gt;</span>
+    <span class="nt">&lt;add</span> <span class="na">SizeLT=</span><span class="s">&quot;1M&quot;</span><span class="nt">&gt;</span>SHA1<span class="nt">&lt;/add&gt;</span>
+<span class="nt">&lt;/columns&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>Example 2: do not compute MD5 if the file has an archive extension (.cab, .zip).</p>
+<ul>
+<li><p>Command-line parameter:</p>
+<blockquote>
+<div><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/-MD5:ExtArchive
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>XML element:</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;columns&gt;</span>
+    <span class="nt">&lt;omit</span> <span class="na">ExtArchive=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>MD5<span class="nt">&lt;/omit&gt;</span>
+<span class="nt">&lt;/columns&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Rules to know when defining columns:</p>
+<ol class="arabic simple">
+<li><p>All rules are evaluated for each file record. Among other things, this implies that some resource-consuming criteria (like HasPE) can impact overall performance.</p></li>
+<li><p>Last matching rule for a file determines if a column is evaluated (if “add” is used) or not (if “omit” is used). This implies that the order in which they appear matter.</p></li>
+</ol>
+<p>For example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;columns&gt;</span>
+    <span class="nt">&lt;add</span> <span class="na">SizeLT=</span><span class="s">&quot;1M&quot;</span><span class="nt">&gt;</span>SHA1<span class="nt">&lt;/add&gt;</span>
+    <span class="nt">&lt;omit</span> <span class="na">ExtArchive=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>SHA1<span class="nt">&lt;/omit&gt;</span>
+<span class="nt">&lt;/columns&gt;</span>
+</pre></div>
+</div>
+<p>The filter implies that if a file is smaller than 1 MB but has an .zip extension, then its SHA1 is not computed. However, if the order was to be reversed, its SHA1 will be computed and added to the CSV file because the last matching rule will be the add filter.</p>
+</div>
+</div>
+</div>
+<div class="section" id="typical-usage-examples">
+<h2>Typical Usage Examples<a class="headerlink" href="#typical-usage-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="quick-discovery-of-volume-content">
+<h3>Quick Discovery of Volume Content<a class="headerlink" href="#quick-discovery-of-volume-content" title="Permalink to this headline">¶</a></h3>
+<p>To quickly enumerate the file system entries of NTFS volumes attached to a system, the typical command line would be:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo /default /fileinfo=VolumesEntries.csv *
+</pre></div>
+</div>
+<p>The equivalent XML syntax would be:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfsinfo</span> <span class="na">walker=</span><span class="s">&quot;MFT&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fileinfo&gt;</span>VolumesEntries.csv<span class="nt">&lt;/fileinfo&gt;</span>
+    <span class="nt">&lt;location&gt;</span>*<span class="nt">&lt;/location&gt;</span>
+    <span class="nt">&lt;columns&gt;</span>
+        <span class="nt">&lt;default&gt;</span>Default<span class="nt">&lt;/default&gt;</span>
+    <span class="nt">&lt;/columns&gt;</span>
+<span class="nt">&lt;/ntfsinfo&gt;</span>
+</pre></div>
+</div>
+<p>This syntax extracts all required information from the MFT record and does not require any extra information to be pulled from the disk. This is the subset of information that can be systematically collected on systems.</p>
+</div>
+<div class="section" id="getting-detailed-information-on-binaries">
+<h3>Getting Detailed Information on Binaries<a class="headerlink" href="#getting-detailed-information-on-binaries" title="Permalink to this headline">¶</a></h3>
+<p>To obtain detailed information about binaries, based on the presence of version information and on the system drive, the typical syntax would be:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo /Default /+Details:HasVersionInfo /out=Details.csv <span class="nv">%SystemDrive%</span>\
+</pre></div>
+</div>
+<p>Equivalent XML Syntax:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfsinfo</span> <span class="na">walker=</span><span class="s">&quot;MFT&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fileinfo&gt;</span>Details.csv<span class="nt">&lt;/fileinfo&gt;</span>
+    <span class="nt">&lt;location&gt;</span>%SystemDrive%\<span class="nt">&lt;/location&gt;</span>
+    <span class="nt">&lt;columns&gt;</span>
+        <span class="nt">&lt;default&gt;</span>Default<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;add</span> <span class="na">HasVersionInfo=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>Details<span class="nt">&lt;/add&gt;</span>
+    <span class="nt">&lt;/columns&gt;</span>
+<span class="nt">&lt;/ntfsinfo&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-windows-pe-binaries-details">
+<h3>Getting Windows PE Binaries Details<a class="headerlink" href="#getting-windows-pe-binaries-details" title="Permalink to this headline">¶</a></h3>
+<p>To obtain detailed information about files that contain code, based on the presence of a valid PE Header and on the system drive, and excluding computing cryptographic hashes for big files, the typical syntax would be:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo /Default /+Details:HasPE /+Hashes:HasPe /-Hashes:SizeGT=1MB <span class="nv">%SystemDrive%</span>\
+</pre></div>
+</div>
+<p>Equivalent XML Syntax:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfsinfo</span> <span class="na">walker=</span><span class="s">&quot;MFT&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fileinfo&gt;</span>%TEMP%\test.csv<span class="nt">&lt;/fileinfo&gt;</span>
+    <span class="nt">&lt;location&gt;</span>%SystemDrive%\<span class="nt">&lt;/location&gt;</span>
+    <span class="nt">&lt;columns&gt;</span>
+        <span class="nt">&lt;default&gt;</span>Default<span class="nt">&lt;/default&gt;</span>
+        <span class="nt">&lt;add</span> <span class="na">HasPE=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>Hashes,Details<span class="nt">&lt;/add&gt;</span>
+        <span class="nt">&lt;omit</span> <span class="na">SizeGT=</span><span class="s">&quot;1M&quot;</span><span class="nt">&gt;</span>Hashes<span class="nt">&lt;/omit&gt;</span>
+    <span class="nt">&lt;/columns&gt;</span>
+<span class="nt">&lt;/ntfsinfo&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="NTFSUtil.html" title="NTFSUtil"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="GetSectors.html" title="GetSectors"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

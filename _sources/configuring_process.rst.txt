@@ -1,6 +1,9 @@
-Configuring process priority
-----------------------------
+============================
+Configuring Process Priority
+============================
 
-To minimize tools’ impact on the analysed systems, all tools accept the /low command line option.
-This will set the process priority class to BELOW_NORMAL_PRIORITY_CLASS.
+To minimize the tools impact on the workload of the analyzed systems, all tools accept the ``/low`` command-line option.
+
+This sets the process priority class to BELOW_NORMAL_PRIORITY_CLASS.
+
 The main thread priority is set to THREAD_PRIORITY_BELOW_NORMAL.

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring process priority &#8212; DFIR ORC  documentation</title>
+    <title>Configuring Process Priority &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -13,14 +13,31 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuring Tool Output" href="configuring_tool_output.html" />
+    <link rel="prev" title="Configuring Console Output, Logging" href="configuring_console_output.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         
-        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+        
+        <li class="right" >
+          <a href="configuring_tool_output.html" title="Configuring Tool Output"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_console_output.html" title="Configuring Console Output, Logging"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" accesskey="U">Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -29,15 +46,39 @@
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table of Contents</a></h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -47,10 +88,10 @@
           <div class="body" role="main">
             
   <div class="section" id="configuring-process-priority">
-<h1>Configuring process priority<a class="headerlink" href="#configuring-process-priority" title="Permalink to this headline">¶</a></h1>
-<p>To minimize tools’ impact on the analysed systems, all tools accept the /low command line option.
-This will set the process priority class to BELOW_NORMAL_PRIORITY_CLASS.
-The main thread priority is set to THREAD_PRIORITY_BELOW_NORMAL.</p>
+<h1>Configuring Process Priority<a class="headerlink" href="#configuring-process-priority" title="Permalink to this headline">¶</a></h1>
+<p>To minimize the tools impact on the workload of the analyzed systems, all tools accept the <code class="docutils literal notranslate"><span class="pre">/low</span></code> command-line option.</p>
+<p>This sets the process priority class to BELOW_NORMAL_PRIORITY_CLASS.</p>
+<p>The main thread priority is set to THREAD_PRIORITY_BELOW_NORMAL.</p>
 </div>
 
 
@@ -63,12 +104,34 @@ The main thread priority is set to THREAD_PRIORITY_BELOW_NORMAL.</p>
       <h3>Navigation</h3>
       <ul>
         
-        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+        
+        <li class="right" >
+          <a href="configuring_tool_output.html" title="Configuring Tool Output"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_console_output.html" title="Configuring Console Output, Logging"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" >Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
   </body>
 </html>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring ntfs_find/ntfs_exclude attributes &#8212; DFIR ORC  documentation</title>
+    <title>Configuring Attributes of ntfs_find and ntfs_exclude Elements &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -13,14 +13,31 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuring Console Output, Logging" href="configuring_console_output.html" />
+    <link rel="prev" title="Configuring the Yara Scanner" href="configuring_yara.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         
-        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+        
+        <li class="right" >
+          <a href="configuring_console_output.html" title="Configuring Console Output, Logging"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_yara.html" title="Configuring the Yara Scanner"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" accesskey="U">Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -29,15 +46,39 @@
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table of Contents</a></h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -46,71 +87,120 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="configuring-ntfs-find-ntfs-exclude-attributes">
-<h1>Configuring ntfs_find/ntfs_exclude attributes<a class="headerlink" href="#configuring-ntfs-find-ntfs-exclude-attributes" title="Permalink to this headline">¶</a></h1>
-<p>FastFind, RegInfo and GetThis can select file system entries based on multiple indicators to allow precise definition of what you may be looking for.
-You can combine attributes of different class (file/hash/size/header/ads/ea/attribute) to specify an AND condition for this indicator. A Yara scan can also be used.
-For instance:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;quickfix.dat&quot;</span> <span class="na">size=</span><span class="s">&quot;104857600&quot;</span> <span class="nt">/&gt;</span>
+  <div class="section" id="configuring-attributes-of-ntfs-find-and-ntfs-exclude-elements">
+<h1>Configuring Attributes of <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Elements<a class="headerlink" href="#configuring-attributes-of-ntfs-find-and-ntfs-exclude-elements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="search-algorithm-and-result-of-a-search">
+<h2>Search Algorithm and Result of a Search<a class="headerlink" href="#search-algorithm-and-result-of-a-search" title="Permalink to this headline">¶</a></h2>
+<p>FastFind, RegInfo and GetThis can select NTFS file system entries based on multiple indicators to allow the precise definition of wanted items. Those indicators are specified by using two elements:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> to search for an indicator,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> to reject a match.</p></li>
+</ul>
+<p>The search is conducted as follows. Each <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> element yields a (possibly combined) search clause, and the global search is conducted for records matching at least one clause.
+Then, amongst matching records, those verifying any of the exclusion clauses yield by <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements are eliminated.</p>
+<p>When using several <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> elements, a match is found if the artefact matches one of the elements. For instance</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;qfe.dat&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;ntfs_find</span> <span class="na">size=</span><span class="s">&quot;104857600&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>Indicates the looked after file should be named « quickfix.dat » AND its size be 104857600 bytes to trigger a detection.</p>
-<p>The table below describes the attributes that can be used to describe the indicators:</p>
+<p>indicates files should either be named “qfe.dat” <strong>OR</strong> their size should be 104857600 bytes to trigger a detection.</p>
+<p>When using several <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements, a match is discarded if the artefact matches one of the elements. For instance</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_exclude</span> <span class="na">name=</span><span class="s">&quot;qfe.dat&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;ntfs_exclude</span> <span class="na">size=</span><span class="s">&quot;104857600&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>indicates files are rejected if they are either named “qfe.dat” <strong>OR</strong> their size is 104857600 bytes.</p>
+<p>Within an element <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> or <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code>, attributes of different classes can be combined to specify an “AND” condition. This combined condition is evaluated on MFT records.
+For instance</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;qfe.dat&quot;</span> <span class="na">size=</span><span class="s">&quot;104857600&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>indicates files should be named “qfe.dat” <strong>AND</strong> their size should be 104857600 bytes to trigger a detection. Furthermore</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_exclude</span> <span class="na">name=</span><span class="s">&quot;qfe.dat&quot;</span> <span class="na">size=</span><span class="s">&quot;104857600&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>indicates files are rejected if they are named “qfe.dat” <strong>AND</strong> their size is 104857600 bytes.</p>
+<p>For every record matching a clause, each NTFS attribute involved in a match is registered. Indeed, conditions can be imposed on various types of record features, such as <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> streams and extended attributes.
+For instance, if a match is on an ADS name, only the <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> corresponding to this ADS is registered and not the other record attributes.</p>
+<p>The search eventually results in the set of registered NTFS artefacts which are not eliminated by any <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> element.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The search algorithm defined above does not depend on the place of the <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements within an XML file; in particular, a <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> element <strong>does impact</strong> all artefacts to be collected by an XML configuration file, independently of its position with respect to other elements. Therefore, an <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> element should alwys be placed at the utmost level to emphasize their scope. Typically, in GetThis, <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements should be placed under the <code class="docutils literal notranslate"><span class="pre">&lt;samples&gt;</span></code> element.</p>
+</div>
+<p>How the resulting set of NTFS artefacts is used depends on the tool using <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code>.
+In general, only the NTFS attributes used for a record match are reported/collected. The only exception is that the resulting set must have at least a name and data. If a name is missing, the tool will use the first <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> attribute. If a data is missing, the default (unnamed) <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> is used.
+For instance, for GetThis, if the only condition used is on the file name, the resulting set will have a name but no data so the tool will also retrieve the default <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> (the file contents). This is detailed below.</p>
+</div>
+<div class="section" id="possible-attributes-of-a-ntfs-find-element">
+<h2>Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> Element<a class="headerlink" href="#possible-attributes-of-a-ntfs-find-element" title="Permalink to this headline">¶</a></h2>
+<p>The list below enumerates the attributes that can be used to describe search indicators. The conditions are tested against MFT records. When an NTFS artefact matches a condition, it is registered. The whole MFT record has to match all conditions expressed in the scope of one element.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">*_regex</span></code> elements should use the ECMA-script syntax.</p>
+</div>
+<p>The conditions listed below are matched against each <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> attribute.
+The artefact registered is the <code class="docutils literal notranslate"><span class="pre">$FILE_NAME</span></code> attribute matching the condition.</p>
 <ul>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">name</span></code></dt><dd><p>File name compares to the supplied string</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;quickfix.dat&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code></dt><dd><p>The file name coincides with the supplied string.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;qfe.dat&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">name_match</span></code></dt><dd><p>File name matches the supplied string</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name_match</span><span class="o">=</span><span class="s2">&quot;quick*.dat&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">name_match</span></code></dt><dd><p>The file name matches the supplied expression.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name_match</span><span class="o">=</span><span class="s2">&quot;q*.dat&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">name_regex</span></code></dt><dd><p>File name matches the regular expression</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name_regex</span><span class="o">=</span><span class="s2">&quot;quick.*\.dat&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">name_regex</span></code></dt><dd><p>The file name matches the regular expression.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name_regex</span><span class="o">=</span><span class="s2">&quot;q.*\.dat&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">path</span></code></dt><dd><p>File full path compares to the supplied string</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;\Windows\System32\drivers\partmgr.sys&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">path</span></code></dt><dd><p>The full path of the file coincides with the supplied string.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;\Windows\System32\drivers\mgr.sys&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">path_match</span></code></dt><dd><p>File full path matches the supplied string</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path_match</span><span class="o">=</span><span class="s2">&quot;\Windows\System32\*\partmgr.s?s&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">path_match</span></code></dt><dd><p>The full path of the file matches the supplied string.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path_match</span><span class="o">=</span><span class="s2">&quot;\Windows\System32\*\mgr.s?s&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">path_regex</span></code></dt><dd><p>File full path matches the regular expression</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path_regex</span><span class="o">=</span><span class="s2">&quot;\Windows\System32\.*\partmgr.s.?s&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">path_regex</span></code></dt><dd><p>The full path of the file matches the regular expression.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path_regex</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">Windows</span><span class="se">\\</span><span class="s2">System32</span><span class="se">\\</span><span class="s2">.*</span><span class="se">\\</span><span class="s2">mgr\.s.s&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
+</ul>
+<p>The conditions listed below are matched against each <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> attribute.
+The artefact registered is the <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> attribute matching the condition.</p>
+<ul>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">size</span></code></dt><dd><p>File size equals the supplied integer.
-Multipliers can be use:
-* 1K for 1024 bytes
-* 1M for 1024 Kbytes
-* 1G for 1024 Mbytes</p>
+<dt><code class="docutils literal notranslate"><span class="pre">size</span></code></dt><dd><p>The size of the file equals the supplied integer.
+Multipliers can be used:</p>
+<ul class="simple">
+<li><p>1K for 1024 bytes,</p></li>
+<li><p>1M for 1024 kilobytes,</p></li>
+<li><p>1G for 1024 megabytes.</p></li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="o">=</span><span class="s2">&quot;5M&quot;</span>
 </pre></div>
 </div>
@@ -118,7 +208,7 @@ Multipliers can be use:
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">size_gt</span></code></dt><dd><p>File size is greater than the supplied integer</p>
+<dt><code class="docutils literal notranslate"><span class="pre">size_gt</span></code></dt><dd><p>The size of the file is greater than the supplied integer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">size_gt</span><span class="o">=</span><span class="s2">&quot;5M&quot;</span>
 </pre></div>
 </div>
@@ -126,7 +216,7 @@ Multipliers can be use:
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">size_ge</span></code></dt><dd><p>File size is greater or equal than the supplied integer</p>
+<dt><code class="docutils literal notranslate"><span class="pre">size_ge</span></code></dt><dd><p>The size of the file is greater than or equal to the supplied integer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">size_ge</span><span class="o">=</span><span class="s2">&quot;5M&quot;</span>
 </pre></div>
 </div>
@@ -134,7 +224,7 @@ Multipliers can be use:
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">size_lt</span></code></dt><dd><p>File size is less than the supplied integer</p>
+<dt><code class="docutils literal notranslate"><span class="pre">size_lt</span></code></dt><dd><p>The size of the file is less than the supplied integer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">size_lt</span><span class="o">=</span><span class="s2">&quot;5M&quot;</span>
 </pre></div>
 </div>
@@ -142,7 +232,7 @@ Multipliers can be use:
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">size_le</span></code></dt><dd><p>File size is less or equal than the supplied integer</p>
+<dt><code class="docutils literal notranslate"><span class="pre">size_le</span></code></dt><dd><p>The size of the file is less than or equal to the supplied integer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">size_le</span><span class="o">=</span><span class="s2">&quot;5M&quot;</span>
 </pre></div>
 </div>
@@ -150,65 +240,7 @@ Multipliers can be use:
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">md5</span></code></dt><dd><p>File MD5 hash is the supplied value</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">md5</span><span class="o">=</span><span class="s2">&quot;b092e1d683fc21cea137dba2a8b4b08b&quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">sha1</span></code></dt><dd><p>File SHA1 hash is the supplied value</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sha1</span><span class="o">=</span><span class="s2">&quot; be0ccf54cdb3ec100de233b393d936d2ee1c33a3 &quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">sha256</span></code></dt><dd><p>File SHA256 hash is the supplied value</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sha256</span><span class="o">=</span><span class="s2">&quot;4cdb3ec100de233b393d936d2ee1c33a3…&quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">header</span></code></dt><dd><p>Header compares to the supplied string (ANSI encoding). Up to 128 bytes.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="o">=</span><span class="s2">&quot;MZ&quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">header_hex</span></code></dt><dd><p>Header compares to the supplied hex encoded bytes.
-“0x” prefix can be used and is optional. Up to 128 bytes</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header_hex</span><span class="o">=</span><span class="s2">&quot;ccf54cdb&quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">header_regex</span></code></dt><dd><p>Header matches the regular expression.
-Regex will be matched against header_len bytes from the file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header_regex</span><span class="o">=</span><span class="s2">&quot;M[X-Y]&quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">header_length</span></code></dt><dd><p>Length of the header to read to do the comparison (in bytes).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header_length</span><span class="o">=</span><span class="s2">&quot;1024&quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">ads</span></code></dt><dd><p>ADS compares to the supplied string</p>
+<dt><code class="docutils literal notranslate"><span class="pre">ads</span></code></dt><dd><p>The name of an ADS coincides with the supplied string.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ads</span><span class="o">=</span><span class="s2">&quot;MyAds&quot;</span>
 </pre></div>
 </div>
@@ -216,7 +248,7 @@ Regex will be matched against header_len bytes from the file.</p>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">ads_match</span></code></dt><dd><p>ADS matches the supplied string</p>
+<dt><code class="docutils literal notranslate"><span class="pre">ads_match</span></code></dt><dd><p>The file has an ADS which matches the supplied string.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ads_match</span><span class="o">=</span><span class="s2">&quot;My?ds&quot;</span>
 </pre></div>
 </div>
@@ -224,39 +256,109 @@ Regex will be matched against header_len bytes from the file.</p>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">ads_regex</span></code></dt><dd><p>ADS matches the regular expression</p>
+<dt><code class="docutils literal notranslate"><span class="pre">ads_regex</span></code></dt><dd><p>The file has an ADS which matches the regular expression specified.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ads_regex</span><span class="o">=</span><span class="s2">&quot;My.ds&quot;</span>
+<span class="n">ea_regex</span><span class="o">=</span><span class="s2">&quot;My.A&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The conditions listed below are matched against each <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> attribute actually stored data.
+The artefact registered is the <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> attribute matching the condition.</p>
+<ul>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">md5</span></code></dt><dd><p>The MD5 hash of a data stream is the supplied value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">md5</span><span class="o">=</span><span class="s2">&quot;b092e1d683fc21cea137dba2a8b4b08b&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">ea</span></code></dt><dd><p>EA compares to the supplied string</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ea=”MyEA”
+<dt><code class="docutils literal notranslate"><span class="pre">sha1</span></code></dt><dd><p>The SHA1 hash of a data stream is the supplied value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sha1</span><span class="o">=</span><span class="s2">&quot;be0ccf54cdb3ec100de233b393d936d2ee1c33a3&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">ea_match</span></code></dt><dd><p>EA matches the supplied string</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ea_match</span><span class="o">=</span><span class="s2">&quot;My?A&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">sha256</span></code></dt><dd><p>The SHA256 hash of a data stream is the supplied value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sha256</span><span class="o">=</span><span class="s2">&quot;4cdb3ec100de233b393d936d2ee1c33a3...&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">ea_regex</span></code></dt><dd><p>EA matches the regular expression</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ea_regex</span><span class="o">=</span><span class="s2">&quot;My.A&quot;</span>
+<dt><code class="docutils literal notranslate"><span class="pre">header</span></code></dt><dd><p>The header of a data stream coincides with the supplied string (ANSI encoding). Up to 128 bytes can be specified.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="o">=</span><span class="s2">&quot;MZ&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">attr_name</span></code></dt><dd><p>Attribute name compares to the supplied string</p>
+<dt><code class="docutils literal notranslate"><span class="pre">header_hex</span></code></dt><dd><p>The header of a data stream coincides with the supplied bytes, written in hexadecimal.
+“0x” prefix can be used and is optional. Up to 128 bytes can be specified.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header_hex</span><span class="o">=</span><span class="s2">&quot;ccf54cdb&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">header_regex</span></code></dt><dd><p>The header of a data stream matches the regular expression, against <code class="docutils literal notranslate"><span class="pre">header_length</span></code> bytes from the file.
+The value has to be at least that of the minimal string matching the expression, or no hits
+are found. For example, <code class="docutils literal notranslate"><span class="pre">header_regex=&quot;MZ&quot;</span> <span class="pre">header_len=&quot;1&quot;</span></code> does not match any file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header_regex</span><span class="o">=</span><span class="s2">&quot;M[X-Y]&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">header_length</span></code></dt><dd><p>This attribute has to be used along <code class="docutils literal notranslate"><span class="pre">header_regex</span></code>.
+It specifies the length of the header to read to make the comparison (in bytes).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header_length</span><span class="o">=</span><span class="s2">&quot;1024&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">contains</span></code></dt><dd><p>A data stream contains the specified string (written in ASCII and case-sensitive).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contains</span><span class="o">=</span><span class="s2">&quot;Hello World&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">contains_hex</span></code></dt><dd><p>A data stream contains a specific binary array.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contains_hex</span><span class="o">=</span><span class="s2">&quot;0x0BADF00DBAADF000D&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">yara_rule</span></code></dt><dd><p>A data stream verifies one rule amongst a comma or semicolon separated list of yara rules.
+The rule specification may use “*” or “?” to match arbitrary characters.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yara_rule</span><span class="o">=</span><span class="s2">&quot;is_dll;apt??_rat&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The conditions listed below are matched against each attribute in the MFT record.
+The artefact registered is the attribute matching the condition.</p>
+<ul>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">attr_name</span></code></dt><dd><p>The name of an attribute coincides with the supplied string</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">attr_name</span><span class="o">=</span><span class="s2">&quot;$I30&quot;</span>
 </pre></div>
 </div>
@@ -308,35 +410,28 @@ Regex will be matched against header_len bytes from the file.</p>
 </dd>
 </dl>
 </li>
+</ul>
+<p>For the conditions listed below, the artefact registered is the content of any extended attribute (<code class="docutils literal notranslate"><span class="pre">$EA</span></code>) associated to the record - that is to say, pairs of names and values.</p>
+<ul>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">contains</span></code></dt><dd><p>All $DATA attributes are searched if their content contains a specific string (ASCII)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>contains=”Hello World”
+<dt><code class="docutils literal notranslate"><span class="pre">ea</span></code></dt><dd><p>The name associated to a value in an extended attribute of the file coincides with the supplied string.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ea</span><span class="o">=</span><span class="s2">&quot;MyEA&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">contains_hex</span></code></dt><dd><p>All $DATA attributes are searched if their content contains a specific binary array</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>contains_hex=”0x0BADF00DBAADF000D”
+<dt><code class="docutils literal notranslate"><span class="pre">ea_match</span></code></dt><dd><p>The name associated to a value of an extended attribute of the file matches the supplied string.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ea_match</span><span class="o">=</span><span class="s2">&quot;My?A&quot;</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">yara</span></code></dt><dd><p>Specifies a yara “source” file from which rules can be used to match file’s content.
-Can be either a file name or a reference to a embedded resource.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>yara=”res:#MyYaraFile”
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">yara_rule</span></code></dt><dd><p>Specifies a comma or semi-colon separated list of yara rule specification.
-Rule specification may use * or ? to match arbitrary characters</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>yara_rule=”is_dll;apt??_rat”
+<dt><code class="docutils literal notranslate"><span class="pre">ea_regex</span></code></dt><dd><p>The name associated to a value of an extended attribute of the file matches the regular expression.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ea_regex</span><span class="o">=</span><span class="s2">&quot;My.*&quot;</span>
 </pre></div>
 </div>
 </dd>
@@ -345,53 +440,124 @@ Rule specification may use * or ? to match arbitrary characters</p>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Attributes evaluation order is based on cost. For instance, size is a very cheap indicator to evaluate. Hash value is very expensive. So the evaluator will first test file size and then (if size matches) will evaluate the file’s hash value. This means that coupling a size indicator to a hash one will dramatically enhance the performance of the search.</p>
+<p>At the end of the evaluation of a clause, when a record matches, the artefacts justifying the match have been registered. This artefact list can be completed with other elements:</p>
+<ul class="simple">
+<li><p>If there was no condition on the record name, there is no name amongst the artefacts registered. However, a name is needed to refer to the other artefacts registered (e.g. for GetThis). In this case, the name is chosen to be the first non-short file name listed in the record.</p></li>
+<li><p>If there was no condition on data streams or attributes, namely, if only file names are constrained, there is no registered artefact with actual content. In this case, the default <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> stream of the record is added to the list when it exists. This allows GetThis to collect it.</p></li>
+</ul>
 </div>
+</div>
+<div class="section" id="possible-attributes-of-a-ntfs-exclude-element">
+<h2>Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Element<a class="headerlink" href="#possible-attributes-of-a-ntfs-exclude-element" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements can be used to exclude specific matches.
+As explained in <a class="reference external" href="#search-algorithm-and-result-of-a-search">the first section of this page</a>,
+when a record matches all attributes of an exclusion term, all NTFS artefacts related to this record are excluded from the matching set.</p>
+<p>All ntfs_find attributes are supported by ntfs_exclude <strong>except</strong> extended attributes related ones (ea, ea_match, ea_regex).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As previously explained, the search algorithm defined above does not depend on the placement of the <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements; in particular, an <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> element <strong>does impact</strong> all artefacts to be collected, independently of its position with respect to other elements.</p>
+</div>
+</div>
+<div class="section" id="order-of-evaluation-of-attributes-in-clauses">
+<h2>Order of Evaluation of Attributes in Clauses<a class="headerlink" href="#order-of-evaluation-of-attributes-in-clauses" title="Permalink to this headline">¶</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>At least one yara rule (matching the file’s content) should match at least one of the rules specification for the file match to succeed (i.e. if the file’s content matches arbitrary yara rules not mentioned in the yara_rule attribute, then the match will fail for this file. For a successful yara scan to always succeed, please use the yara_rule=”*” specification.</p>
+<p>Attributes evaluation order is based on cost. For instance, size is a very cheap indicator to evaluate whereas hash value is very expensive. If both are present, the evaluator will first test file size and then (if size matches) will evaluate the file’s hash value. <strong>This means that coupling a size indicator to a hash one will dramatically enhance the performance of the search</strong>.</p>
 </div>
-<div class="section" id="ntfs-exclude">
-<h2>ntfs_exclude<a class="headerlink" href="#ntfs-exclude" title="Permalink to this headline">¶</a></h2>
-<p>ntfs_exclude elements can be used to exclude specific matches.
-Once a match is found using a ntfs_find term, exclusion terms are evaluated.
-When a match matches all attributes of an exclusion term, the complete match is excluded.
-For instance, you could be interested in getting all explorer.exe files except the one located in Windowsexplorer.exe.
-This would make:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;explorer.exe&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;ntfs_exclude</span> <span class="na">name=</span><span class="s">&quot;\Windows\explorer.exe&quot;</span> <span class="nt">/&gt;</span>
+<p>The evaluation order is as follows:</p>
+<blockquote>
+<div><ul>
+<li><p>File Name:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>name</p></li>
+<li><p>name_match</p></li>
+<li><p>name_regex</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Path:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>path</p></li>
+<li><p>path_match</p></li>
+<li><p>path_regex</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>$DATA name or size:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ads</p></li>
+<li><p>ads_match</p></li>
+<li><p>ads_regex</p></li>
+<li><p>size</p></li>
+<li><p>size_eq</p></li>
+<li><p>size_gt</p></li>
+<li><p>size_ge</p></li>
+<li><p>size_lt</p></li>
+<li><p>size_le</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Verify if any of the record names are in the selected location (i.e. one of the specified directories in locations)</p></li>
+<li><p>Attribute:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>attr_type</p></li>
+<li><p>attr_name</p></li>
+<li><p>attr_match</p></li>
+<li><p>attr_regex</p></li>
+<li><p>ea</p></li>
+<li><p>ea_match</p></li>
+<li><p>ea_regex</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>$DATA content:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>header</p></li>
+<li><p>header_hex</p></li>
+<li><p>header_regex &amp; header_len</p></li>
+<li><p>contains</p></li>
+<li><p>contains_hex</p></li>
+<li><p>MD5, SHA1, SHA256</p></li>
+<li><p>yara_rule</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="typical-usage-examples">
+<h2>Typical Usage Examples<a class="headerlink" href="#typical-usage-examples" title="Permalink to this headline">¶</a></h2>
+<p>To specify the registry hives of the system, the element would be</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">path=</span><span class="s">&quot;\Windows\System32\config\SOFTWARE&quot;</span> <span class="na">header=</span><span class="s">&quot;regf&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;nffs_find</span> <span class="na">path=</span><span class="s">&quot;\Windows\System32\config\SYSTEM&quot;</span> <span class="na">header=</span><span class="s">&quot;regf&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>Or, considering the Windows catalogs, while excluding known ones:</p>
+<p>To search for all user registry hives, one can use</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">path_match=</span><span class="s">&quot;\Users\*\NTUSER.DAT&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;ntfs_find</span> <span class="na">path_match=</span><span class="s">&quot;\Documents and Settings\*\NTUSER.DAT&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>For instance, you could be interested in getting all fields named <code class="docutils literal notranslate"><span class="pre">explorer.exe</span></code> except the one located in <code class="docutils literal notranslate"><span class="pre">\Windows\explorer.exe</span></code>. This can be done as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_exclude</span> <span class="na">path=</span><span class="s">&quot;\Windows\explorer.exe&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;explorer.exe&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The following lines search for Windows catalogs, while excluding known ones:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">path_match=</span><span class="s">&quot;\Windows\System32\catroot\*\*.cat&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;ntfs_exclude</span> <span class="na">size=</span><span class="s">&quot;138618&quot;</span> <span class="na">md5=</span><span class="s">&quot;d2182e5de2b13d2e68ee66d1bb44fe34&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>All ntfs_find attributes are supported by ntfs_exclude <strong>except</strong> extended attributes related ones (ea, ea_match, ea_regex).</p>
-</div>
-</div>
-<div class="section" id="ntfs-find-examples">
-<h2>ntfs_find examples<a class="headerlink" href="#ntfs-find-examples" title="Permalink to this headline">¶</a></h2>
-<p>To specify system’s registry hives, the FileFind element would be :</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">path=</span><span class="s">&quot;\Windows\System32\config\SOFTWARE&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;nffs_find</span> <span class="na">path=</span><span class="s">&quot;\Windows\System32\config\SYSTEM&quot;</span> <span class="nt">/&gt;</span>
+<p>To search for a file name qfe.dat which has a data stream whose sha1 is 7894ec01651ff3fcdf9d117f416875bbaef03b6d, which has an extended attribute with a value named toto and whose size is not 104857600, one can write</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;qfe.dat&quot;</span> <span class="na">ea=</span><span class="s">&quot;toto&quot;</span> <span class="na">sha1=</span><span class="s">&quot;7894ec01651ff3fcdf9d117f416875bbaef03b6d&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;ntfs_exclude</span> <span class="na">size=</span><span class="s">&quot;104857600&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>To specify all user registry hives:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">path_match=</span><span class="s">&quot;\Users\*\NTUSER.DAT&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;ntfs_find</span> <span class="na">path_match=</span><span class="s">&quot;\Documents and Settings\*\NTUSER.DAT&quot;</span> <span class="nt">/&gt;</span>
-</pre></div>
-</div>
-<p>To specify Internet Explorer temporary files:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">path_match=</span><span class="s">&quot;*\Temporary Internet Files\*&quot;</span> <span class="nt">/&gt;</span>
-</pre></div>
-</div>
-<p>To specify a file name quickfix.dat whose size is 104857600 and sha1 is 7894ec01651ff3fcdf9d117f416875bbaef03b6d:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;quickfix.dat&quot;</span> <span class="na">size=</span><span class="s">&quot;104857600&quot;</span> <span class="na">sha1=</span><span class="s">&quot;7894ec01651ff3fcdf9d117f416875bbaef03b6d&quot;</span> <span class="nt">/&gt;</span>
-</pre></div>
-</div>
+<p>For a record with the matching file name, the NTFS artefacts registered in this case are all the data streams matching the sha1, on top of the content of matching extended attributes. All of these artefacts are eliminated if the size associated with the record is “104857600”, and they are all treated by the tool using the configuration file otherwise.</p>
 </div>
 </div>
 
@@ -405,12 +571,34 @@ This would make:</p>
       <h3>Navigation</h3>
       <ul>
         
-        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+        
+        <li class="right" >
+          <a href="configuring_console_output.html" title="Configuring Console Output, Logging"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_yara.html" title="Configuring the Yara Scanner"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" >Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
   </body>
 </html>

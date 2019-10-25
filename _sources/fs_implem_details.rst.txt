@@ -1,67 +1,38 @@
-Implementation details
-======================
+====================================
+Implementation Details About Parsers
+====================================
 
-Supported Versions
-------------------
+MFT Parser
+==========
 
-File system related tools are entirely implemented in native C++, compiled with Visual Studio 2017 Update 9 and do not require any installation prior to execution on the currently supported Windows versions:
+To circumvent strict ACLs or restrictive sharing status of files, we have implemented a Master File Table (MFT) parser allowing to directly open the volume itself (``\\.\C:``) and read disk geometry and information.
+From here, it is possible to locate the boot sector that provides information about the location of the $MFT
+extents (or segments). The MFT can then be read, record by record.
 
-- Windows Workstation:
+The MFT records are parsed to read attributes like $FILE_NAME and $DATA ones.
+Using this data, NTFS metadata information can be deduced.
+One of the immediate benefits of using an MFT parser is the ability to compute cryptographic
+hashes of locked or secured (DACLed) files, as well as being able to read their contents.
 
-  - Windows XP SP3 (Win32, x64)
+USN Parser
+==========
 
-  - Windows Vista SP1, SP2 (Win32, x64)
-
-  - Windows 7 (Win32, x64)
-
-  - Windows 8 (Win32, x64)
-
-  - Windows 8.1 (Win32, x64)
-
-  - Windows 10 (Win32, x64)
-
-- Windows Server:
-
-  - Windows Server 2003 SP1, SP2 (Win32, x64)
-
-  - Windows Server 2008 (Win32, x64)
-
-  - Windows Server 2008 R2  (x64)
-
-  - Windows Server 2012 (NTFS volumes) (x64)
-
-  - Windows Server 2016 (NTFS volumes) (x64)
-
-  - Windows Server 2019 (NTFS volumes) (x64)
-
-
-USN Parser Implementation Details
----------------------------------
-
-The USN parser is based on a specific FSCTL called `FSCTL_ENUM_USN_DATA`_.
+The USN parser is based on a specific FSCTL called ``FSCTL_ENUM_USN_DATA``.
 
 .. _FSCTL_ENUM_USN_DATA: http://msdn.microsoft.com/en-us/library/aa364563(VS.85).aspx
 
 FSCTL_ENUM_USN_DATA does not walk through the change journal.
-It is a fallback path for when a change journal does not record all
-the information requested by an app. This call walks through the MFT to identify files changed between two USN identifiers.
-Since it is walking the MFT, it generates mostly sequential IO which can be a huge performance win.
+It is a fallback path for when a change journal does not record all the information requested by an application.
+This call walks through the MFT to identify files changed between two USN identifiers.
 
-If the identifiers specified are zero and MAXLONGLONG, this effectively walks through every file on the volume (whether USN is active or not.)
+If the identifiers specified are zero and MAXLONGLONG, this effectively walks through every file on the volume (whether USN is active or not).
 
-Incidentally, this is how defrag works on NTFS.
-
-.. note:: This is NTFS-specific. However, if a solution is required that works on other file systems, you'd need to implement multiple paths. Once we have enumerated the USN data, we enumerate each record returned. To gather information about a specific file, we have to obtain a handle to the file. Since malicious path encoding could limit our inspection (with like, reserved names), we use a special syntax of NtOpenFile() with the FILE_OPEN_BY_FILE_ID flag passing the USN_RECORD.FileReferenceNumber. This trick makes NTFSInfo’s USN parser resilient to path related ‘tricks’ (like using reserved names). However, we are still going through the Windows NTFS implementation so we are still dependent on file sharing status of the file and the DACL set on the file. The MFT parser does not suffer from this limitation.
+The USN parser is now deprecated and should not be used (it was the first parser implemented).
 
 
-MFT Parser Implementation Details
----------------------------------
-To obtain resiliency to strict ACL or sharing status of a file, we have implemented a Master file Table (MFT)
-parser that allows us to directly open the volume itself (\\.\C:) and  read disk geometry and information.
-From here, we are able to locate the boot sector that provides information about the location of the $MFT
-extents (or segments). From there, we are able to read the MFT, record by record.
+The MFT parser provides multiple benefits over the USN parser:
 
-Once this is done, we are able to parse the MFT records to read attributes like $FILE_NAME and $DATA attributes.
-Using this data we can deduce all required information to compute NTFS meta data information.
-One of the immediate benefits of using MFT parser is the ability of the tool to compute cryptographic
-hashes of locked or secured (DACLed) files or being able to read the file contents.
+* Much faster
+* Less fragile to malware interfering (does not rely on CreateFile or NtOpenFile)
+* Feature complete
+

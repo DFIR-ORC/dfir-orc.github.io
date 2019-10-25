@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Requirements &amp; Supported Platforms &#8212; DFIR ORC  documentation</title>
+    <title>Requirements &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -14,8 +14,8 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DFIR ORC Design and Architecture" href="intro_to_data_collection.html" />
-    <link rel="prev" title="Introduction" href="index.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="next" title="Design and Architecture" href="intro_to_data_collection.html" />
+    <link rel="prev" title="Tutorial" href="tuto.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -24,13 +24,13 @@
         
         
         <li class="right" >
-          <a href="intro_to_data_collection.html" title="DFIR ORC Design and Architecture"
+          <a href="intro_to_data_collection.html" title="Design and Architecture"
              accesskey="N">next</a>
           
         
         
         <li class="right" >
-          <a href="index.html" title="Introduction"
+          <a href="tuto.html" title="Tutorial"
              accesskey="P">previous</a>
            |</li>
           
@@ -46,13 +46,24 @@
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements &amp; Supported Platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -61,8 +72,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="requirements-supported-platforms">
-<h1>Requirements &amp; Supported Platforms<a class="headerlink" href="#requirements-supported-platforms" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
 <p>DFIR ORC requires <em>administrative</em> privileges. Indeed, data accessed is privileged.
 However, the embedded tool suite does not go through the permission system of Microsoft Windows to access
 files. It rather interacts at a lower level, using devices, thus preventing access denials on files already in use, locked, etc.
@@ -95,7 +106,7 @@ If this fails, <code class="docutils literal notranslate"><span class="pre">DFIR
 <p class="admonition-title">Warning for Windows 7, XP SP3, Vista, and Windows Server 2003, 2008, 2008 R2</p>
 <p>In these versions of Windows, a process can be associated with only one job: jobs cannot be nested.
 The ability to nest jobs was added in Windows 8 and Windows Server 2012.
-If <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> is running inside a job object that does not have the permission “break way from job”, and nested jobs are not available, then DFIR ORC will attempt to temporarily modify the job to allow its children to break away. It that attempt fails, DFIR ORC will be unable to launch processes and will fail. At this time, there is no known configuration where DFIR ORC fails for this reason but this corner case could still occur. In such a case, an appropriate error message is displayed.</p>
+If <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> is running inside a job object that does not have the permission “break way from job”, and nested jobs are not available, then DFIR ORC will attempt to temporarily modify the job to allow its children to break away. If that attempt fails, DFIR ORC will be unable to launch processes and will fail. At this time, there is no known configuration where DFIR ORC fails for this reason but this corner case could still occur. In such a case, an appropriate error message is displayed.</p>
 </div>
 <p>More information on <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/procthread/job-objects">job objects on MSDN</a>.</p>
 </div>
@@ -112,13 +123,13 @@ If <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</sp
         
         
         <li class="right" >
-          <a href="intro_to_data_collection.html" title="DFIR ORC Design and Architecture"
+          <a href="intro_to_data_collection.html" title="Design and Architecture"
              >next</a>
           
         
         
         <li class="right" >
-          <a href="index.html" title="Introduction"
+          <a href="tuto.html" title="Tutorial"
              >previous</a>
            |</li>
           
@@ -126,9 +137,16 @@ If <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</sp
         <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
   </body>
 </html>

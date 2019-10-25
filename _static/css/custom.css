@@ -30,4 +30,15 @@ div.related ul li a {
     color: #ffffff;
 }
 
+.toggle .header {
+    display: block;
+    clear: both;
+}
 
+div.section h2 {
+    border-bottom: 1px solid #ccc;
+}
+
+div.section h3, h4, h5, h6 {
+    border-bottom: 1px solid #bbb;
+}

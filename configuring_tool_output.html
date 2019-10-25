@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configure tools’ output &#8212; DFIR ORC  documentation</title>
+    <title>Configuring Tool Output &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -13,14 +13,31 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FatInfo" href="FatInfo.html" />
+    <link rel="prev" title="Configuring Process Priority" href="configuring_process.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         
-        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+        
+        <li class="right" >
+          <a href="FatInfo.html" title="FatInfo"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_process.html" title="Configuring Process Priority"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" accesskey="U">Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -29,15 +46,39 @@
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
             </a></p>
 <h3><a href="index.html">Table of Contents</a></h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -46,88 +87,127 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="configure-tools-output">
-<h1>Configure tools’ output<a class="headerlink" href="#configure-tools-output" title="Permalink to this headline">¶</a></h1>
-<p>Tools configure their output in a unified way.
-The syntax is simple and straightforward:
-* Command line argument:</p>
+  <div class="section" id="configuring-tool-output">
+<h1>Configuring Tool Output<a class="headerlink" href="#configuring-tool-output" title="Permalink to this headline">¶</a></h1>
+<p>DFIR ORC tools configure their output in a unified way.
+The syntax is simple and straightforward:</p>
+<ul>
+<li><p>Command line argument:</p>
 <blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">out</span><span class="o">=&lt;</span><span class="n">My</span> <span class="n">output</span><span class="o">&gt;</span>
+<div><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/out=<span class="p">&lt;</span>MyOutput&gt;
 </pre></div>
 </div>
 </div></blockquote>
-<ul>
-<li><p>Config file XML statement:</p>
+</li>
+<li><p>XML configuration file:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output&gt;</span>MyOutput<span class="nt">&lt;/output&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 </ul>
-<p>Where &lt;My Output&gt; can be a file (typically CSV), a directory, an archive or a connection string to a database server.</p>
+<p>Where &lt;MyOutput&gt; can be a file (usually CSV), a directory or an archive.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>“out” in /out can vary from tool to tools typically for tools with more than one output like ntfsinfo (see MyTool.exe –h for details).</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">/out</span></code> can vary in some tools typically when they have more than one output like NTFSInfo (see MyTool.exe -h for details).</p>
 </div>
 <div class="section" id="file-output">
-<h2>File output<a class="headerlink" href="#file-output" title="Permalink to this headline">¶</a></h2>
+<h2>File Output<a class="headerlink" href="#file-output" title="Permalink to this headline">¶</a></h2>
 <p>The simplest form of output:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.csv
-
-C<span class="p">:</span><span class="nl">\temp</span><span class="c1"> must exist, be a directory and writeable.</span>
-Foo.csv must not exist.
 </pre></div>
 </div>
+<p>In this example, if <code class="docutils literal notranslate"><span class="pre">C:\temp</span></code> directory doesn’t exist, it is created. If the directory already exists, it must be writable. If the output file already exists, it is overwritten.</p>
+<p>The CSV file is only written to every 1048576 bytes (or 1 MB) and at the end of the tool execution.
+This implies that tool progress cannot be followed using tools like “tail -f”.</p>
+<p>The following tools do not support this output:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="GetSectors.html"><span class="doc">GetSectors</span></a>,</p></li>
+<li><p><a class="reference internal" href="GetThis.html"><span class="doc">GetThis</span></a>,</p></li>
+<li><p><a class="reference internal" href="GetSamples.html"><span class="doc">GetSamples</span></a>,</p></li>
+<li><p><a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a>,</p></li>
+<li><p><a class="reference internal" href="RegInfo.html"><span class="doc">RegInfo</span></a>.</p></li>
+</ul>
 </div>
 <div class="section" id="directory-output">
-<h2>Directory output<a class="headerlink" href="#directory-output" title="Permalink to this headline">¶</a></h2>
+<h2>Directory Output<a class="headerlink" href="#directory-output" title="Permalink to this headline">¶</a></h2>
 <p>Directory output takes the form:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\test
-
-C<span class="p">:</span><span class="nl">\temp\test</span><span class="c1"> must exist, be a directory and writeable.</span>
 </pre></div>
 </div>
+<p>In this example, if <code class="docutils literal notranslate"><span class="pre">C:\temp\test</span></code> directory doesn’t exist, it is created. If a parent directory doesn’t exist, it is also created. Already existing directories must be writable.</p>
+<p>The following tools do not support this output:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="FastFind.html"><span class="doc">FastFind</span></a>,</p></li>
+<li><p><a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a>.</p></li>
+</ul>
 </div>
 <div class="section" id="archive-output">
-<h2>Archive output<a class="headerlink" href="#archive-output" title="Permalink to this headline">¶</a></h2>
+<h2>Archive Output<a class="headerlink" href="#archive-output" title="Permalink to this headline">¶</a></h2>
 <p>The simplest form of output for an archive is:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.zip
-
-C<span class="p">:</span><span class="nl">\temp</span><span class="c1"> must exist, be a directory and writeable.</span>
-foo.zip must not exist.
 </pre></div>
 </div>
-<p>The archive format is selected based on extension of foo:
-* Foo.zip selects the zip format.
-* Foo.7z selects the LZMA/7zip format (www.7zip.org).
-* Foo.cab select the MSCF Microsoft cabinet format.
-* Foo.&lt;ext&gt; selects the format if supported in 7zip library for archive creation.</p>
-<p>The following tools support output in archive files:
-* NTFSInfo
-* USNInfo
-* GetThis
-* GetSamples</p>
-</div>
-<div class="section" id="sql-server-output">
-<h2>SQL Server output<a class="headerlink" href="#sql-server-output" title="Permalink to this headline">¶</a></h2>
-<p>The simplest form of SQL server output is:</p>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=<span class="p">&lt;</span>MySQLConnectionString<span class="p">&gt;</span>#<span class="p">&lt;</span>MyTable&gt;
+<p>In this example, if <code class="docutils literal notranslate"><span class="pre">C:\temp</span></code> directory doesn’t exist, it is created. If the directory already exists, it must be writable. If the output archive already exists, it is overwritten.</p>
+<p>The archive format is selected based on extension of “foo”:</p>
+<ul class="simple">
+<li><p>Foo.zip selects the zip format.</p></li>
+<li><p>Foo.7z selects the LZMA/7zip format (www.7zip.org).</p></li>
+<li><p>Foo.cab selects the MSCF Microsoft cabinet format.</p></li>
+</ul>
+<p>The following tools do not follow this output syntax:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="FastFind.html"><span class="doc">FastFind</span></a>,</p></li>
+<li><p><a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a>,</p></li>
+<li><p><a class="reference internal" href="RegInfo.html"><span class="doc">RegInfo</span></a>.</p></li>
+</ul>
+<div class="section" id="compression-only-for-zip-and-7z-format">
+<h3>Compression (only for zip and 7z Format)<a class="headerlink" href="#compression-only-for-zip-and-7z-format" title="Permalink to this headline">¶</a></h3>
+<p>The level of compression in the archive can be specified using either an XML configuration file (with a <code class="docutils literal notranslate"><span class="pre">compression</span></code> attribute) or a command-line option (with the <code class="docutils literal notranslate"><span class="pre">/compression</span></code> option).
+Supported values are:</p>
+<ul class="simple">
+<li><p>None</p></li>
+<li><p>Fastest</p></li>
+<li><p>Fast</p></li>
+<li><p>Normal</p></li>
+<li><p>Maximum</p></li>
+<li><p>Ultra</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">compression=</span><span class="s">&quot;fast&quot;</span><span class="nt">&gt;</span>MyOutput.7z<span class="nt">&lt;/output&gt;</span>
 </pre></div>
 </div>
-<p>&lt;MySQLConnectionString&gt; must be a valid connection string:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Server</span><span class="o">=</span><span class="n">myServerAddress</span><span class="p">;</span><span class="n">Database</span><span class="o">=</span><span class="n">myDataBase</span><span class="p">;</span><span class="n">Trusted_Connection</span><span class="o">=</span><span class="kc">True</span><span class="p">;</span><span class="n">DSN</span><span class="o">=</span><span class="n">myDsn</span>
-<span class="o">&lt;</span><span class="n">MyTable</span><span class="o">&gt;</span> <span class="n">must</span> <span class="n">be</span> <span class="n">an</span> <span class="n">existing</span> <span class="n">table</span> <span class="k">with</span> <span class="n">the</span> <span class="n">appropriate</span> <span class="n">column</span> <span class="n">definition</span>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.zip /compression=Normal
 </pre></div>
+</div>
+</div>
+<div class="section" id="password-only-for-zip-and-7z-format">
+<span id="cfg-tool-output-pwd"></span><h3>Password (only for zip and 7z Format)<a class="headerlink" href="#password-only-for-zip-and-7z-format" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The only tools supporting this option are GetThis and GetSamples.</p>
+</div>
+<p>The output archive can be password protected by providing either the <code class="docutils literal notranslate"><span class="pre">/password</span></code> option or a <code class="docutils literal notranslate"><span class="pre">password</span></code> attribute for the <code class="docutils literal notranslate"><span class="pre">output</span></code> element in an XML configuration file.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">password=</span><span class="s">&quot;avproof&quot;</span><span class="nt">&gt;</span>MyOutput.7z<span class="nt">&lt;/output&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=MyOutput.7z /password=<span class="s2">&quot;avproof&quot;</span>
+</pre></div>
+</div>
+<p>This password should not be regarded as a security feature but can be used to evade anti-viruses when collecting malicious samples.
+In order to encrypt archives, one should use the corresponding feature in <a class="reference internal" href="wolf_config.html#wolf-config-recipient-element"><span class="std std-ref">wolf_config</span></a>.</p>
 </div>
 </div>
 <div class="section" id="file-character-encoding">
-<h2>File character encoding<a class="headerlink" href="#file-character-encoding" title="Permalink to this headline">¶</a></h2>
-<p>To reduce output file size and ease file analysis on Linux systems (that seems to have issues with UTF16), the default encoding for CSV is  now UTF8.
-The command line options /utf8 and /utf16 can be used to explicitely control the output encoding.
-Also, XML configuration files elements outputfile and outputdir can have an optional attribute “encoding”:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;UTF16&quot;</span><span class="nt">&gt;</span>c:\temp<span class="nt">&lt;/output&gt;</span>
+<h2>File Character Encoding<a class="headerlink" href="#file-character-encoding" title="Permalink to this headline">¶</a></h2>
+<p>To reduce output file size and ease file analysis on Linux systems (that seems to have issues with UTF16), the default encoding for CSV is UTF8.
+The command-line options <code class="docutils literal notranslate"><span class="pre">/utf8</span></code> and <code class="docutils literal notranslate"><span class="pre">/utf16</span></code> can be used to explicitly control the encoding of the output.</p>
+<p>Also, XML configuration files elements <code class="docutils literal notranslate"><span class="pre">output</span></code> can have an optional attribute <code class="docutils literal notranslate"><span class="pre">encoding</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;utf16&quot;</span><span class="nt">&gt;</span>c:\temp<span class="nt">&lt;/output&gt;</span>
 </pre></div>
 </div>
 <p>Or</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;UTF8&quot;</span> <span class="nt">&gt;</span>c:\temp\test.csv<span class="nt">&lt;/output&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;utf8&quot;</span><span class="nt">&gt;</span>c:\temp\test.csv<span class="nt">&lt;/output&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -143,12 +223,34 @@ Also, XML configuration files elements outputfile and outputdir can have an opti
       <h3>Navigation</h3>
       <ul>
         
-        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+        
+        <li class="right" >
+          <a href="FatInfo.html" title="FatInfo"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_process.html" title="Configuring Process Priority"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" >Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
   </body>
 </html>

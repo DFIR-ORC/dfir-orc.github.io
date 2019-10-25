@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>GetSectors &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NTFSInfo" href="NTFSInfo.html" />
+    <link rel="prev" title="GetSamples" href="GetSamples.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="NTFSInfo.html" title="NTFSInfo"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="GetSamples.html" title="GetSamples"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" accesskey="U">Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getsectors">
+<h1>GetSectors<a class="headerlink" href="#getsectors" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>GetSectors is designed to collect low-level disk data, i.e. data not related to the file system.
+As such, it can typically be used to collect the boot sector, the boot code, the partition tables, slack space on the disk (typically the available sectors after the last partition), etc.</p>
+</div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>GetSectors generates the requested dump(s) in an archive or a folder. The tool also generates a CSV file, GetSectors.csv, which contains the metadata about the dump(s) with the following columns.</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ComputerName</p></td>
+<td><p>The computer name</p></td>
+</tr>
+<tr class="row-odd"><td><p>Disk</p></td>
+<td><p>The disk from which the dump is extracted</p></td>
+</tr>
+<tr class="row-even"><td><p>DumpDescription</p></td>
+<td><p>The type of dump (MBR, GPT primary header,…)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DumpName</p></td>
+<td><p>The dump file name in output</p></td>
+</tr>
+<tr class="row-even"><td><p>DumpOffset</p></td>
+<td><p>The starting offset of the dumped region (on the disk)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DumpSize</p></td>
+<td><p>The size of the dump in bytes</p></td>
+</tr>
+<tr class="row-even"><td><p>ReadingTime</p></td>
+<td><p>Time to read the dumped region</p></td>
+</tr>
+<tr class="row-odd"><td><p>DiskInterfaceUsed</p></td>
+<td><p>Actual device used to read the dump region</p></td>
+</tr>
+<tr class="row-even"><td><p>DiskSectorSize</p></td>
+<td><p>The disk sector size in bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>The dump name inside the output directory/archive is generated by the concatenation of</p>
+<ul>
+<li><p>the disk name (where “\” is replaced by “_”),</p></li>
+<li><p>“_off_” followed by the offset of the data collected (in bytes),</p></li>
+<li><p>“_len_” followed by the length of the data collected (in bytes),</p></li>
+<li><p>a description of the dump:</p>
+<blockquote>
+<div><table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EFI-partition</p></td>
+<td><p>Full UEFI partition</p></td>
+</tr>
+<tr class="row-odd"><td><p>MBR</p></td>
+<td><p>Master Boot Record</p></td>
+</tr>
+<tr class="row-even"><td><p>VBR-of-&lt;Partition Description&gt;</p></td>
+<td><p>Volume Boot Record</p></td>
+</tr>
+<tr class="row-odd"><td><p>VBR-backup-of-&lt;Partition Description&gt;</p></td>
+<td><p>Volume Boot Record backup</p></td>
+</tr>
+<tr class="row-even"><td><p>IPL-of-&lt;Partition Description&gt;</p></td>
+<td><p>Initial Program Loader</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPT-primary-header</p></td>
+<td><p>Primary GPT header</p></td>
+</tr>
+<tr class="row-even"><td><p>Disk-slack-space</p></td>
+<td><p>Slack space located after the last partition on disk</p></td>
+</tr>
+<tr class="row-odd"><td><p>Custom-sample</p></td>
+<td><p>Custom portion of disk</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ul>
+<p>Dump file extension is <code class="docutils literal notranslate"><span class="pre">.bin</span></code>.</p>
+<p>As an example, <code class="docutils literal notranslate"><span class="pre">__._PhysicalDrive0_off_0_len_512_MBR.bin</span></code> is the name of a MBR dump.</p>
+<p>An output for logging purposes can be used with the syntax found in <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>A typical syntax to use GetSectors looks like the following:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetSectors /LegacyBootCode /SlackSpace /Out=BootCode.7z
+
+DFIR-Orc.exe GetSectors /UefiFull /Out=UefiFull.7z
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to specify something for the tool to dump, at least one option amongst <code class="docutils literal notranslate"><span class="pre">/LegacyBootCode</span></code>, <code class="docutils literal notranslate"><span class="pre">/UefiFull</span></code>, <code class="docutils literal notranslate"><span class="pre">/SlackSpace</span></code> or <code class="docutils literal notranslate"><span class="pre">/Custom</span></code> must be specified.</p>
+</div>
+<div class="section" id="disk-device-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/Disk=&lt;Device&gt;</span></code> Option<a class="headerlink" href="#disk-device-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=Windows boot disk</em></p>
+<p>Specifies the name of the disk device to read sectors from. A disk image file can also be used.</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/Disk=\\.\PhysicalDrive0
+/Disk=D:\MyImage.dd
+</pre></div>
+</div>
+<p>Access path examples are also proposed in <a class="reference internal" href="configuring_locations.html"><span class="doc">Configuring Locations</span></a> but some are not allowed or do not make sense.</p>
+</div>
+<div class="section" id="legacybootcode-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/LegacyBootCode</span></code> Option<a class="headerlink" href="#legacybootcode-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em></p>
+<p>Predefined logic to dump MBR, VBRs and IPLs (cf. <a class="reference external" href="https://en.wikipedia.org/wiki/Booting">https://en.wikipedia.org/wiki/Booting</a>).</p>
+</div>
+<div class="section" id="uefifull-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/UefiFull</span></code> Option<a class="headerlink" href="#uefifull-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=Off</em></p>
+<p>Dumps the entire EFI partition.</p>
+</div>
+<div class="section" id="uefifullmaxsize-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/UefiFullMaxSize</span></code> Option<a class="headerlink" href="#uefifullmaxsize-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=400M</em></p>
+<p>Used in combination of the <code class="docutils literal notranslate"><span class="pre">/UefiFull</span></code> option to specify a maximum size to dump. A larger partition will be truncated.</p>
+</div>
+<div class="section" id="slackspace-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/SlackSpace</span></code> Option<a class="headerlink" href="#slackspace-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=Off</em></p>
+<p>Predefined logic to dump sectors samples outside any partition.</p>
+</div>
+<div class="section" id="slackspacedumpsize-size-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/SlackSpaceDumpSize=&lt;Size&gt;</span></code> Option<a class="headerlink" href="#slackspacedumpsize-size-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=5MB</em></p>
+<p>Maximum size, in bytes, of the collected slackspace (disk unallocated space starting after the end of the last partition).
+This option is only used when the <code class="docutils literal notranslate"><span class="pre">/SlackSpace</span></code> option is active.</p>
+</div>
+<div class="section" id="custom-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/Custom</span></code> Option<a class="headerlink" href="#custom-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=Off</em></p>
+<p>Dumps a specific disk extent. Must be followed with <code class="docutils literal notranslate"><span class="pre">/CustomOffset</span></code> and/or <code class="docutils literal notranslate"><span class="pre">/CustomSize</span></code>.</p>
+</div>
+<div class="section" id="customoffset-size-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/CustomOffset=&lt;Size&gt;</span></code> Option<a class="headerlink" href="#customoffset-size-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=0</em></p>
+<p>Specifies the specific disk extent offset in bytes.</p>
+</div>
+<div class="section" id="customsize-size-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/CustomSize=&lt;Size&gt;</span></code> Option<a class="headerlink" href="#customsize-size-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=512</em></p>
+<p>Specifies the specific disk extent size in bytes.</p>
+</div>
+<div class="section" id="out-path-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/Out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#out-path-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=.\GetSectors.7z</em></p>
+<p>Specifies the name of the result container. The container can be a folder or an archive (7z, zip, cab). For more details on this option, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
+</div>
+<div class="section" id="notlowinterface-option">
+<h3><code class="docutils literal notranslate"><span class="pre">/NotLowInterface</span></code> Option<a class="headerlink" href="#notlowinterface-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=False</em></p>
+<p>The tool does not try to obtain a low interface on the disk device using the setupAPI functions.
+Indeed, GetSectors attempts to use the lowest user mode accessible means to open the specified disk (usually, the bus interface); <code class="docutils literal notranslate"><span class="pre">/NotLowInterface</span></code> disables this behavior.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="NTFSInfo.html" title="NTFSInfo"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="GetSamples.html" title="GetSamples"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li> 
+      </ul>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

@@ -18,7 +18,7 @@ The “Grantor” grants the “Reuser” the free, non-exclusive right to “Re
 -   An acknowledgement of the authorship of the “Information”: its source (at least, the name of the “Grantor”) and the date of the most recent update of the reused “Information”. Specifically, the “Reuser” may satisfy this condition by pointing, via a hypertext link, to the source of “the Information” and so supplying an actual acknowledgement of its authorship.
 
 .. admonition:: Example
-   :class: tip 
+   :class: tip
 
    “Ministry of xxx—Original data downloaded from `http://www.data.gouv.fr/fr/datasets/xxx/`, updated on 14 February 2017”.
 

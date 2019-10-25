@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>DFIR ORC Architecture &#8212; DFIR ORC  documentation</title>
+    <title>Architecture &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DFIR ORC Configuration" href="configuration.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
     <link rel="prev" title="Design Principles" href="design_principles.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
   </head><body>
@@ -24,7 +24,7 @@
         
         
         <li class="right" >
-          <a href="configuration.html" title="DFIR ORC Configuration"
+          <a href="configuration.html" title="Configuration"
              accesskey="N">next</a>
           
         
@@ -36,7 +36,7 @@
           
         
         <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="intro_to_data_collection.html" accesskey="U">DFIR ORC Design and Architecture</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="intro_to_data_collection.html" accesskey="U">Design and Architecture</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -47,17 +47,28 @@
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements &amp; Supported Platforms</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="intro_to_data_collection.html">DFIR ORC Design and Architecture</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="design_principles.html">Design Principles</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">DFIR ORC Architecture</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Architecture</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">DFIR ORC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool_list.html">DFIR ORC Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -66,13 +77,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dfir-orc-architecture">
-<h1>DFIR ORC Architecture<a class="headerlink" href="#dfir-orc-architecture" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="dfir-orc-configuration-process">
-<span id="architecture-config-process"></span><h2>DFIR ORC Configuration Process<a class="headerlink" href="#dfir-orc-configuration-process" title="Permalink to this headline">¶</a></h2>
-<p>The <strong>ultimate objective</strong> of using DFIR ORC is to create a single binary file that will orchestrate complex collection tasks on a system, optionally protect the result with encryption and, finally, upload them to a central collection point (SMB share, BITS server).</p>
+  <div class="section" id="architecture">
+<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configuration-process">
+<span id="architecture-config-process"></span><h2>Configuration Process<a class="headerlink" href="#configuration-process" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>ultimate objective</strong> of using DFIR ORC is to create a single binary file that orchestrates complex collection tasks on a system, optionally protect the result with encryption and, finally, upload them to a central collection point (SMB share, BITS server).</p>
 <p>Compiling the source code for DFIR ORC yields what is called <strong>unconfigured binaries</strong>, typically named <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> and <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x64.exe</span></code>.
-These binaries contain the <a class="reference internal" href="tool_list.html"><span class="doc">embedded specific tools</span></a> developed as part of this project.
+These binaries contain the <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">embedded specific tools</span></a> developed as part of this project.
 However, as explained in <a class="reference internal" href="design_principles.html"><span class="doc">Design Principles</span></a>, the framework is meant to build a single binary, embedding <strong>external</strong> tools and the whole
 list of data to collect. The process of creating such a binary is called <strong>configuring DFIR ORC</strong>. It results in a <strong>configured binary</strong>, typically called <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>.</p>
 <p>The configuration process takes as inputs:</p>
@@ -81,10 +92,10 @@ list of data to collect. The process of creating such a binary is called <strong
 <li><p>a <a class="reference internal" href="wolf_config.html"><span class="doc">WolfLauncher configuration</span></a> defining the collection commands to execute and their expected results,</p></li>
 <li><p>the configuration files needed for the tools (both external and from the pre-embedded suite) to run the commands listed in the WolfLauncher configuration file,</p></li>
 <li><p>an <a class="reference internal" href="ToolEmbed.html"><span class="doc">Embed configuration</span></a> to specify how the files listed above should be embedded in the resulting <em>configured binary</em>,</p></li>
-<li><p>a <strong>Mothership</strong>, typically DFIR-Orc_x86.exe that will be the “base” from which the configured binary is created. The <strong>Mothership</strong> is the first code to run when the configured binary is launched.</p></li>
+<li><p>a <strong>Mothership</strong>, typically <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> that will be the “base” from which the configured binary is created. The Mothership is the first code to run when the configured binary is launched.</p></li>
 </ul>
 <p>Once all these inputs are gathered, running the following <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> command creates a configured binary:</p>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe ToolEmbed /config=Embed.xml /out=MyConfiguredBinary.exe
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe ToolEmbed /config=Embed.xml /out=DFIR-Orc.exe
 </pre></div>
 </div>
 <p>Once the configured binary is created, it is ready for testing and, then, deployment.</p>
@@ -96,60 +107,59 @@ list of data to collect. The process of creating such a binary is called <strong
 present in both configured and unconfigured binaries, and the external tools which only configured binaries can embed.</p>
 <p>In the embedded suite, some tools are basic, such as NTFSUtil or DD, others are more complex, like WolfLauncher.</p>
 <p>Each tool is usable through the configured and unconfigured binaries.
-For instance, <span class="xref std std-doc">NTFSUtil</span> can enumerate the file systems present on the live system, with the command:</p>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe ntfsutil /enumlocs
+For instance, <a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a> can enumerate the file systems present on the live system, with the command:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe NTFSUtil /enumlocs
 </pre></div>
 </div>
-<p>NTFSInfo lists the files and directories of an NTFS volume with the command:</p>
+<p><a class="reference internal" href="NTFSInfo.html"><span class="doc">NTFSInfo</span></a> lists the files and directories of an NTFS volume with the command:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe NTFSInfo /out=<span class="nv">%temp%</span>\test.csv c:\
 </pre></div>
 </div>
-<p>GetThis collects the system’s software hive with:</p>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe GetThis /nolimits /sample=SOFTWARE c:\ /out=<span class="nv">%temp%</span>\hive.7z
+<p><a class="reference internal" href="GetThis.html"><span class="doc">GetThis</span></a> collects the system software hive with:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc_x64.exe GetThis /nolimits /sample=SOFTWARE /out=<span class="nv">%temp%</span>\hive.7z c:\
 </pre></div>
 </div>
-<p>Most tools can be configured for more advanced scenarios (like Yara rules, complex filters or search criteria) with XML configuration files.
-This is documented <a class="reference internal" href="tool_list.html"><span class="doc">here</span></a>.</p>
+<p>Most tools can be configured for more advanced scenarios (like YARA rules, complex filters or search criteria) with XML configuration files.
+The documentation for every embedded tool can be found <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">here</span></a>.</p>
 </div>
-<div class="section" id="dfir-orc-deployment-specific-configuration">
-<h2>DFIR ORC Deployment-specific Configuration<a class="headerlink" href="#dfir-orc-deployment-specific-configuration" title="Permalink to this headline">¶</a></h2>
-<p>Each DFIR ORC deployment requires its own set of parameters and settings suited to the targeted installed base.
+<div class="section" id="deployment-specific-configuration">
+<span id="architecture-deployment-spe-conf"></span><h2>Deployment-specific Configuration<a class="headerlink" href="#deployment-specific-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Each DFIR ORC deployment requires its own set of parameters and settings suited to the targeted installed base (upload method, temporary folder, etc.).
 To adapt a configured binary to these specifics, a <a class="reference internal" href="orc_local_config.html"><span class="doc">local configuration file</span></a> can be used.
 Of course, <a class="reference internal" href="cli_options.html"><span class="doc">command-line options</span></a> also work.</p>
-<p>All these configuration files and options will be evaluated by a configured binary <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> in the following order:</p>
+<p>All these configuration files and options are evaluated by a configured binary, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>, in the following order:</p>
 <img alt="_images/orc_configuration_input.svg" src="_images/orc_configuration_input.svg" /><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Some execution parameters can be overriden at each step of configuration. For instance, <code class="docutils literal notranslate"><span class="pre">temporary</span></code> can be defined in the WolfLauncher configuration, then overriden by the local configuration file and, finally, modified by a command-line switch.</p>
+<p>Some execution parameters can be overridden at each step of the configuration. For instance, <code class="docutils literal notranslate"><span class="pre">temporary</span></code> (which specify the temporary working folder) can be defined in the WolfLauncher configuration, then overridden by the local configuration file and, finally, modified by a command-line switch.</p>
 </div>
 </div>
 <div class="section" id="dfir-orc-execution">
 <span id="architecture-exec"></span><h2>DFIR ORC Execution<a class="headerlink" href="#dfir-orc-execution" title="Permalink to this headline">¶</a></h2>
-<p>As explained in <a class="reference internal" href="platforms.html"><span class="doc">Requirements &amp; Supported Platforms</span></a>, most DFIR ORC collection tasks involving the NTFS Master File Table parser (NTFSInfo, GetThis) require administrative privilege to execute successfully.</p>
+<p>As explained in <a class="reference internal" href="platforms.html"><span class="doc">Requirements</span></a>, most DFIR ORC collection tasks involving the NTFS Master File Table parser (NTFSInfo, GetThis) require administrative privilege to execute successfully.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Administrative privilege is always requested when DFIR ORC is executed. If absent, a UAC elevation prompt may be triggered depending on the system’s configuration.</p>
+<p>Administrative privilege is always requested when DFIR ORC is executed. If absent, a UAC elevation prompt may be triggered depending on the system configuration.</p>
 </div>
 <p>As seen <a class="reference external" href="#dfir-orc-configuration-process">above</a>, the first code to run when a configured binary runs is called the <strong>Mothership</strong>.
 As 64-bit platform can run 32-bit code but not the other way around, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> is the usual choice.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The execution sequence documented below corresponds to the usual configuration, such as the example set originally proposed in <a class="reference external" href="https://github.com/dfir-orc/dfir-orc-config">the GitHub repository</a>. Fiddling with Embed.xml and <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> can change what happens.</p>
+<p>The execution sequence documented below corresponds to the usual configuration, such as the example set originally proposed in <a class="reference external" href="https://github.com/dfir-orc/dfir-orc-config">the GitHub repository</a>. Fiddling with <code class="docutils literal notranslate"><span class="pre">Embed.xml</span></code> and <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> can change what happens.</p>
 </div>
-<p>The goal of a configured binary is to launch a native version of the unconfigured binary with the WolfLauncher argument, to run the
-architecture-appropriate embedded tool WolfLauncher. This latter orchestrates the data collection afterwards.</p>
+<p>The goal of a configured binary is to launch the architecture-appropriate DFIR ORC with the <code class="docutils literal notranslate"><span class="pre">WolfLauncher</span></code> argument. This argument launch an embedded tool, WolfLauncher, that is the command scheduler.</p>
 <div class="section" id="dfir-orc-on-32-bit-systems">
 <h3>DFIR ORC on 32-bit Systems<a class="headerlink" href="#dfir-orc-on-32-bit-systems" title="Permalink to this headline">¶</a></h3>
-<p>On 32-bit systems, the configured binary is “native” to the architecture. Thus, the “Mothership” can simply reexecute itself with the “WolfLauncher” (the collection tasks orchestrator) as shown in the figure below.</p>
-<img alt="_images/orc_execution_x86.svg" src="_images/orc_execution_x86.svg" /><p>Then this process will, in turn, launch the various collection commands required by the WolfLauncher configuration.</p>
-</div>
+<p>On 32-bit systems, the configured binary is “native” to the architecture. Thus, the Mothership (here <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86</span></code>) can simply reexecute itself with the <code class="docutils literal notranslate"><span class="pre">WolfLauncher</span></code> as shown in the figure below.
+Depending on what is specified in the <a class="reference internal" href="wolf_config.html"><span class="doc">WolfLauncher configuration file</span></a>, it will then launch embedded tools and/or external tools to proceed with the data collection.</p>
+<img alt="_images/orc_execution_x86.svg" src="_images/orc_execution_x86.svg" /></div>
 <div class="section" id="dfir-orc-on-64-bit-systems">
 <h3>DFIR ORC on 64-bit Systems<a class="headerlink" href="#dfir-orc-on-64-bit-systems" title="Permalink to this headline">¶</a></h3>
-<p>On 64-bit systems, the “Mothership” not being “native” to these systems, the extraction of <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x64.exe</span></code> is required.
+<p>On 64-bit systems, the Mothership not being “native” to these systems, the extraction of <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x64.exe</span></code> is required.
 It is followed by the execution of <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x64.exe</span> <span class="pre">WolfLauncher</span></code>.
-This process will then execute the various collection tasks as shown in the figure below.</p>
-<img alt="_images/orc_execution_x64.svg" src="_images/orc_execution_x64.svg" /><p>DFIR ORC can lookup and use resources from its parent and grand-parent processes (i.e. the Mothership and/or WolfLauncher).
+Depending on what is specified in the <a class="reference internal" href="wolf_config.html"><span class="doc">WolfLauncher configuration file</span></a>, it will then launch embedded tools and/or external tools to proceed with the data collection.</p>
+<img alt="_images/orc_execution_x64.svg" src="_images/orc_execution_x64.svg" /><p>DFIR ORC can look up and use resources from its parent and grandparent processes (i.e. the Mothership and/or WolfLauncher) without having to extract them.
 This avoids unnecessary file extraction to disk and allows direct use of these resources from the children tasks.
-On 64-bit systems, each collection task being a reexecution of the unconfigured <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x64.exe</span></code>, this is typically used as resources are not available in the subprocesses but only in the Mothership binary as shown in the figure above. On 32-bit systems, each collection task being a reexecution of the Mothership with different arguments, this feature is not typically used.</p>
+This process is typically used for 64-bit systems since resources are not available in the subprocesses but only in the Mothership binary.</p>
 </div>
 </div>
 </div>
@@ -166,7 +176,7 @@ On 64-bit systems, each collection task being a reexecution of the unconfigured 
         
         
         <li class="right" >
-          <a href="configuration.html" title="DFIR ORC Configuration"
+          <a href="configuration.html" title="Configuration"
              >next</a>
           
         
@@ -178,12 +188,19 @@ On 64-bit systems, each collection task being a reexecution of the unconfigured 
           
         
         <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="intro_to_data_collection.html" >DFIR ORC Design and Architecture</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="intro_to_data_collection.html" >Design and Architecture</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.2.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
   </body>
 </html>
