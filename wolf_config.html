@@ -147,22 +147,23 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <li><dl>
 <dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Base file name of the log file. The same patterns can be used as in the archive file names (cf <a class="reference external" href="#the-archive-element">archive element</a>).</p>
 <p>The following patterns will be automatically substituted:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p>{ComputerName}</p></td>
+<tr class="row-even"><td><p>{ComputerName}</p></td>
 <td><p>NetBIOS computer name</p></td>
 </tr>
-<tr class="row-even"><td><p>{FullComputerName}</p></td>
+<tr class="row-odd"><td><p>{FullComputerName}</p></td>
 <td><p>Fully qualified DNS name of physical computer (per GetComputerNameEx())</p></td>
 </tr>
-<tr class="row-odd"><td><p>{TimeStamp}</p></td>
+<tr class="row-even"><td><p>{TimeStamp}</p></td>
 <td><p>The current date and time in the following form: YYYYMMDD_HHMMSS</p></td>
 </tr>
-<tr class="row-even"><td><p>{SystemType}</p></td>
+<tr class="row-odd"><td><p>{SystemType}</p></td>
 <td><p>The Windows edition type running on this computer: WorkStation, Server, DomainController</p></td>
 </tr>
 </tbody>
@@ -231,22 +232,23 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <li><dl>
 <dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Configures the name of the archive</p>
 <p>The following patterns will be automatically substituted:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p>{ComputerName}</p></td>
+<tr class="row-even"><td><p>{ComputerName}</p></td>
 <td><p>NetBIOS computer name</p></td>
 </tr>
-<tr class="row-even"><td><p>{FullComputerName}</p></td>
+<tr class="row-odd"><td><p>{FullComputerName}</p></td>
 <td><p>Fully qualified DNS name of physical computer (per GetComputerNameEx())</p></td>
 </tr>
-<tr class="row-odd"><td><p>{TimeStamp}</p></td>
+<tr class="row-even"><td><p>{TimeStamp}</p></td>
 <td><p>The current date and time in the following form: YYYYMMDD_HHMMSS</p></td>
 </tr>
-<tr class="row-even"><td><p>{SystemType}</p></td>
+<tr class="row-odd"><td><p>{SystemType}</p></td>
 <td><p>The Windows edition type running on this computer: WorkStation, Server, DomainController</p></td>
 </tr>
 </tbody>
