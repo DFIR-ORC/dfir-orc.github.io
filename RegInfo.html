@@ -176,7 +176,7 @@ This allows independence from third party library, permits cross platform and pr
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>When called from the command line, the syntax of RegInfo looks like the following:</p>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe RegInfo /config=reginfo_config.xml /out=reginfo_output.xml
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe RegInfo /config=reginfo_config.xml /out=reginfo_output.csv
 </pre></div>
 </div>
 <div class="section" id="config-path-option">
@@ -229,7 +229,7 @@ A typical RegInfo configuration file looks like:</p>
 <div class="section" id="output-element-out-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#output-element-out-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
-<p>The value must be a directory (already existing or not) in which the tool will generate the results.
+<p>The value must be a directory (already existing or not), a CSV file or a TSV file in which the tool will generate the results.
 This element can also be specified from the command line with the <code class="docutils literal notranslate"><span class="pre">/out</span></code> option. For details on the syntax, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
 <p>Attribute <code class="docutils literal notranslate"><span class="pre">encoding</span></code> allows to specify output encoding. Possible values are <code class="docutils literal notranslate"><span class="pre">UTF8</span></code> or <code class="docutils literal notranslate"><span class="pre">UTF16</span></code> (case-insensitive). Encoding can also be specified with <code class="docutils literal notranslate"><span class="pre">/utf8</span></code> and <code class="docutils literal notranslate"><span class="pre">/utf16</span></code> options.</p>
 </div>
