@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DFIR-ORC Execution Outline &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dfir-orc-execution-outline">
+<h1>DFIR-ORC Execution Outline<a class="headerlink" href="#dfir-orc-execution-outline" title="Permalink to this headline">¶</a></h1>
+<p>The DFIR-ORC Execution Outline (introduced in dfir-orc v10.0.14) is a json file to summarize the dfir-orc execution context:</p>
+<div class="section" id="dfir-orc-binary-executed">
+<h2>DFIR-ORC binary executed<a class="headerlink" href="#dfir-orc-binary-executed" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>version: The schema version of the outline file</p></li>
+<li><p>dfir_orc_id: The identifier of the binary version run</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;dfir-orc&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;dfir_orc_id&quot;: &quot;v10.0.14&quot;,
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="dfir-orc-execution-context">
+<h2>DFIR-ORC execution context<a class="headerlink" href="#dfir-orc-execution-context" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>time: The time of DFIR-ORC execution UTC</p></li>
+<li><p>timestamp: The timestamp replacement string used throughout this DFIR-ORC execution in the following form: YYYYMMDD_HHMMSS (cf <a class="reference internal" href="wolf_config.html"><span class="doc">WolfLauncher configuration</span></a>)</p></li>
+<li><p>command: The command line that started ORC execution</p></li>
+<li><p>output: The configured output directory</p></li>
+<li><p>temp: The configured directory fot temp files</p></li>
+<li><p>archives: The archives collected and their active commands (cf <a class="reference internal" href="configuration.html"><span class="doc">Configuration</span></a>)</p></li>
+<li><p>process: Detailed WolfLauncher process information (command line, environment, user context, …)</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;dfir-orc&quot;: {
+    &quot;time&quot;: &quot;2020-07-31 10:51:20.937&quot;,
+    &quot;timestamp&quot;: &quot;20200731_105120&quot;,
+    &quot;command&quot;: &quot;\&quot;C:\\temp\\dir-orc.exe\&quot;&quot;,
+    &quot;output&quot;: &quot;C:\\temp&quot;,
+    &quot;temp&quot;: &quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\WorkingTemp&quot;,
+    &quot;archives&quot;: [
+        {
+            &quot;keyword&quot;: &quot;ORC_Archive&quot;,
+            &quot;file&quot;: &quot;ORC_WorkStation_Machine_Archive.7z&quot;,
+            &quot;commands&quot;: [
+                ... list of commands run in this archive (by their keyword)
+            ]
+        }
+    ],
+    &quot;process&quot;: {
+        &quot;binary&quot;: &quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\DFIR-Orc_x64.exe&quot;,
+        &quot;syswow64&quot;: false,
+        &quot;command_line&quot;: &quot;\&quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\DFIR-Orc_x64.exe\&quot; WolfLauncher&quot;,
+        &quot;user&quot;: {
+            &quot;username&quot;: &quot;MachineName\\UserName&quot;,
+            &quot;SID&quot;: &quot;S-1-5-21-164153534902-4134548383802-265243332323-1001&quot;,
+            &quot;elevated&quot;: true,
+            &quot;locale&quot;: &quot;en-US&quot;,
+            &quot;language&quot;: &quot;English (United States)&quot;
+        },
+        &quot;environment&quot;: [
+            {
+                &quot;Name&quot;: &quot;COMPUTERNAME&quot;,
+                &quot;Value&quot;: &quot;MachineName&quot;
+            },
+            ...
+        ]
+    },
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="system-s-hardware-and-configuration-information">
+<h2>System’s hardware and configuration information<a class="headerlink" href="#system-s-hardware-and-configuration-information" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>name, fullname: This machine’s names</p></li>
+<li><p>type: This machine’s type (WorkStation, Server, DomainController)</p></li>
+<li><p>architecture: This’s machine architecture (x64, x86)</p></li>
+<li><dl class="simple">
+<dt>operating_system: Detailed information about the operating system currently running DFIR-ORC:</dt><dd><ul>
+<li><p>description</p></li>
+<li><p>version</p></li>
+<li><p>language</p></li>
+<li><p>locale</p></li>
+<li><p>tag</p></li>
+<li><p>time_zone</p></li>
+<li><p>qfe</p></li>
+<li><p>physical_drives</p></li>
+<li><p>mounted_volumes</p></li>
+<li><p>physical_memory</p></li>
+<li><p>cpu</p></li>
+<li><p>network</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;dfir-orc&quot;: {
+    &quot;system&quot;: {
+        &quot;name&quot;: &quot;MachineName&quot;,
+        &quot;fullname&quot;: &quot;MachineName.Domain.com&quot;,
+        &quot;type&quot;: &quot;WorkStation&quot;,
+        &quot;architecture&quot;: &quot;x64&quot;,
+        &quot;operating_system&quot;: {
+            &quot;description&quot;: &quot;Microsoft Windows 10 Enterprise Edition (build 19041), 64-bit&quot;,
+            &quot;version&quot;: &quot;10.0&quot;,
+            &quot;locale&quot;: &quot;en-US&quot;,
+            &quot;language&quot;: &quot;English (United States)&quot;,
+            &quot;tag&quot;: [
+                &quot;OSBuild#19041&quot;,
+                &quot;RTM&quot;,
+                &quot;Release#2004&quot;,
+                &quot;Windows10&quot;,
+                &quot;WorkStation&quot;,
+                &quot;x64&quot;
+            ],
+            &quot;time_zone&quot;: {
+                &quot;daylight&quot;: &quot;Romance Daylight Time&quot;,
+                &quot;daylight_bias&quot;: -60,
+                &quot;standard&quot;: &quot;Romance Standard Time&quot;,
+                &quot;standard_bias&quot;: 0,
+                &quot;current_bias&quot;: -60,
+                &quot;current&quot;: &quot;daylight&quot;
+            },
+            &quot;qfe&quot;: [
+                {
+                    &quot;hotfix_id&quot;: &quot;KB4565627&quot;,
+                    &quot;installed_on&quot;: &quot;7/14/2020&quot;
+                },
+                ...
+            ]
+        },
+        &quot;physical_drives&quot;: [
+            {
+                &quot;path&quot;: &quot;\\\\.\\PHYSICALDRIVE0&quot;,
+                &quot;type&quot;: &quot;Fixed hard disk media&quot;,
+                &quot;serial&quot;: 0,
+                &quot;size&quot;: 512105932800,
+                &quot;status&quot;: &quot;OK&quot;
+            },
+            ...
+        ],
+        &quot;mounted_volumes&quot;: [
+            {
+                &quot;path&quot;: &quot;C:\\&quot;,
+                &quot;label&quot;: &quot;Windows&quot;,
+                &quot;serial&quot;: 3471674564,
+                &quot;file_system&quot;: &quot;NTFS&quot;,
+                &quot;device_id&quot;: &quot;\\\\?\\Volume{214de6b9-8fa1-4b0e-9e83-3b41cdb194f9}\\&quot;,
+                &quot;is_boot&quot;: true,
+                &quot;is_system&quot;: false,
+                &quot;size&quot;: 128178376704,
+                &quot;freespace&quot;: 15089700864,
+                &quot;type&quot;: &quot;Fixed&quot;
+            },
+            ...
+        ],
+        &quot;physical_memory&quot;: {
+            &quot;current_load&quot;: 56,
+            &quot;physical&quot;: 17097428992,
+            &quot;pagefile&quot;: 22244237312,
+            &quot;available_physical&quot;: 7437279232,
+            &quot;available_pagefile&quot;: 8191057920
+        },
+        &quot;cpu&quot;: [
+            {
+                &quot;name&quot;: &quot;Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz&quot;,
+                &quot;description&quot;: &quot;Intel64 Family 6 Model 142 Stepping 10&quot;,
+                &quot;cores&quot;: 4,
+                &quot;enabled_cores&quot;: 4,
+                &quot;logical_processors&quot;: 8
+            }
+        ],
+        &quot;network&quot;: {
+            &quot;adapter&quot;: [
+                {
+                    &quot;name&quot;: &quot;{AB41C39A-E91B-4DA1-B697-74FF38F4BEA0}&quot;,
+                    &quot;friendly_name&quot;: &quot;Wi-Fi&quot;,
+                    &quot;description&quot;: &quot;Marvell AVASTAR Wireless-AC Network Controller&quot;,
+                    &quot;physical&quot;: &quot;F0-6E-B-CF-9D-56&quot;,
+                    &quot;dns_suffix&quot;: &quot;home&quot;,
+                    &quot;address&quot;: [
+                        {
+                            &quot;ipv6&quot;: &quot;2a01:cb04:119:5600:b475:1fbb:8110:8dd1&quot;,
+                            &quot;mode&quot;: &quot;unicast&quot;
+                        },
+                        {
+                            &quot;ipv6&quot;: &quot;2a01:cb04:119:5600:d77:2a0:bdd8:6835&quot;,
+                            &quot;mode&quot;: &quot;unicast&quot;
+                        },
+                        {
+                            &quot;ipv6&quot;: &quot;fe80::b475:1fbb:8110:8dd1%22&quot;,
+                            &quot;mode&quot;: &quot;unicast&quot;
+                        },
+                        {
+                            &quot;ipv4&quot;: &quot;192.168.1.46&quot;,
+                            &quot;mode&quot;: &quot;unicast&quot;
+                        }
+                    ],
+                    &quot;dns_server&quot;: [
+                        {
+                            &quot;ipv6&quot;: &quot;fe80::a21b:29ff:feff:4300%22&quot;
+                        },
+                        {
+                            &quot;ipv4&quot;: &quot;192.168.1.1&quot;
+                        }
+                    ]
+                },
+                ...
+            ]
+        }
+    }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="user-profile-information">
+<h2>User Profile information<a class="headerlink" href="#user-profile-information" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>default_profile: The default profile location</p></li>
+<li><p>profiles_directory: The directory where user profiles ares created by default</p></li>
+<li><p>program_data: ProgramData location</p></li>
+<li><p>public_path: Public file libraries</p></li>
+<li><dl class="simple">
+<dt>profiles: List of currently system’s known profiles (per HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindows NTCurrentVersionProfileList)</dt><dd><ul>
+<li><p>sid</p></li>
+<li><p>path</p></li>
+<li><p>user: resolved user name</p></li>
+<li><p>key_last_write</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;dfir-orc&quot;: {
+    &quot;profile_list&quot;: {
+        &quot;default_profile&quot;: &quot;C:\\Users\\Default&quot;,
+        &quot;profiles_directory&quot;: &quot;C:\\Users&quot;,
+        &quot;program_data&quot;: &quot;C:\\ProgramData&quot;,
+        &quot;public_path&quot;: &quot;C:\\Users\\Public&quot;,
+        &quot;profile&quot;: [
+            {
+                &quot;sid&quot;: &quot;S-1-5-18&quot;,
+                &quot;path&quot;: &quot;C:\\WINDOWS\\system32\\config\\systemprofile&quot;,
+                &quot;user&quot;: &quot;NT AUTHORITY\\SYSTEM&quot;,
+                &quot;key_last_write&quot;: &quot;2019-12-07 09:17:27.256&quot;
+            },
+            {
+                &quot;sid&quot;: &quot;S-1-5-19&quot;,
+                &quot;path&quot;: &quot;C:\\WINDOWS\\ServiceProfiles\\LocalService&quot;,
+                &quot;user&quot;: &quot;NT AUTHORITY\\LOCAL SERVICE&quot;,
+                &quot;key_last_write&quot;: &quot;2019-12-07 09:17:27.256&quot;
+            },
+            {
+                &quot;sid&quot;: &quot;S-1-5-20&quot;,
+                &quot;path&quot;: &quot;C:\\WINDOWS\\ServiceProfiles\\NetworkService&quot;,
+                &quot;user&quot;: &quot;NT AUTHORITY\\NETWORK SERVICE&quot;,
+                &quot;key_last_write&quot;: &quot;2019-12-07 09:17:27.256&quot;
+            },
+            {
+                &quot;sid&quot;: &quot;S-1-5-21-16443543502-41343243243202-264324343432-1001&quot;,
+                &quot;path&quot;: &quot;C:\\Users\\UserName&quot;,
+                &quot;user&quot;: &quot;MachineName\\UserName&quot;,
+                &quot;local_load_time&quot;: &quot;2020-07-26 15:42:47.209&quot;,
+                &quot;local_unload_time&quot;: &quot;2020-07-25 19:06:05.433&quot;,
+                &quot;key_last_write&quot;: &quot;2020-07-26 15:42:47.209&quot;
+            },
+            ...
+        ]
+    }
+}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

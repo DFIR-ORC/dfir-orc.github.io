@@ -192,7 +192,7 @@ A typical XML configuration file looks like the following:
     <fastfind version="Test 2.0">
         <filesystem>
             <location shadows="yes">%SystemDrive%</location>
-            <yara source=yara.rules block="2M" timeout="120" overlap="8192" scan_method="filemapping" />
+            <yara source="yara.rules" block="2M" timeout="120" overlap="8192" scan_method="filemapping" />
             <ntfs_find size="694160" md5="1CECAFE147F1CC3E2B9804B8CDA593C9"/>
             <ntfs_find name="ntdll.dll" yara_rule="is_dll"/>
             <ntfs_find name_match="gdi*.dll"/>

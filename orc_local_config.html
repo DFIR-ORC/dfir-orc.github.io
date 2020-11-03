@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DFIR ORC Local Configuration File &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Embedded Tool Suite" href="embedded_tool_suite.html" />
@@ -234,12 +235,12 @@ More information on power states: <a class="reference external" href="https://do
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>include</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, which determines that an output archive from <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> will be uploaded to the specified location. When <code class="docutils literal notranslate"><span class="pre">include</span></code> is not present, all archives are uploaded, if not explicitly excluded (see below). When <code class="docutils literal notranslate"><span class="pre">include</span></code> is specified, only archives whose name matches one of the patterns will be uploaded.</p>
+<dt><strong>include</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, that determine whether an output archive from <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> will be uploaded to the specified location. When missing, all archives are uploaded (if not explicitly excluded, see below). When specified, only archives whose name matches one of the patterns will be uploaded.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>exclude</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, which determines that an output archive should not be uploaded. When excluded, an output archive is left intact in the output directory (i.e. regardless of the <code class="docutils literal notranslate"><span class="pre">operation</span></code> attribute). The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> attribute takes precedence over the <code class="docutils literal notranslate"><span class="pre">include</span></code> attribute, meaning an archive whose name matches both <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">exclude</span></code> patterns will be excluded.</p>
+<dt><strong>exclude</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, that determine whether an output archive should not be uploaded. When excluded, an output archive is left intact in the output directory (i.e. regardless of the <code class="docutils literal notranslate"><span class="pre">operation</span></code> attribute). The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> attribute takes precedence over the <code class="docutils literal notranslate"><span class="pre">include</span></code> attribute, meaning an archive whose name matches both <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">exclude</span></code> patterns will be excluded.</p>
 </dd>
 </dl>
 </li>
@@ -346,6 +347,7 @@ The <code class="docutils literal notranslate"><span class="pre">disable_key</sp
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>

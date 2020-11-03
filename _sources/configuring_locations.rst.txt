@@ -34,6 +34,12 @@ A location is an access path to a specific NTFS volume. Typically, an access pat
 
     * ``MyImage.dd``.
 
+* an environment variable or a dynamic variable, such as
+
+    * ``%SYSTEMDRIVE%``
+
+    * ``{UserProfiles``}
+
 Paths, file names and namespaces notations are `documented on the MSDN <https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file>`_.
     
 .. note:: When using the drive letter notation, a specific folder inside the volume can also be specified. This will cause the tools to collect information recursively only for entries that are subentities of the selected folders (the selected folder is excluded).
@@ -84,6 +90,7 @@ Locations are simply added using full path names:
     <location>C:\Windows</location>
     <location>D:\MyFiles</location>
     <location>G:\Documents</location>
+    <location>{UserProfiles}\Downloads</location>
 
 File System Entries are enumerated recursively for the specified locations.
 
@@ -269,6 +276,27 @@ or when using the XML configuration file:
 .. code:: xml
 
     <location>d:\temp\$MFT_data</location>
+
+
+Location variables
+------------------
+
+Environment variables (ex: ``SYSTEMROOT``) are resolved when executing DFIR-Orc.
+
+The syntax is as follows:
+
+.. code:: xml
+
+    <location>%SYSTEMROOT%</location>
+
+DFIR-Orc can also define some dynamic variable like ``UserProfiles``.
+
+.. code:: xml
+
+    <location>{UserProfiles}\Downloads</location>
+
+* ``UserProfiles``: This variable will be expanded to the paths stored in ``HKLM/SOFTWARE/Microsoft/Windows NT/CurrentVersion/ProfileList``. Once expanded it will have the same behavior as with multiple `<Location>...` for each a user profile directory.
+
 
 Usage
 =====

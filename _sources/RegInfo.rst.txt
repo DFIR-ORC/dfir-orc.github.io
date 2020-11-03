@@ -69,7 +69,7 @@ When called from the command line, the syntax of RegInfo looks like the followin
 
 .. code:: bat
 
-    DFIR-Orc.exe RegInfo /config=reginfo_config.xml /out=reginfo_output.xml
+    DFIR-Orc.exe RegInfo /config=reginfo_config.xml /out=reginfo_output.csv
 
 ``/config=<Path>`` Option
 -------------------------
@@ -127,7 +127,7 @@ Root element.
 
 *optional=no, default=N/A*
 
-The value must be a directory (already existing or not) in which the tool will generate the results.
+The value must be a directory (already existing or not), a CSV file or a TSV file in which the tool will generate the results.
 This element can also be specified from the command line with the ``/out`` option. For details on the syntax, please refer to the :doc:`output documentation <configuring_tool_output>`.
 
 Attribute ``encoding`` allows to specify output encoding. Possible values are ``UTF8`` or ``UTF16`` (case-insensitive). Encoding can also be specified with ``/utf8`` and ``/utf16`` options.

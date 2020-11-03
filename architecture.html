@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Architecture &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Configuration" href="configuration.html" />
@@ -83,7 +84,7 @@
 <span id="architecture-config-process"></span><h2>Configuration Process<a class="headerlink" href="#configuration-process" title="Permalink to this headline">¶</a></h2>
 <p>The <strong>ultimate objective</strong> of using DFIR ORC is to create a single binary file that orchestrates complex collection tasks on a system, optionally protect the result with encryption and, finally, upload them to a central collection point (SMB share, BITS server).</p>
 <p>Compiling the source code for DFIR ORC yields what is called <strong>unconfigured binaries</strong>, typically named <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> and <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x64.exe</span></code>.
-These binaries contain the <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">embedded specific tools</span></a> developed as part of this project.
+These binaries contain the <span class="xref std std-doc">embedded specific tools</span> developed as part of this project.
 However, as explained in <a class="reference internal" href="design_principles.html"><span class="doc">Design Principles</span></a>, the framework is meant to build a single binary, embedding <strong>external</strong> tools and the whole
 list of data to collect. The process of creating such a binary is called <strong>configuring DFIR ORC</strong>. It results in a <strong>configured binary</strong>, typically called <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>.</p>
 <p>The configuration process takes as inputs:</p>
@@ -120,7 +121,7 @@ For instance, <a class="reference internal" href="NTFSUtil.html"><span class="do
 </pre></div>
 </div>
 <p>Most tools can be configured for more advanced scenarios (like YARA rules, complex filters or search criteria) with XML configuration files.
-The documentation for every embedded tool can be found <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">here</span></a>.</p>
+The documentation for every embedded tool can be found <span class="xref std std-doc">here</span>.</p>
 </div>
 <div class="section" id="deployment-specific-configuration">
 <span id="architecture-deployment-spe-conf"></span><h2>Deployment-specific Configuration<a class="headerlink" href="#deployment-specific-configuration" title="Permalink to this headline">¶</a></h2>
@@ -165,6 +166,7 @@ This process is typically used for 64-bit systems since resources are not availa
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>

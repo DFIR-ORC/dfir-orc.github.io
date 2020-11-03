@@ -38,10 +38,10 @@ The first step is to define your data collection goals, to choose appropriate to
 
 * What data do you need to collect?
 
-    * File system related data (file lists, hashes, file signatures, …)
+    * File system related data (file lists, hashes, file signatures, ...)
     * Registry
     * Live data: processes, network communications, kernel objects,
-    * System configuration (network, ASEPs, …)
+    * System configuration (network, ASEPs, ...)
     * Logs, events
 
 * What are the target platforms?
@@ -68,15 +68,15 @@ Next, you need to define and assemble the set of tools required to collect this 
 
 * From third parties:
 
-    * SysInternals Tools Suite (autoruns, …),
+    * SysInternals Tools Suite (autoruns, ...),
     * Tcpdump,
-    * …
+    * ...
 
 The flexibility allowed by the configuration enables to consider tuning tools which:
 
     * only run on specific Windows version or architecture,
     * have different output or command line arguments on specific Windows versions,
-    * require files to be available (configurations, dependencies, …) upon execution.
+    * require files to be available (configurations, dependencies, ...) upon execution.
 
 A Configurable Framework
 ------------------------

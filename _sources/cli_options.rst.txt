@@ -55,7 +55,7 @@ An example of the output for this command is shown below.
 .. code:: bat
 
     .\DFIR-Orc.exe /Keys
-    
+
     DFIR-Orc Version 10.0.2.000
 
     Start time            : 10/22/2019 09:07:07.956 (UTC)

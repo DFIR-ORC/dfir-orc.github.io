@@ -224,8 +224,8 @@ The available criteria for FatInfo column filters are
 
 * **HasVersionInfo:** if file has a VERSION_INFO resource
 * **HasPE:** if file has a valid PE header
-* **ExtBinary:** if file has an executable extension (like .exe, .dll, .scr, .sys, …)
-* **ExtArchive:** if the file has a archive extension (like .zip, .cab, …)
+* **ExtBinary:** if file has an executable extension (like .exe, .dll, .scr, .sys, ...)
+* **ExtArchive:** if the file has a archive extension (like .zip, .cab, ...)
 * **Ext=.Ext1,.Ext2,...:** if file has extension in .Ext1,.Ext2,...
 * **SizeLT=<Size>, SizeGT=<Size>:** if file is smaller or bigger than a specified size. Note that size can be expressed in KB (i.e. SizeGT=25K...) or in MB (i.e. SizeLT=5M etc...).
 

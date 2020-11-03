@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WolfLauncher Configuration File &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ToolEmbed" href="ToolEmbed.html" />
@@ -89,6 +90,7 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <div class="line">&lt;<a class="reference external" href="#wolf-element">wolf</a> attributes=”…” &gt;</div>
 <div class="line-block">
 <div class="line">&lt;<a class="reference external" href="#log-element">log</a> attributes=”…” &gt; <em>value</em> &lt;/log&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#outline-element">outline</a> attributes=”…” &gt; &gt; <em>value</em> &lt;/outline&gt;</div>
 <div class="line">&lt;<a class="reference external" href="#recipient-element">recipient</a> attributes=”…”&gt; <em>value</em> &lt;/recipient&gt;</div>
 <div class="line">&lt;<a class="reference external" href="#the-archive-element">archive</a> attributes=”…”&gt;</div>
 <div class="line-block">
@@ -191,12 +193,66 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
 </div>
 </div>
+<div class="section" id="outline-element">
+<h2><code class="docutils literal notranslate"><span class="pre">outline</span></code> Element<a class="headerlink" href="#outline-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=no outline file</em>, <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The <a class="reference internal" href="outline.html"><span class="doc">outline</span></a> element can be used to create an optional json file of DFIR ORC execution’s context. This file will also be uploaded if an &lt;upload/&gt; element is specified in a <a class="reference internal" href="orc_local_config.html"><span class="doc">DFIR ORC local configuration file</span></a>.</p>
+<div class="section" id="id7">
+<h3>Attributes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl>
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Base file name of the outline file. The same patterns can be used as in the archive file names (cf <a class="reference external" href="#the-archive-element">archive element</a>).</p>
+<p>The following patterns will be automatically substituted:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{ComputerName}</p></td>
+<td><p>NetBIOS computer name</p></td>
+</tr>
+<tr class="row-odd"><td><p>{FullComputerName}</p></td>
+<td><p>Fully qualified DNS name of physical computer (per GetComputerNameEx())</p></td>
+</tr>
+<tr class="row-even"><td><p>{TimeStamp}</p></td>
+<td><p>The current date and time in the following form: YYYYMMDD_HHMMSS</p></td>
+</tr>
+<tr class="row-odd"><td><p>{SystemType}</p></td>
+<td><p>The Windows edition type running on this computer: WorkStation, Server, DomainController</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>disposition</strong> <em>(optional=yes, default=append)</em></dt><dd><p>Specifies if the outline file should:</p>
+<ul class="simple">
+<li><p>be appended to an existing file -&gt; use “append”</p></li>
+<li><p>be created as a new file (and logging should fail if file exists) -&gt; use “create_new”</p></li>
+<li><p>truncate any existing file or create a new file -&gt; use “truncate”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>Example<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outline</span> <span class="na">disposition=</span><span class="s">&#39;truncate&#39;</span> <span class="nt">&gt;</span>DFIR-ORC\_{SystemType}_{ComputerName}.json<span class="nt">&lt;/outline&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</div>
+</div>
 <div class="section" id="recipient-element">
 <span id="wolf-config-recipient-element"></span><h2><code class="docutils literal notranslate"><span class="pre">recipient</span></code> Element<a class="headerlink" href="#recipient-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
 <p>The recipient element is used to create the list of recipients able to open the CMS enveloped archives. It basically consists of a list of encoded certificates.</p>
-<div class="section" id="id7">
-<h3>Attributes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Attributes<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Name of the recipient</p>
@@ -210,8 +266,8 @@ Its point is to be exhaustive from the point of view of existing usable elements
 </li>
 </ul>
 </div>
-<div class="section" id="id8">
-<h3>Example<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h3>Example<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;recipient</span> <span class="na">name=</span><span class="s">&#39;certfr&#39;</span> <span class="na">archive=</span><span class="s">&#39;*&#39;</span> <span class="nt">&gt;</span>
   -----BEGIN CERTIFICATE-----
     ... value ...
@@ -223,11 +279,11 @@ Its point is to be exhaustive from the point of view of existing usable elements
 </div>
 </div>
 <div class="section" id="wolf-config-archive-element">
-<span id="the-archive-element"></span><span id="id10"></span><h2><code class="docutils literal notranslate"><span class="pre">archive</span></code> Element<a class="headerlink" href="#wolf-config-archive-element" title="Permalink to this headline">¶</a></h2>
+<span id="the-archive-element"></span><span id="id15"></span><h2><code class="docutils literal notranslate"><span class="pre">archive</span></code> Element<a class="headerlink" href="#wolf-config-archive-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=no, default=N/A,</em> <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
 <p>The archive element specifies the archives to be created during the execution of <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">WolfLauncher</span></code>.</p>
-<div class="section" id="id12">
-<h3>Attributes<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h3>Attributes<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><dl>
 <dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Configures the name of the archive</p>
@@ -307,8 +363,8 @@ Its point is to be exhaustive from the point of view of existing usable elements
 </li>
 </ul>
 </div>
-<div class="section" id="id13">
-<h3>Example<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h3>Example<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&#39;Quick\_{ComputerName}.7z&#39;</span> <span class="na">keyword=</span><span class="s">&#39;Basic&#39;</span> <span class="na">concurrency=</span><span class="s">&#39;2&#39;</span> <span class="na">repeat=</span><span class="s">&#39;Overwrite&#39;</span> <span class="nt">&gt;</span>
   <span class="nt">&lt;restrictions</span> <span class="na">JobMemoryLimit=</span><span class="s">&#39;3G&#39;</span> <span class="na">JobCPULimit=</span><span class="s">&#39;30&#39;</span> <span class="na">ProcessMemoryLimit=</span><span class="s">&#39;1G&#39;</span>
       <span class="na">ElapsedTimeLimit=</span><span class="s">&#39;360&#39;</span> <span class="na">ProcessCPULimit=</span><span class="s">&#39;10&#39;</span> <span class="nt">/&gt;</span>
@@ -323,8 +379,8 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <h2><code class="docutils literal notranslate"><span class="pre">restrictions</span></code> Element<a class="headerlink" href="#restrictions-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
 <p>This element configures the Windows job controlling the execution of subprocesses. Limits are set to the resources processes can consume. When a limit is reached, all remaining processes in the job will be terminated and the available output files will be collected into the archive.</p>
-<div class="section" id="id16">
-<h3>Attributes<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id21">
+<h3>Attributes<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt><strong>JobMemoryLimit</strong> <em>(optional=yes, default=unlimited)</em></dt><dd><p>Memory limit (working set) which the processes created can collectively commit. Can be expressed with multipliers (K,M,G). Example 3G for 3GB.</p>
@@ -353,8 +409,8 @@ Its point is to be exhaustive from the point of view of existing usable elements
 </li>
 </ul>
 </div>
-<div class="section" id="id17">
-<h3>Example<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id22">
+<h3>Example<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;restrictions</span> <span class="na">JobMemoryLimit=</span><span class="s">&quot;3G&quot;</span> <span class="na">ProcessMemoryLimit=</span><span class="s">&quot;2G&quot;</span> <span class="na">ElapsedTimeLimit=</span><span class="s">&quot;360&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
@@ -370,8 +426,8 @@ Its point is to be exhaustive from the point of view of existing usable elements
 <li><p>the arguments passed to the command line, and</p></li>
 <li><p>the output expected upon completion of the task.</p></li>
 </ul>
-<div class="section" id="id19">
-<h3>Attributes<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id24">
+<h3>Attributes<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><dl class="simple">
 <dt><strong>keyword</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Uniquely identifies this task in the archive</p>
@@ -418,8 +474,8 @@ The available values for this attribute are:</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id20">
-<h3>Example<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id25">
+<h3>Example<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span> <span class="na">keyword=</span><span class="s">&#39;NTFSInfo&#39;</span>  <span class="na">queue=</span><span class="s">&#39;flush&#39;</span><span class="nt">&gt;</span>
           <span class="nt">&lt;execute</span> <span class="na">name=</span><span class="s">&#39;DFIR-Orc.exe&#39;</span> <span class="na">run=</span><span class="s">&#39;self:#NTFSInfo&#39;</span> <span class="nt">/&gt;</span>
           <span class="nt">&lt;argument&gt;</span>/config=res:#ntfsinfo_basic<span class="nt">&lt;/argument&gt;</span>
@@ -443,8 +499,8 @@ If not, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.ex
 <p>Similarly, on 32-bit platforms, the run32 attribute is evaluated first and used if available.
 If not, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">WolfLauncher</span></code> evaluates the run attribute.
 Attributes named run, run32 and run64 can use the <a class="reference internal" href="resources.html"><span class="doc">resource syntax</span></a> or directly reference a file on the live system (environment variables are expanded).</p>
-<div class="section" id="id22">
-<h3>Attributes<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id27">
+<h3>Attributes<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Provides the name of a temporary file to be extracted (if need be)</p>
@@ -468,8 +524,8 @@ Attributes named run, run32 and run64 can use the <a class="reference internal" 
 </li>
 </ul>
 </div>
-<div class="section" id="id23">
-<h3>Example<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id28">
+<h3>Example<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;execute</span> <span class="na">name=</span><span class="s">&#39;ipconfig.exe&#39;</span> <span class="na">run=</span><span class="s">&#39;%windir%\System32\ipconfig.exe&#39;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
@@ -481,8 +537,8 @@ Attributes named run, run32 and run64 can use the <a class="reference internal" 
 <p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
 <p>Configures the files on which the execution depends (typically a configuration file or input file).
 Command-line arguments can be passed to a tool using the argument attribute.</p>
-<div class="section" id="id26">
-<h3>Attributes<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id31">
+<h3>Attributes<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Name of the extracted file</p>
@@ -501,8 +557,8 @@ Command-line arguments can be passed to a tool using the argument attribute.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id27">
-<h3>Example<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id32">
+<h3>Example<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;input</span>  <span class="na">name=</span><span class="s">&#39;NTFSInfo_Config.xml&#39;</span> <span class="na">source=</span><span class="s">&#39;res:#NTFSINFO_Config&#39;</span>
   <span class="na">argument=</span><span class="s">&#39;/config={FileName}&#39;</span> <span class="nt">/&gt;</span>
 </pre></div>
@@ -515,8 +571,8 @@ Command-line arguments can be passed to a tool using the argument attribute.</p>
 <p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
 <p>Configures the outputs of the command execution.
 Command-line arguments to further specify the output can be passed to a tool using the argument attribute.</p>
-<div class="section" id="id30">
-<h3>Attributes<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id35">
+<h3>Attributes<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>This is the file name (relative to the temp dir) of the expected output of the execution</p>
@@ -564,12 +620,12 @@ Command-line arguments to further specify the output can be passed to a tool usi
 <span id="anchor-argument"></span><h2><code class="docutils literal notranslate"><span class="pre">argument</span></code> Element<a class="headerlink" href="#argument-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
 <p>This element will add an argument to the command line of the executed command.</p>
-<div class="section" id="id33">
-<h3>Attributes<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id38">
+<h3>Attributes<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h3>
 <p>None</p>
 </div>
-<div class="section" id="id34">
-<h3>Example<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id39">
+<h3>Example<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;argument&gt;</span>/config=MyConfig.xml /verbose<span class="nt">&lt;/argument&gt;</span>
 </pre></div>
 </div>
@@ -579,6 +635,7 @@ Command-line arguments to further specify the output can be passed to a tool usi
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>

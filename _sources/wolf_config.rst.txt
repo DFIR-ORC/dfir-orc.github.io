@@ -15,6 +15,7 @@ Its point is to be exhaustive from the point of view of existing usable elements
 
 | <`wolf <#wolf-element>`_ attributes="..." >
 |    <`log <#log-element>`_ attributes="..." > *value* </log>
+|    <`outline <#outline-element>`_ attributes="..." > > *value* </outline>
 |    <`recipient <#recipient-element>`_ attributes="..."> *value* </recipient>
 |    <`archive <#the-archive-element>`_ attributes="...">
 |        <`restrictions <#restrictions-element>`_ attributes="..." />
@@ -59,19 +60,22 @@ Attributes
 The log element can be used to create an optional log file of DFIR ORC execution. This file will be uploaded if an <upload/> element is specified in a :doc:`DFIR ORC local configuration file <orc_local_config>`.
 
 Attributes
------------
+----------
 
 * **name** *(optional=no, default=N/A)*
         Base file name of the log file. The same patterns can be used as in the archive file names (cf `archive element <#the-archive-element>`_).
 
         The following patterns will be automatically substituted:
 
-        .. csv-table::
+        ..  csv-table:: 
+            :header: Pattern, Description
+            :align: left
+            :widths: auto
 
-                {ComputerName}, NetBIOS computer name
-                {FullComputerName},Fully qualified DNS name of physical computer (per GetComputerNameEx())
-                {TimeStamp}, The current date and time in the following form: YYYYMMDD_HHMMSS
-                {SystemType},"The Windows edition type running on this computer: WorkStation, Server, DomainController"
+            {ComputerName}, NetBIOS computer name
+            {FullComputerName},Fully qualified DNS name of physical computer (per GetComputerNameEx())
+            {TimeStamp}, The current date and time in the following form: YYYYMMDD_HHMMSS
+            {SystemType},"The Windows edition type running on this computer: WorkStation, Server, DomainController"
 
 * **disposition** *(optional=yes, default=append)*
         Specifies if the log file should:
@@ -86,6 +90,47 @@ Example
 .. code:: xml
 
   <log disposition='truncate' >DFIR-ORC\_{SystemType}_{ComputerName}.log</log>
+
+`Back to Root <#anchor-root>`_
+
+``outline`` Element
+===================
+
+*optional=yes, default=no outline file*, `parent element: wolf <#wolf-element>`_
+
+The :doc:`outline <outline>` element can be used to create an optional json file of DFIR ORC execution's context. This file will also be uploaded if an <upload/> element is specified in a :doc:`DFIR ORC local configuration file <orc_local_config>`.
+
+Attributes
+----------
+
+* **name** *(optional=no, default=N/A)*
+        Base file name of the outline file. The same patterns can be used as in the archive file names (cf `archive element <#the-archive-element>`_).
+
+        The following patterns will be automatically substituted:
+
+        ..  csv-table::
+            :header: Pattern, Description
+            :align: left
+            :widths: auto
+
+            {ComputerName}, NetBIOS computer name
+            {FullComputerName},Fully qualified DNS name of physical computer (per GetComputerNameEx())
+            {TimeStamp}, The current date and time in the following form: YYYYMMDD_HHMMSS
+            {SystemType},"The Windows edition type running on this computer: WorkStation, Server, DomainController"
+
+* **disposition** *(optional=yes, default=append)*
+        Specifies if the outline file should:
+
+        * be appended to an existing file -> use "append"
+        * be created as a new file (and logging should fail if file exists) -> use "create_new"
+        * truncate any existing file or create a new file -> use "truncate"
+
+Example
+--------
+
+.. code:: xml
+
+  <outline disposition='truncate' >DFIR-ORC\_{SystemType}_{ComputerName}.json</outline>
 
 `Back to Root <#anchor-root>`_
 
@@ -139,12 +184,15 @@ Attributes
 
         The following patterns will be automatically substituted:
 
-        .. csv-table::
-
-                {ComputerName}, NetBIOS computer name
-                {FullComputerName},Fully qualified DNS name of physical computer (per GetComputerNameEx())
-                {TimeStamp}, The current date and time in the following form: YYYYMMDD_HHMMSS
-                {SystemType},"The Windows edition type running on this computer: WorkStation, Server, DomainController"
+        ..  csv-table::
+            :header: Pattern, Description
+            :align: left
+            :widths: auto
+    
+            {ComputerName}, NetBIOS computer name
+            {FullComputerName},Fully qualified DNS name of physical computer (per GetComputerNameEx())
+            {TimeStamp}, The current date and time in the following form: YYYYMMDD_HHMMSS
+            {SystemType},"The Windows edition type running on this computer: WorkStation, Server, DomainController"
 
 * **keyword** *(optional=no, default=N/A)*
         Uniquely identifies this archive

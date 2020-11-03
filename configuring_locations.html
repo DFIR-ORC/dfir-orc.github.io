@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Configuring Locations &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Configuring the Yara Scanner" href="configuring_yara.html" />
@@ -131,6 +132,14 @@
 </ul>
 </div></blockquote>
 </li>
+<li><p>an environment variable or a dynamic variable, such as</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%SYSTEMDRIVE%</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{UserProfiles</span></code>}</p></li>
+</ul>
+</div></blockquote>
+</li>
 </ul>
 <p>Paths, file names and namespaces notations are <a class="reference external" href="https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file">documented on the MSDN</a>.</p>
 <div class="admonition note">
@@ -167,6 +176,7 @@ Possible location attributes documented below such as <code class="docutils lite
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>C:\Windows<span class="nt">&lt;/location&gt;</span>
 <span class="nt">&lt;location&gt;</span>D:\MyFiles<span class="nt">&lt;/location&gt;</span>
 <span class="nt">&lt;location&gt;</span>G:\Documents<span class="nt">&lt;/location&gt;</span>
+<span class="nt">&lt;location&gt;</span>{UserProfiles}\Downloads<span class="nt">&lt;/location&gt;</span>
 </pre></div>
 </div>
 <p>File System Entries are enumerated recursively for the specified locations.</p>
@@ -306,6 +316,21 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>d:\temp\$MFT_data<span class="nt">&lt;/location&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="location-variables">
+<h3>Location variables<a class="headerlink" href="#location-variables" title="Permalink to this headline">¶</a></h3>
+<p>Environment variables (ex: <code class="docutils literal notranslate"><span class="pre">SYSTEMROOT</span></code>) are resolved when executing DFIR-Orc.</p>
+<p>The syntax is as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>%SYSTEMROOT%<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>DFIR-Orc can also define some dynamic variable like <code class="docutils literal notranslate"><span class="pre">UserProfiles</span></code>.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>{UserProfiles}\Downloads<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UserProfiles</span></code>: This variable will be expanded to the paths stored in <code class="docutils literal notranslate"><span class="pre">HKLM/SOFTWARE/Microsoft/Windows</span> <span class="pre">NT/CurrentVersion/ProfileList</span></code>. Once expanded it will have the same behavior as with multiple <cite>&lt;Location&gt;…</cite> for each a user profile directory.</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="usage">
@@ -459,6 +484,7 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>

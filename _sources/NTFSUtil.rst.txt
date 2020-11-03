@@ -544,3 +544,66 @@ It takes as argument the drive name.
 
 
 Explanations related to the warning can be found in the paragraph :ref:`NTFSUtil-enumlocs`.
+
+``/bitlocker`` Option
+---------------
+
+This option displays information about the meta data location (incl. protectors) on mounted BitLocker volumes or images.
+
+Two syntaxes for this command:
+* online: 
+.. code:: bat
+
+     .\DFIR-Orc.exe NTFSUtil /bitlocker
+
+    The result of the command looks like:
+
+    .. code:: bat
+        BitLocker locations:
+
+                \\.\PHYSICALDRIVE0,offset=129256914944,size=380912008704,sector=512
+                        SectorSize: 512
+                        Metadata offset[0]: 0x4d00000
+                        Metadata   size[0]: 65536
+                        Metadata offset[1]: 0x44d00000
+                        Metadata   size[1]: 65536
+                        Metadata offset[2]: 0x84d00000
+                        Metadata   size[2]: 65536
+
+                \\.\PHYSICALDRIVE0,offset=407896064,size=128849018368,sector=512
+                        SectorSize: 512
+                        Metadata offset[0]: 0x30bb24000
+                        Metadata   size[0]: 65536
+                        Metadata offset[1]: 0x30bb34000
+                        Metadata   size[1]: 65536
+                        Metadata offset[2]: 0x30bb44000
+                        Metadata   size[2]: 65536
+
+                \\.\PHYSICALDRIVE1,offset=33554432,size=393836756992,sector=512
+                        SectorSize: 512
+                        Metadata offset[0]: 0x4e00000
+                        Metadata   size[0]: 65536
+                        Metadata offset[1]: 0x44e00000
+                        Metadata   size[1]: 65536
+                        Metadata offset[2]: 0x84e00000
+                        Metadata   size[2]: 65536
+
+* offline:
+.. code:: bat
+
+     .\DFIR-Orc.exe NTFSUtil /bitlocker F:\BitLocker.vhd,offset=16777216"
+    
+
+    The result of the command looks like:
+
+    .. code:: bat
+        BitLocker locations:
+
+                F:\Hyper-V\Virtual Hard Disks\BitLocker.vhd,offset=16777216
+                        SectorSize: 512
+                        Metadata offset[0]: 0x2200000
+                        Metadata   size[0]: 65536
+                        Metadata offset[1]: 0x9200000
+                        Metadata   size[1]: 65536
+                        Metadata offset[2]: 0x10200000
+                        Metadata   size[2]: 65536
