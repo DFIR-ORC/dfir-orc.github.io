@@ -566,36 +566,67 @@ WARNING (Fonction incorrecte, hr=0x80070001): IOCTL_STORAGE_QUERY_PROPERTY does 
 <div class="section" id="bitlocker-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/bitlocker</span></code> Option<a class="headerlink" href="#bitlocker-option" title="Permalink to this headline">¶</a></h3>
 <p>This option displays information about the meta data location (incl. protectors) on mounted BitLocker volumes or images.</p>
-<p>Two syntaxes for this command:
-* online:
-.. code:: bat</p>
-<blockquote>
-<div><blockquote>
-<div><p>.DFIR-Orc.exe NTFSUtil /bitlocker</p>
-</div></blockquote>
-<p>The result of the command looks like:</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>offline:</p></li>
-</ul>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span> .\DFIR-Orc.exe NTFSUtil /bitlocker F:\BitLocker.vhd,offset=16777216<span class="s2">&quot;</span>
-
-
-The result of the command looks like:
-
-.. code:: bat
-    BitLocker locations:
-
-            F:\Hyper-V\Virtual Hard Disks\BitLocker.vhd,offset=16777216
-                    SectorSize: 512
-                    Metadata offset[0]: 0x2200000
-                    Metadata   size[0]: 65536
-                    Metadata offset[1]: 0x9200000
-                    Metadata   size[1]: 65536
-                    Metadata offset[2]: 0x10200000
-                    Metadata   size[2]: 65536
+<p>Two syntaxes for this command:</p>
+<ul>
+<li><dl>
+<dt>online:</dt><dd><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>.\DFIR-Orc.exe NTFSUtil /bitlocker
 </pre></div>
 </div>
+<p>The result of the command looks like:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>BitLocker locations:
+
+        \\.\PHYSICALDRIVE0,offset=129256914944,size=380912008704,sector=512
+                SectorSize: 512
+                Metadata offset[0]: 0x4d00000
+                Metadata   size[0]: 65536
+                Metadata offset[1]: 0x44d00000
+                Metadata   size[1]: 65536
+                Metadata offset[2]: 0x84d00000
+                Metadata   size[2]: 65536
+
+        \\.\PHYSICALDRIVE0,offset=407896064,size=128849018368,sector=512
+                SectorSize: 512
+                Metadata offset[0]: 0x30bb24000
+                Metadata   size[0]: 65536
+                Metadata offset[1]: 0x30bb34000
+                Metadata   size[1]: 65536
+                Metadata offset[2]: 0x30bb44000
+                Metadata   size[2]: 65536
+
+        \\.\PHYSICALDRIVE1,offset=33554432,size=393836756992,sector=512
+                SectorSize: 512
+                Metadata offset[0]: 0x4e00000
+                Metadata   size[0]: 65536
+                Metadata offset[1]: 0x44e00000
+                Metadata   size[1]: 65536
+                Metadata offset[2]: 0x84e00000
+                Metadata   size[2]: 65536
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>offline:</dt><dd><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>.\DFIR-Orc.exe NTFSUtil /bitlocker F:\BitLocker.vhd,offset=16777216<span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>The result of the command looks like:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>BitLocker locations:
+
+        F:\Hyper-V\Virtual Hard Disks\BitLocker.vhd,offset=16777216
+                SectorSize: 512
+                Metadata offset[0]: 0x2200000
+                Metadata   size[0]: 65536
+                Metadata offset[1]: 0x9200000
+                Metadata   size[1]: 65536
+                Metadata offset[2]: 0x10200000
+                Metadata   size[2]: 65536
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 </div>
 </div>

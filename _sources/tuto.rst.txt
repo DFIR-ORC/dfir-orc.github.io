@@ -7,15 +7,19 @@ It explains which code to compile, how to embed a configuration, how to modify a
 Basically, it goes through most of the classical steps which incident responders have to follow in their daily usage of the framework.
 
 
-.. warning:: Everything must be done in a Microsoft Windows environment. Only step 1 requires compiling with Visual Studio (the free edition is sufficient, see step 1 for details).
+.. warning::
 
-   Unconfigured and configured binaries require administrative privileges.
-   **Commands below are designed to be run in an elevated Powershell shell.** It can be adapted to work in an elevated command shell prompt.
+    Everything must be done in a Microsoft Windows environment.
+    Only step 1 requires compiling with Visual Studio (the free edition is sufficient,
+    see step 1 for details).
+
+    Unconfigured and configured binaries require administrative privileges.
+    **Commands below are designed to be run in an elevated Powershell shell.**
+    It can be adapted to work in an elevated command shell prompt.
 
 .. contents:: List of the steps
-   :local:
+    :local:
    
-
 
 1. Build
 --------
@@ -56,8 +60,8 @@ Find a command line to use :doc:`NTFSUtil` to display information about the USN 
 
     .. code:: powershell
 
-      .\DFIR-Orc_x86.exe NTFSUtil /USN \\.\c:
-      .\DFIR-Orc_x64.exe NTFSUtil /USN \\.\c:
+        .\DFIR-Orc_x86.exe NTFSUtil /USN "\\.\c:"
+        .\DFIR-Orc_x64.exe NTFSUtil /USN "\\.\c:"
 
 
 .. _tuto-step-2:
@@ -71,14 +75,15 @@ Why is a configuration needed? Basically, an *unconfigured* binary is just a set
 artefacts to be collected, and how to collect them, has not been provided yet. This list is precisely what a configuration is!
 Please refer to the short section :ref:`architecture-config-process` to read about the basics.
 
-This step details how to obtain a *configured* binary from an *unconfigured* binary and the `repository of existing configurations <https://github.com/dfir-orc/dfir-orc-config>`_. 
+This step details how to obtain a *configured* binary from an *unconfigured* binary and the
+`repository of existing configurations <https://github.com/dfir-orc/dfir-orc-config>`_. 
 
 First, clone the default configuration:
 
 .. code:: powershell
   
-   git clone https://github.com/dfir-orc/dfir-orc-config.git
-   cd dfir-orc-config
+    git clone "https://github.com/dfir-orc/dfir-orc-config.git"
+    cd dfir-orc-config
 
 Then, copy the *unconfigured* DFIR ORC binaries ``DFIR-ORC_x86.exe`` and ``DFIR-ORC_x64.exe`` in the ``tools`` folder:
 
@@ -91,7 +96,7 @@ To illustrate how to include external tools into the DFIR ORC framework, we have
 
 .. code:: powershell
 
-    Invoke-WebRequest https://live.sysinternals.com/autorunsc.exe -OutFile .\tools\autorunsc.exe
+    Invoke-WebRequest "https://live.sysinternals.com/autorunsc.exe" -OutFile .\tools\autorunsc.exe
 
 Finally, run the command below in an **elevated** command prompt:
 
@@ -131,7 +136,7 @@ Of course, we can use it to execute one of the :doc:`embedded tools <embedded_to
 
 .. code:: powershell
 
-    .\output\DFIR-Orc.exe NTFSInfo /out=C_drive.csv C:\
+    .\output\DFIR-Orc.exe NTFSInfo /out=C_drive.csv "C:\"
 
 This command will create a file named ``C_drive.csv`` in the current directory with the enumeration of the Master File Table of the volume ``C:``.
 
@@ -140,7 +145,7 @@ In a similar manner, GetThis can be invoked from the command line:
 
 .. code:: powershell
 
-    .\output\DFIR-Orc.exe GetThis /nolimits /sample=ntdll.dll /out=ntdll.7z C:\
+    .\output\DFIR-Orc.exe GetThis /nolimits /sample=ntdll.dll /out=ntdll.7z "C:\"
 
 This command will create a file called ``ntdll.7z`` in the current directory, containing all files named ``ntdll.dll`` in the ``C:`` volume.
 
@@ -159,7 +164,7 @@ Let's try this on the binary obtained in step 2.
 
 This command outputs the result below:
 
-.. code:: powershell  
+.. code::  
 
     DFIR-Orc Version 10.0.0.000
 

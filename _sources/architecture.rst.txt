@@ -10,7 +10,7 @@ Configuration Process
 The **ultimate objective** of using DFIR ORC is to create a single binary file that orchestrates complex collection tasks on a system, optionally protect the result with encryption and, finally, upload them to a central collection point (SMB share, BITS server).
 
 Compiling the source code for DFIR ORC yields what is called **unconfigured binaries**, typically named ``DFIR-Orc_x86.exe`` and ``DFIR-Orc_x64.exe``.
-These binaries contain the :doc:`embedded specific tools <tool_list>` developed as part of this project.
+These binaries contain the :doc:`embedded specific tools <embedded_tool_suite>` developed as part of this project.
 However, as explained in :doc:`design_principles`, the framework is meant to build a single binary, embedding **external** tools and the whole
 list of data to collect. The process of creating such a binary is called **configuring DFIR ORC**. It results in a **configured binary**, typically called ``DFIR-Orc.exe``.
 
@@ -62,7 +62,7 @@ For instance, :doc:`NTFSUtil <NTFSUtil>` can enumerate the file systems present 
     DFIR-Orc_x64.exe GetThis /nolimits /sample=SOFTWARE /out=%temp%\hive.7z c:\
 
 Most tools can be configured for more advanced scenarios (like YARA rules, complex filters or search criteria) with XML configuration files.
-The documentation for every embedded tool can be found :doc:`here <tool_list>`.
+The documentation for every embedded tool can be found :doc:`here <embedded_tool_suite>`.
 
 
 .. _architecture-deployment-spe-conf:

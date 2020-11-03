@@ -88,9 +88,12 @@
 Basically, it goes through most of the classical steps which incident responders have to follow in their daily usage of the framework.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Everything must be done in a Microsoft Windows environment. Only step 1 requires compiling with Visual Studio (the free edition is sufficient, see step 1 for details).</p>
+<p>Everything must be done in a Microsoft Windows environment.
+Only step 1 requires compiling with Visual Studio (the free edition is sufficient,
+see step 1 for details).</p>
 <p>Unconfigured and configured binaries require administrative privileges.
-<strong>Commands below are designed to be run in an elevated Powershell shell.</strong> It can be adapted to work in an elevated command shell prompt.</p>
+<strong>Commands below are designed to be run in an elevated Powershell shell.</strong>
+It can be adapted to work in an elevated command shell prompt.</p>
 </div>
 <div class="contents local topic" id="list-of-the-steps">
 <p class="topic-title">List of the steps</p>
@@ -155,8 +158,8 @@ Find a command line to use <a class="reference internal" href="NTFSUtil.html"><s
 <p><strong>Answer  ▶</strong></p>
 </div>
 <p>Both command lines work.</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span>.\DFIR-Orc_x86.exe NTFSUtil /USN \\.\c:
-.\DFIR-Orc_x64.exe NTFSUtil /USN \\.\c:
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">DFIR-Orc_x86</span><span class="p">.</span><span class="n">exe</span> <span class="n">NTFSUtil</span> <span class="p">/</span><span class="n">USN</span> <span class="s2">&quot;\\.\c:&quot;</span>
+<span class="p">.\</span><span class="n">DFIR-Orc_x64</span><span class="p">.</span><span class="n">exe</span> <span class="n">NTFSUtil</span> <span class="p">/</span><span class="n">USN</span> <span class="s2">&quot;\\.\c:&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -171,10 +174,11 @@ Find a command line to use <a class="reference internal" href="NTFSUtil.html"><s
 <p>Why is a configuration needed? Basically, an <em>unconfigured</em> binary is just a set of tools, plus a collection engine. Hence, the list of
 artefacts to be collected, and how to collect them, has not been provided yet. This list is precisely what a configuration is!
 Please refer to the short section <a class="reference internal" href="architecture.html#architecture-config-process"><span class="std std-ref">Configuration Process</span></a> to read about the basics.</p>
-<p>This step details how to obtain a <em>configured</em> binary from an <em>unconfigured</em> binary and the <a class="reference external" href="https://github.com/dfir-orc/dfir-orc-config">repository of existing configurations</a>.</p>
+<p>This step details how to obtain a <em>configured</em> binary from an <em>unconfigured</em> binary and the
+<a class="reference external" href="https://github.com/dfir-orc/dfir-orc-config">repository of existing configurations</a>.</p>
 <p>First, clone the default configuration:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/dfir-orc/dfir-orc-config.git
-cd dfir-orc-config
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="s2">&quot;https://github.com/dfir-orc/dfir-orc-config.git&quot;</span>
+<span class="nb">cd </span><span class="n">dfir-orc-config</span>
 </pre></div>
 </div>
 <p>Then, copy the <em>unconfigured</em> DFIR ORC binaries <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_x86.exe</span></code> and <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_x64.exe</span></code> in the <code class="docutils literal notranslate"><span class="pre">tools</span></code> folder:</p>
@@ -183,7 +187,7 @@ cd dfir-orc-config
 </pre></div>
 </div>
 <p>To illustrate how to include external tools into the DFIR ORC framework, we have chosen to provide an example configuration which uses <code class="docutils literal notranslate"><span class="pre">autorunsc.exe</span></code>. Hence, you need to <a class="reference external" href="https://live.sysinternals.com/autorunsc.exe">download it from the Microsoft SysInternals website</a>.</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span>Invoke-WebRequest https://live.sysinternals.com/autorunsc.exe -OutFile .\tools\autorunsc.exe
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Invoke-WebRequest</span> <span class="s2">&quot;https://live.sysinternals.com/autorunsc.exe&quot;</span> <span class="n">-OutFile</span> <span class="p">.\</span><span class="n">tools</span><span class="p">\</span><span class="n">autorunsc</span><span class="p">.</span><span class="n">exe</span>
 </pre></div>
 </div>
 <p>Finally, run the command below in an <strong>elevated</strong> command prompt:</p>
@@ -212,12 +216,12 @@ cd dfir-orc-config
 <h2><a class="toc-backref" href="#id5">3. Test the Configuration</a><a class="headerlink" href="#test-the-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Once we have a <em>configured</em> DFIR ORC binary, we can start testing it!</p>
 <p>Of course, we can use it to execute one of the <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">embedded tools</span></a> (just like the <em>unconfigured</em> ones):</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span>.\output\DFIR-Orc.exe NTFSInfo /out=C_drive.csv C:\
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">output</span><span class="p">\</span><span class="n">DFIR-Orc</span><span class="p">.</span><span class="n">exe</span> <span class="n">NTFSInfo</span> <span class="p">/</span><span class="n">out</span><span class="p">=</span><span class="n">C_drive</span><span class="p">.</span><span class="n">csv</span> <span class="s2">&quot;C:\&quot;</span>
 </pre></div>
 </div>
 <p>This command will create a file named <code class="docutils literal notranslate"><span class="pre">C_drive.csv</span></code> in the current directory with the enumeration of the Master File Table of the volume <code class="docutils literal notranslate"><span class="pre">C:</span></code>.</p>
 <p>In a similar manner, GetThis can be invoked from the command line:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span>.\output\DFIR-Orc.exe GetThis /nolimits /sample=ntdll.dll /out=ntdll.7z C:\
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">output</span><span class="p">\</span><span class="n">DFIR-Orc</span><span class="p">.</span><span class="n">exe</span> <span class="n">GetThis</span> <span class="p">/</span><span class="n">nolimits</span> <span class="p">/</span><span class="n">sample</span><span class="p">=</span><span class="n">ntdll</span><span class="p">.</span><span class="n">dll</span> <span class="p">/</span><span class="n">out</span><span class="p">=</span><span class="n">ntdll</span><span class="p">.</span><span class="n">7z</span> <span class="s2">&quot;C:\&quot;</span>
 </pre></div>
 </div>
 <p>This command will create a file called <code class="docutils literal notranslate"><span class="pre">ntdll.7z</span></code> in the current directory, containing all files named <code class="docutils literal notranslate"><span class="pre">ntdll.dll</span></code> in the <code class="docutils literal notranslate"><span class="pre">C:</span></code> volume.</p>
@@ -231,48 +235,48 @@ according to the embedded configuration.</p>
 </pre></div>
 </div>
 <p>This command outputs the result below:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span>DFIR-Orc Version 10.0.0.000
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DFIR</span><span class="o">-</span><span class="n">Orc</span> <span class="n">Version</span> <span class="mf">10.0</span><span class="o">.</span><span class="mf">0.000</span>
 
-Start time            : 09/26/2019 14:57:55.198 (UTC)
+<span class="n">Start</span> <span class="n">time</span>            <span class="p">:</span> <span class="mi">09</span><span class="o">/</span><span class="mi">26</span><span class="o">/</span><span class="mi">2019</span> <span class="mi">14</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mf">55.198</span> <span class="p">(</span><span class="n">UTC</span><span class="p">)</span>
 
-Computer              : JEANGABOOK
-Full Computer         : jeangabook
+<span class="n">Computer</span>              <span class="p">:</span> <span class="n">JEANGABOOK</span>
+<span class="n">Full</span> <span class="n">Computer</span>         <span class="p">:</span> <span class="n">jeangabook</span>
 
-User                  : JEANGABOOK\Jean (elevated)
+<span class="n">User</span>                  <span class="p">:</span> <span class="n">JEANGABOOK</span>\<span class="n">Jean</span> <span class="p">(</span><span class="n">elevated</span><span class="p">)</span>
 
-System type           : WorkStation
+<span class="n">System</span> <span class="nb">type</span>           <span class="p">:</span> <span class="n">WorkStation</span>
 
-System tags           : OSBuild#18362,RTM,Release#1903,Windows10,WorkStation,x64
-Operating System      : Microsoft Windows 10 Enterprise Edition (build 18362), 64-bit
-Output   directory    : F:\Projects\dfir-orc-config (encoding=UTF8)
-Temp     directory    : C:\Users\Jean\AppData\Local\Temp\WorkingTemp (encoding=UTF8)
-Log file              : DFIR-ORC_WorkStation_jeangabook_20190926_145755.log
-Repeat Behavior       : No global override set (config behavior used)
-Priority              : Low
+<span class="n">System</span> <span class="n">tags</span>           <span class="p">:</span> <span class="n">OSBuild</span><span class="c1">#18362,RTM,Release#1903,Windows10,WorkStation,x64</span>
+<span class="n">Operating</span> <span class="n">System</span>      <span class="p">:</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="mi">10</span> <span class="n">Enterprise</span> <span class="n">Edition</span> <span class="p">(</span><span class="n">build</span> <span class="mi">18362</span><span class="p">),</span> <span class="mi">64</span><span class="o">-</span><span class="n">bit</span>
+<span class="n">Output</span>   <span class="n">directory</span>    <span class="p">:</span> <span class="n">F</span><span class="p">:</span>\<span class="n">Projects</span>\<span class="n">dfir</span><span class="o">-</span><span class="n">orc</span><span class="o">-</span><span class="n">config</span> <span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">UTF8</span><span class="p">)</span>
+<span class="n">Temp</span>     <span class="n">directory</span>    <span class="p">:</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Jean</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">WorkingTemp</span> <span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">UTF8</span><span class="p">)</span>
+<span class="n">Log</span> <span class="n">file</span>              <span class="p">:</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_20190926_145755</span><span class="o">.</span><span class="n">log</span>
+<span class="n">Repeat</span> <span class="n">Behavior</span>       <span class="p">:</span> <span class="n">No</span> <span class="k">global</span> <span class="n">override</span> <span class="nb">set</span> <span class="p">(</span><span class="n">config</span> <span class="n">behavior</span> <span class="n">used</span><span class="p">)</span>
+<span class="n">Priority</span>              <span class="p">:</span> <span class="n">Low</span>
 
-[X] Archive: Main (file is DFIR-ORC_WorkStation_jeangabook_Main.7z)
-        [X] Command SystemInfo
-        [X] Command Processes
-        [X] Command GetEvents
-        [X] Command Autoruns
-        [X] Command NTFSInfo
-        [ ] Command NTFSInfoHashPE
-        [X] Command FatInfo
-        [ ] Command FatInfoHashPE
-        [X] Command USNInfo
-        [X] Command GetArtefacts
+<span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Main</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Main</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">SystemInfo</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">Processes</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetEvents</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">Autoruns</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">NTFSInfo</span>
+        <span class="p">[</span> <span class="p">]</span> <span class="n">Command</span> <span class="n">NTFSInfoHashPE</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">FatInfo</span>
+        <span class="p">[</span> <span class="p">]</span> <span class="n">Command</span> <span class="n">FatInfoHashPE</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">USNInfo</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetArtefacts</span>
 
-[X] Archive: Hives (file is DFIR-ORC_WorkStation_jeangabook_Hives.7z)
-        [X] Command GetSystemHives
-        [X] Command GetUserHives
-        [X] Command GetSamHive
+<span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Hives</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Hives</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetSystemHives</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetUserHives</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetSamHive</span>
 
-[ ] Archive: Yara (file is DFIR-ORC_WorkStation_jeangabook_Yara.7z)
-        [X] Command GetYara
+<span class="p">[</span> <span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Yara</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Yara</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetYara</span>
 
 
-Finish time           : 09/26/2019 14:57:55.198 (UTC)
-Elapsed time          : 0 msecs
+<span class="n">Finish</span> <span class="n">time</span>           <span class="p">:</span> <span class="mi">09</span><span class="o">/</span><span class="mi">26</span><span class="o">/</span><span class="mi">2019</span> <span class="mi">14</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mf">55.198</span> <span class="p">(</span><span class="n">UTC</span><span class="p">)</span>
+<span class="n">Elapsed</span> <span class="n">time</span>          <span class="p">:</span> <span class="mi">0</span> <span class="n">msecs</span>
 </pre></div>
 </div>
 <p>After the usual banner with the tool running, version information and parameters, we get a list of configured archives (Main, Hives and Yara) and the list of commands which they comprise.</p>

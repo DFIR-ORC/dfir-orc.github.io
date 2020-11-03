@@ -1,4 +1,5 @@
 div.related {
+    clear: both;
     background: #00896f;
     color: #ffffff;
 }
@@ -6,6 +7,11 @@ div.related {
 div.admonition p.admonition-title
 {
     background-color: #00896f;
+}
+
+div.body
+{
+    float: left;
 }
 
 div.hint p.admonition-title,

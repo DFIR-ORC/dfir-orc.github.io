@@ -546,19 +546,21 @@ It takes as argument the drive name.
 Explanations related to the warning can be found in the paragraph :ref:`NTFSUtil-enumlocs`.
 
 ``/bitlocker`` Option
----------------
+---------------------
 
 This option displays information about the meta data location (incl. protectors) on mounted BitLocker volumes or images.
 
 Two syntaxes for this command:
-* online: 
-.. code:: bat
 
-     .\DFIR-Orc.exe NTFSUtil /bitlocker
+* online: 
+    .. code:: bat
+
+        .\DFIR-Orc.exe NTFSUtil /bitlocker
 
     The result of the command looks like:
 
     .. code:: bat
+
         BitLocker locations:
 
                 \\.\PHYSICALDRIVE0,offset=129256914944,size=380912008704,sector=512
@@ -589,14 +591,15 @@ Two syntaxes for this command:
                         Metadata   size[2]: 65536
 
 * offline:
-.. code:: bat
+    .. code:: bat
 
-     .\DFIR-Orc.exe NTFSUtil /bitlocker F:\BitLocker.vhd,offset=16777216"
+        .\DFIR-Orc.exe NTFSUtil /bitlocker F:\BitLocker.vhd,offset=16777216"
     
 
     The result of the command looks like:
 
     .. code:: bat
+    
         BitLocker locations:
 
                 F:\Hyper-V\Virtual Hard Disks\BitLocker.vhd,offset=16777216

@@ -98,7 +98,8 @@ Example
 
 *optional=yes, default=no outline file*, `parent element: wolf <#wolf-element>`_
 
-The :doc:`outline <outline>` element can be used to create an optional json file of DFIR ORC execution's context. This file will also be uploaded if an <upload/> element is specified in a :doc:`DFIR ORC local configuration file <orc_local_config>`.
+The :doc:`outline <outline>` element can be used to create an optional json file of DFIR ORC execution's context.
+This file will also be uploaded if an <upload/> element is specified in a :doc:`DFIR ORC local configuration file <orc_local_config>`.
 
 Attributes
 ----------
