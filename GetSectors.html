@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>GetSectors &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="NTFSInfo" href="NTFSInfo.html" />
@@ -87,14 +87,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="getsectors">
+  <section id="getsectors">
 <h1>GetSectors<a class="headerlink" href="#getsectors" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>GetSectors is designed to collect low-level disk data, i.e. data not related to the file system.
 As such, it can typically be used to collect the boot sector, the boot code, the partition tables, slack space on the disk (typically the available sectors after the last partition), etc.</p>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>GetSectors generates the requested dump(s) in an archive or a folder. The tool also generates a CSV file, GetSectors.csv, which contains the metadata about the dump(s) with the following columns.</p>
 <table class="colwidths-auto docutils align-left">
@@ -179,8 +179,8 @@ As such, it can typically be used to collect the boot sector, the boot code, the
 <p>Dump file extension is <code class="docutils literal notranslate"><span class="pre">.bin</span></code>.</p>
 <p>As an example, <code class="docutils literal notranslate"><span class="pre">__._PhysicalDrive0_off_0_len_512_MBR.bin</span></code> is the name of a MBR dump.</p>
 <p>An output for logging purposes can be used with the syntax found in <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>A typical syntax to use GetSectors looks like the following:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetSectors /LegacyBootCode /SlackSpace /Out=BootCode.7z
@@ -192,7 +192,7 @@ DFIR-Orc.exe GetSectors /UefiFull /Out=UefiFull.7z
 <p class="admonition-title">Note</p>
 <p>In order to specify something for the tool to dump, at least one option amongst <code class="docutils literal notranslate"><span class="pre">/LegacyBootCode</span></code>, <code class="docutils literal notranslate"><span class="pre">/UefiFull</span></code>, <code class="docutils literal notranslate"><span class="pre">/SlackSpace</span></code> or <code class="docutils literal notranslate"><span class="pre">/Custom</span></code> must be specified.</p>
 </div>
-<div class="section" id="disk-device-option">
+<section id="disk-device-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/Disk=&lt;Device&gt;</span></code> Option<a class="headerlink" href="#disk-device-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=Windows boot disk</em></p>
 <p>Specifies the name of the disk device to read sectors from. A disk image file can also be used.</p>
@@ -201,61 +201,61 @@ DFIR-Orc.exe GetSectors /UefiFull /Out=UefiFull.7z
 </pre></div>
 </div>
 <p>Access path examples are also proposed in <a class="reference internal" href="configuring_locations.html"><span class="doc">Configuring Locations</span></a> but some are not allowed or do not make sense.</p>
-</div>
-<div class="section" id="legacybootcode-option">
+</section>
+<section id="legacybootcode-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/LegacyBootCode</span></code> Option<a class="headerlink" href="#legacybootcode-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>Predefined logic to dump MBR, VBRs and IPLs (cf. <a class="reference external" href="https://en.wikipedia.org/wiki/Booting">https://en.wikipedia.org/wiki/Booting</a>).</p>
-</div>
-<div class="section" id="uefifull-option">
+</section>
+<section id="uefifull-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/UefiFull</span></code> Option<a class="headerlink" href="#uefifull-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=Off</em></p>
 <p>Dumps the entire EFI partition.</p>
-</div>
-<div class="section" id="uefifullmaxsize-option">
+</section>
+<section id="uefifullmaxsize-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/UefiFullMaxSize</span></code> Option<a class="headerlink" href="#uefifullmaxsize-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=400M</em></p>
 <p>Used in combination of the <code class="docutils literal notranslate"><span class="pre">/UefiFull</span></code> option to specify a maximum size to dump. A larger partition will be truncated.</p>
-</div>
-<div class="section" id="slackspace-option">
+</section>
+<section id="slackspace-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/SlackSpace</span></code> Option<a class="headerlink" href="#slackspace-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=Off</em></p>
 <p>Predefined logic to dump sectors samples outside any partition.</p>
-</div>
-<div class="section" id="slackspacedumpsize-size-option">
+</section>
+<section id="slackspacedumpsize-size-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/SlackSpaceDumpSize=&lt;Size&gt;</span></code> Option<a class="headerlink" href="#slackspacedumpsize-size-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=5MB</em></p>
 <p>Maximum size, in bytes, of the collected slackspace (disk unallocated space starting after the end of the last partition).
 This option is only used when the <code class="docutils literal notranslate"><span class="pre">/SlackSpace</span></code> option is active.</p>
-</div>
-<div class="section" id="custom-option">
+</section>
+<section id="custom-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/Custom</span></code> Option<a class="headerlink" href="#custom-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=Off</em></p>
 <p>Dumps a specific disk extent. Must be followed with <code class="docutils literal notranslate"><span class="pre">/CustomOffset</span></code> and/or <code class="docutils literal notranslate"><span class="pre">/CustomSize</span></code>.</p>
-</div>
-<div class="section" id="customoffset-size-option">
+</section>
+<section id="customoffset-size-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/CustomOffset=&lt;Size&gt;</span></code> Option<a class="headerlink" href="#customoffset-size-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=0</em></p>
 <p>Specifies the specific disk extent offset in bytes.</p>
-</div>
-<div class="section" id="customsize-size-option">
+</section>
+<section id="customsize-size-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/CustomSize=&lt;Size&gt;</span></code> Option<a class="headerlink" href="#customsize-size-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=512</em></p>
 <p>Specifies the specific disk extent size in bytes.</p>
-</div>
-<div class="section" id="out-path-option">
+</section>
+<section id="out-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/Out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#out-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=.\GetSectors.7z</em></p>
 <p>Specifies the name of the result container. The container can be a folder or an archive (7z, zip, cab). For more details on this option, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
-</div>
-<div class="section" id="notlowinterface-option">
+</section>
+<section id="notlowinterface-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/NotLowInterface</span></code> Option<a class="headerlink" href="#notlowinterface-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=False</em></p>
 <p>The tool does not try to obtain a low interface on the disk device using the setupAPI functions.
 Indeed, GetSectors attempts to use the lowest user mode accessible means to open the specified disk (usually, the bus interface); <code class="docutils literal notranslate"><span class="pre">/NotLowInterface</span></code> disables this behavior.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -288,7 +288,7 @@ Indeed, GetSectors attempts to use the lowest user mode accessible means to open
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

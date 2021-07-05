@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>GetSamples &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="GetSectors" href="GetSectors.html" />
@@ -87,9 +87,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="getsamples">
+  <section id="getsamples">
 <h1>GetSamples<a class="headerlink" href="#getsamples" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>GetSamples was developed to add automatic sample collection. DFIR ORC collects multiple artefacts, which in turn allow the analyst to pivot and determine which files to examine.  GetSamples was created to identify and collect these files beforehand, to minimize the chances of having to get back to the analyzed system.</p>
 <p>Typically, targets include binaries registered in <em>ASEP</em> (AutoStart Extension Points), startup folders, loaded in processes, etc.</p>
@@ -117,15 +117,15 @@
 </li>
 <li><p>Generate a <a class="reference internal" href="GetThis.html"><span class="doc">GetThis</span></a> configuration file and run the tool.</p></li>
 </ol>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For verbose logging output refer to <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
 </div>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>GetSamples can be used from the command line, using options or an XML configuration file. Such a file can also be embedded in a configured binary. Command-line switches and XML configurations provide (mostly) identical access to the functionalities of GetSamples, even if the configuration files allow for more complexity.</p>
 <ul class="simple">
@@ -151,11 +151,11 @@
 <p class="admonition-title">Note</p>
 <p>All output-related parameters (in the configuration file and on the command line) can use environment variables.</p>
 </div>
-<div class="section" id="getsamples-element">
+<section id="getsamples-element">
 <h3><code class="docutils literal notranslate"><span class="pre">GetSamples</span></code> Element<a class="headerlink" href="#getsamples-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Root element.</p>
-<div class="section" id="attributes">
+<section id="attributes">
 <h4>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -168,16 +168,16 @@
 <p class="admonition-title">Important</p>
 <p>Since GetSamples relies on GetThis, the same constraint on limits exists in both tools: limits or their absence <strong>have to be specified</strong> for the tool to run. This can either be done using the <code class="docutils literal notranslate"><span class="pre">nolimits</span></code> attribute or option, or by setting upper limits in the <code class="docutils literal notranslate"><span class="pre">samples</span></code> element.</p>
 </div>
-</div>
-</div>
-<div class="section" id="output-element-out-path-option">
+</section>
+</section>
+<section id="output-element-out-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">Output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#output-element-out-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Configures where the samples get stored. It silently relies on <a class="reference internal" href="GetThis.html"><span class="doc">GetThis</span></a> using a dynamically generated configuration.</p>
 <p>The syntax is similar to the <code class="docutils literal notranslate"><span class="pre">output</span></code> element or <code class="docutils literal notranslate"><span class="pre">/out</span></code> option used in other tools, described in the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
 <p>This is mandatory: if no <code class="docutils literal notranslate"><span class="pre">output</span></code> element (or <code class="docutils literal notranslate"><span class="pre">/out</span></code> option) is specified, no sample will be collected.</p>
-</div>
-<div class="section" id="sampleinfo-element-sampleinfo-path-option">
+</section>
+<section id="sampleinfo-element-sampleinfo-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">SampleInfo</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/SampleInfo=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#sampleinfo-element-sampleinfo-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <dl class="simple">
@@ -194,8 +194,8 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sampleinfo</span> <span class="na">encoding=</span><span class="s">&quot;utf16&quot;</span><span class="nt">&gt;</span>Output.csv<span class="nt">&lt;/sampleinfo&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="timeline-element-timeline-path-option">
+</section>
+<section id="timeline-element-timeline-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">TimeLine</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/TimeLine=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#timeline-element-timeline-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <dl class="simple">
@@ -212,12 +212,12 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;timeline</span> <span class="na">encoding=</span><span class="s">&quot;utf8&quot;</span><span class="nt">&gt;</span>Timeline.csv<span class="nt">&lt;/timeline&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="samples-element">
+</section>
+<section id="samples-element">
 <h3><code class="docutils literal notranslate"><span class="pre">Samples</span></code> Element<a class="headerlink" href="#samples-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no (ignored if nolimits has been specified), default=N/A</em></p>
 <p>Describes the samples to collect limitations.</p>
-<div class="section" id="id1">
+<section id="id1">
 <h4>Attributes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -240,9 +240,9 @@
 <p class="admonition-title">Warning</p>
 <p>Limits must be explicitly set, either by using <code class="docutils literal notranslate"><span class="pre">nolimits</span></code> or by using a meaningful combination of attributes of <code class="docutils literal notranslate"><span class="pre">samples</span></code>.</p>
 </div>
-</div>
-</div>
-<div class="section" id="autoruns-element-autoruns-path-option">
+</section>
+</section>
+<section id="autoruns-element-autoruns-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">Autoruns</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/Autoruns[=&lt;Path&gt;]</span></code> Option<a class="headerlink" href="#autoruns-element-autoruns-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>This option has multiple purposes but it is mainly used to make <em>DFIR ORC</em> execute and store <em>Autoruns</em> results.</p>
@@ -262,8 +262,8 @@
 <p class="admonition-title">Important</p>
 <p>To be able to execute <em>SysInternals Autoruns</em>, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> must have embedded it when prepared with <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> (see <a class="reference internal" href="ToolEmbed.html#toolembed-archive-element"><span class="std std-ref">Archive</span></a> element).</p>
 </div>
-</div>
-<div class="section" id="getthisconfig-element-getthisconfig-path-option">
+</section>
+<section id="getthisconfig-element-getthisconfig-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">GetThisConfig</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/GetThisConfig=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#getthisconfig-element-getthisconfig-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>The configuration file generated for GetThis is output. This will be used to store the dynamically generated XML file provided to GetThis. It can be examined later.</p>
@@ -271,8 +271,8 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;GetThisConfig&gt;</span>GetThisConfig.xml<span class="nt">&lt;/GetThisConfig&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="getthisargs-element-getthisargs-arg1-arg2">
+</section>
+<section id="getthisargs-element-getthisargs-arg1-arg2">
 <h3><code class="docutils literal notranslate"><span class="pre">GetThisArgs</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/GetThisArgs=&quot;&lt;Arg1</span> <span class="pre">Arg2</span> <span class="pre">...&gt;&quot;</span></code><a class="headerlink" href="#getthisargs-element-getthisargs-arg1-arg2" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>Command-line arguments to be forwarded to GetThis.</p>
@@ -280,8 +280,8 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;GetThisArgs&gt;</span>/flushregistry /nolimits<span class="nt">&lt;/GetThisArgs&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="tempdir-element-tempdir-path">
+</section>
+<section id="tempdir-element-tempdir-path">
 <h3><code class="docutils literal notranslate"><span class="pre">TempDir</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/TempDir=&lt;Path&gt;</span></code><a class="headerlink" href="#tempdir-element-tempdir-path" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>The specified directory must be used to store temporary files.</p>
@@ -290,8 +290,8 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;TempDir&gt;</span>D:\Temp<span class="nt">&lt;/TempDir&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="nosigcheck-element-nosigcheck-option">
+</section>
+<section id="nosigcheck-element-nosigcheck-option">
 <h3><code class="docutils literal notranslate"><span class="pre">NoSigCheck</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/NoSigCheck</span></code> Option<a class="headerlink" href="#nosigcheck-element-nosigcheck-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>Does not check sample signatures (those returned by <em>autoruns</em> output will still be checked).</p>
@@ -299,9 +299,9 @@
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;NoSigCheck/&gt;</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -334,7 +334,7 @@
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

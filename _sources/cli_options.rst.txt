@@ -268,6 +268,28 @@ To only prevent sleep, recommended value for this option is: ``SystemRequired,Aw
 
 This option overrides the ``powerstate`` attribute of the :ref:`dfir-orc element <orc_local_config-dfir-orc-element>` in a local configuration file.
 
+``/NoLimits[:<Command1>,<Command2>,...]`` Option
+------------------------------------------------
+
+Overrides the safety limits configuration when collecting with ``GetThis`` and ``GetSamples`` subcommands.
+
+The option ``/nolimits`` with no value means that ALL configurated commands will have no output size limits. BEWARE: this could easily use all available storage space. As such, it is recommanded to target specific overrides by indicating one or more commands (see available list with ``/Keys`` option).
+
+For example:
+1. Execute the configured DFIR-ORC but overrides limits for ``GetFoo`` and ``GetBar`` commands:
+
+.. code:: bat
+
+    dfir-orc.exe /nolimits:GetFoo,GetBar ...
+
+
+2. Only execute ``GetFoo`` and overrides limits for this command:
+
+.. code:: bat
+
+    dfir-orc.exe /key=GetFoo /nolimits
+    dfir-orc.exe /key=GetFoo /nolimits:GetFoo
+
 Mothership Specific Command-line Options
 ----------------------------------------
 

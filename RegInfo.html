@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>RegInfo &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="USNInfo" href="USNInfo.html" />
@@ -87,9 +87,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="reginfo">
+  <section id="reginfo">
 <h1>RegInfo<a class="headerlink" href="#reginfo" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>RegInfo is a registry parser which can analyze either online or offline registry files.</p>
 <p>Online analysis uses the MFT parser and therefore allows enumeration of registry hives without the need to either rely on APIs or be able to open the registry hive file itself.
@@ -100,8 +100,8 @@ That gives the tool unique capabilities to evade hiding techniques such as API h
 <p>The parsing of hive files is then accomplished by a parser which only rely on the C++ standard API.
 This allows independence from third party library, permits cross platform and precise control of the output of the tool.</p>
 <p>Offline analysis only uses this second step (hive parsing) to inspect registry hives retrieved by other tools (e.g. GetThis).</p>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>RegInfo produces 2 kinds of files:</p>
 <ul class="simple">
@@ -173,14 +173,14 @@ This allows independence from third party library, permits cross platform and pr
 </li>
 </ul>
 <p>As for every tool, an output for logging is also available from the command line. The syntax can be found in <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>When called from the command line, the syntax of RegInfo looks like the following:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe RegInfo /config=reginfo_config.xml /out=reginfo_output.csv
 </pre></div>
 </div>
-<div class="section" id="config-path-option">
+<section id="config-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/config=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#config-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Takes an XML configuration file as argument.</p>
@@ -221,41 +221,41 @@ A typical RegInfo configuration file looks like:</p>
 <p class="admonition-title">Note</p>
 <p>Hive files can also be specified on command line for <em>offline</em> registry hives. Online hives (locked by NTFS) <strong>must</strong> be located via the MFT parser (i.e. <code class="docutils literal notranslate"><span class="pre">location</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code>).</p>
 </div>
-</div>
-<div class="section" id="reginfo-element">
+</section>
+<section id="reginfo-element">
 <h3><code class="docutils literal notranslate"><span class="pre">reginfo</span></code> Element<a class="headerlink" href="#reginfo-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Root element.</p>
-</div>
-<div class="section" id="output-element-out-path-option">
+</section>
+<section id="output-element-out-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#output-element-out-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>The value must be a directory (already existing or not), a CSV file or a TSV file in which the tool will generate the results.
 This element can also be specified from the command line with the <code class="docutils literal notranslate"><span class="pre">/out</span></code> option. For details on the syntax, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
 <p>Attribute <code class="docutils literal notranslate"><span class="pre">encoding</span></code> allows to specify output encoding. Possible values are <code class="docutils literal notranslate"><span class="pre">UTF8</span></code> or <code class="docutils literal notranslate"><span class="pre">UTF16</span></code> (case-insensitive). Encoding can also be specified with <code class="docutils literal notranslate"><span class="pre">/utf8</span></code> and <code class="docutils literal notranslate"><span class="pre">/utf16</span></code> options.</p>
-</div>
-<div class="section" id="information-element">
+</section>
+<section id="information-element">
 <h3><code class="docutils literal notranslate"><span class="pre">information</span></code> Element<a class="headerlink" href="#information-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Selects the columns to fill in the CSV output.</p>
-</div>
-<div class="section" id="location-element">
+</section>
+<section id="location-element">
 <h3><code class="docutils literal notranslate"><span class="pre">location</span></code> Element<a class="headerlink" href="#location-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>When configuring to use the MFT parser, RegInfo can locate registry hives on a specific volume. For this purpose, one can use any syntax described in <a class="reference internal" href="configuring_locations.html"><span class="doc">Configuring Locations</span></a>.</p>
-</div>
-<div class="section" id="hive-element">
+</section>
+<section id="hive-element">
 <h3><code class="docutils literal notranslate"><span class="pre">hive</span></code> Element<a class="headerlink" href="#hive-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Encloses a query. One can configure different queries on different hives inside the same configuration file.</p>
 <p>It is highly recommended to run RegInfo with a complete set of queries for better performance, especially when using the MFT parser.</p>
-</div>
-<div class="section" id="filename-element">
+</section>
+<section id="filename-element">
 <h3><code class="docutils literal notranslate"><span class="pre">filename</span></code> Element<a class="headerlink" href="#filename-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>Used to directly specify the full path of a registry hive. This must only be used with offline hives.</p>
-</div>
-<div class="section" id="template-element">
+</section>
+<section id="template-element">
 <h3><code class="docutils literal notranslate"><span class="pre">template</span></code> Element<a class="headerlink" href="#template-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>In order to simplify both capitalization and usage, RegInfo provides a way to <code class="docutils literal notranslate"><span class="pre">template</span></code> search queries.
@@ -284,13 +284,13 @@ This element can also be specified from the command line with the <code class="d
 </pre></div>
 </div>
 <p>The syntax used inside the element <code class="docutils literal notranslate"><span class="pre">registry_find</span></code> is the same as the one explained previously in <a class="reference internal" href="#reginfo-registryfind"><span class="std std-ref">registry related elements</span></a>.</p>
-</div>
-<div class="section" id="ntfs-find-or-ntfs-exclude-element">
+</section>
+<section id="ntfs-find-or-ntfs-exclude-element">
 <h3><code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> or <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Element<a class="headerlink" href="#ntfs-find-or-ntfs-exclude-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Used to specify a set of rules which matches the hive in each previously specified location. For details on the <code class="docutils literal notranslate"><span class="pre">&lt;ntfs_find&gt;</span></code> element syntax, please refer to the <a class="reference internal" href="configuring_ntfs_opt.html"><span class="doc">ntfs_find documentation</span></a>.</p>
-</div>
-<div class="section" id="registry-find-element">
+</section>
+<section id="registry-find-element">
 <span id="reginfo-registryfind"></span><h3><code class="docutils literal notranslate"><span class="pre">registry_find</span></code> Element<a class="headerlink" href="#registry-find-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">registry_find</span></code> element is used to specify a rule on which to match a registry key, value or data.
@@ -396,9 +396,9 @@ Just like for <code class="docutils literal notranslate"><span class="pre">ntfs_
 </div></blockquote>
 </li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -431,7 +431,7 @@ Just like for <code class="docutils literal notranslate"><span class="pre">ntfs_
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

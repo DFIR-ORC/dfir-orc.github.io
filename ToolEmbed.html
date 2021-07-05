@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>ToolEmbed &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="DFIR ORC Local Configuration File" href="orc_local_config.html" />
@@ -81,7 +81,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="toolembed">
+  <section id="toolembed">
 <h1>ToolEmbed<a class="headerlink" href="#toolembed" title="Permalink to this headline">¶</a></h1>
 <p id="anchor-root-toolembed">ToolEmbed is used to add resources (binaries, configuration files) to a DFIR ORC binary. It takes an XML configuration file as input.
 To understand why this is needed and what happens when <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> is executed, please refer to <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a>. A <a class="reference internal" href="tuto.html"><span class="doc">tutorial</span></a> presents how to configure and reconfigure binaries.</p>
@@ -135,7 +135,7 @@ To understand why this is needed and what happens when <code class="docutils lit
 <span class="nt">&lt;/toolembed&gt;</span>
 </pre></div>
 </div>
-<div class="section" id="usage">
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>There are two  most classical ways to use ToolEmbed:</p>
 <ul class="simple">
@@ -150,13 +150,13 @@ To understand why this is needed and what happens when <code class="docutils lit
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe ToolEmbed /dump=Configured-binary.exe /out=dump-dir\
 </pre></div>
 </div>
-<div class="section" id="toolembed-element">
+<section id="toolembed-element">
 <span id="toolembed-toolembed-element"></span><h3><code class="docutils literal notranslate"><span class="pre">toolembed</span></code> Element<a class="headerlink" href="#toolembed-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Root element.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-<div class="section" id="input-element-input-path-option">
+</section>
+<section id="input-element-input-path-option">
 <span id="toolembed-input-element"></span><h3><code class="docutils literal notranslate"><span class="pre">input</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/input=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#input-element-input-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no except with /dump option, default=N/A</em></p>
 <p>This element contains the path to the binary which ToolEmbed uses as a <strong>Mothership</strong> (see <a class="reference internal" href="architecture.html#architecture-config-process"><span class="std std-ref">here</span></a>).
@@ -164,35 +164,35 @@ This base is augmented with new resources to create the output of ToolEmbed.
 This input file remains unmodified by ToolEmbed.
 Environment variables will be substituted.</p>
 <p>The element is compulsory in an XML configuration file, and during a configuration operation. On the contrary, when dumping resources from a configured binary, it is irrelevant.</p>
-<div class="section" id="example">
+<section id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;input&gt;</span>.\tools\DFIR-Orc_x86.exe<span class="nt">&lt;/input&gt;</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="output-element-out-path-option">
+</section>
+</section>
+<section id="output-element-out-path-option">
 <span id="toolembed-output-element"></span><h3><code class="docutils literal notranslate"><span class="pre">output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#output-element-out-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>This element contains the path to the output file created by ToolEmbed.
 It is first created as a copy of the input file and, then, the specified resources are added.
 Environment variables will be substituted.</p>
 <p>For details on the <code class="docutils literal notranslate"><span class="pre">output</span></code> element syntax, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
-<div class="section" id="id5">
+<section id="id5">
 <h4>Example<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output&gt;</span>.\output\DFIR-Orc.exe<span class="nt">&lt;/output&gt;</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="run-element-run-ressource-option">
+</section>
+</section>
+<section id="run-element-run-ressource-option">
 <span id="toolembed-run-element"></span><h3><code class="docutils literal notranslate"><span class="pre">run</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/run=&lt;Ressource&gt;</span></code> Option<a class="headerlink" href="#run-element-run-ressource-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>This element specifies the unconfigured binary which should run. See <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a> for details.
 This element can be overridden by <code class="docutils literal notranslate"><span class="pre">run32</span></code> or <code class="docutils literal notranslate"><span class="pre">run64</span></code> elements (or options).</p>
-<div class="section" id="attributes">
+<section id="attributes">
 <h4>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -201,8 +201,8 @@ This element can be overridden by <code class="docutils literal notranslate"><sp
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h4>Example<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;input&gt;</span>.\tools\DFIR-Orc_x86.exe<span class="nt">&lt;/input&gt;</span>
 ...
@@ -212,14 +212,14 @@ This element can be overridden by <code class="docutils literal notranslate"><sp
 <p>This example results in the Mothership binary relaunching itself with the added argument “WolfLauncher” (which results in the execution of the code of WolfLauncher, the scheduler for DFIR ORC).
 Notation <code class="docutils literal notranslate"><span class="pre">self:#</span></code> and resources are documented in <a class="reference internal" href="resources.html"><span class="doc">Referencing Resources in Configurations</span></a>.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="run32-element-run32-ressource-option">
+</section>
+</section>
+<section id="run32-element-run32-ressource-option">
 <span id="toolembed-run32-element"></span><h3><code class="docutils literal notranslate"><span class="pre">run32</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/run32=&lt;Ressource&gt;</span></code> Option<a class="headerlink" href="#run32-element-run32-ressource-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>This element specifies the unconfigured binary which should run on 32-bit platforms. See <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a> for details.
 When specified this element overrides a <code class="docutils literal notranslate"><span class="pre">run</span></code> element (or option).</p>
-<div class="section" id="id9">
+<section id="id9">
 <h4>Attributes<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -228,8 +228,8 @@ When specified this element overrides a <code class="docutils literal notranslat
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id10">
+</section>
+<section id="id10">
 <h4>Example<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;input&gt;</span>.\tools\DFIR-Orc_x86.exe<span class="nt">&lt;/input&gt;</span>
 ...
@@ -239,14 +239,14 @@ When specified this element overrides a <code class="docutils literal notranslat
 <p>This example results in the Mothership binary relaunching itself with the added argument “WolfLauncher” (the scheduler for DFIR ORC).
 Notation <code class="docutils literal notranslate"><span class="pre">self:#</span></code> and resources are documented in <a class="reference internal" href="resources.html"><span class="doc">Referencing Resources in Configurations</span></a>.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="run64-element-run64-ressource-option">
+</section>
+</section>
+<section id="run64-element-run64-ressource-option">
 <span id="toolembed-run64-element"></span><h3><code class="docutils literal notranslate"><span class="pre">run64</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/run64=&lt;Ressource&gt;</span></code> Option<a class="headerlink" href="#run64-element-run64-ressource-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>This element specifies the unconfigured binary which should run on 64-bit platforms. See <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a> for details.
 When specified this element overrides a <code class="docutils literal notranslate"><span class="pre">run</span></code> element (or option).</p>
-<div class="section" id="id12">
+<section id="id12">
 <h4>Attributes<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -255,8 +255,8 @@ When specified this element overrides a <code class="docutils literal notranslat
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id13">
+</section>
+<section id="id13">
 <h4>Example<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;run64</span> <span class="na">args=</span><span class="s">&quot;WolfLauncher&quot;</span><span class="nt">&gt;</span>7z:#Tools|Orc_x64.exe<span class="nt">&lt;/run64&gt;</span>
 </pre></div>
@@ -264,13 +264,13 @@ When specified this element overrides a <code class="docutils literal notranslat
 <p>This example results in the launch of <code class="docutils literal notranslate"><span class="pre">Orc_x64.exe</span></code> contained in the 7z archive Tools, with the added argument “WolfLauncher” (the scheduler for DFIR ORC).
 Notation <code class="docutils literal notranslate"><span class="pre">7z:#Tools</span></code> and resources are documented in <a class="reference internal" href="resources.html"><span class="doc">Referencing Resources in Configurations</span></a>.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="file-element-addfile-path-name-option">
+</section>
+</section>
+<section id="file-element-addfile-path-name-option">
 <span id="toolembed-file-element"></span><h3><code class="docutils literal notranslate"><span class="pre">file</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/AddFile=&lt;Path&gt;,&lt;Name&gt;</span></code> Option<a class="headerlink" href="#file-element-addfile-path-name-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>The file element provides a simple way to embed a file as a resource in the destination binary.</p>
-<div class="section" id="id15">
+<section id="id15">
 <h4>Attributes<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -284,8 +284,8 @@ Notation <code class="docutils literal notranslate"><span class="pre">7z:#Tools<
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id16">
+</section>
+<section id="id16">
 <h4>Example<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;WOLFLAUNCHER_CONFIG&quot;</span> <span class="na">path=</span><span class="s">&quot;.\config\DFIR-ORC_config.xml&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
@@ -293,14 +293,14 @@ Notation <code class="docutils literal notranslate"><span class="pre">7z:#Tools<
 <p>This creates a resource named WOLFLAUNCHER_CONFIG which contains the <code class="docutils literal notranslate"><span class="pre">.\config\DFIR-ORC_config.xml</span></code> file.
 On a command line, the equivalent resource is created by using <code class="docutils literal notranslate"><span class="pre">/AddFile=.\config\DFIR-ORC_config.xml,WOLFLAUNCHER_CONFIG</span></code>.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="pair-element-name-value-option">
+</section>
+</section>
+<section id="pair-element-name-value-option">
 <span id="toolembed-pair-element"></span><h3><code class="docutils literal notranslate"><span class="pre">pair</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/name=&lt;Value&gt;</span></code> Option<a class="headerlink" href="#pair-element-name-value-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>This element is used internally to allow a level of indirection between a tool binary code and the configured resources.
 This should not be necessary in a user-created configuration.</p>
-<div class="section" id="id18">
+<section id="id18">
 <h4>Attributes<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -314,22 +314,22 @@ This should not be necessary in a user-created configuration.</p>
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id19">
+</section>
+<section id="id19">
 <h4>Example<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;pair</span> <span class="na">name=</span><span class="s">&quot;XMLLITE_X86DLL&quot;</span> <span class="na">value=</span><span class="s">&quot;7z:#Tools|xmllite.dll&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>This line creates a resource named XMLLITE_X86DLL which contains the string “7z:#Tools|xmllite.dll”.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="archive-element">
+</section>
+</section>
+<section id="archive-element">
 <span id="toolembed-archive-element"></span><h3><code class="docutils literal notranslate"><span class="pre">archive</span></code> Element<a class="headerlink" href="#archive-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>The archive element provides the ability to embed files in a resource but in a compressed archive (to minimize the size of the resulting binary). This element is a container for <code class="docutils literal notranslate"><span class="pre">file</span></code> sub-elements used to define the archive (see below).</p>
 <p>This mechanism is deemed too complex to be described on a command line, there is no equivalent option. To use it, an XML configuration file must be passed as an argument through the <code class="docutils literal notranslate"><span class="pre">/config</span></code> option.</p>
-<div class="section" id="id21">
+<section id="id21">
 <h4>Attributes<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -361,8 +361,8 @@ This should not be necessary in a user-created configuration.</p>
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id22">
+</section>
+<section id="id22">
 <h4>Example<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&quot;Tools&quot;</span> <span class="na">format=</span><span class="s">&quot;7z&quot;</span> <span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
         ...
@@ -371,12 +371,12 @@ This should not be necessary in a user-created configuration.</p>
 </div>
 <p>This creates a resource in the output file named “Tools” in the 7zip archive file format.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="file-element-in-archive">
+</section>
+</section>
+<section id="file-element-in-archive">
 <span id="toolembed-archive-file-element"></span><h3><code class="docutils literal notranslate"><span class="pre">file</span></code> Element (in <code class="docutils literal notranslate"><span class="pre">archive</span></code>)<a class="headerlink" href="#file-element-in-archive" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">file</span></code> element provides a simple way to embed a file in an archive in the configured binary.</p>
-<div class="section" id="id24">
+<section id="id24">
 <h4>Attributes<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -390,8 +390,8 @@ This should not be necessary in a user-created configuration.</p>
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id25">
+</section>
+<section id="id25">
 <h4>Example<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&quot;Tools&quot;</span> <span class="na">format=</span><span class="s">&quot;7z&quot;</span> <span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;DFIR-Orc_x64.exe&quot;</span> <span class="na">path=</span><span class="s">&quot;.\tools\DFIR-Orc_x64.exe&quot;</span><span class="nt">/&gt;</span>
@@ -406,9 +406,9 @@ This should not be necessary in a user-created configuration.</p>
 </ul>
 <p>These paths are relative to the directory where <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">toolembed</span></code> is launched.</p>
 <p><a class="reference external" href="#anchor-root-toolembed">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="dump-path-option">
+</section>
+</section>
+<section id="dump-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/dump[=&lt;Path&gt;]</span></code> Option<a class="headerlink" href="#dump-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>This option allows to extract the resources from a configured binary (stored at the given path), in a directory specified using <code class="docutils literal notranslate"><span class="pre">/out</span></code>.
@@ -421,9 +421,9 @@ This option has no equivalent XML element, it just exists as a switch to revert 
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe toolembed /dump /out=dumpdir\
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -456,7 +456,7 @@ This option has no equivalent XML element, it just exists as a switch to revert 
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

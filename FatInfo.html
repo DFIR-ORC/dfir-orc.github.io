@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>FatInfo &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="FastFind" href="FastFind.html" />
@@ -87,14 +87,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="fatinfo">
+  <section id="fatinfo">
 <h1>FatInfo<a class="headerlink" href="#fatinfo" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>FatInfo is intended to collect details on data stored on FAT mounted volumes and raw disk images.
 Basically, the tool enumerates the file system entries and outputs user-chosen details to collect in one or more CSV files.</p>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>FatInfo can output data into a CSV file, a folder or an archive. When provided with a folder or an archive, it creates one file per FAT volume instead of a unique file, and creates a file named volstats.csv in the output archive or directory.</p>
 <p>Each CSV file contains the following information on files and folders present on the FAT system:</p>
@@ -183,8 +183,8 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 <li><p><strong>FirstBytes:</strong> First 16 bytes (in hex) of the file content.</p></li>
 </ul>
 <p>An output for logging purposes can be used with the syntax found in <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>FatInfo can be used from command line or with an XML configuration file. Both provide (mostly) identical access to FatInfo functionality even if the configuration files allow for more complexity.</p>
 <ul class="simple">
@@ -230,11 +230,11 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 <p class="admonition-title">Note</p>
 <p>All output-related parameters (in the configuration file and in the command line) can use environment variables.</p>
 </div>
-<div class="section" id="fatinfo-element">
+<section id="fatinfo-element">
 <h3><code class="docutils literal notranslate"><span class="pre">fatinfo</span></code> Element<a class="headerlink" href="#fatinfo-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Root element.</p>
-<div class="section" id="attributes">
+<section id="attributes">
 <h4>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -253,14 +253,14 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 </dl>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="output-element-out-path-option">
+</section>
+</section>
+<section id="output-element-out-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#output-element-out-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=FatInfo.csv</em></p>
 <p>For details on the <code class="docutils literal notranslate"><span class="pre">output</span></code> element syntax, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
-</div>
-<div class="section" id="location-element">
+</section>
+<section id="location-element">
 <h3><code class="docutils literal notranslate"><span class="pre">location</span></code> Element<a class="headerlink" href="#location-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Specifies the parsed system. For details on the syntax, please refer to the <a class="reference internal" href="configuring_locations.html"><span class="doc">configuring locations documentation</span></a>.</p>
@@ -268,8 +268,8 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe FatInfo <span class="p">&lt;</span>Location1<span class="p">&gt;</span>,&lt;Location2&gt;
 </pre></div>
 </div>
-</div>
-<div class="section" id="columns-element-column1-option">
+</section>
+<section id="columns-element-column1-option">
 <h3><code class="docutils literal notranslate"><span class="pre">columns</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/&lt;Column1&gt;,...</span></code> Option<a class="headerlink" href="#columns-element-column1-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=Default (Alias defined below)</em></p>
 <p>Information to collect in the output. Column selection is specified using a comma-separated list of included columns.</p>
@@ -325,8 +325,8 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 <p class="admonition-title">Note</p>
 <p>The command <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">FatInfo</span> <span class="pre">/?</span></code> will print all column definitions along with the definition of aliases.</p>
 </div>
-</div>
-<div class="section" id="add-or-omit-element-columnselection-criteria-value-option">
+</section>
+<section id="add-or-omit-element-columnselection-criteria-value-option">
 <h3><code class="docutils literal notranslate"><span class="pre">add</span></code> or <code class="docutils literal notranslate"><span class="pre">omit</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/(+|-)&lt;ColumnSelection&gt;:criteria=&lt;value&gt;</span></code> Option<a class="headerlink" href="#add-or-omit-element-columnselection-criteria-value-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>FatInfo allows to selectively add or remove column content, depending on whether a specific criterion is met for a file. This can help reduce resource consumption for some columns (e.g. MD5, AuthenticodeStatus).</p>
@@ -383,11 +383,11 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 </pre></div>
 </div>
 <p>imply that if a file is smaller than 1MB but has an .zip extension, then its SHA1 is not computed. However, if the order was to be reversed, its SHA1 would be computed and added to the CSV file, since the last matching rule would be the <code class="docutils literal notranslate"><span class="pre">add</span></code> filter.</p>
-</div>
-</div>
-<div class="section" id="typical-usage-examples">
+</section>
+</section>
+<section id="typical-usage-examples">
 <h2>Typical Usage Examples<a class="headerlink" href="#typical-usage-examples" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="quick-discovery-of-volume-content">
+<section id="quick-discovery-of-volume-content">
 <h3>Quick Discovery of Volume Content<a class="headerlink" href="#quick-discovery-of-volume-content" title="Permalink to this headline">¶</a></h3>
 <p>To quickly enumerate the file system entries of FAT volumes attached to a system, the typical command line would be</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe FatInfo /default /out=VolumeEntries.csv *
@@ -407,8 +407,8 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 </pre></div>
 </div>
 <p>This syntax extracts all required information from the FAT records and does not require any extra information to be pulled from the disk. This is the subset of information that can be systematically collected on systems.</p>
-</div>
-<div class="section" id="getting-detailed-information-on-binaries">
+</section>
+<section id="getting-detailed-information-on-binaries">
 <h3>Getting Detailed Information on Binaries<a class="headerlink" href="#getting-detailed-information-on-binaries" title="Permalink to this headline">¶</a></h3>
 <p>To obtain detailed information about binaries, based on the presence of version information, the typical syntax would be</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe FatInfo /Default /+Details:HasVersionInfo /out=Details.csv F:
@@ -428,8 +428,8 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 <span class="nt">&lt;/fatinfo&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="getting-windows-pe-binaries-details">
+</section>
+<section id="getting-windows-pe-binaries-details">
 <h3>Getting Windows PE Binaries Details<a class="headerlink" href="#getting-windows-pe-binaries-details" title="Permalink to this headline">¶</a></h3>
 <p>To obtain detailed information about files that contain code, based on the presence of a valid PE Header, and excluding computing cryptographic hashes for big files, the typical syntax would be</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe FatInfo /Default /+Hashes,Details:HasPE /-Hashes:SizeGT=1MB F:
@@ -449,9 +449,9 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
 <span class="nt">&lt;/fatinfo&gt;</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -484,7 +484,7 @@ Basically, the tool enumerates the file system entries and outputs user-chosen d
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

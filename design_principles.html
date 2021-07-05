@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Design Principles &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Architecture" href="architecture.html" />
@@ -78,9 +78,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="design-principles">
+  <section id="design-principles">
 <h1>Design Principles<a class="headerlink" href="#design-principles" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="the-approach-one-binary-to-run-them-all">
+<section id="the-approach-one-binary-to-run-them-all">
 <h2>The Approach: One Binary to Run Them All<a class="headerlink" href="#the-approach-one-binary-to-run-them-all" title="Permalink to this headline">¶</a></h2>
 <p>DFIR ORC was originally developed to address the need for reliable data collection on potentially compromised systems.
 Historically, teams have been using two approaches:</p>
@@ -102,8 +102,8 @@ Processes output data which is immediately compressed into the output file, to m
 <p class="admonition-title">The main design motto behind DFIR ORC</p>
 <p><strong>Whatever it takes, whatever happens, DFIR ORC will strive to provide valid output files in a predetermined amount of time.</strong></p>
 </div>
-</div>
-<div class="section" id="choosing-your-arsenal-tools-to-embed">
+</section>
+<section id="choosing-your-arsenal-tools-to-embed">
 <h2>Choosing Your Arsenal: Tools to Embed<a class="headerlink" href="#choosing-your-arsenal-tools-to-embed" title="Permalink to this headline">¶</a></h2>
 <p>DFIR ORC can embed other tools to create a unique file that will be executed on the target systems.</p>
 <p>The first step is to define your data collection goals, to choose appropriate tools to run on machines.</p>
@@ -165,8 +165,8 @@ Processes output data which is immediately compressed into the output file, to m
 <li><p>require files to be available (configurations, dependencies, …) upon execution.</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="a-configurable-framework">
+</section>
+<section id="a-configurable-framework">
 <h2>A Configurable Framework<a class="headerlink" href="#a-configurable-framework" title="Permalink to this headline">¶</a></h2>
 <p>DFIR ORC is configurable. On top of the embedded tools, the operational binary <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> embeds
 an XML configuration listing all the tools to run and their options. This is the reason why we call <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> <em>a configured</em> binary.
@@ -181,8 +181,8 @@ We offer some ideas of criteria below.</p>
 <li><p>Analysis: if you delegate analysis to other teams, or collect data for other teams (potentially with a different need-to-know), you will organize this data in separate archives to ease the treatment process.</p></li>
 <li><p>Behavior: If a tool has known issues or is new to your arsenal, you may want to segregate its execution into a separate archive to enable the command engine to impose specific limitations.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -215,7 +215,7 @@ We offer some ideas of criteria below.</p>
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

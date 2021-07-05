@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>GetThis &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="GetSamples" href="GetSamples.html" />
@@ -87,9 +87,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="getthis">
+  <section id="getthis">
 <h1>GetThis<a class="headerlink" href="#getthis" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>GetThis was originally developed to assist with malicious sample collection but quickly evolved into a general purpose file collection tool.</p>
 <p>GetThis is using the same MFT parser as <a class="reference internal" href="NTFSInfo.html"><span class="doc">NTFSInfo</span></a>, but specifically targeted to sample collection.
@@ -107,8 +107,8 @@ For details on the MFT parser used in GetThis, please refer to <a class="referen
 <p>The copy is made by locating file extents (a.k.a. segments) on disk directly via the volume handle to avoid sharing violation and strict DACLs issues.</p>
 <p>To prevent interference from anti-virus software, it is recommended to store the samples in a password-protected archive. The encryption occurs  <em>in memory</em> when the data is extracted from the disk, before any temporary file is created (i.e. clear text samples do not hit the disk).
 To use this feature, please refer to this documentation: <a class="reference internal" href="configuring_tool_output.html#cfg-tool-output-pwd"><span class="std std-ref">Password (only for zip and 7z Format)</span></a>.</p>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>When collecting a sample, GetThis creates a file in the output directory (or archive) with the logic below to compute its file name:</p>
 <ul class="simple">
@@ -212,8 +212,8 @@ The same sample collected with the deprecated XOR pattern <code class="docutils 
 </tbody>
 </table>
 <p>An output for logging purposes can be used with the syntax found in <a class="reference internal" href="configuring_console_output.html"><span class="doc">Configuring Console Output</span></a>.</p>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>GetThis can be used in two mutually exclusive manners, etiher with command-line parameters or with an XML configuration file.
 The XML syntax is to be preferred as it provides a better access to GetThis functionalities, especially the limit settings and yara rules.</p>
@@ -244,11 +244,11 @@ The XML syntax is to be preferred as it provides a better access to GetThis func
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetThis /config=<span class="p">&lt;</span>TypicalConfig<span class="p">&gt;</span>.xml
 </pre></div>
 </div>
-<div class="section" id="getthis-element">
+<section id="getthis-element">
 <h3><code class="docutils literal notranslate"><span class="pre">getthis</span></code> Element<a class="headerlink" href="#getthis-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Root element.</p>
-<div class="section" id="attributes">
+<section id="attributes">
 <h4>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
@@ -287,9 +287,9 @@ The XML syntax is to be preferred as it provides a better access to GetThis func
 <p class="admonition-title">Important</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">hash</span></code> and <code class="docutils literal notranslate"><span class="pre">fuzzyhash</span></code> options are ignored when using <code class="docutils literal notranslate"><span class="pre">/XOR</span></code>.</p>
 </div>
-</div>
-</div>
-<div class="section" id="output-element-out-path-option">
+</section>
+</section>
+<section id="output-element-out-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#output-element-out-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=.\GetThis.7z</em></p>
 <p>This element can also be specified from the command line. For details on the <code class="docutils literal notranslate"><span class="pre">output</span></code> element syntax, please refer to the <a class="reference internal" href="configuring_tool_output.html"><span class="doc">output documentation</span></a>.</p>
@@ -312,8 +312,8 @@ The XML syntax is to be preferred as it provides a better access to GetThis func
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">/XOR</span></code> option is <strong>DEPRECATED</strong>. To prevent interference from anti-viruses, one should use a password-protected archive.</p>
 </div>
-</div>
-<div class="section" id="location-element">
+</section>
+<section id="location-element">
 <h3><code class="docutils literal notranslate"><span class="pre">location</span></code> Element<a class="headerlink" href="#location-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Selectively collect samples in specific folders inside volumes. For this purpose, one can use any syntax described in <a class="reference internal" href="configuring_locations.html"><span class="doc">Configuring Locations</span></a>.</p>
@@ -321,20 +321,20 @@ The XML syntax is to be preferred as it provides a better access to GetThis func
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetThis /sample=git.exe /out=git.7z <span class="p">&lt;</span>Location1<span class="p">&gt;</span>, &lt;Location2&gt;
 </pre></div>
 </div>
-</div>
-<div class="section" id="yara-element-or-yara-path-option">
+</section>
+<section id="yara-element-or-yara-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">yara</span></code> Element or <code class="docutils literal notranslate"><span class="pre">/yara=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#yara-element-or-yara-path-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>Used to specify yara rules. Please refer to <a class="reference internal" href="configuring_yara.html"><span class="doc">Configuring the Yara Scanner</span></a> for details on the <code class="docutils literal notranslate"><span class="pre">yara</span></code> element.
 The option should indicate the path to a file containing yara rules.</p>
-</div>
-<div class="section" id="samples-element">
+</section>
+<section id="samples-element">
 <h3><code class="docutils literal notranslate"><span class="pre">samples</span></code> Element<a class="headerlink" href="#samples-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>Describes the samples to collect.</p>
-<div class="section" id="id1">
+<section id="id1">
 <h4>Attributes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="specifying-limits">
+<section id="specifying-limits">
 <span id="getthis-limits"></span><h5>Specifying Limits<a class="headerlink" href="#specifying-limits" title="Permalink to this headline">¶</a></h5>
 <p>To help control the amount of data collected, GetThis requires limits to be specified to the number and size of samples that can be collected.
 Those can be specified using three attributes:</p>
@@ -382,8 +382,8 @@ Additionally, a single match in the <em>git</em> group cannot be larger than 50 
 <li><p>every time a sample is collected for the first <code class="docutils literal notranslate"><span class="pre">sample</span></code> element, its size is added to the total number of bytes collected for in the context of this <code class="docutils literal notranslate"><span class="pre">sample</span></code> element, but is also added to the number of bytes collected in the context of the global <code class="docutils literal notranslate"><span class="pre">samples</span></code> element.</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="retrieved-content-the-content-attribute">
+</section>
+<section id="retrieved-content-the-content-attribute">
 <h5>Retrieved Content: the Content Attribute<a class="headerlink" href="#retrieved-content-the-content-attribute" title="Permalink to this headline">¶</a></h5>
 <p>The <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute allows to define an algorithm to retrieve the data to be collected.</p>
 <p>In more details, GetThis relies on the MFT parser to find NTFS attributes matching constraints defined by <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements. The default data getting collected from a matching NTFS attribute is specified in <a class="reference internal" href="configuring_ntfs_opt.html"><span class="doc">Configuring Attributes of ntfs_find and ntfs_exclude Elements</span></a>. The <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute can be used to influence the way in which the collection of this data is realized. However, it does not influence which NTFS attribute is being collected: the <code class="docutils literal notranslate"><span class="pre">content</span></code> requirement is applied to alternate data streams and extended attributes in the same way as it is applied to the default <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> stream of files.</p>
@@ -430,10 +430,10 @@ The second element results in the collection of the strings of at least 5 and at
 <li><p><strong>_raw</strong> when raw data is collected.</p></li>
 </ul>
 <p>When using the command line, this switch can be activated with the option <code class="docutils literal notranslate"><span class="pre">/content</span></code>.</p>
-</div>
-</div>
-</div>
-<div class="section" id="ntfs-exclude-element">
+</section>
+</section>
+</section>
+<section id="ntfs-exclude-element">
 <h3><code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Element<a class="headerlink" href="#ntfs-exclude-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=yes, default=N/A</em></p>
 <p>This element allows to exclude NTFS attributes <strong>from all the searches configured in the XML file</strong>.
@@ -443,8 +443,8 @@ While the most classical use of this element is path-related, a lot more precise
 <p class="admonition-title">Warning</p>
 <p>The scope of an <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> element is the whole configuration file.</p>
 </div>
-</div>
-<div class="section" id="sample-element-sample-filename-option">
+</section>
+<section id="sample-element-sample-filename-option">
 <h3><code class="docutils literal notranslate"><span class="pre">sample</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/sample=&lt;FileName&gt;</span></code> Option<a class="headerlink" href="#sample-element-sample-filename-option" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>This element regroups <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> elements.</p>
@@ -462,15 +462,15 @@ The folder name is specified using the <code class="docutils literal notranslate
 <p class="admonition-title">Warning</p>
 <p>When using the <strong>option</strong>, a <strong>file name</strong>, rather than a file path, is required.</p>
 </div>
-</div>
-<div class="section" id="ntfs-find-element">
+</section>
+<section id="ntfs-find-element">
 <h3><code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> Element<a class="headerlink" href="#ntfs-find-element" title="Permalink to this headline">¶</a></h3>
 <p><em>optional=no, default=N/A</em></p>
 <p>It is this element which specifies a set of rules to identify the NTFS attributes to be collected.
 The complete specification of the search algorithm and the syntax to use are detailed in <a class="reference internal" href="configuring_ntfs_opt.html"><span class="doc">Configuring Attributes of ntfs_find and ntfs_exclude Elements</span></a>.
 While the most classical use of this element is path-related, it is possible to search for alternate data streams, extended attributes, streams with specific hashes, etc.</p>
-</div>
-<div class="section" id="additional-command-line-usage">
+</section>
+<section id="additional-command-line-usage">
 <h3>Additional Command-line Usage<a class="headerlink" href="#additional-command-line-usage" title="Permalink to this headline">¶</a></h3>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -490,11 +490,11 @@ While the most classical use of this element is path-related, it is possible to 
 <p class="admonition-title">Note</p>
 <p>There is no need to specify a XOR pattern. If the content is XORed by GetThis, names are prefixed by <code class="docutils literal notranslate"><span class="pre">XOR_XORPATTERN</span></code>. In this case, the <code class="docutils literal notranslate"><span class="pre">XOR_PATTERN</span></code> is used to XOR file content before being written to output directory.</p>
 </div>
-</div>
-</div>
-<div class="section" id="typical-usage-examples">
+</section>
+</section>
+<section id="typical-usage-examples">
 <h2>Typical Usage Examples<a class="headerlink" href="#typical-usage-examples" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="samples-with-wildcards">
+<section id="samples-with-wildcards">
 <h3>Samples with Wildcards<a class="headerlink" href="#samples-with-wildcards" title="Permalink to this headline">¶</a></h3>
 <p>The typical command line to collect all samples matching “ker*.dll” on the system drive would be:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetThis /nolimits /sample=ker*.dll /out=<span class="nv">%TEMP%</span> <span class="nv">%SystemDrive%</span>\
@@ -516,8 +516,8 @@ While the most classical use of this element is path-related, it is possible to 
 <span class="nt">&lt;/getthis&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="samples-from-an-alternate-data-stream">
+</section>
+<section id="samples-from-an-alternate-data-stream">
 <h3>Samples from an Alternate Data Stream<a class="headerlink" href="#samples-from-an-alternate-data-stream" title="Permalink to this headline">¶</a></h3>
 <p>The typical command line to collect all samples, residing in an <strong>Alternate Data Stream</strong> named <code class="docutils literal notranslate"><span class="pre">calc.exe</span></code> in any file of the file system is:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetThis /nolimits /sample=*:calc.exe /out=<span class="nv">%TEMP%</span> <span class="nv">%SystemDrive%</span>\
@@ -544,8 +544,8 @@ While the most classical use of this element is path-related, it is possible to 
 </pre></div>
 </div>
 <p>In this example, GetThis looks for any <strong>ADS</strong> matching Malware*.exe in a record named <code class="docutils literal notranslate"><span class="pre">HostFileName.txt</span></code>.</p>
-</div>
-<div class="section" id="samples-from-an-extended-attribute">
+</section>
+<section id="samples-from-an-extended-attribute">
 <h3>Samples from an Extended Attribute<a class="headerlink" href="#samples-from-an-extended-attribute" title="Permalink to this headline">¶</a></h3>
 <p>The syntax for <strong>Extended Attribute</strong> sample collection is typically:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetThis /sample=HostFileName.txt#Malware*.exe
@@ -568,9 +568,9 @@ While the most classical use of this element is path-related, it is possible to 
 </pre></div>
 </div>
 <p>In this example, GetThis looks for any extended attribute matching Malware*.exe in a record named <code class="docutils literal notranslate"><span class="pre">HostFileName.txt</span></code>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -603,7 +603,7 @@ While the most classical use of this element is path-related, it is possible to 
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

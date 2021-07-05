@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Tutorial &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Requirements" href="platforms.html" />
@@ -81,7 +81,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tutorial">
+  <section id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial details the steps to obtain a <strong>configured</strong> DFIR ORC binary ready for deployment.</p>
 <p>It explains which code to compile, how to embed a configuration, how to modify a configuration, the difference between compiling and configuring…
@@ -131,7 +131,7 @@ It can be adapted to work in an elevated command shell prompt.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="build">
+<section id="build">
 <h2><a class="toc-backref" href="#id1">1. Build</a><a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
 <p>This step is the only one requiring actual compilation with Microsoft’s toolchain. Instructions to compile these files from the source code are detailed <a class="reference external" href="https://github.com/DFIR-ORC/dfir-orc/blob/master/README.md">here</a>.</p>
 <p>Please follow this procedure before going further.</p>
@@ -143,7 +143,7 @@ Thus, it can behave kind of like the <em>busybox</em> tool, and be used <em>as i
 <p class="admonition-title">Important</p>
 <p>As configured binaries, unconfigured binaries <strong>require administrative privileges</strong> for execution.</p>
 </div>
-<div class="section" id="mini-challenge-1">
+<section id="mini-challenge-1">
 <h3><a class="toc-backref" href="#id2">Mini-challenge 1</a><a class="headerlink" href="#mini-challenge-1" title="Permalink to this headline">¶</a></h3>
 <p>This first step illustrates how to use unconfigured binaries to run the tools embedded by default.
 Find a command line to use <a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a> to display information about the USN journal of disk <code class="docutils literal notranslate"><span class="pre">C:</span></code>.</p>
@@ -163,9 +163,9 @@ Find a command line to use <a class="reference internal" href="NTFSUtil.html"><s
 </pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="configure">
+</section>
+</section>
+<section id="configure">
 <span id="tuto-step-2"></span><h2><a class="toc-backref" href="#id3">2. Configure</a><a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -195,7 +195,7 @@ Please refer to the short section <a class="reference internal" href="architectu
 </pre></div>
 </div>
 <p>This command yields a <em>configured</em> DFIR ORC binary (named <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> by default) in the <code class="docutils literal notranslate"><span class="pre">output</span></code> directory.</p>
-<div class="section" id="mini-challenge-2">
+<section id="mini-challenge-2">
 <h3><a class="toc-backref" href="#id4">Mini-challenge 2</a><a class="headerlink" href="#mini-challenge-2" title="Permalink to this headline">¶</a></h3>
 <p>In the configuration repository, which file describes the commands which WolfLauncher (the collection engine) is going to run when the <em>configured</em> binary is executed ?</p>
 <div class="toggle docutils container">
@@ -210,9 +210,9 @@ Please refer to the short section <a class="reference internal" href="architectu
 </div>
 <p>The main configuration file, or <a class="reference internal" href="wolf_config.html"><span class="doc">WolfLauncher configuration</span></a>, is <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_config.xml</span></code>. Basics to read and edit it are detailed in <a class="reference internal" href="#tuto-step-5"><span class="std std-ref">5. Edit Embedded Configurations</span></a>.</p>
 </div>
-</div>
-</div>
-<div class="section" id="test-the-configuration">
+</section>
+</section>
+<section id="test-the-configuration">
 <h2><a class="toc-backref" href="#id5">3. Test the Configuration</a><a class="headerlink" href="#test-the-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Once we have a <em>configured</em> DFIR ORC binary, we can start testing it!</p>
 <p>Of course, we can use it to execute one of the <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">embedded tools</span></a> (just like the <em>unconfigured</em> ones):</p>
@@ -235,7 +235,7 @@ according to the embedded configuration.</p>
 </pre></div>
 </div>
 <p>This command outputs the result below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DFIR</span><span class="o">-</span><span class="n">Orc</span> <span class="n">Version</span> <span class="mf">10.0</span><span class="o">.</span><span class="mf">0.000</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DFIR</span><span class="o">-</span><span class="n">Orc</span> <span class="n">Version</span> <span class="mf">10.0.0.000</span>
 
 <span class="n">Start</span> <span class="n">time</span>            <span class="p">:</span> <span class="mi">09</span><span class="o">/</span><span class="mi">26</span><span class="o">/</span><span class="mi">2019</span> <span class="mi">14</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mf">55.198</span> <span class="p">(</span><span class="n">UTC</span><span class="p">)</span>
 
@@ -254,7 +254,7 @@ according to the embedded configuration.</p>
 <span class="n">Repeat</span> <span class="n">Behavior</span>       <span class="p">:</span> <span class="n">No</span> <span class="k">global</span> <span class="n">override</span> <span class="nb">set</span> <span class="p">(</span><span class="n">config</span> <span class="n">behavior</span> <span class="n">used</span><span class="p">)</span>
 <span class="n">Priority</span>              <span class="p">:</span> <span class="n">Low</span>
 
-<span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Main</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Main</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span><span class="p">)</span>
+<span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Main</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Main</span><span class="mf">.7</span><span class="n">z</span><span class="p">)</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">SystemInfo</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">Processes</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetEvents</span>
@@ -266,12 +266,12 @@ according to the embedded configuration.</p>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">USNInfo</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetArtefacts</span>
 
-<span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Hives</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Hives</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span><span class="p">)</span>
+<span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Hives</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Hives</span><span class="mf">.7</span><span class="n">z</span><span class="p">)</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetSystemHives</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetUserHives</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetSamHive</span>
 
-<span class="p">[</span> <span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Yara</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Yara</span><span class="o">.</span><span class="mi">7</span><span class="n">z</span><span class="p">)</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Archive</span><span class="p">:</span> <span class="n">Yara</span> <span class="p">(</span><span class="n">file</span> <span class="ow">is</span> <span class="n">DFIR</span><span class="o">-</span><span class="n">ORC_WorkStation_jeangabook_Yara</span><span class="mf">.7</span><span class="n">z</span><span class="p">)</span>
         <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="n">Command</span> <span class="n">GetYara</span>
 
 
@@ -296,7 +296,7 @@ embedded in <code class="docutils literal notranslate"><span class="pre">DFIR-Or
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">output</span><span class="p">\</span><span class="n">DFIR-Orc</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">key</span><span class="p">+=</span><span class="n">Yara</span> <span class="p">/</span><span class="n">key</span><span class="p">-=</span><span class="n">GetSamHive</span> <span class="p">/</span><span class="n">keys</span>
 </pre></div>
 </div>
-<div class="section" id="mini-challenge-3">
+<section id="mini-challenge-3">
 <h3><a class="toc-backref" href="#id6">Mini-challenge 3</a><a class="headerlink" href="#mini-challenge-3" title="Permalink to this headline">¶</a></h3>
 <p>Write a command line allowing to only get the output of SystemInfo in the Main archive, in a folder
 named <code class="docutils literal notranslate"><span class="pre">\Temp\testing</span></code>.
@@ -331,9 +331,9 @@ Run the command to test that it works (SystemInfo is very quick).</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> detects that some archives already exist (based on the file names) and does not overwrite them by default.</p>
 </div>
-</div>
-</div>
-<div class="section" id="use-local-configuration-files">
+</section>
+</section>
+<section id="use-local-configuration-files">
 <h2><a class="toc-backref" href="#id7">4. Use Local Configuration Files</a><a class="headerlink" href="#use-local-configuration-files" title="Permalink to this headline">¶</a></h2>
 <p>A local configuration file is meant to provide some configuration options while not using a command line.
 This can be useful in some deployment scenarios.</p>
@@ -398,7 +398,7 @@ daTOT/9UylLxu1L/epiWiYtqRZOO/9i1fyqrkguIww7EjXXT3ybL5U/BakEC2Yg5
 </pre></div>
 </div>
 <p>Element <code class="docutils literal notranslate"><span class="pre">upload</span></code> is the counterpart of the <code class="docutils literal notranslate"><span class="pre">output</span></code> element to configure a <strong>remote</strong> repository as a destination for the archives.</p>
-<div class="section" id="mini-challenge-4">
+<section id="mini-challenge-4">
 <h3><a class="toc-backref" href="#id8">Mini-challenge 4</a><a class="headerlink" href="#mini-challenge-4" title="Permalink to this headline">¶</a></h3>
 <p>Combine the steps above to find a way to confirm <em>without creating any archive</em> that the local configuration file is being taken into account by the following command line.</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">output</span><span class="p">\</span><span class="n">DFIR-Orc</span><span class="p">.</span><span class="n">exe</span>
@@ -449,9 +449,9 @@ daTOT/9UylLxu1L/epiWiYtqRZOO/9i1fyqrkguIww7EjXXT3ybL5U/BakEC2Yg5
 </pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="edit-embedded-configurations">
+</section>
+</section>
+<section id="edit-embedded-configurations">
 <span id="tuto-step-5"></span><h2><a class="toc-backref" href="#id9">5. Edit Embedded Configurations</a><a class="headerlink" href="#edit-embedded-configurations" title="Permalink to this headline">¶</a></h2>
 <p>To refer to embedded tools as resources in a configuration file, a specific syntax is used.
 Please read <a class="reference internal" href="resources.html"><span class="doc">Referencing Resources in Configurations</span></a> before proceeding.</p>
@@ -516,7 +516,7 @@ The first possibility is to modify the file <code class="docutils literal notran
 <span class="p">..\</span><span class="n">DFIR-Orc</span><span class="p">.</span><span class="n">exe</span> <span class="n">toolembed</span> <span class="p">/</span><span class="n">out</span><span class="p">=..\</span><span class="n">New_DFIR-Orc</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">config</span><span class="p">=</span><span class="n">Embed</span><span class="p">.</span><span class="n">xml</span>
 </pre></div>
 </div>
-<div class="section" id="mini-challenge-5">
+<section id="mini-challenge-5">
 <h3><a class="toc-backref" href="#id10">Mini-challenge 5</a><a class="headerlink" href="#mini-challenge-5" title="Permalink to this headline">¶</a></h3>
 <p>Find how to change the yara rules used in DFIR ORC, and explain <strong>why</strong> it works.</p>
 <div class="toggle docutils container">
@@ -534,11 +534,11 @@ seems a good place to start. But how is it used ?</p>
 a resource named <code class="docutils literal notranslate"><span class="pre">res:#ruleset.yara</span></code> to collect samples matching any rules in this set.
 Changing the file <code class="docutils literal notranslate"><span class="pre">ruleset.yara</span></code> and embedding it in a new configured binary is indeed the right thing to do.</p>
 </div>
-</div>
-</div>
-<div class="section" id="the-final-challenge">
+</section>
+</section>
+<section id="the-final-challenge">
 <span id="tuto-step-6"></span><h2><a class="toc-backref" href="#id11">6. The Final Challenge</a><a class="headerlink" href="#the-final-challenge" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-few-q-a-to-warm-up">
+<section id="a-few-q-a-to-warm-up">
 <h3><a class="toc-backref" href="#id12">A Few Q&amp;A to Warm Up</a><a class="headerlink" href="#a-few-q-a-to-warm-up" title="Permalink to this headline">¶</a></h3>
 <p>Find out which of the following statements are false, and why.</p>
 <p><code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> is a configured binary, hence I can use it to run NTFSInfo.</p>
@@ -564,8 +564,8 @@ using ToolEmbed is sufficient to obtain a new configured binary.</p>
 </div>
 <p>False. ToolEmbed allows to extract resources from a configured binary, modify them and reconstruct a new configured binary. This is explained in <a class="reference internal" href="#tuto-step-5"><span class="std std-ref">5. Edit Embedded Configurations</span></a>. This is necessary to add the collection of files using GetSamples or GetThis. However, changing the timeout can be done using option <code class="docutils literal notranslate"><span class="pre">/archive_timeout</span></code> on the command line. It will supersede the default value in the embedded configuration.</p>
 </div>
-</div>
-<div class="section" id="the-final-boss">
+</section>
+<section id="the-final-boss">
 <h3><a class="toc-backref" href="#id13">The Final Boss</a><a class="headerlink" href="#the-final-boss" title="Permalink to this headline">¶</a></h3>
 <p>Great forensicators know that sometimes quick wins can be found in <code class="docutils literal notranslate"><span class="pre">Temp</span></code>.
 Create a new configured binary, which uses <a class="reference internal" href="GetThis.html"><span class="doc">GetThis</span></a> to collect specifically PE files in this directory.
@@ -615,9 +615,9 @@ We assume the file <code class="docutils literal notranslate"><span class="pre">
 </div>
 <p>Eventually, reconfiguration can be done as documented in step <a class="reference internal" href="#tuto-step-2"><span class="std std-ref">2. Configure</span></a>.</p>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -649,7 +649,7 @@ We assume the file <code class="docutils literal notranslate"><span class="pre">
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

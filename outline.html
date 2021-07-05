@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>DFIR-ORC Execution Outline &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
@@ -58,29 +58,29 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dfir-orc-execution-outline">
+  <section id="dfir-orc-execution-outline">
 <h1>DFIR-ORC Execution Outline<a class="headerlink" href="#dfir-orc-execution-outline" title="Permalink to this headline">¶</a></h1>
 <p>The DFIR-ORC Execution Outline (introduced in dfir-orc v10.0.14) is a json file to summarize the dfir-orc execution context.</p>
-<div class="section" id="dfir-orc-binary-executed">
+<section id="dfir-orc-binary-executed">
 <h2>DFIR-ORC binary executed<a class="headerlink" href="#dfir-orc-binary-executed" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>version: The schema version of the outline file</p></li>
 <li><p>dfir_orc_id: The identifier of the binary version run</p></li>
 </ul>
-<div class="section" id="example">
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
         <span class="nt">&quot;dfir_orc_id&quot;</span><span class="p">:</span> <span class="s2">&quot;v10.0.14&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;[...]&quot;</span>
+        <span class="s2">&quot;[...]&quot;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="dfir-orc-execution-context">
+</section>
+</section>
+<section id="dfir-orc-execution-context">
 <h2>DFIR-ORC execution context<a class="headerlink" href="#dfir-orc-execution-context" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>time: The time of DFIR-ORC execution in UTC</p></li>
@@ -91,7 +91,7 @@
 <li><p>archives: The archives collected and their active commands (cf <a class="reference internal" href="configuration.html"><span class="doc">Configuration</span></a>)</p></li>
 <li><p>process: Detailed WolfLauncher process information (command line, environment, user context, …)</p></li>
 </ul>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -132,9 +132,9 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="system-s-hardware-and-configuration-information">
+</section>
+</section>
+<section id="system-s-hardware-and-configuration-information">
 <h2>System’s hardware and configuration information<a class="headerlink" href="#system-s-hardware-and-configuration-information" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
@@ -165,7 +165,7 @@
 </dl>
 </li>
 </ul>
-<div class="section" id="id2">
+<section id="id2">
 <h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -287,9 +287,9 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="user-profile-information">
+</section>
+</section>
+<section id="user-profile-information">
 <h2>User Profile information<a class="headerlink" href="#user-profile-information" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>default_profile: The default profile location</p></li>
@@ -307,7 +307,7 @@
 </dl>
 </li>
 </ul>
-<div class="section" id="id3">
+<section id="id3">
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -350,9 +350,9 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -371,7 +371,7 @@
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

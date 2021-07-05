@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Configuring Tool Output &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="FatInfo" href="FatInfo.html" />
@@ -88,7 +88,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="configuring-tool-output">
+  <section id="configuring-tool-output">
 <h1>Configuring Tool Output<a class="headerlink" href="#configuring-tool-output" title="Permalink to this headline">¶</a></h1>
 <p>DFIR ORC tools configure their output in a unified way.
 The syntax is simple and straightforward:</p>
@@ -113,7 +113,7 @@ The syntax is simple and straightforward:</p>
 <p class="admonition-title">Note</p>
 <p>The option <code class="docutils literal notranslate"><span class="pre">/out</span></code> can vary in some tools typically when they have more than one output like NTFSInfo (see MyTool.exe -h for details).</p>
 </div>
-<div class="section" id="file-output">
+<section id="file-output">
 <h2>File Output<a class="headerlink" href="#file-output" title="Permalink to this headline">¶</a></h2>
 <p>The simplest form of output:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.csv
@@ -130,8 +130,8 @@ This implies that tool progress cannot be followed using tools like “tail -f�
 <li><p><a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a>,</p></li>
 <li><p><a class="reference internal" href="RegInfo.html"><span class="doc">RegInfo</span></a>.</p></li>
 </ul>
-</div>
-<div class="section" id="directory-output">
+</section>
+<section id="directory-output">
 <h2>Directory Output<a class="headerlink" href="#directory-output" title="Permalink to this headline">¶</a></h2>
 <p>Directory output takes the form:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\test
@@ -143,8 +143,8 @@ This implies that tool progress cannot be followed using tools like “tail -f�
 <li><p><a class="reference internal" href="FastFind.html"><span class="doc">FastFind</span></a>,</p></li>
 <li><p><a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a>.</p></li>
 </ul>
-</div>
-<div class="section" id="archive-output">
+</section>
+<section id="archive-output">
 <h2>Archive Output<a class="headerlink" href="#archive-output" title="Permalink to this headline">¶</a></h2>
 <p>The simplest form of output for an archive is:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.zip
@@ -163,7 +163,7 @@ This implies that tool progress cannot be followed using tools like “tail -f�
 <li><p><a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a>,</p></li>
 <li><p><a class="reference internal" href="RegInfo.html"><span class="doc">RegInfo</span></a>.</p></li>
 </ul>
-<div class="section" id="compression-only-for-zip-and-7z-format">
+<section id="compression-only-for-zip-and-7z-format">
 <h3>Compression (only for zip and 7z Format)<a class="headerlink" href="#compression-only-for-zip-and-7z-format" title="Permalink to this headline">¶</a></h3>
 <p>The level of compression in the archive can be specified using either an XML configuration file (with a <code class="docutils literal notranslate"><span class="pre">compression</span></code> attribute) or a command-line option (with the <code class="docutils literal notranslate"><span class="pre">/compression</span></code> option).
 Supported values are:</p>
@@ -181,8 +181,8 @@ Supported values are:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>MyTool.exe /out=c:\temp\foo.zip /compression=Normal
 </pre></div>
 </div>
-</div>
-<div class="section" id="password-only-for-zip-and-7z-format">
+</section>
+<section id="password-only-for-zip-and-7z-format">
 <span id="cfg-tool-output-pwd"></span><h3>Password (only for zip and 7z Format)<a class="headerlink" href="#password-only-for-zip-and-7z-format" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -197,9 +197,9 @@ Supported values are:</p>
 </div>
 <p>This password should not be regarded as a security feature but can be used to evade anti-viruses when collecting malicious samples.
 In order to encrypt archives, one should use the corresponding feature in <a class="reference internal" href="wolf_config.html#wolf-config-recipient-element"><span class="std std-ref">wolf_config</span></a>.</p>
-</div>
-</div>
-<div class="section" id="file-character-encoding">
+</section>
+</section>
+<section id="file-character-encoding">
 <h2>File Character Encoding<a class="headerlink" href="#file-character-encoding" title="Permalink to this headline">¶</a></h2>
 <p>To reduce output file size and ease file analysis on Linux systems (that seems to have issues with UTF16), the default encoding for CSV is UTF8.
 The command-line options <code class="docutils literal notranslate"><span class="pre">/utf8</span></code> and <code class="docutils literal notranslate"><span class="pre">/utf16</span></code> can be used to explicitly control the encoding of the output.</p>
@@ -211,8 +211,8 @@ The command-line options <code class="docutils literal notranslate"><span class=
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;utf8&quot;</span><span class="nt">&gt;</span>c:\temp\test.csv<span class="nt">&lt;/output&gt;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -246,7 +246,7 @@ The command-line options <code class="docutils literal notranslate"><span class=
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

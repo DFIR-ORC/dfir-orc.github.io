@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>DFIR ORC Command-line Options &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="WolfLauncher Configuration File" href="wolf_config.html" />
@@ -81,7 +81,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dfir-orc-command-line-options">
+  <section id="dfir-orc-command-line-options">
 <h1>DFIR ORC Command-line Options<a class="headerlink" href="#dfir-orc-command-line-options" title="Permalink to this headline">¶</a></h1>
 <p>DFIR ORC cannot be solely configured using command-line options. It never was and never will be possible.
 DFIR ORC is configured using XML configuration files. Command-line options are too often misused, misspelled or misunderstood
@@ -91,7 +91,7 @@ That being said, command-line options can be used to change certain behaviors of
 <p class="admonition-title">Note</p>
 <p>Options are case insensitive.</p>
 </div>
-<div class="section" id="out-outputfolder-option">
+<section id="out-outputfolder-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/out=&lt;OutputFolder&gt;</span></code> Option<a class="headerlink" href="#out-outputfolder-option" title="Permalink to this headline">¶</a></h2>
 <p>Modifies the output location of the archives. This must be an existing directory with write access for the user running <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>.</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/out=<span class="p">&lt;</span>OutputFolder&gt;
@@ -104,8 +104,8 @@ That being said, command-line options can be used to change certain behaviors of
 <p class="admonition-title">Note</p>
 <p>This option does not affect the upload location.</p>
 </div>
-</div>
-<div class="section" id="tempdir-tempfolder-option">
+</section>
+<section id="tempdir-tempfolder-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/TempDir=&lt;TempFolder&gt;</span></code> Option<a class="headerlink" href="#tempdir-tempfolder-option" title="Permalink to this headline">¶</a></h2>
 <p>Changes the temporary folder used for temporary files.</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/tempdir=<span class="p">&lt;</span>OutputFolder&gt;
@@ -114,8 +114,8 @@ That being said, command-line options can be used to change certain behaviors of
 </div>
 <p>By default, %TEMP%\WorkingTemp\ is used.</p>
 <p>This option overrides the directory defined in the <a class="reference internal" href="orc_local_config.html#orc-local-config-temporary-element"><span class="std std-ref">temporary element</span></a> in a local configuration file.</p>
-</div>
-<div class="section" id="keys-option">
+</section>
+<section id="keys-option">
 <span id="cli-options-keys"></span><h2><code class="docutils literal notranslate"><span class="pre">/Keys</span></code> Option<a class="headerlink" href="#keys-option" title="Permalink to this headline">¶</a></h2>
 <p>This option can be used to visualize the archives and commands of a configured binary <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>.
 When <code class="docutils literal notranslate"><span class="pre">/Keys</span></code> is used, no command is executed, no archives are created.</p>
@@ -169,8 +169,8 @@ Elapsed time          : 0 msecs
 </div>
 <p>An <code class="docutils literal notranslate"><span class="pre">[X]</span></code> before an archive implies that it will be collected. However, an <code class="docutils literal notranslate"><span class="pre">[X]</span></code> before a command only shows the default commands run when collecting the archive. If the archive itself is not selected, the command <strong>will not</strong> be run.
 In the previous example, the archives <code class="docutils literal notranslate"><span class="pre">Main.7z</span></code> and <code class="docutils literal notranslate"><span class="pre">Hives.7z</span></code> are computed but not <code class="docutils literal notranslate"><span class="pre">Yara.7z</span></code>.</p>
-</div>
-<div class="section" id="key-keyword-key-keyword-and-key-keyword-options">
+</section>
+<section id="key-keyword-key-keyword-and-key-keyword-options">
 <h2><code class="docutils literal notranslate"><span class="pre">/Key=&lt;Keyword&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">/+Key=&lt;Keyword&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">/-Key=&lt;Keyword&gt;</span></code> Options<a class="headerlink" href="#key-keyword-key-keyword-and-key-keyword-options" title="Permalink to this headline">¶</a></h2>
 <p>Regarding the <code class="docutils literal notranslate"><span class="pre">&lt;Keyword&gt;</span></code> value:</p>
 <ul class="simple">
@@ -205,8 +205,8 @@ In the previous example, the archives <code class="docutils literal notranslate"
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">/Keys</span></code> can be used in conjunction with <code class="docutils literal notranslate"><span class="pre">/Key</span></code>, <code class="docutils literal notranslate"><span class="pre">/+Key</span></code> and <code class="docutils literal notranslate"><span class="pre">/-Key</span></code> to visualize the command and archives actually selected to be collected.</p>
 </div>
-</div>
-<div class="section" id="childdebug-and-nochilddebug-options">
+</section>
+<section id="childdebug-and-nochilddebug-options">
 <h2><code class="docutils literal notranslate"><span class="pre">/ChildDebug</span></code> and <code class="docutils literal notranslate"><span class="pre">/NoChildDebug</span></code> Options<a class="headerlink" href="#childdebug-and-nochilddebug-options" title="Permalink to this headline">¶</a></h2>
 <p>These options respectively enable and disable the debugger of DFIR ORC.</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/ChildDebug
@@ -215,8 +215,8 @@ In the previous example, the archives <code class="docutils literal notranslate"
 </div>
 <p>The debugger is disabled by default.</p>
 <p>This option overrides the <code class="docutils literal notranslate"><span class="pre">ChildDebug</span></code> attribute set in the <a class="reference internal" href="wolf_config.html#wolf-config-wolf-element"><span class="std std-ref">wolf element</span></a>.</p>
-</div>
-<div class="section" id="once-overwrite-and-createnew-options">
+</section>
+<section id="once-overwrite-and-createnew-options">
 <h2><code class="docutils literal notranslate"><span class="pre">/Once</span></code>, <code class="docutils literal notranslate"><span class="pre">/Overwrite</span></code> and <code class="docutils literal notranslate"><span class="pre">/CreateNew</span></code> Options<a class="headerlink" href="#once-overwrite-and-createnew-options" title="Permalink to this headline">¶</a></h2>
 <p>These options control the behavior of the launcher when the output archives are already present in the output or upload location (cf. <a class="reference internal" href="wolf_config.html#wolf-config-archive-element"><span class="std std-ref">archive element</span></a>).</p>
 <p>These options apply to all archives created by the execution of <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>.</p>
@@ -226,8 +226,8 @@ In the previous example, the archives <code class="docutils literal notranslate"
 </pre></div>
 </div>
 <p>This option overrides the <code class="docutils literal notranslate"><span class="pre">repeat</span></code> attribute set in the <a class="reference internal" href="wolf_config.html#wolf-config-archive-element"><span class="std std-ref">archive element</span></a> in a WolfLauncher configuration file.</p>
-</div>
-<div class="section" id="compression-compressionlevel-option">
+</section>
+<section id="compression-compressionlevel-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/Compression=&lt;CompressionLevel&gt;</span></code> Option<a class="headerlink" href="#compression-compressionlevel-option" title="Permalink to this headline">¶</a></h2>
 <p>This option controls the level of compression for generated archives.
 Allowed values are: <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">Fastest</span></code>, <code class="docutils literal notranslate"><span class="pre">Fast</span></code>, <code class="docutils literal notranslate"><span class="pre">Normal</span></code>, <code class="docutils literal notranslate"><span class="pre">Maximum</span></code>, <code class="docutils literal notranslate"><span class="pre">Ultra</span></code>.</p>
@@ -237,8 +237,8 @@ Allowed values are: <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>By default, level <code class="docutils literal notranslate"><span class="pre">Normal</span></code> is used.</p>
 <p>This option overrides the <code class="docutils literal notranslate"><span class="pre">compression</span></code> attribute set in the <a class="reference internal" href="wolf_config.html#wolf-config-archive-element"><span class="std std-ref">archive element</span></a> in a WolfLauncher configuration file.</p>
-</div>
-<div class="section" id="archive-timeout-timeoutvalue-option">
+</section>
+<section id="archive-timeout-timeoutvalue-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/archive_timeout=&lt;TimeoutValue&gt;</span></code> Option<a class="headerlink" href="#archive-timeout-timeoutvalue-option" title="Permalink to this headline">¶</a></h2>
 <p>This option configures the number of minutes during which the archive is allowed to run <strong>after</strong> the last command finishes. In other words, this parameter is the timeout after which the archive is canceled at the end of command execution.</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/archive_timeout=10
@@ -246,8 +246,8 @@ Allowed values are: <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>By default, an archive creation has to complete within 5 minutes after the last command terminates.</p>
 <p>This option overrides the <code class="docutils literal notranslate"><span class="pre">archive_timeout</span></code> attribute set in the <a class="reference internal" href="wolf_config.html#wolf-config-archive-element"><span class="std std-ref">archive element</span></a> in a WolfLauncher configuration file.</p>
-</div>
-<div class="section" id="command-timeout-timeoutvalue-option">
+</section>
+<section id="command-timeout-timeoutvalue-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/command_timeout=&lt;TimeoutValue&gt;</span></code> Option<a class="headerlink" href="#command-timeout-timeoutvalue-option" title="Permalink to this headline">¶</a></h2>
 <p>This option configures the time span (in minutes) during which the command engine is allowed to run. In other words, this parameter configures the total amount of time, per archive, the commands can take to execute.</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/command_timeout=180
@@ -255,16 +255,16 @@ Allowed values are: <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>By default, after 3 hours, any pending command is killed, the archive is then properly completed and closed.</p>
 <p>This option overrides the attribute <code class="docutils literal notranslate"><span class="pre">command_timeout</span></code> of the <a class="reference internal" href="wolf_config.html#wolf-config-archive-element"><span class="std std-ref">archive element</span></a> in a WolfLauncher configuration file.</p>
-</div>
-<div class="section" id="tee-cleartext-option">
+</section>
+<section id="tee-cleartext-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/tee_cleartext</span></code> Option<a class="headerlink" href="#tee-cleartext-option" title="Permalink to this headline">¶</a></h2>
 <p>This option is for <strong>testing/debugging purposes only</strong>. It creates a clear text file alongside the encrypted file when DFIR ORC encrypts its output (cf <a class="reference internal" href="wolf_config.html#wolf-config-recipient-element"><span class="std std-ref">wolf recipient element</span></a>).</p>
-</div>
-<div class="section" id="no-journaling-option">
+</section>
+<section id="no-journaling-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/no_journaling</span></code> Option<a class="headerlink" href="#no-journaling-option" title="Permalink to this headline">¶</a></h2>
 <p>This option disables the journal format inside PKCS#7 CMS messages (for encrypted archives), thus directly creating the enveloped archive inside the CMS message (at the expense of a temporary clear text file created on disk).</p>
-</div>
-<div class="section" id="werdontshowui-option">
+</section>
+<section id="werdontshowui-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/WERDontShowUI</span></code> Option<a class="headerlink" href="#werdontshowui-option" title="Permalink to this headline">¶</a></h2>
 <p>When <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> and children crash (no matter whether child debug is enabled), it may happen that a user interface is shown to the user, asking for interaction.</p>
 <p>This results in a loss of concurrent execution and <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> eventually hangs (when all concurrent runs are blocked by this UI). To prevent this, the <code class="docutils literal notranslate"><span class="pre">WERDontShowUI</span></code> option temporarily disables WER UI (Microsoft Windows Error Reporting).
@@ -275,8 +275,8 @@ When DFIR ORC ends, this parameter is reset to its previous value.</p>
 </div>
 <p>By default, it is disabled (i.e. WER prompts are shown).</p>
 <p>This option overrides the <code class="docutils literal notranslate"><span class="pre">werdontshowui</span></code> attribute of the <a class="reference internal" href="wolf_config.html#wolf-config-wolf-element"><span class="std std-ref">wolf element</span></a>.</p>
-</div>
-<div class="section" id="priority-level-option">
+</section>
+<section id="priority-level-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/Priority=&lt;Level&gt;</span></code> Option<a class="headerlink" href="#priority-level-option" title="Permalink to this headline">¶</a></h2>
 <p>To avoid impact on the user experience during the tool execution, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> can be launched with a modified priority (typically below normal).</p>
 <p>Available priority values are:</p>
@@ -299,8 +299,8 @@ When DFIR ORC ends, this parameter is reset to its previous value.</p>
 </tbody>
 </table>
 <p>This option overrides the <code class="docutils literal notranslate"><span class="pre">priority</span></code> attribute of the <a class="reference internal" href="orc_local_config.html#orc-local-config-dfir-orc-element"><span class="std std-ref">dfir-orc element</span></a> in a local configuration file.</p>
-</div>
-<div class="section" id="powerstate-requirements-option">
+</section>
+<section id="powerstate-requirements-option">
 <h2><code class="docutils literal notranslate"><span class="pre">/PowerState=&lt;Requirements&gt;</span></code> Option<a class="headerlink" href="#powerstate-requirements-option" title="Permalink to this headline">¶</a></h2>
 <p>To avoid letting the computer sleep (a.k.a. going to StandBy or S3 power mode) when the user is away, this option can be used with the following values:</p>
 <ul class="simple">
@@ -311,20 +311,37 @@ When DFIR ORC ends, this parameter is reset to its previous value.</p>
 </ul>
 <p>To only prevent sleep, recommended value for this option is: <code class="docutils literal notranslate"><span class="pre">SystemRequired,AwayMode</span></code>.</p>
 <p>This option overrides the <code class="docutils literal notranslate"><span class="pre">powerstate</span></code> attribute of the <a class="reference internal" href="orc_local_config.html#orc-local-config-dfir-orc-element"><span class="std std-ref">dfir-orc element</span></a> in a local configuration file.</p>
+</section>
+<section id="nolimits-command1-command2-option">
+<h2><code class="docutils literal notranslate"><span class="pre">/NoLimits[:&lt;Command1&gt;,&lt;Command2&gt;,...]</span></code> Option<a class="headerlink" href="#nolimits-command1-command2-option" title="Permalink to this headline">¶</a></h2>
+<p>Overrides the safety limits configuration when collecting with <code class="docutils literal notranslate"><span class="pre">GetThis</span></code> and <code class="docutils literal notranslate"><span class="pre">GetSamples</span></code> subcommands.</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">/nolimits</span></code> with no value means that ALL configurated commands will have no output size limits. BEWARE: this could easily use all available storage space. As such, it is recommanded to target specific overrides by indicating one or more commands (see available list with <code class="docutils literal notranslate"><span class="pre">/Keys</span></code> option).</p>
+<p>For example:
+1. Execute the configured DFIR-ORC but overrides limits for <code class="docutils literal notranslate"><span class="pre">GetFoo</span></code> and <code class="docutils literal notranslate"><span class="pre">GetBar</span></code> commands:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>dfir-orc.exe /nolimits:GetFoo,GetBar ...
+</pre></div>
 </div>
-<div class="section" id="mothership-specific-command-line-options">
+<ol class="arabic simple" start="2">
+<li><p>Only execute <code class="docutils literal notranslate"><span class="pre">GetFoo</span></code> and overrides limits for this command:</p></li>
+</ol>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>dfir-orc.exe /key=GetFoo /nolimits
+dfir-orc.exe /key=GetFoo /nolimits:GetFoo
+</pre></div>
+</div>
+</section>
+<section id="mothership-specific-command-line-options">
 <h2>Mothership Specific Command-line Options<a class="headerlink" href="#mothership-specific-command-line-options" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="architecture.html#architecture-exec"><span class="std std-ref">Mothership mechanism</span></a> allows DFIR ORC to be executed in any compatible context (Scheduled Task, Logon Script, Startup script, x86/x64…). The configuration allows the Mothership to launch the subsequent execution which suits the context. Specific command-line options can be used to customize this behavior.</p>
-<div class="section" id="nowait-option">
+<section id="nowait-option">
 <h3><code class="docutils literal notranslate"><span class="pre">-NoWait</span></code> Option<a class="headerlink" href="#nowait-option" title="Permalink to this headline">¶</a></h3>
 <p>With this option, the mothership executes the command engine (i.e. WolfLauncher) with appropriate options (CREATE_SUSPENDED|CREATE_BREAKAWAY_FROM_JOB) and return immediately.
 This option is typically used in startup scripts which could limit the time <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> is allowed to run.</p>
-</div>
-<div class="section" id="wmi-option">
+</section>
+<section id="wmi-option">
 <h3><code class="docutils literal notranslate"><span class="pre">-WMI</span></code> Option<a class="headerlink" href="#wmi-option" title="Permalink to this headline">¶</a></h3>
 <p>With this option, the mothership executes the command engine (i.e. WolfLauncher) using WMI (the <code class="docutils literal notranslate"><span class="pre">Win32_Process::Create</span></code> method).</p>
-</div>
-<div class="section" id="preservejob-option">
+</section>
+<section id="preservejob-option">
 <h3><code class="docutils literal notranslate"><span class="pre">-PreserveJob</span></code> Option<a class="headerlink" href="#preservejob-option" title="Permalink to this headline">¶</a></h3>
 <p>With this option, the mothership <strong>does not</strong> alter the job under which it executes.
 By default, the mothership attempts to modify the current job (if needed, typically to allow JOB_OBJECT_LIMIT_BREAKAWAY_OK).</p>
@@ -332,9 +349,9 @@ By default, the mothership attempts to modify the current job (if needed, typica
 <p class="admonition-title">Warning</p>
 <p>Using this option may lead to a failure in WolfLauncher command engine if BreakAwayFromJob is not allowed. See <a class="reference internal" href="platforms.html"><span class="doc">Requirements</span></a> for more details.</p>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -367,7 +384,7 @@ By default, the mothership attempts to modify the current job (if needed, typica
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

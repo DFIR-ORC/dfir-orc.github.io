@@ -3,16 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>DFIR ORC Local Configuration File &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Embedded Tool Suite" href="embedded_tool_suite.html" />
@@ -81,7 +81,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dfir-orc-local-configuration-file">
+  <section id="dfir-orc-local-configuration-file">
 <h1>DFIR ORC Local Configuration File<a class="headerlink" href="#dfir-orc-local-configuration-file" title="Permalink to this headline">¶</a></h1>
 <p>DFIR ORC can be locally configured to specify a limited set of configuration elements. Typically, those elements are the client’s specific configuration options (like the upload method, priority, temporary folder, etc.). The local configuration can be specified using:</p>
 <blockquote>
@@ -114,11 +114,11 @@ Its point is to be exhaustive from the point of view of existing usable elements
 </div>
 <div class="line">&lt;<a class="reference external" href="#dfir-orc-element">/dfir-orc</a>&gt;</div>
 </div>
-<div class="section" id="dfir-orc-element">
+<section id="dfir-orc-element">
 <span id="orc-local-config-dfir-orc-element"></span><h2><code class="docutils literal notranslate"><span class="pre">dfir-orc</span></code> Element<a class="headerlink" href="#dfir-orc-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=no, default=N/A</em></p>
 <p>Root element</p>
-<div class="section" id="attributes">
+<section id="attributes">
 <h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><dl class="simple">
@@ -141,45 +141,45 @@ More information on power states: <a class="reference external" href="https://do
 </li>
 </ul>
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="temporary-element">
+</section>
+</section>
+<section id="temporary-element">
 <span id="orc-local-config-temporary-element"></span><h2><code class="docutils literal notranslate"><span class="pre">temporary</span></code> Element<a class="headerlink" href="#temporary-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=%temp%</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
 <p>This element configures the location of temporary files created by the tool. The inner text of this element contains the name of the folder. Environment variables will be substituted.</p>
-<div class="section" id="id8">
+<section id="id8">
 <h3>Attributes<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>None</p>
-</div>
-<div class="section" id="example">
+</section>
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;temporary&gt;</span>%Temp%\WorkingTemp<span class="nt">&lt;/temporary&gt;</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="output-element">
+</section>
+</section>
+<section id="output-element">
 <span id="orc-local-config-output-element"></span><h2><code class="docutils literal notranslate"><span class="pre">output</span></code> Element<a class="headerlink" href="#output-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=no, default=’.’</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
 <p>This element configures the folder where the various archives will be created. A local drive or a remote SMB share can be specified (in the latter, the upload syntax should be privileged to reduce network congestion). Environment variables will be substituted.</p>
-<div class="section" id="id11">
+<section id="id11">
 <h3>Attributes<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>None</p>
-</div>
-<div class="section" id="id12">
+</section>
+<section id="id12">
 <h3>Example<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output&gt;</span>%Temp%<span class="nt">&lt;/output&gt;</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="upload-element">
+</section>
+</section>
+<section id="upload-element">
 <span id="orc-local-config-upload-element"></span><h2><code class="docutils literal notranslate"><span class="pre">upload</span></code> Element<a class="headerlink" href="#upload-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=no upload</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
 <p>The upload element is used to configure an optional upload operation when an archive is created.</p>
-<div class="section" id="id15">
+<section id="id15">
 <h3>Attributes<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
@@ -245,8 +245,8 @@ More information on power states: <a class="reference external" href="https://do
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id16">
+</section>
+<section id="id16">
 <h3>Example<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;upload</span> <span class="na">job=</span><span class="s">&quot;DFIR-ORC&quot;</span> <span class="na">method=</span><span class="s">&quot;BITS&quot;</span>
   <span class="na">server=</span><span class="s">&quot;http://MyBits.MyOrg.com&quot;</span>
@@ -257,13 +257,13 @@ More information on power states: <a class="reference external" href="https://do
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="recipient-element">
+</section>
+</section>
+<section id="recipient-element">
 <span id="orc-local-config-recipient-element"></span><h2><code class="docutils literal notranslate"><span class="pre">recipient</span></code> Element<a class="headerlink" href="#recipient-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
 <p>The recipient element is used to create the list of recipients able to open the enveloped CMS archives. It basically consists of a list of encoded certificates. This element is used to add a recipient’s certificate to the list of possible recipients for individual archives. This element implies encryption of the archives specified in its compulsory archive attribute.</p>
-<div class="section" id="id19">
+<section id="id19">
 <h3>Attributes<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
@@ -277,8 +277,8 @@ More information on power states: <a class="reference external" href="https://do
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id20">
+</section>
+<section id="id20">
 <h3>Example<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;recipient</span> <span class="na">name=</span><span class="s">&#39;certfr&#39;</span> <span class="na">archive=</span><span class="s">&#39;*&#39;</span> <span class="nt">&gt;</span>
   -----BEGIN CERTIFICATE-----
@@ -303,17 +303,17 @@ More information on power states: <a class="reference external" href="https://do
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="key-element">
+</section>
+</section>
+<section id="key-element">
 <span id="orc-local-config-key-element"></span><h2><code class="docutils literal notranslate"><span class="pre">key</span></code> Element<a class="headerlink" href="#key-element" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
 <p>The key element allows to select only specific commands to be executed or archives to be generated. All non-matching keywords or archives are not executed or generated. This element is exclusive with <code class="docutils literal notranslate"><span class="pre">enable_key</span></code> and <code class="docutils literal notranslate"><span class="pre">disable_key</span></code>.</p>
-<div class="section" id="id23">
+<section id="id23">
 <h3>Attributes<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <p>None</p>
-</div>
-<div class="section" id="id24">
+</section>
+<section id="id24">
 <h3>Example<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc&gt;</span>
   <span class="nt">&lt;key&gt;</span>ORC_Quick<span class="nt">&lt;/ key&gt;</span>
@@ -322,18 +322,18 @@ More information on power states: <a class="reference external" href="https://do
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
-</div>
-</div>
-<div class="section" id="enable-key-and-disable-key-elements">
+</section>
+</section>
+<section id="enable-key-and-disable-key-elements">
 <span id="orc-local-config-enable-key-and-disable-key-elements"></span><h2><code class="docutils literal notranslate"><span class="pre">enable_key</span></code> and <code class="docutils literal notranslate"><span class="pre">disable_key</span></code> Elements<a class="headerlink" href="#enable-key-and-disable-key-elements" title="Permalink to this headline">¶</a></h2>
 <p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#dfir-orc-element">parent element: dfir-orc</a></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">enable_key</span></code> element will enable an optional archive or command (cf. <a class="reference external" href="wolf_config.html#the-archive-element">archive element</a> , <a class="reference external" href="wolf_config.html#command-element">command element</a>).
 The <code class="docutils literal notranslate"><span class="pre">disable_key</span></code> element will disable an archive generation or command execution. Elements <code class="docutils literal notranslate"><span class="pre">enable_key</span></code> and <code class="docutils literal notranslate"><span class="pre">disable_key</span></code> can be combined and repeated. All <code class="docutils literal notranslate"><span class="pre">enable_key</span></code> elements take effect before the <code class="docutils literal notranslate"><span class="pre">disable_key</span></code> elements. Keywords are case insensitive. The data in the element can be a comma separated list of keywords.</p>
-<div class="section" id="id27">
+<section id="id27">
 <h3>Attributes<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <p>None</p>
-</div>
-<div class="section" id="id28">
+</section>
+<section id="id28">
 <h3>Example<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc&gt;</span>
     <span class="nt">&lt;disable_key&gt;</span>DFIR-ORC_Detail<span class="nt">&lt;/disable_key&gt;</span>
@@ -342,9 +342,9 @@ The <code class="docutils literal notranslate"><span class="pre">disable_key</sp
 </pre></div>
 </div>
 <p><a class="reference external" href="#anchor-root">Back to Root</a></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -377,7 +377,7 @@ The <code class="docutils literal notranslate"><span class="pre">disable_key</sp
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {
