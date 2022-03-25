@@ -249,6 +249,12 @@ The wildcard ``*`` is also supported:
 
     <location shadows="yes">*</location>
 
+It is also possible to select 'newest', 'mid', 'oldest' or specific GUID of a shadow copy:
+
+.. code:: xml
+
+    <location shadows="newest,oldest,{04c16363-68ec-4f94-a956-abd80375c89f}">*</location>
+
 The ``/shadows`` option can also be used on command lines and applies to all mounted volumes otherwise selected.
 
 
@@ -381,7 +387,62 @@ For more information, please refer to `the reference page for KnownLocations <ht
     
     Known locations cannot be used as a ``location`` value.
 
+.. _configuring_locations-shadows:
+
 ``shadows`` Attribute, ``/shadows`` Option
 ------------------------------------------
 
-This option allows automatic parsing of the shadow copies on mounted volumes only. It is explained :ref:`above <configuring_locations-automatic shadow>`.
+This option enable the processing of the shadow copy volumes from all the specified ``location``. Multiple of the following values can be assigned:
+
+* ``no`` (default): Disable every volume shadow copy processing.
+* ``yes``: enable every volume shadow copy processing.
+* ``<empty>`` (shadows without value): Same as ``yes``.
+* ``oldest``: process eldest volume shadow copy.
+* ``mid``: process the "mid-N" volume shadow copy between the oldest and the newest.
+* ``newest``: process only the most recent volume shadow copy.
+* ``GUID``: process only the volume shadow copy with the specified GUID (Shadow Copy ID given by ``vssadmin list shadows``).
+
+Example enabling the processing of the ``newest`` and ``oldest`` volume shadow copy:
+
+.. code:: bat
+
+    /Shadows=oldest,newest
+
+or via the ``shadows`` attribute of the ``location`` element:
+
+.. code:: xml
+
+    <location shadows="oldest,newest">*</location>
+
+See also :ref:`above <configuring_locations-automatic shadow>`.
+
+.. _configuring_locations-exclude:
+
+``exclude`` Attribute, ``/Exclude="<DriveList>"`` Option
+--------------------------------------------------------
+Specify volume(s) to exclude from any processing. This can be particularly helpful when ``location`` value is wildcard '*'. It is also possible to exclude a "normal" volume when only its shadow copy volumes must be processed.
+
+Example processing all volumes but the 'D':
+
+.. code:: xml
+
+    <location exclude="D:">*</location>
+
+Example processing only volume shadow copy from the system drive but not the mounted volume itself:
+
+.. code:: xml
+
+    <location exclude="%SYSTEMDRIVE%" shadows="yes">%SYSTEMDRIVE%</location>
+
+Finally a XML configuration can be overloaded using the command line to remove exclusion:
+
+.. code:: bat
+
+    /Exclude=""
+
+Or specify another one:
+
+.. code:: bat
+
+    /Exclude="C:"
+

@@ -74,7 +74,6 @@ This information is, by default, stored in a CSV file named ``GetThis.csv``, whi
     SnapshotID, Snapshot associated with this entry
     SHA256, Cryptographic SHA256 hash
     SSDeep, Fuzzy hash SSDeep
-    TLSH, Trend Micro's TLSH
     YaraRules, List of the yara rules matching with the sample
 
 
@@ -148,7 +147,7 @@ Attributes
    Comma-separated list of hashes to compute for the collected samples. MD5 and SHA1 cannot be suppressed.  There is only one other possible hash algorithm for the time being: SHA256.
 
 * **fuzzyhash** *(optional=yes, default=None)*, ``/fuzzyhash="<FHash1,...>"`` option:
-    Comma-separated list of fuzzy hashes to compute for the collected samples. Possible values are SSDeep and TLSH. 
+    Comma-separated list of fuzzy hashes to compute for the collected samples. Possible values is SSDeep.
 
 .. important::
 

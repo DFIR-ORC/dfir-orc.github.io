@@ -15,7 +15,9 @@ Its point is to be exhaustive from the point of view of existing usable elements
 
 | <`wolf <#wolf-element>`_ attributes="..." >
 |    <`log <#log-element>`_ attributes="..." > *value* </log>
+|    <`console <#console-element>`_ attributes="..." > *value* </console>
 |    <`outline <#outline-element>`_ attributes="..." > > *value* </outline>
+|    <`outcome <#outcome-element>`_ attributes="..." > > *value* </outcome>
 |    <`recipient <#recipient-element>`_ attributes="..."> *value* </recipient>
 |    <`archive <#the-archive-element>`_ attributes="...">
 |        <`restrictions <#restrictions-element>`_ attributes="..." />
@@ -49,49 +51,99 @@ Attributes
 * **werdontshowui** *(optional=yes, default=WER UI will appear)*
         Configures Windows Error Reporting to prevent blocking UI in case of a crash during DFIR ORC execution. WER previous configuration is restored at the end of DFIR ORC execution.
 
-
 `Back to Root <#anchor-root>`_
+
+.. _wolf_config-log-element:
 
 ``log`` Element
 ===============
 
-*optional=yes, default=no log file*, `parent element: wolf <#wolf-element>`_
+*optional=yes, default=N/A*, `parent element: wolf <#wolf-element>`_
 
 The log element can be used to create an optional log file of DFIR ORC execution. This file will be uploaded if an <upload/> element is specified in a :doc:`DFIR ORC local configuration file <orc_local_config>`.
 
+The log message are passing through "sinks" like 'console' or 'file'. To configure log output a sink must be specified.
+
+``Console`` sink element
+-------------------------
+
+*optional=yes, default=N/A*, `parent element: log <#log-element>`_
+
 Attributes
-----------
+~~~~~~~~~~~
 
-* **name** *(optional=no, default=N/A)*
-        Base file name of the log file. The same patterns can be used as in the archive file names (cf `archive element <#the-archive-element>`_).
+* **level** *(optional=yes, default=critical)*
+        Log level, one of 'trace', 'debug', 'info' 'error', 'warning', 'critical'.
 
-        The following patterns will be automatically substituted:
+* **backtrace** *(optional=yes, default=off)*
+        Specify a log level which will trigger a log backtrace which will contain logs up to level 'debug'. Can also have the value 'off'.
 
-        ..  csv-table:: 
-            :header: Pattern, Description
-            :align: left
-            :widths: auto
+``File`` sink element
+----------------------
 
-            {ComputerName}, NetBIOS computer name
-            {FullComputerName},Fully qualified DNS name of physical computer (per GetComputerNameEx())
-            {TimeStamp}, The current date and time in the following form: YYYYMMDD_HHMMSS
-            {SystemType},"The Windows edition type running on this computer: WorkStation, Server, DomainController"
+*optional=yes, default=N/A*, `parent element: log <#log-element>`_
 
-* **disposition** *(optional=yes, default=append)*
-        Specifies if the log file should:
+Attributes
+~~~~~~~~~~~
 
-        * be appended to an existing file -> use "append"
-        * be created as a new file (and logging should fail if file exists) -> use "create_new"
-        * truncate any existing file or create a new file -> use "truncate"
+* **level** *(optional=yes, default=info)*
+        Log level, one of 'trace', 'debug', 'info' 'error', 'warning', 'critical'.
+
+* **backtrace** *(optional=yes, default=error)*
+        Specify a log level which will trigger a log backtrace which will contain logs up to level 'debug'. Can also have the value 'off'.
+
+``output`` Element
+~~~~~~~~~~~~~~~~~~~
+
+*optional=yes, default=N/A*, `parent element: file`
+
+Path to the log file. Patterns are supported as with archive element (cf `archive element <#the-archive-element>`_).
 
 Example
 --------
 
 .. code:: xml
 
-  <log disposition='truncate' >DFIR-ORC\_{SystemType}_{ComputerName}.log</log>
+    <log>
+        <console level="critical" backtrace="off"></console>
+        <file level="error" backtrace="error">
+            <output disposition="truncate">ORC_{SystemType}_{FullComputerName}_{TimeStamp}.dev.log</output>
+        </file>
+    </log>
 
 `Back to Root <#anchor-root>`_
+
+
+``console`` Element
+===================
+
+*optional=yes, default=no console output file*, `parent element: wolf <#wolf-element>`_
+
+With a configurated Orc in can be convenient to capture console output to a file but keeping console output visible. This elements is complementary to the usual logs as it is intended to be as human readable as possible.
+
+``output`` Element
+-------------------
+
+*optional=yes, default=N/A*, `parent element: console`
+
+Path to the console output file. Patterns are supported as with archive element (cf `archive element <#the-archive-element>`_).
+
+Example
+--------
+
+.. code:: xml
+
+    <console>
+        <output>ORC_{SystemType}_{FullComputerName}_{TimeStamp}.log</output>
+    </console>
+
+.. code:: bat
+
+        .\DFIR-Orc.exe /console:output=ORC_W7_COMPUTER_1010.log
+
+
+`Back to Root <#anchor-root>`_
+
 
 ``outline`` Element
 ===================
@@ -135,7 +187,51 @@ Example
 
 `Back to Root <#anchor-root>`_
 
+
+``outcome`` Element
+===================
+
+*optional=yes, default=no outcome file*, `parent element: wolf <#wolf-element>`_
+
+The :doc:`outcome <outcome>` element can be used to create an optional json file of DFIR ORC execution's summary.
+This file will also be uploaded if an <upload/> element is specified in a :doc:`DFIR ORC local configuration file <orc_local_config>`.
+
+Attributes
+----------
+
+* **name** *(optional=no, default=N/A)*
+        Base file name of the outcome file. The same patterns can be used as in the archive file names (cf `archive element <#the-archive-element>`_).
+
+        The following patterns will be automatically substituted:
+
+        ..  csv-table::
+            :header: Pattern, Description
+            :align: left
+            :widths: auto
+
+            {ComputerName}, NetBIOS computer name
+            {FullComputerName},Fully qualified DNS name of physical computer (per GetComputerNameEx())
+            {TimeStamp}, The current date and time in the following form: YYYYMMDD_HHMMSS
+            {SystemType},"The Windows edition type running on this computer: WorkStation, Server, DomainController"
+
+* **disposition** *(optional=yes, default=append)*
+        Specifies if the outcome file should:
+
+        * be appended to an existing file -> use "append"
+        * be created as a new file (and logging should fail if file exists) -> use "create_new"
+        * truncate any existing file or create a new file -> use "truncate"
+
+Example
+--------
+
+.. code:: xml
+
+  <outcome disposition='truncate' >DFIR-ORC\_{SystemType}_{ComputerName}.json</outcome>
+
+`Back to Root <#anchor-root>`_
+
 .. _wolf_config-recipient-element:
+
 
 ``recipient`` Element
 =====================

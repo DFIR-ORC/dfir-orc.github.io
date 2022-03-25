@@ -190,27 +190,27 @@ A typical RegInfo configuration file looks like:</p>
 
     <span class="nt">&lt;output</span> <span class="na">encoding=</span><span class="s">&quot;UTF16&quot;</span><span class="nt">&gt;</span>d:\test<span class="nt">&lt;/output&gt;</span>
 
-    <span class="c">&lt;!-- Fields to be included inside the result file --&gt;</span>
+    <span class="cm">&lt;!-- Fields to be included inside the result file --&gt;</span>
     <span class="nt">&lt;information&gt;</span>ComputerName,TemplateName,SearchTerm,LastModificationDate,KeyName,KeyTree,ValueName,ValueType,ValueData<span class="nt">&lt;/information&gt;</span>
 
-    <span class="c">&lt;!-- Locations to be parsed (MFT parser) --&gt;</span>
+    <span class="cm">&lt;!-- Locations to be parsed (MFT parser) --&gt;</span>
     <span class="nt">&lt;location&gt;</span>%SystemDrive%<span class="nt">&lt;/location&gt;</span>
     <span class="nt">&lt;location&gt;</span>c:\<span class="nt">&lt;/location&gt;</span>
 
-    <span class="c">&lt;!-- A search query --&gt;</span>
+    <span class="cm">&lt;!-- A search query --&gt;</span>
     <span class="nt">&lt;hive&gt;</span>
-        <span class="c">&lt;!-- FileFind like criteria on hive --&gt;</span>
+        <span class="cm">&lt;!-- FileFind like criteria on hive --&gt;</span>
         <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;SYSTEM&quot;</span> <span class="nt">/&gt;</span>
-        <span class="c">&lt;!-- Search query criteria --&gt;</span>
+        <span class="cm">&lt;!-- Search query criteria --&gt;</span>
         <span class="nt">&lt;registry_find</span> <span class="na">key_path_regex=</span><span class="s">&quot;\\ControlSet001\\Services\\[^\\]*&quot;</span> <span class="na">value_regex=</span><span class="s">&quot;.*&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/hive&gt;</span>
 
-    <span class="c">&lt;!-- Another search query --&gt;</span>
+    <span class="cm">&lt;!-- Another search query --&gt;</span>
     <span class="nt">&lt;hive&gt;</span>
-        <span class="c">&lt;!-- Path to an offline hive --&gt;</span>
+        <span class="cm">&lt;!-- Path to an offline hive --&gt;</span>
         <span class="nt">&lt;filename&gt;</span>c:\temp\SOFTWARE<span class="nt">&lt;/filename&gt;</span>
 
-        <span class="c">&lt;!-- Search query criterias --&gt;</span>
+        <span class="cm">&lt;!-- Search query criterias --&gt;</span>
         <span class="nt">&lt;registry_find</span> <span class="na">key=</span><span class="s">&quot;CurrentVersion&quot;</span> <span class="na">value=</span><span class="s">&quot;CurrentMajorVersionNumber&quot;</span> <span class="na">data_hex=</span><span class="s">&quot;0000000a&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/hive&gt;</span>
 
@@ -276,7 +276,7 @@ This element can also be specified from the command line with the <code class="d
 <p>A standard template file typically looks like :</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;reginfo_template&gt;</span>
 
-    <span class="c">&lt;!-- Query terms --&gt;</span>
+    <span class="cm">&lt;!-- Query terms --&gt;</span>
     <span class="nt">&lt;registry_find</span> <span class="na">key=</span><span class="s">&quot;Run&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;registry_find</span> <span class="na">key=</span><span class="s">&quot;RunOnce&quot;</span> <span class="na">value_regex=</span><span class="s">&quot;.*&quot;</span> <span class="nt">/&gt;</span>
 
@@ -431,7 +431,7 @@ Just like for <code class="docutils literal notranslate"><span class="pre">ntfs_
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.4.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

@@ -134,6 +134,7 @@ DFIR-Orc.exe NTFSUtil /?
 <li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#altitude-attribute-altitude-strategy-option"><code class="docutils literal notranslate"><span class="pre">altitude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Altitude=&lt;Strategy&gt;</span></code> Option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#knownlocations-attribute-knownlocations-option"><code class="docutils literal notranslate"><span class="pre">knownlocations</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/knownlocations</span></code> Option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#shadows-attribute-shadows-option"><code class="docutils literal notranslate"><span class="pre">shadows</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> Option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_locations.html#exclude-attribute-exclude-drivelist-option"><code class="docutils literal notranslate"><span class="pre">exclude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Exclude=&quot;&lt;DriveList&gt;&quot;</span></code> Option</a></li>
 </ul>
 </li>
 </ul>
@@ -155,8 +156,27 @@ DFIR-Orc.exe NTFSUtil /?
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configuring_console_output.html">Configuring Console Output, Logging</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configuring_console_output.html#usage">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#file-attribute-logfile-file-option"><code class="docutils literal notranslate"><span class="pre">file</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/logfile=&lt;File&gt;</span></code> Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_console_output.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_console_output.html#log-element"><code class="docutils literal notranslate"><span class="pre">log</span></code> Element</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#console-sink-element-log-console-option"><code class="docutils literal notranslate"><span class="pre">Console</span></code> sink element, <code class="docutils literal notranslate"><span class="pre">/log:console,...</span></code> Option</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#level-attribute-log-console-level-level-option"><code class="docutils literal notranslate"><span class="pre">level</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:console,level=&lt;Level&gt;,...</span></code> Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#backtrace-attribute-log-console-backtrace-level-option"><code class="docutils literal notranslate"><span class="pre">backtrace</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:console,backtrace=&lt;Level&gt;,...</span></code> Option</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#file-sink-element-log-file-option"><code class="docutils literal notranslate"><span class="pre">File</span></code> sink element, <code class="docutils literal notranslate"><span class="pre">/log:file,...</span></code> Option</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#level-attribute-log-file-level-level-option"><code class="docutils literal notranslate"><span class="pre">level</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:file,level=&lt;Level&gt;,...</span></code> Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#backtrace-attribute-log-file-backtrace-level-option"><code class="docutils literal notranslate"><span class="pre">backtrace</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:file,backtrace=&lt;Level&gt;,...</span></code> Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#output-element-log-file-output-path-option"><code class="docutils literal notranslate"><span class="pre">output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/log:file,output=Path&gt;,...</span></code> Option</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#syslog-sink-element-log-syslog-option"><code class="docutils literal notranslate"><span class="pre">Syslog</span></code> sink element, <code class="docutils literal notranslate"><span class="pre">/log:syslog,...</span></code> Option</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#level-attribute-log-syslog-level-level-option"><code class="docutils literal notranslate"><span class="pre">level</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,level=&lt;Level&gt;,...</span></code> Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#backtrace-attribute-log-syslog-backtrace-level-option"><code class="docutils literal notranslate"><span class="pre">backtrace</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,backtrace=&lt;Level&gt;,...</span></code> Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#host-attribute-log-syslog-host-ip4-or-ip6-option"><code class="docutils literal notranslate"><span class="pre">host</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,host=&lt;ip4_or_ip6&gt;,...</span></code> Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_console_output.html#port-attribute-log-syslog-port-port-option"><code class="docutils literal notranslate"><span class="pre">port</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,port=&lt;port&gt;,...</span></code> Option</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#noconsole-attribute-noconsole-option"><code class="docutils literal notranslate"><span class="pre">noconsole</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/noconsole</span></code> Option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#verbose-attribute-verbose-option"><code class="docutils literal notranslate"><span class="pre">verbose</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/verbose</span></code> Option</a></li>
 <li class="toctree-l3"><a class="reference internal" href="configuring_console_output.html#debug-attribute-debug-option"><code class="docutils literal notranslate"><span class="pre">debug</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/debug</span></code> Option</a></li>
@@ -213,7 +233,7 @@ DFIR-Orc.exe NTFSUtil /?
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.4.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

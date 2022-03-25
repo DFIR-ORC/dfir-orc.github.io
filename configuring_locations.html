@@ -296,6 +296,10 @@ This feature can be enabled by adding the attribute <code class="docutils litera
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">shadows=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>*<span class="nt">&lt;/location&gt;</span>
 </pre></div>
 </div>
+<p>It is also possible to select ‘newest’, ‘mid’, ‘oldest’ or specific GUID of a shadow copy:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">shadows=</span><span class="s">&quot;newest,oldest,{04c16363-68ec-4f94-a956-abd80375c89f}&quot;</span><span class="nt">&gt;</span>*<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> option can also be used on command lines and applies to all mounted volumes otherwise selected.</p>
 </section>
 </section>
@@ -477,8 +481,46 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 </div>
 </section>
 <section id="shadows-attribute-shadows-option">
-<h3><code class="docutils literal notranslate"><span class="pre">shadows</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> Option<a class="headerlink" href="#shadows-attribute-shadows-option" title="Permalink to this headline">¶</a></h3>
-<p>This option allows automatic parsing of the shadow copies on mounted volumes only. It is explained <a class="reference internal" href="#configuring-locations-automatic-shadow"><span class="std std-ref">above</span></a>.</p>
+<span id="configuring-locations-shadows"></span><h3><code class="docutils literal notranslate"><span class="pre">shadows</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> Option<a class="headerlink" href="#shadows-attribute-shadows-option" title="Permalink to this headline">¶</a></h3>
+<p>This option enable the processing of the shadow copy volumes from all the specified <code class="docutils literal notranslate"><span class="pre">location</span></code>. Multiple of the following values can be assigned:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">no</span></code> (default): Disable every volume shadow copy processing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yes</span></code>: enable every volume shadow copy processing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;empty&gt;</span></code> (shadows without value): Same as <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oldest</span></code>: process eldest volume shadow copy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mid</span></code>: process the “mid-N” volume shadow copy between the oldest and the newest.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">newest</span></code>: process only the most recent volume shadow copy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GUID</span></code>: process only the volume shadow copy with the specified GUID (Shadow Copy ID given by <code class="docutils literal notranslate"><span class="pre">vssadmin</span> <span class="pre">list</span> <span class="pre">shadows</span></code>).</p></li>
+</ul>
+<p>Example enabling the processing of the <code class="docutils literal notranslate"><span class="pre">newest</span></code> and <code class="docutils literal notranslate"><span class="pre">oldest</span></code> volume shadow copy:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/Shadows=oldest,newest
+</pre></div>
+</div>
+<p>or via the <code class="docutils literal notranslate"><span class="pre">shadows</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">location</span></code> element:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">shadows=</span><span class="s">&quot;oldest,newest&quot;</span><span class="nt">&gt;</span>*<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>See also <a class="reference internal" href="#configuring-locations-automatic-shadow"><span class="std std-ref">above</span></a>.</p>
+</section>
+<section id="exclude-attribute-exclude-drivelist-option">
+<span id="configuring-locations-exclude"></span><h3><code class="docutils literal notranslate"><span class="pre">exclude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Exclude=&quot;&lt;DriveList&gt;&quot;</span></code> Option<a class="headerlink" href="#exclude-attribute-exclude-drivelist-option" title="Permalink to this headline">¶</a></h3>
+<p>Specify volume(s) to exclude from any processing. This can be particularly helpful when <code class="docutils literal notranslate"><span class="pre">location</span></code> value is wildcard ‘*’. It is also possible to exclude a “normal” volume when only its shadow copy volumes must be processed.</p>
+<p>Example processing all volumes but the ‘D’:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">exclude=</span><span class="s">&quot;D:&quot;</span><span class="nt">&gt;</span>*<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>Example processing only volume shadow copy from the system drive but not the mounted volume itself:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span> <span class="na">exclude=</span><span class="s">&quot;%SYSTEMDRIVE%&quot;</span> <span class="na">shadows=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>%SYSTEMDRIVE%<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+<p>Finally a XML configuration can be overloaded using the command line to remove exclusion:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/Exclude=<span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Or specify another one:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/Exclude=<span class="s2">&quot;C:&quot;</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -515,7 +557,7 @@ This allows the MFT to be parsed without malware potentially intervening in the 
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.4.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

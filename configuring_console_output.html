@@ -90,25 +90,102 @@
             
   <section id="configuring-console-output-logging">
 <h1>Configuring Console Output, Logging<a class="headerlink" href="#configuring-console-output-logging" title="Permalink to this headline">¶</a></h1>
-<p>Tools default console output is sent to the default output console (CONOUT$).
-It can be configured to log into a file, output verbose logs, and/or print information to an attached debugger console.</p>
+<p>Multiple log output are available and they can be use simultaneously. Existing output are console, file and limited syslog.</p>
+<p><strong>Syslog use is currently limited to WolfLauncher high level logs</strong>.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>In XML configuration file, the console output is configured within the <code class="docutils literal notranslate"><span class="pre">logging</span></code> element.</p>
-<section id="file-attribute-logfile-file-option">
-<h3><code class="docutils literal notranslate"><span class="pre">file</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/logfile=&lt;File&gt;</span></code> Option<a class="headerlink" href="#file-attribute-logfile-file-option" title="Permalink to this headline">¶</a></h3>
-<p>Logs to a file. The log file is created if it does not exist or truncated if it does.
-The containing folder must exist and be writeable (or no logging is performed).</p>
-<p>Unlike console output, the logging is only written to the file every 1048576 bytes (or 1MB) and at the end of the tool execution.
-This implies that tool progress cannot be followed from log file using “tail -f” tools.</p>
-<blockquote>
-<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;logging</span> <span class="na">file=</span><span class="s">&quot;c:\Temp\dfir-orc.log&quot;</span><span class="nt">/&gt;</span>
+<p>In XML configuration file, the console output and the file output are configured within the <code class="docutils literal notranslate"><span class="pre">log</span></code> element.</p>
+</section>
+<section id="log-element">
+<h2><code class="docutils literal notranslate"><span class="pre">log</span></code> Element<a class="headerlink" href="#log-element" title="Permalink to this headline">¶</a></h2>
+<p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The log element can be used to create an optional log file of DFIR ORC execution. This file will be uploaded if an &lt;upload/&gt; element is specified in a <a class="reference internal" href="orc_local_config.html"><span class="doc">DFIR ORC local configuration file</span></a>.</p>
+<p>The log message are passing through “sinks” like ‘console’ or ‘file’. To configure log output a sink must be specified.</p>
+<section id="console-sink-element-log-console-option">
+<h3><code class="docutils literal notranslate"><span class="pre">Console</span></code> sink element, <code class="docutils literal notranslate"><span class="pre">/log:console,...</span></code> Option<a class="headerlink" href="#console-sink-element-log-console-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em>, <cite>parent element: log</cite></p>
+<section id="level-attribute-log-console-level-level-option">
+<h4><code class="docutils literal notranslate"><span class="pre">level</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:console,level=&lt;Level&gt;,...</span></code> Option<a class="headerlink" href="#level-attribute-log-console-level-level-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=critical</em>, <cite>parent element: console</cite></p>
+<p>Log level is one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’.</p>
+</section>
+<section id="backtrace-attribute-log-console-backtrace-level-option">
+<h4><code class="docutils literal notranslate"><span class="pre">backtrace</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:console,backtrace=&lt;Level&gt;,...</span></code> Option<a class="headerlink" href="#backtrace-attribute-log-console-backtrace-level-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=off</em>, <cite>parent element: console</cite></p>
+<p>Specify a log level which will trigger a log backtrace which will contain logs up to level ‘debug’.</p>
+<p>Value is one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’, off.</p>
+</section>
+</section>
+<section id="file-sink-element-log-file-option">
+<h3><code class="docutils literal notranslate"><span class="pre">File</span></code> sink element, <code class="docutils literal notranslate"><span class="pre">/log:file,...</span></code> Option<a class="headerlink" href="#file-sink-element-log-file-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em>, <cite>parent element: log</cite></p>
+<p>The logging can be written to the file at the end of the tool execution.
+This implies that tool progress cannot be followed from log file using “tail</p>
+<section id="level-attribute-log-file-level-level-option">
+<h4><code class="docutils literal notranslate"><span class="pre">level</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:file,level=&lt;Level&gt;,...</span></code> Option<a class="headerlink" href="#level-attribute-log-file-level-level-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=info</em>, <cite>parent element: file</cite></p>
+<p>Log level is one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’.</p>
+</section>
+<section id="backtrace-attribute-log-file-backtrace-level-option">
+<h4><code class="docutils literal notranslate"><span class="pre">backtrace</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:file,backtrace=&lt;Level&gt;,...</span></code> Option<a class="headerlink" href="#backtrace-attribute-log-file-backtrace-level-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=error</em>, <cite>parent element: file</cite></p>
+<p>Specify a log level which will trigger a log backtrace which will contain logs up to level ‘debug’.</p>
+<p>Value is one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’, off.</p>
+</section>
+<section id="output-element-log-file-output-path-option">
+<h4><code class="docutils literal notranslate"><span class="pre">output</span></code> Element, <code class="docutils literal notranslate"><span class="pre">/log:file,output=Path&gt;,...</span></code> Option<a class="headerlink" href="#output-element-log-file-output-path-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=N/A</em>, <cite>parent element: file</cite></p>
+<p>Path to the log file. Patterns are supported as with archive element (cf <a class="reference external" href="#the-archive-element">archive element</a>).</p>
+</section>
+</section>
+<section id="syslog-sink-element-log-syslog-option">
+<h3><code class="docutils literal notranslate"><span class="pre">Syslog</span></code> sink element, <code class="docutils literal notranslate"><span class="pre">/log:syslog,...</span></code> Option<a class="headerlink" href="#syslog-sink-element-log-syslog-option" title="Permalink to this headline">¶</a></h3>
+<p><em>optional=yes, default=N/A</em>, <cite>parent element: log</cite></p>
+<p>Redirect high level logs to a syslog server.</p>
+<p><strong>Currently ‘syslog’ use is restricted to WolfLauncher</strong>.</p>
+<section id="level-attribute-log-syslog-level-level-option">
+<h4><code class="docutils literal notranslate"><span class="pre">level</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,level=&lt;Level&gt;,...</span></code> Option<a class="headerlink" href="#level-attribute-log-syslog-level-level-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=info</em>, <cite>parent element: syslog</cite></p>
+<p>Log level is one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’.</p>
+</section>
+<section id="backtrace-attribute-log-syslog-backtrace-level-option">
+<h4><code class="docutils literal notranslate"><span class="pre">backtrace</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,backtrace=&lt;Level&gt;,...</span></code> Option<a class="headerlink" href="#backtrace-attribute-log-syslog-backtrace-level-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=off</em>, <cite>parent element: syslog</cite></p>
+<p>Specify a log level which will trigger a log backtrace which will contain logs up to level ‘debug’.</p>
+<p>Value is one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’, off.</p>
+</section>
+<section id="host-attribute-log-syslog-host-ip4-or-ip6-option">
+<h4><code class="docutils literal notranslate"><span class="pre">host</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,host=&lt;ip4_or_ip6&gt;,...</span></code> Option<a class="headerlink" href="#host-attribute-log-syslog-host-ip4-or-ip6-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=no, default=N/A</em>, <cite>parent element: syslog</cite></p>
+<p>Address of the syslog server</p>
+</section>
+<section id="port-attribute-log-syslog-port-port-option">
+<h4><code class="docutils literal notranslate"><span class="pre">port</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/log:syslog,port=&lt;port&gt;,...</span></code> Option<a class="headerlink" href="#port-attribute-log-syslog-port-port-option" title="Permalink to this headline">¶</a></h4>
+<p><em>optional=yes, default=514</em>, <cite>parent element: syslog</cite></p>
+<p>Port of the syslog server.</p>
+</section>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;log&gt;</span>
+    <span class="nt">&lt;console</span> <span class="na">level=</span><span class="s">&quot;critical&quot;</span> <span class="na">backtrace=</span><span class="s">&quot;off&quot;</span><span class="nt">&gt;&lt;/console&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">level=</span><span class="s">&quot;error&quot;</span> <span class="na">backtrace=</span><span class="s">&quot;error&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;output</span> <span class="na">disposition=</span><span class="s">&quot;truncate&quot;</span><span class="nt">&gt;</span>ORC_{SystemType}_{FullComputerName}_{TimeStamp}.dev.log<span class="nt">&lt;/output&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+    <span class="nt">&lt;syslog&gt;</span>
+        <span class="nt">&lt;host&gt;</span>127.0.0.1<span class="nt">&lt;/host&gt;</span>
+        <span class="nt">&lt;port&gt;</span>514<span class="nt">&lt;/port&gt;</span>
+    <span class="nt">&lt;/syslog&gt;</span>
+<span class="nt">&lt;/log&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">logfile</span><span class="o">=</span><span class="n">c</span><span class="p">:</span>\<span class="n">Temp</span>\<span class="n">dfir</span><span class="o">-</span><span class="n">orc</span><span class="o">.</span><span class="n">log</span>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>dfir-orc.exe \
+    /log:console,level=critical,backtrace=off \
+    /log:file,level=debug,backtrace=error,output=<span class="s2">&quot;dfir-orc.log&quot;</span> \
+    /log:syslog,host=127.0.0.1,port=514 ...
 </pre></div>
 </div>
-</div></blockquote>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
 </section>
 <section id="noconsole-attribute-noconsole-option">
 <h3><code class="docutils literal notranslate"><span class="pre">noconsole</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/noconsole</span></code> Option<a class="headerlink" href="#noconsole-attribute-noconsole-option" title="Permalink to this headline">¶</a></h3>
@@ -124,7 +201,7 @@ This implies that tool progress cannot be followed from log file using “tail -
 </section>
 <section id="verbose-attribute-verbose-option">
 <h3><code class="docutils literal notranslate"><span class="pre">verbose</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/verbose</span></code> Option<a class="headerlink" href="#verbose-attribute-verbose-option" title="Permalink to this headline">¶</a></h3>
-<p>Enables verbose output</p>
+<p>Enables verbose output. <strong>XML is deprecated</strong>.</p>
 <blockquote>
 <div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;logging</span> <span class="na">verbose=</span><span class="s">&quot;&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
@@ -136,7 +213,7 @@ This implies that tool progress cannot be followed from log file using “tail -
 </section>
 <section id="debug-attribute-debug-option">
 <h3><code class="docutils literal notranslate"><span class="pre">debug</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/debug</span></code> Option<a class="headerlink" href="#debug-attribute-debug-option" title="Permalink to this headline">¶</a></h3>
-<p>Enables debug logging. The debug mode also adds debug related traces like source file name and line number where the output is logged.</p>
+<p>Enables debug logging for Console and File log output. <strong>XML is deprecated</strong>.</p>
 <blockquote>
 <div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;logging</span> <span class="na">debug=</span><span class="s">&quot;&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
@@ -146,18 +223,14 @@ This implies that tool progress cannot be followed from log file using “tail -
 </div>
 </div></blockquote>
 <p>Example of debug logging:</p>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>[NTFSInfo_Output.cpp:86] Orc.Exe Version 10.0
-[NTFSInfo_Output.cpp:87] Start time: 10/08/2019 12:47:50.159 (UTC)
-[NTFSInfo_Output.cpp:89] Walker used  : MFT
-[NTFSInfo_Output.cpp:90] Output file  : NTFSInfo.csv
-[NTFSInfo_Output.cpp:94]
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>2021-02-08T17:43:41.200Z [I] WolfLauncher v10.1.0-rc3-115-ge4123652(orc.git 66613f2cdbc7fd9241eb9acabfab7a6ac19a242b
 </pre></div>
 </div>
 </section>
 </section>
 <section id="typical-usage-example">
 <h2>Typical Usage Example<a class="headerlink" href="#typical-usage-example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>.\DFIR-Orc.exe NTFSInfo /noconsole /debug /logfile=c:\temp\ntfsinfo.log
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>.\DFIR-Orc.exe NTFSInfo /noconsole /debug /log:file,level=error,output=c:\temp\ntfsinfo.log
 </pre></div>
 </div>
 <p>This example does not output anything to the console (quiet mode), log information directly into an attached debugger and create “c:\temp\ntfsinfo.log” containing the console output.</p>
@@ -200,7 +273,7 @@ This implies that tool progress cannot be followed from log file using “tail -
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.0.2.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.4.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {
