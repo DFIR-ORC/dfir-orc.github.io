@@ -19,6 +19,7 @@ Its point is to be exhaustive from the point of view of existing usable elements
 |    <`outline <#outline-element>`_ attributes="..." > > *value* </outline>
 |    <`outcome <#outcome-element>`_ attributes="..." > > *value* </outcome>
 |    <`recipient <#recipient-element>`_ attributes="..."> *value* </recipient>
+|    <`upload <#upload-element>`_ *attributes="..."* />
 |    <`archive <#the-archive-element>`_ attributes="...">
 |        <`restrictions <#restrictions-element>`_ attributes="..." />
 |        <`command <#command-element>`_ attributes="..." >
@@ -261,6 +262,61 @@ Example
 
 `Back to Root <#anchor-root>`_
 
+.. _wolf_config-upload-element:
+
+
+``upload`` Element
+==================
+
+*optional=yes, default=N/A,* `parent element: wolf <#wolf-element>`_
+
+The upload element is used to configure an optional upload operation when an archive is created.
+
+Attributes
+----------
+
+* **job** *(optional=yes, default=none)*
+        Describes the upload operation.
+* **method** *(optional=no, default=N/A)*
+        Describes the method to upload the files. Currently only "filecopy" (uses SMB) or "BITS" are allowed values.
+* **server** *(optional=no, default=N/A)*
+        Specifies the server name (e.g. `file://servername` or `http://servername`, or `https://servername`) when using BITS or SMB.
+* **path** *(optional=no, default= / or \\ depending on the method)*
+        Specifies the file share or folder for the upload
+* **user** *(optional=yes, default=the current user (executing DFIR ORC))*
+        Specifies the user name to be used to connect to the remote server.
+* **password** *(optional=yes, default=N/A)*
+        Specifies the password to use (for the user defined above)
+* **authscheme** *(optional=yes, default=Negotiate (if a user name is specified, anonymous otherwise))*
+        Specifies the authentication scheme for the connection. Possible scheme values are:
+
+        * Anonymous
+        * Basic
+        * NTLM
+        * Kerberos
+        * Negotiate
+* **operation** *(optional=yes, default=copy)*
+        "copy" or "move" the archives to the upload server.
+* **mode** *(optional=yes, default=sync)*
+        "sync" or "async": upload can be synchronous or asynchronous (asynchronous allows DFIR ORC to exit prior to BITS jobs completes). "async" is **not** supported for "filecopy" method.
+* **include** *(optional=yes, default=none)*
+        Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, that determine whether an output archive from ``DFIR-Orc.exe`` will be uploaded to the specified location. When missing, all archives are uploaded (if not explicitly excluded, see below). When specified, only archives whose name matches one of the patterns will be uploaded.
+* **exclude** *(optional=yes, default=none)*
+        Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, that determine whether an output archive should not be uploaded. When excluded, an output archive is left intact in the output directory (i.e. regardless of the ``operation`` attribute). The ``exclude`` attribute takes precedence over the ``include`` attribute, meaning an archive whose name matches both ``include`` and ``exclude`` patterns will be excluded.
+
+Example
+-------
+
+.. code:: xml
+
+    <upload job="DFIR-ORC" method="BITS"
+      server="http://MyBits.MyOrg.com"
+      path="upload"
+      user="MyORG\BITSUploadClient" password="P@ssw0rd!"
+      operation="move"
+      include="DFIR-ORC_*_Hives.7z" />
+
+`Back to Root <#anchor-root>`_
 
 .. _the-archive-element:
 

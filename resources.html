@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Referencing Resources in Configurations &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,7 +12,9 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="DFIR ORC Command-line Options" href="cli_options.html" />
@@ -82,9 +84,9 @@
           <div class="body" role="main">
             
   <section id="referencing-resources-in-configurations">
-<h1>Referencing Resources in Configurations<a class="headerlink" href="#referencing-resources-in-configurations" title="Permalink to this headline">¶</a></h1>
+<h1>Referencing Resources in Configurations<a class="headerlink" href="#referencing-resources-in-configurations" title="Permalink to this heading">¶</a></h1>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">¶</a></h2>
 <p>The section <a class="reference internal" href="architecture.html#architecture-config-process"><span class="std std-ref">Configuration Process</span></a> explains the embedding of tools as resources of configured and unconfigured binaries.
 To reference an embedded resource, Mothership and WolfLauncher use the syntax below. Configuration files rely on these notations.</p>
 <ul>
@@ -104,8 +106,8 @@ To reference an embedded resource, Mothership and WolfLauncher use the syntax be
 </div>
 <p>For example, the string <code class="docutils literal notranslate"><span class="pre">7z:#Tools|autorunsc.exe</span></code> will reference the resource autorunsc.exe in the 7zip archive named Tools. Such a resource is created by the following <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> XML configuration:</p>
 <blockquote>
-<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&quot;Tools&quot;</span> <span class="na">format=</span><span class="s">&quot;7z&quot;</span> <span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;autorunsc.exe&quot;</span> <span class="na">path=</span><span class="s">&quot;.\tools\autorunsc.exe&quot;</span><span class="nt">/&gt;</span>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Tools&quot;</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;7z&quot;</span><span class="w"> </span><span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;autorunsc.exe&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;.\tools\autorunsc.exe&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/archive&gt;</span>
 </pre></div>
 </div>
@@ -119,13 +121,13 @@ the name of the tool as argument. Hence, the command line of the new process wou
 </ul>
 </section>
 <section id="well-known-resources-or-variables">
-<h2>Well-known Resources or Variables<a class="headerlink" href="#well-known-resources-or-variables" title="Permalink to this headline">¶</a></h2>
+<h2>Well-known Resources or Variables<a class="headerlink" href="#well-known-resources-or-variables" title="Permalink to this heading">¶</a></h2>
 <p>Below are listed well-known resources and variables defined in DFIR ORC.</p>
-<table class="colwidths-given docutils align-default">
+<table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 50%" />
-<col style="width: 25%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+<col style="width: 25.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -230,7 +232,7 @@ the name of the tool as argument. Hence, the command line of the new process wou
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.4.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

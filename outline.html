@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>DFIR-ORC Execution Outline &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,7 +12,9 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
@@ -59,29 +61,29 @@
           <div class="body" role="main">
             
   <section id="dfir-orc-execution-outline">
-<h1>DFIR-ORC Execution Outline<a class="headerlink" href="#dfir-orc-execution-outline" title="Permalink to this headline">¶</a></h1>
+<h1>DFIR-ORC Execution Outline<a class="headerlink" href="#dfir-orc-execution-outline" title="Permalink to this heading">¶</a></h1>
 <p>The DFIR-ORC Execution Outline (introduced in dfir-orc v10.0.14) is a json file to summarize the dfir-orc execution context.</p>
 <section id="dfir-orc-binary-executed">
-<h2>DFIR-ORC binary executed<a class="headerlink" href="#dfir-orc-binary-executed" title="Permalink to this headline">¶</a></h2>
+<h2>DFIR-ORC binary executed<a class="headerlink" href="#dfir-orc-binary-executed" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>version: The schema version of the outline file</p></li>
 <li><p>dfir_orc_id: The identifier of the binary version run</p></li>
 </ul>
 <section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;dfir_orc_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v10.0.14&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;[...]&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;dfir_orc_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v10.0.14&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;[...]&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="dfir-orc-execution-context">
-<h2>DFIR-ORC execution context<a class="headerlink" href="#dfir-orc-execution-context" title="Permalink to this headline">¶</a></h2>
+<h2>DFIR-ORC execution context<a class="headerlink" href="#dfir-orc-execution-context" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>time: The time of DFIR-ORC execution in UTC</p></li>
 <li><p>timestamp: The timestamp replacement string used throughout this DFIR-ORC execution in the following form: YYYYMMDD_HHMMSS (cf <a class="reference internal" href="wolf_config.html"><span class="doc">WolfLauncher configuration</span></a>)</p></li>
@@ -92,50 +94,50 @@
 <li><p>process: Detailed WolfLauncher process information (command line, environment, user context, …)</p></li>
 </ul>
 <section id="id1">
-<h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-31 10:51:20.937&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20200731_105120&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;C:\\temp\\dir-orc.exe\&quot;&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\temp&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;temp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\WorkingTemp&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;archives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;keyword&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORC_Archive&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORC_WorkStation_Machine_Archive.7z&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;... list of commands run in this archive (by their keyword)&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">]</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">],</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;process&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;binary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\DFIR-Orc_x64.exe&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;syswow64&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;command_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\DFIR-Orc_x64.exe\&quot; WolfLauncher&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName\\UserName&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;SID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-21-164153534902-4134548383802-265243332323-1001&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;elevated&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English (United States)&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPUTERNAME&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;Value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;[...]&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-31 10:51:20.937&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20200731_105120&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;C:\\temp\\dir-orc.exe\&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\temp&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;temp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\WorkingTemp&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;archives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;keyword&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORC_Archive&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORC_WorkStation_Machine_Archive.7z&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;... list of commands run in this archive (by their keyword)&quot;</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;process&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;binary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\DFIR-Orc_x64.exe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;syswow64&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;command_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;C:\\Users\\Jean\\AppData\\Local\\Temp\\DFIR-Orc_x64.exe\&quot; WolfLauncher&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName\\UserName&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;SID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-21-164153534902-4134548383802-265243332323-1001&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;elevated&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English (United States)&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPUTERNAME&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;Value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;[...]&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="system-s-hardware-and-configuration-information">
-<h2>System’s hardware and configuration information<a class="headerlink" href="#system-s-hardware-and-configuration-information" title="Permalink to this headline">¶</a></h2>
+<h2>System’s hardware and configuration information<a class="headerlink" href="#system-s-hardware-and-configuration-information" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
 <dt>system</dt><dd><ul>
@@ -166,131 +168,131 @@
 </li>
 </ul>
 <section id="id2">
-<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;system&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;fullname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName.Domain.com&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WorkStation&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;architecture&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x64&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;operating_system&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Microsoft Windows 10 Enterprise Edition (build 19041), 64-bit&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English (United States)&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;OSBuild#19041&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;RTM&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;Release#2004&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;Windows10&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;WorkStation&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;x64&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">],</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;time_zone&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;daylight&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Romance Daylight Time&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;daylight_bias&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-60</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;standard&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Romance Standard Time&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;standard_bias&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;current_bias&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-60</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;daylight&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;qfe&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                    </span><span class="p">{</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;hotfix_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KB4565627&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;installed_on&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7/14/2020&quot;</span><span class="w"></span>
-<span class="w">                    </span><span class="p">},</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;[...]&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">]</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;physical_drives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\\\.\\PHYSICALDRIVE0&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fixed hard disk media&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512105932800</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;[...]&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">],</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;mounted_volumes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Windows&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3471674564</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;file_system&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NTFS&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\\\?\\Volume{214de6b9-8fa1-4b0e-9e83-3b41cdb194f9}\\&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;is_boot&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;is_system&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128178376704</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;freespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15089700864</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fixed&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;[...]&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">],</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;physical_memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;current_load&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;physical&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">17097428992</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;pagefile&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">22244237312</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;available_physical&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7437279232</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;available_pagefile&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8191057920</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;cpu&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Intel64 Family 6 Model 142 Stepping 10&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;cores&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;enabled_cores&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;logical_processors&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">],</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;adapter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                    </span><span class="p">{</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{AB41C39A-E91B-4DA1-B697-74FF38F4BEA0}&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;friendly_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wi-Fi&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Marvell AVASTAR Wireless-AC Network Controller&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;physical&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F0-6E-B-CF-9D-56&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;dns_suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;home&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2a01:cb04:119:5600:b475:1fbb:8110:8dd1&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span><span class="w"></span>
-<span class="w">                            </span><span class="p">},</span><span class="w"></span>
-<span class="w">                            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2a01:cb04:119:5600:d77:2a0:bdd8:6835&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span><span class="w"></span>
-<span class="w">                            </span><span class="p">},</span><span class="w"></span>
-<span class="w">                            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fe80::b475:1fbb:8110:8dd1%22&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span><span class="w"></span>
-<span class="w">                            </span><span class="p">},</span><span class="w"></span>
-<span class="w">                            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;ipv4&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.46&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span><span class="w"></span>
-<span class="w">                            </span><span class="p">}</span><span class="w"></span>
-<span class="w">                        </span><span class="p">],</span><span class="w"></span>
-<span class="w">                        </span><span class="nt">&quot;dns_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fe80::a21b:29ff:feff:4300%22&quot;</span><span class="w"></span>
-<span class="w">                            </span><span class="p">},</span><span class="w"></span>
-<span class="w">                            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                                </span><span class="nt">&quot;ipv4&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.1&quot;</span><span class="w"></span>
-<span class="w">                            </span><span class="p">}</span><span class="w"></span>
-<span class="w">                        </span><span class="p">]</span><span class="w"></span>
-<span class="w">                    </span><span class="p">},</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;[...]&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">]</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;system&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;fullname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName.Domain.com&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WorkStation&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;architecture&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x64&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;operating_system&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Microsoft Windows 10 Enterprise Edition (build 19041), 64-bit&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English (United States)&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;OSBuild#19041&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;RTM&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;Release#2004&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;Windows10&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;WorkStation&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;x64&quot;</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;time_zone&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;daylight&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Romance Daylight Time&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;daylight_bias&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-60</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;standard&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Romance Standard Time&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;standard_bias&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;current_bias&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-60</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;daylight&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;qfe&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;hotfix_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KB4565627&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;installed_on&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7/14/2020&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="s2">&quot;[...]&quot;</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;physical_drives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\\\.\\PHYSICALDRIVE0&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fixed hard disk media&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512105932800</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;[...]&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;mounted_volumes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Windows&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3471674564</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;file_system&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NTFS&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\\\?\\Volume{214de6b9-8fa1-4b0e-9e83-3b41cdb194f9}\\&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;is_boot&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;is_system&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128178376704</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;freespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15089700864</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fixed&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;[...]&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;physical_memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;current_load&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;physical&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">17097428992</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;pagefile&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">22244237312</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;available_physical&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7437279232</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;available_pagefile&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8191057920</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;cpu&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Intel64 Family 6 Model 142 Stepping 10&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;cores&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;enabled_cores&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;logical_processors&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;adapter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{AB41C39A-E91B-4DA1-B697-74FF38F4BEA0}&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;friendly_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wi-Fi&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Marvell AVASTAR Wireless-AC Network Controller&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;physical&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F0-6E-B-CF-9D-56&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;dns_suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;home&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2a01:cb04:119:5600:b475:1fbb:8110:8dd1&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span>
+<span class="w">                            </span><span class="p">},</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2a01:cb04:119:5600:d77:2a0:bdd8:6835&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span>
+<span class="w">                            </span><span class="p">},</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fe80::b475:1fbb:8110:8dd1%22&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span>
+<span class="w">                            </span><span class="p">},</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;ipv4&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.46&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unicast&quot;</span>
+<span class="w">                            </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">],</span>
+<span class="w">                        </span><span class="nt">&quot;dns_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;ipv6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fe80::a21b:29ff:feff:4300%22&quot;</span>
+<span class="w">                            </span><span class="p">},</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;ipv4&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.1&quot;</span>
+<span class="w">                            </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">]</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="s2">&quot;[...]&quot;</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="user-profile-information">
-<h2>User Profile information<a class="headerlink" href="#user-profile-information" title="Permalink to this headline">¶</a></h2>
+<h2>User Profile information<a class="headerlink" href="#user-profile-information" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>default_profile: The default profile location</p></li>
 <li><p>profiles_directory: The directory where user profiles ares created by default</p></li>
@@ -308,46 +310,46 @@
 </li>
 </ul>
 <section id="id3">
-<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;profile_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;default_profile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Default&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;profiles_directory&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;program_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\ProgramData&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;public_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Public&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;profile&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-18&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\WINDOWS\\system32\\config\\systemprofile&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NT AUTHORITY\\SYSTEM&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-07 09:17:27.256&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-19&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\WINDOWS\\ServiceProfiles\\LocalService&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NT AUTHORITY\\LOCAL SERVICE&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-07 09:17:27.256&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-20&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\WINDOWS\\ServiceProfiles\\NetworkService&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NT AUTHORITY\\NETWORK SERVICE&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-07 09:17:27.256&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-21-16443543502-41343243243202-264324343432-1001&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\UserName&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName\\UserName&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;local_load_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-26 15:42:47.209&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;local_unload_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-25 19:06:05.433&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-26 15:42:47.209&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="s2">&quot;[...]&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;dfir-orc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;profile_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;default_profile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Default&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;profiles_directory&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;program_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\ProgramData&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;public_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\Public&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;profile&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-18&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\WINDOWS\\system32\\config\\systemprofile&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NT AUTHORITY\\SYSTEM&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-07 09:17:27.256&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-19&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\WINDOWS\\ServiceProfiles\\LocalService&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NT AUTHORITY\\LOCAL SERVICE&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-07 09:17:27.256&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-20&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\WINDOWS\\ServiceProfiles\\NetworkService&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NT AUTHORITY\\NETWORK SERVICE&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-07 09:17:27.256&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S-1-5-21-16443543502-41343243243202-264324343432-1001&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\Users\\UserName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MachineName\\UserName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;local_load_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-26 15:42:47.209&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;local_unload_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-25 19:06:05.433&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;key_last_write&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-07-26 15:42:47.209&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;[...]&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -371,7 +373,7 @@
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.4.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

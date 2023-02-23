@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Tutorial &#8212; DFIR ORC  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,7 +12,9 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Requirements" href="platforms.html" />
@@ -82,7 +84,7 @@
           <div class="body" role="main">
             
   <section id="tutorial">
-<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading">¶</a></h1>
 <p>This tutorial details the steps to obtain a <strong>configured</strong> DFIR ORC binary ready for deployment.</p>
 <p>It explains which code to compile, how to embed a configuration, how to modify a configuration, the difference between compiling and configuring…
 Basically, it goes through most of the classical steps which incident responders have to follow in their daily usage of the framework.</p>
@@ -95,7 +97,7 @@ see step 1 for details).</p>
 <strong>Commands below are designed to be run in an elevated Powershell shell.</strong>
 It can be adapted to work in an elevated command shell prompt.</p>
 </div>
-<div class="contents local topic" id="list-of-the-steps">
+<nav class="contents local" id="list-of-the-steps">
 <p class="topic-title">List of the steps</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#build" id="id1">1. Build</a></p>
@@ -130,9 +132,9 @@ It can be adapted to work in an elevated command shell prompt.</p>
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <section id="build">
-<h2><a class="toc-backref" href="#id1">1. Build</a><a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1. Build</a><a class="headerlink" href="#build" title="Permalink to this heading">¶</a></h2>
 <p>This step is the only one requiring actual compilation with Microsoft’s toolchain. Instructions to compile these files from the source code are detailed <a class="reference external" href="https://github.com/DFIR-ORC/dfir-orc/blob/master/README.md">here</a>.</p>
 <p>Please follow this procedure before going further.</p>
 <p>As is explained in the section <a class="reference internal" href="architecture.html#architecture-config-process"><span class="std std-ref">Configuration Process</span></a>, compiling the source code for DFIR ORC yields what is called <strong>unconfigured binaries</strong>, typically named <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> (32-bit) and <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x64.exe</span></code> (64-bit).
@@ -144,7 +146,7 @@ Thus, it can behave kind of like the <em>busybox</em> tool, and be used <em>as i
 <p>As configured binaries, unconfigured binaries <strong>require administrative privileges</strong> for execution.</p>
 </div>
 <section id="mini-challenge-1">
-<h3><a class="toc-backref" href="#id2">Mini-challenge 1</a><a class="headerlink" href="#mini-challenge-1" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Mini-challenge 1</a><a class="headerlink" href="#mini-challenge-1" title="Permalink to this heading">¶</a></h3>
 <p>This first step illustrates how to use unconfigured binaries to run the tools embedded by default.
 Find a command line to use <a class="reference internal" href="NTFSUtil.html"><span class="doc">NTFSUtil</span></a> to display information about the USN journal of disk <code class="docutils literal notranslate"><span class="pre">C:</span></code>.</p>
 <div class="toggle docutils container">
@@ -166,7 +168,7 @@ Find a command line to use <a class="reference internal" href="NTFSUtil.html"><s
 </section>
 </section>
 <section id="configure">
-<span id="tuto-step-2"></span><h2><a class="toc-backref" href="#id3">2. Configure</a><a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h2>
+<span id="tuto-step-2"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">2. Configure</a><a class="headerlink" href="#configure" title="Permalink to this heading">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>No compilation is required after step 1.</p>
@@ -196,7 +198,7 @@ Please refer to the short section <a class="reference internal" href="architectu
 </div>
 <p>This command yields a <em>configured</em> DFIR ORC binary (named <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> by default) in the <code class="docutils literal notranslate"><span class="pre">output</span></code> directory.</p>
 <section id="mini-challenge-2">
-<h3><a class="toc-backref" href="#id4">Mini-challenge 2</a><a class="headerlink" href="#mini-challenge-2" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Mini-challenge 2</a><a class="headerlink" href="#mini-challenge-2" title="Permalink to this heading">¶</a></h3>
 <p>In the configuration repository, which file describes the commands which WolfLauncher (the collection engine) is going to run when the <em>configured</em> binary is executed ?</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
@@ -213,7 +215,7 @@ Please refer to the short section <a class="reference internal" href="architectu
 </section>
 </section>
 <section id="test-the-configuration">
-<h2><a class="toc-backref" href="#id5">3. Test the Configuration</a><a class="headerlink" href="#test-the-configuration" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">3. Test the Configuration</a><a class="headerlink" href="#test-the-configuration" title="Permalink to this heading">¶</a></h2>
 <p>Once we have a <em>configured</em> DFIR ORC binary, we can start testing it!</p>
 <p>Of course, we can use it to execute one of the <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">embedded tools</span></a> (just like the <em>unconfigured</em> ones):</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">output</span><span class="p">\</span><span class="n">DFIR-Orc</span><span class="p">.</span><span class="n">exe</span> <span class="n">NTFSInfo</span> <span class="p">/</span><span class="n">out</span><span class="p">=</span><span class="n">C_drive</span><span class="p">.</span><span class="n">csv</span> <span class="s2">&quot;C:\&quot;</span>
@@ -297,7 +299,7 @@ embedded in <code class="docutils literal notranslate"><span class="pre">DFIR-Or
 </pre></div>
 </div>
 <section id="mini-challenge-3">
-<h3><a class="toc-backref" href="#id6">Mini-challenge 3</a><a class="headerlink" href="#mini-challenge-3" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Mini-challenge 3</a><a class="headerlink" href="#mini-challenge-3" title="Permalink to this heading">¶</a></h3>
 <p>Write a command line allowing to only get the output of SystemInfo in the Main archive, in a folder
 named <code class="docutils literal notranslate"><span class="pre">\Temp\testing</span></code>.
 Run the command to test that it works (SystemInfo is very quick).</p>
@@ -334,7 +336,7 @@ Run the command to test that it works (SystemInfo is very quick).</p>
 </section>
 </section>
 <section id="use-local-configuration-files">
-<h2><a class="toc-backref" href="#id7">4. Use Local Configuration Files</a><a class="headerlink" href="#use-local-configuration-files" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">4. Use Local Configuration Files</a><a class="headerlink" href="#use-local-configuration-files" title="Permalink to this heading">¶</a></h2>
 <p>A local configuration file is meant to provide some configuration options while not using a command line.
 This can be useful in some deployment scenarios.</p>
 <p>It is an XML file which has the following skeleton, described in the section <a class="reference internal" href="orc_local_config.html"><span class="doc">DFIR ORC Local Configuration File</span></a>.</p>
@@ -356,9 +358,9 @@ This can be useful in some deployment scenarios.</p>
 </pre></div>
 </div>
 <p>The corresponding file, named <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.xml</span></code> and which we choose to store in <code class="docutils literal notranslate"><span class="pre">\Temp\testing\</span></code>,  looks as follows.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc</span> <span class="na">priority=</span><span class="s">&quot;low&quot;</span> <span class="na">powerstate=</span><span class="s">&quot;SystemRequired,AwayMode&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;output&gt;</span>\Temp\testing<span class="nt">&lt;/output&gt;</span>
-   <span class="nt">&lt;key&gt;</span>SystemInfo<span class="nt">&lt;/key&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc</span><span class="w"> </span><span class="na">priority=</span><span class="s">&quot;low&quot;</span><span class="w"> </span><span class="na">powerstate=</span><span class="s">&quot;SystemRequired,AwayMode&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;output&gt;</span>\Temp\testing<span class="nt">&lt;/output&gt;</span>
+<span class="w">   </span><span class="nt">&lt;key&gt;</span>SystemInfo<span class="nt">&lt;/key&gt;</span>
 <span class="nt">&lt;/dfir-orc&gt;</span>
 </pre></div>
 </div>
@@ -367,11 +369,11 @@ This can be useful in some deployment scenarios.</p>
 </pre></div>
 </div>
 <p>Encrypting the archives with a public key requires adding a <code class="docutils literal notranslate"><span class="pre">recipient</span></code> element in the XML file.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc</span> <span class="na">priority=</span><span class="s">&quot;low&quot;</span> <span class="na">powerstate=</span><span class="s">&quot;Systemrequired,AwayMode&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;output&gt;</span>\Temp\testing<span class="nt">&lt;/output&gt;</span>
-  <span class="nt">&lt;key&gt;</span>SystemInfo<span class="nt">&lt;/key&gt;</span>
-  <span class="nt">&lt;recipient</span> <span class="na">name=</span><span class="s">&#39;certfr&#39;</span> <span class="na">archive=</span><span class="s">&#39;*&#39;</span> <span class="nt">&gt;</span>
------BEGIN CERTIFICATE-----
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc</span><span class="w"> </span><span class="na">priority=</span><span class="s">&quot;low&quot;</span><span class="w"> </span><span class="na">powerstate=</span><span class="s">&quot;Systemrequired,AwayMode&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;output&gt;</span>\Temp\testing<span class="nt">&lt;/output&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>SystemInfo<span class="nt">&lt;/key&gt;</span>
+<span class="w">  </span><span class="nt">&lt;recipient</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;certfr&#39;</span><span class="w"> </span><span class="na">archive=</span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="nt">&gt;</span>
+-----BEGIN<span class="w"> </span>CERTIFICATE-----
 MIIC7TCCAdmgAwIBAgIQR5AF92Ti8qtEwuT3PMVrJzAJBgUrDgMCHQUAMBIxEDAO
 BgNVBAMTB0NFUlQtRlIwHhcNMDQxMjMxMjIwMDAwWhcNMTQxMjMxMjIwMDAwWjAS
 MRAwDgYDVQQDEwdDRVJULUZSMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
@@ -388,8 +390,8 @@ daTOT/9UylLxu1L/epiWiYtqRZOO/9i1fyqrkguIww7EjXXT3ybL5U/BakEC2Yg5
 6vUoxbo2EbA1UoMWurRxYNYxyFfHpvBYXFf4uDaAFIVMtEgH5VkKyM3Kj2hi/PJH
 /a30ndTWVSY/82hoRGCa+SkevR5VbDsxTqHtEHys4K+ETVTNXp29HwG+1YG7BTTc
 4VdFRqUm7e3o6VUArFar8I01oHiHzqKJiu1Omm2Fkmc1
------END CERTIFICATE-----
-  <span class="nt">&lt;/recipient&gt;</span>
+-----END<span class="w"> </span>CERTIFICATE-----
+<span class="w">  </span><span class="nt">&lt;/recipient&gt;</span>
 <span class="nt">&lt;/dfir-orc&gt;</span>
 </pre></div>
 </div>
@@ -399,7 +401,7 @@ daTOT/9UylLxu1L/epiWiYtqRZOO/9i1fyqrkguIww7EjXXT3ybL5U/BakEC2Yg5
 </div>
 <p>Element <code class="docutils literal notranslate"><span class="pre">upload</span></code> is the counterpart of the <code class="docutils literal notranslate"><span class="pre">output</span></code> element to configure a <strong>remote</strong> repository as a destination for the archives.</p>
 <section id="mini-challenge-4">
-<h3><a class="toc-backref" href="#id8">Mini-challenge 4</a><a class="headerlink" href="#mini-challenge-4" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Mini-challenge 4</a><a class="headerlink" href="#mini-challenge-4" title="Permalink to this heading">¶</a></h3>
 <p>Combine the steps above to find a way to confirm <em>without creating any archive</em> that the local configuration file is being taken into account by the following command line.</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">output</span><span class="p">\</span><span class="n">DFIR-Orc</span><span class="p">.</span><span class="n">exe</span>
 </pre></div>
@@ -432,19 +434,19 @@ daTOT/9UylLxu1L/epiWiYtqRZOO/9i1fyqrkguIww7EjXXT3ybL5U/BakEC2Yg5
 <p><strong>Answer  ▶</strong></p>
 </div>
 <p>Here is one possible solution.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc</span> <span class="na">priority=</span><span class="s">&quot;low&quot;</span> <span class="na">powerstate=</span><span class="s">&quot;Systemrequired,AwayMode&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;output&gt;</span>\Temp\testing<span class="nt">&lt;/output&gt;</span>
-  <span class="nt">&lt;key&gt;</span>SystemInfo,GetSamHive<span class="nt">&lt;/key&gt;</span>
-  <span class="nt">&lt;recipient</span> <span class="na">name=</span><span class="s">&quot;certfr&quot;</span> <span class="na">archive=</span><span class="s">&quot;*&quot;</span> <span class="nt">&gt;</span>
-   -----BEGIN CERTIFICATE-----
-   etc.
-   -----END CERTIFICATE-----
-  <span class="nt">&lt;/recipient&gt;</span>
-  <span class="nt">&lt;recipient</span> <span class="na">name=</span><span class="s">&quot;Marc&quot;</span> <span class="na">archive=</span><span class="s">&quot;Hives&quot;</span> <span class="nt">&gt;</span>
-  -----BEGIN CERTIFICATE-----
-  etc.
-  -----END CERTIFICATE-------
-  <span class="nt">&lt;/recipient&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dfir-orc</span><span class="w"> </span><span class="na">priority=</span><span class="s">&quot;low&quot;</span><span class="w"> </span><span class="na">powerstate=</span><span class="s">&quot;Systemrequired,AwayMode&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;output&gt;</span>\Temp\testing<span class="nt">&lt;/output&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>SystemInfo,GetSamHive<span class="nt">&lt;/key&gt;</span>
+<span class="w">  </span><span class="nt">&lt;recipient</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;certfr&quot;</span><span class="w"> </span><span class="na">archive=</span><span class="s">&quot;*&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">   </span>-----BEGIN<span class="w"> </span>CERTIFICATE-----
+<span class="w">   </span>etc.
+<span class="w">   </span>-----END<span class="w"> </span>CERTIFICATE-----
+<span class="w">  </span><span class="nt">&lt;/recipient&gt;</span>
+<span class="w">  </span><span class="nt">&lt;recipient</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Marc&quot;</span><span class="w"> </span><span class="na">archive=</span><span class="s">&quot;Hives&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">  </span>-----BEGIN<span class="w"> </span>CERTIFICATE-----
+<span class="w">  </span>etc.
+<span class="w">  </span>-----END<span class="w"> </span>CERTIFICATE-------
+<span class="w">  </span><span class="nt">&lt;/recipient&gt;</span>
 <span class="nt">&lt;/dfir-orc&gt;</span>
 </pre></div>
 </div>
@@ -452,33 +454,33 @@ daTOT/9UylLxu1L/epiWiYtqRZOO/9i1fyqrkguIww7EjXXT3ybL5U/BakEC2Yg5
 </section>
 </section>
 <section id="edit-embedded-configurations">
-<span id="tuto-step-5"></span><h2><a class="toc-backref" href="#id9">5. Edit Embedded Configurations</a><a class="headerlink" href="#edit-embedded-configurations" title="Permalink to this headline">¶</a></h2>
+<span id="tuto-step-5"></span><h2><a class="toc-backref" href="#id9" role="doc-backlink">5. Edit Embedded Configurations</a><a class="headerlink" href="#edit-embedded-configurations" title="Permalink to this heading">¶</a></h2>
 <p>To refer to embedded tools as resources in a configuration file, a specific syntax is used.
 Please read <a class="reference internal" href="resources.html"><span class="doc">Referencing Resources in Configurations</span></a> before proceeding.</p>
 <p>As an example, let us try to find the command lines matching some instructions in the sample configuration file <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_config.xml</span></code> from <a class="reference external" href="https://github.com/dfir-orc/dfir-orc-config">the repository of existing configurations</a>.</p>
 <p>First, let us focus on <code class="docutils literal notranslate"><span class="pre">autorunsc.exe</span></code>. The file reads:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span> <span class="na">keyword=</span><span class="s">&quot;Autoruns&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;execute</span> <span class="na">name=</span><span class="s">&quot;autorunsc.exe&quot;</span> <span class="na">run=</span><span class="s">&quot;7z:#Tools|autorunsc.exe&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;argument&gt;</span>-a * -c -h -m -s -t -accepteula<span class="nt">&lt;/argument&gt;</span>
-   <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;autoruns.csv&quot;</span> <span class="na">source=</span><span class="s">&quot;StdOut&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;autoruns.log&quot;</span> <span class="na">source=</span><span class="s">&quot;StdErr&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span><span class="w"> </span><span class="na">keyword=</span><span class="s">&quot;Autoruns&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;execute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;autorunsc.exe&quot;</span><span class="w"> </span><span class="na">run=</span><span class="s">&quot;7z:#Tools|autorunsc.exe&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;argument&gt;</span>-a<span class="w"> </span>*<span class="w"> </span>-c<span class="w"> </span>-h<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>-t<span class="w"> </span>-accepteula<span class="nt">&lt;/argument&gt;</span>
+<span class="w">   </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;autoruns.csv&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;StdOut&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;autoruns.log&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;StdErr&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/command&gt;</span>
 </pre></div>
 </div>
 <p>This paragraph establishes that when command Autoruns is run, a temporary file named <code class="docutils literal notranslate"><span class="pre">autorunsc.exe</span></code> is extracted on disk from an archive resource embedded in <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> (see the second bullet point <a class="reference internal" href="resources.html"><span class="doc">here</span></a> and <a class="reference internal" href="wolf_config.html#wolf-config-execute-element"><span class="std std-ref">here</span></a> for details). Then, this temporary binary is run with arguments <code class="docutils literal notranslate"><span class="pre">-a</span> <span class="pre">*</span> <span class="pre">-c</span> <span class="pre">-h</span> <span class="pre">-m</span> <span class="pre">-s</span> <span class="pre">-t</span> <span class="pre">-accepteula</span></code>. This produces two outputs; lines output on StdOut are stored in a file named <code class="docutils literal notranslate"><span class="pre">autoruns.csv</span></code>, while lines output on StdErr are stored in autoruns.log.</p>
 <p>Secondly, let us detail the example of NTFSInfo. The configuration reads:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span> <span class="na">keyword=</span><span class="s">&quot;NTFSInfo&quot;</span> <span class="na">queue=</span><span class="s">&quot;flush&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;execute</span> <span class="na">name=</span><span class="s">&quot;DFIR-ORC.exe&quot;</span> <span class="na">run=</span><span class="s">&quot;self:#NTFSInfo&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;argument&gt;</span>/config=res:#NTFSInfo_config.xml<span class="nt">&lt;/argument&gt;</span>
-   <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;NTFSInfo_SecDesc.7z&quot;</span> <span class="na">source=</span><span class="s">&quot;File&quot;</span> <span class="na">argument=</span><span class="s">&quot;/SecDescr={FileName}&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;NTFSInfo_i30Info.7z&quot;</span> <span class="na">source=</span><span class="s">&quot;File&quot;</span> <span class="na">argument=</span><span class="s">&quot;/i30info={FileName}&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;NTFSInfo.7z&quot;</span> <span class="na">source=</span><span class="s">&quot;File&quot;</span> <span class="na">argument=</span><span class="s">&quot;/out={FileName}&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;NTFSInfo.log&quot;</span> <span class="na">source=</span><span class="s">&quot;StdOutErr&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span><span class="w"> </span><span class="na">keyword=</span><span class="s">&quot;NTFSInfo&quot;</span><span class="w"> </span><span class="na">queue=</span><span class="s">&quot;flush&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;execute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;DFIR-ORC.exe&quot;</span><span class="w"> </span><span class="na">run=</span><span class="s">&quot;self:#NTFSInfo&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;argument&gt;</span>/config=res:#NTFSInfo_config.xml<span class="nt">&lt;/argument&gt;</span>
+<span class="w">   </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;NTFSInfo_SecDesc.7z&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;File&quot;</span><span class="w"> </span><span class="na">argument=</span><span class="s">&quot;/SecDescr={FileName}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;NTFSInfo_i30Info.7z&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;File&quot;</span><span class="w"> </span><span class="na">argument=</span><span class="s">&quot;/i30info={FileName}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;NTFSInfo.7z&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;File&quot;</span><span class="w"> </span><span class="na">argument=</span><span class="s">&quot;/out={FileName}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;NTFSInfo.log&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;StdOutErr&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/command&gt;</span>
 </pre></div>
 </div>
 <p>This paragraph describes what should happen when the NTFSInfo command is run. As NTFSInfo is a raw, non-archived resource of the configured binary, the syntax used is <code class="docutils literal notranslate"><span class="pre">self:#NTFSInfo</span></code>. The configuration used by NTFSInfo (<cite>̀`res:#NTFSInfo_config.xml`</cite>) is a resource of the configured binary, named <code class="docutils literal notranslate"><span class="pre">NTFSInfo_config.xml</span></code>. This file has been embedded in the configured binary by ToolEmbed in <a class="reference internal" href="#tuto-step-2"><span class="std std-ref">2. Configure</span></a>. The following line in <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_embed.xml</span></code> allows to match the resource to the original file.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;NTFSInfo_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\NTFSInfo_config.xml&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;NTFSInfo_config.xml&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\NTFSInfo_config.xml&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>Recreating the command line can dine with a little help from <a class="reference internal" href="NTFSInfo.html#ntfsinfo-output"><span class="std std-ref">this section of the documentation of NTFSInfo</span></a>. Assuming that the configuration file is on the disk and in the same directory as the configured binary, this yields the following line.</p>
@@ -488,19 +490,19 @@ Please read <a class="reference internal" href="resources.html"><span class="doc
 <p>Now that reading a WolfLauncher configuration file is less of a mystery, let’s try to modify it by adding the hives related to the AmCache. There are <a class="reference external" href="https://www.ssi.gouv.fr/en/publication/amcache-analysis/">several other useful files to collect</a>, but this is beyond the scope of this tutorial. The Amcache hive is systemwide, and it has to be collected along with transaction and temporary files. Thus, after searching for the configuration files involved in the SYSTEM hive collection, it seems reasonable to append our new requirements to <code class="docutils literal notranslate"><span class="pre">GetSystemHives_config.xml</span></code>.
 Below is an excerpt of the new configuration file to be used by <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span class="nt">&lt;getthis</span> <span class="na">reportall=</span><span class="s">&quot;&quot;</span> <span class="na">flushregistry=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;location&gt;</span>%SystemRoot%<span class="nt">&lt;/location&gt;</span>
-   <span class="nt">&lt;samples</span> <span class="na">MaxPerSampleBytes=</span><span class="s">&quot;500MB&quot;</span> <span class="na">MaxTotalBytes=</span><span class="s">&quot;2048MB&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;sample&gt;</span>
-         <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;SECURITY&quot;</span> <span class="na">header=</span><span class="s">&quot;regf&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;/sample&gt;</span>
-      ...
-      <span class="nt">&lt;sample&gt;</span>
-         <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;AmCache.hve&quot;</span> <span class="na">header=</span><span class="s">&quot;regf&quot;</span> <span class="nt">/&gt;</span>
-         <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;AmCache.hve.log1&quot;</span> <span class="nt">/&gt;</span>
-         <span class="nt">&lt;ntfs_find</span> <span class="na">name=</span><span class="s">&quot;AmCache.hve.log2&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;/sample&gt;</span>
-   <span class="nt">&lt;/samples&gt;</span>
+<span class="nt">&lt;getthis</span><span class="w"> </span><span class="na">reportall=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="na">flushregistry=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;location&gt;</span>%SystemRoot%<span class="nt">&lt;/location&gt;</span>
+<span class="w">   </span><span class="nt">&lt;samples</span><span class="w"> </span><span class="na">MaxPerSampleBytes=</span><span class="s">&quot;500MB&quot;</span><span class="w"> </span><span class="na">MaxTotalBytes=</span><span class="s">&quot;2048MB&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;sample&gt;</span>
+<span class="w">         </span><span class="nt">&lt;ntfs_find</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;SECURITY&quot;</span><span class="w"> </span><span class="na">header=</span><span class="s">&quot;regf&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/sample&gt;</span>
+<span class="w">      </span>...
+<span class="w">      </span><span class="nt">&lt;sample&gt;</span>
+<span class="w">         </span><span class="nt">&lt;ntfs_find</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AmCache.hve&quot;</span><span class="w"> </span><span class="na">header=</span><span class="s">&quot;regf&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">         </span><span class="nt">&lt;ntfs_find</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AmCache.hve.log1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">         </span><span class="nt">&lt;ntfs_find</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;AmCache.hve.log2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/sample&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/samples&gt;</span>
 <span class="nt">&lt;/getthis&gt;</span>
 </pre></div>
 </div>
@@ -517,7 +519,7 @@ The first possibility is to modify the file <code class="docutils literal notran
 </pre></div>
 </div>
 <section id="mini-challenge-5">
-<h3><a class="toc-backref" href="#id10">Mini-challenge 5</a><a class="headerlink" href="#mini-challenge-5" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Mini-challenge 5</a><a class="headerlink" href="#mini-challenge-5" title="Permalink to this heading">¶</a></h3>
 <p>Find how to change the yara rules used in DFIR ORC, and explain <strong>why</strong> it works.</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
@@ -537,9 +539,9 @@ Changing the file <code class="docutils literal notranslate"><span class="pre">r
 </section>
 </section>
 <section id="the-final-challenge">
-<span id="tuto-step-6"></span><h2><a class="toc-backref" href="#id11">6. The Final Challenge</a><a class="headerlink" href="#the-final-challenge" title="Permalink to this headline">¶</a></h2>
+<span id="tuto-step-6"></span><h2><a class="toc-backref" href="#id11" role="doc-backlink">6. The Final Challenge</a><a class="headerlink" href="#the-final-challenge" title="Permalink to this heading">¶</a></h2>
 <section id="a-few-q-a-to-warm-up">
-<h3><a class="toc-backref" href="#id12">A Few Q&amp;A to Warm Up</a><a class="headerlink" href="#a-few-q-a-to-warm-up" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">A Few Q&amp;A to Warm Up</a><a class="headerlink" href="#a-few-q-a-to-warm-up" title="Permalink to this heading">¶</a></h3>
 <p>Find out which of the following statements are false, and why.</p>
 <p><code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> is a configured binary, hence I can use it to run NTFSInfo.</p>
 <div class="toggle docutils container">
@@ -566,7 +568,7 @@ using ToolEmbed is sufficient to obtain a new configured binary.</p>
 </div>
 </section>
 <section id="the-final-boss">
-<h3><a class="toc-backref" href="#id13">The Final Boss</a><a class="headerlink" href="#the-final-boss" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">The Final Boss</a><a class="headerlink" href="#the-final-boss" title="Permalink to this heading">¶</a></h3>
 <p>Great forensicators know that sometimes quick wins can be found in <code class="docutils literal notranslate"><span class="pre">Temp</span></code>.
 Create a new configured binary, which uses <a class="reference internal" href="GetThis.html"><span class="doc">GetThis</span></a> to collect specifically PE files in this directory.
 To guarantee that this does not create enormous archives to transfer over a network, find how to impose
@@ -588,29 +590,29 @@ is created.</p>
 </div>
 <p>The solution presented here is not the only way to go, but doing these modifications work.
 Firstly, create the following file named <code class="docutils literal notranslate"><span class="pre">GetExeInTemp_config.xml</span></code>, in the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory of the repository of configurations cloned previously.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span> <span class="nt">&lt;getthis</span> <span class="na">reportall=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;location&gt;</span>*<span class="nt">&lt;/location&gt;</span>
-    <span class="nt">&lt;samples</span> <span class="na">MaxPerSampleBytes=</span><span class="s">&quot;&lt;SomeLimitOfYourChoice&gt;&quot;</span> <span class="na">MaxTotalBytes=</span><span class="s">&quot;&lt;SomeOtherLimitToChoose&gt;&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;sample&gt;</span>
-         <span class="nt">&lt;ntfs_find</span> <span class="na">path_match=</span><span class="s">&quot;\Temp\*&quot;</span> <span class="na">header=</span><span class="s">&quot;MZ&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;/sample&gt;</span>
-    <span class="nt">&lt;/samples&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="nt">&lt;getthis</span><span class="w"> </span><span class="na">reportall=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;location&gt;</span>*<span class="nt">&lt;/location&gt;</span>
+<span class="w">    </span><span class="nt">&lt;samples</span><span class="w"> </span><span class="na">MaxPerSampleBytes=</span><span class="s">&quot;&lt;SomeLimitOfYourChoice&gt;&quot;</span><span class="w"> </span><span class="na">MaxTotalBytes=</span><span class="s">&quot;&lt;SomeOtherLimitToChoose&gt;&quot;</span><span class="nt">&gt;</span>
+<span class="w">       </span><span class="nt">&lt;sample&gt;</span>
+<span class="w">         </span><span class="nt">&lt;ntfs_find</span><span class="w"> </span><span class="na">path_match=</span><span class="s">&quot;\Temp\*&quot;</span><span class="w"> </span><span class="na">header=</span><span class="s">&quot;MZ&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/sample&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/samples&gt;</span>
 <span class="nt">&lt;/getthis&gt;</span>
 </pre></div>
 </div>
 <p>Then insert the following command element in <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_config.xml</span></code>, e.g. in the Main archive.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span> <span class="na">keyword=</span><span class="s">&quot;GetExeInTemp&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;execute</span> <span class="na">name=</span><span class="s">&quot;DFIR-Orc.exe&quot;</span> <span class="na">run=</span><span class="s">&quot;self:#GetThis&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;argument&gt;</span>/config=res:#GetExeInTemp_config.xml<span class="nt">&lt;/argument&gt;</span>
-    <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;ExeInTemp.7z&quot;</span> <span class="na">source=</span><span class="s">&quot;File&quot;</span> <span class="na">argument=</span><span class="s">&quot;/out={FileName}&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">&quot;ExeInTemp.log&quot;</span> <span class="na">source=</span><span class="s">&quot;StdOutErr&quot;</span> <span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span><span class="w"> </span><span class="na">keyword=</span><span class="s">&quot;GetExeInTemp&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;execute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;DFIR-Orc.exe&quot;</span><span class="w"> </span><span class="na">run=</span><span class="s">&quot;self:#GetThis&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;argument&gt;</span>/config=res:#GetExeInTemp_config.xml<span class="nt">&lt;/argument&gt;</span>
+<span class="w">    </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ExeInTemp.7z&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;File&quot;</span><span class="w"> </span><span class="na">argument=</span><span class="s">&quot;/out={FileName}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ExeInTemp.log&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;StdOutErr&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/command&gt;</span>
 </pre></div>
 </div>
 <p>This addition requires that a (non-archived) resource named <code class="docutils literal notranslate"><span class="pre">GetExeInTemp_config.xml</span></code> is available when the configured binary runs; so we have to embed it. To do so, let us edit the file <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_embed.xml</span></code>.
 We assume the file <code class="docutils literal notranslate"><span class="pre">GetExeInTemp.xml</span></code> exists along all the others in the <code class="docutils literal notranslate"><span class="pre">config/</span></code> directory. As a result, we insert the line below to the <code class="docutils literal notranslate"><span class="pre">DFIR-ORC_embed.xml</span></code> file.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;GetExeInTemp_config.xml&quot;</span> <span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetExeInTemp_config.xml&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GetExeInTemp_config.xml&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;.\%ORC_CONFIG_FOLDER%\GetExeInTemp_config.xml&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>Eventually, reconfiguration can be done as documented in step <a class="reference internal" href="#tuto-step-2"><span class="std std-ref">2. Configure</span></a>.</p>
@@ -649,7 +651,7 @@ We assume the file <code class="docutils literal notranslate"><span class="pre">
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 4.4.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {
