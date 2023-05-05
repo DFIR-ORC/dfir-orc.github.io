@@ -257,6 +257,22 @@ It is also possible to select 'newest', 'mid', 'oldest' or specific GUID of a sh
 
 The ``/shadows`` option can also be used on command lines and applies to all mounted volumes otherwise selected.
 
+Shadow copy parser engine
+`````````````````````````
+
+
+As of v10.2.0, DFIR-Orc supports two engines for parsing volume shadow copy files that can be specified with the ``shadows_parser`` attribute.
+
+Until DFIR-Orc v10.2.0 the shadow copies were parsed using a volume created by Microsoft's volsnap.sys named like ``\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10``. An immediate drawback was that the ``offline`` DFIR-Orc mode did not handle shadow copies. A future one could be that Microsoft restricts the access to the shadow copy volumes.
+
+This why a custom shadow copy parser has been embedded and is now used as default.
+
+To use the Microsoft parser instead specify ``shadows_parser="microsoft"``.
+
+.. code:: xml
+
+    <location shadows="yes" shadows_parser="microsoft">c:\</location>
+
 
 Locations for Offline MFT
 -------------------------

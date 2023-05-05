@@ -261,6 +261,31 @@ The XML syntax is to be preferred as it provides a better access to GetThis func
 <p>Limits must be explicitly set, either by using <code class="docutils literal notranslate"><span class="pre">nolimits</span></code> or by using a meaningful combination of attributes of <code class="docutils literal notranslate"><span class="pre">samples</span></code>. Details are provided <a class="reference internal" href="#getthis-limits"><span class="std std-ref">below</span></a>.</p>
 </div>
 <ul class="simple">
+<li><p><strong>resurrect</strong> <em>(optional=yes, default=no)</em>, <code class="docutils literal notranslate"><span class="pre">/ResurrectRecords=&lt;yes|no|resident&gt;</span></code> Option</p></li>
+</ul>
+<p>The MFT parser can be configured to include deleted records. This option can provide information about recently deleted file system entries.
+This can, by design, incur unpredictable results (as we are using unreliable or partially deleted information).
+One can generally assume that resident attributes for those entries are valid unlike nonresident attributes that are most likely quickly invalidated after the entry deletion.
+Use the option value <code class="docutils literal notranslate"><span class="pre">resident</span></code> to limit parsed deleted entries to resident ones.</p>
+<table class="docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>yes</em></p></td>
+<td><p>Enable deleted records recovery</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>resident</em></p></td>
+<td><p>Enabled deleted resident records only recovery</p></td>
+</tr>
+<tr class="row-even"><td><p><em>no</em></p></td>
+<td><p>Do not try to recover deleted records</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
 <li><dl class="simple">
 <dt><strong>reportall</strong> <em>(optional=yes, default=Inactive)</em>, <code class="docutils literal notranslate"><span class="pre">/reportall</span></code> option:</dt><dd><p>When using limits, GetThis potentially does not collect files that would have been collected otherwise. Nevertheless, the <code class="docutils literal notranslate"><span class="pre">reportall</span></code> option can be added so that the output CSV file contains information about all matching data from the disk, and not just the collected ones. When using the command line, this switch can be activated with the option <code class="docutils literal notranslate"><span class="pre">/reportall</span></code>, which takes no value. In an XML file, the attribute is written <code class="docutils literal notranslate"><span class="pre">reportall=&quot;&quot;</span></code>.</p>
 </dd>

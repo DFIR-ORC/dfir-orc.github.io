@@ -366,19 +366,20 @@ NTFSInfo can only use one parser per execution. The choice of the parser is very
 
 Configuring the parser to parse deleted entries
 
-* **ResurrectRecords** *(optional=yes, default=no)*, ``/ResurrectRecords=<yes|no>`` Option
+* **resurrect** *(optional=yes, default=no)*, ``/ResurrectRecords=<yes|no|resident>`` Option
 
 The MFT parser can be configured to include deleted records. This option can provide information about recently deleted file system entries.
-This can, by design, incur unpredictable results (as we are using unreliable or partially deleted information). One can generally assume that resident attributes for those entries are valid unlike nonresident attributes that are most likely quickly invalidated after the entry deletion.
-
-The technique is called *record resurrection*.
+This can, by design, incur unpredictable results (as we are using unreliable or partially deleted information).
+One can generally assume that resident attributes for those entries are valid unlike nonresident attributes that are most likely quickly invalidated after the entry deletion.
+Use the option value ``resident`` to limit parsed deleted entries to resident ones.
 
 ..  csv-table::
     :header: Value, Description
     :widths: auto
     :align: left
 
-    *yes*, "Enable deleted record recovery"
+    *yes*, "Enable deleted records recovery"
+    *resident*, "Enabled deleted resident records only recovery"
     *no*,  "Do not try to recover deleted records"
 
 

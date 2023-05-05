@@ -304,6 +304,16 @@ This feature can be enabled by adding the attribute <code class="docutils litera
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> option can also be used on command lines and applies to all mounted volumes otherwise selected.</p>
 </section>
+<section id="shadow-copy-parser-engine">
+<h4>Shadow copy parser engine<a class="headerlink" href="#shadow-copy-parser-engine" title="Permalink to this heading">¶</a></h4>
+<p>As of v10.2.0, DFIR-Orc supports two engines for parsing volume shadow copy files that can be specified with the <code class="docutils literal notranslate"><span class="pre">shadows_parser</span></code> attribute.</p>
+<p>Until DFIR-Orc v10.2.0 the shadow copies were parsed using a volume created by Microsoft’s volsnap.sys named like <code class="docutils literal notranslate"><span class="pre">\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10</span></code>. An immediate drawback was that the <code class="docutils literal notranslate"><span class="pre">offline</span></code> DFIR-Orc mode did not handle shadow copies. A future one could be that Microsoft restricts the access to the shadow copy volumes.</p>
+<p>This why a custom shadow copy parser has been embedded and is now used as default.</p>
+<p>To use the Microsoft parser instead specify <code class="docutils literal notranslate"><span class="pre">shadows_parser=&quot;microsoft&quot;</span></code>.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span><span class="w"> </span><span class="na">shadows=</span><span class="s">&quot;yes&quot;</span><span class="w"> </span><span class="na">shadows_parser=</span><span class="s">&quot;microsoft&quot;</span><span class="nt">&gt;</span>c:\<span class="nt">&lt;/location&gt;</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="locations-for-offline-mft">
 <h3>Locations for Offline MFT<a class="headerlink" href="#locations-for-offline-mft" title="Permalink to this heading">¶</a></h3>

@@ -139,6 +139,22 @@ Attributes
 .. warning::
     Limits must be explicitly set, either by using ``nolimits`` or by using a meaningful combination of attributes of ``samples``. Details are provided :ref:`below <getthis-limits>`.
 
+* **resurrect** *(optional=yes, default=no)*, ``/ResurrectRecords=<yes|no|resident>`` Option
+
+The MFT parser can be configured to include deleted records. This option can provide information about recently deleted file system entries.
+This can, by design, incur unpredictable results (as we are using unreliable or partially deleted information).
+One can generally assume that resident attributes for those entries are valid unlike nonresident attributes that are most likely quickly invalidated after the entry deletion.
+Use the option value ``resident`` to limit parsed deleted entries to resident ones.
+
+..  csv-table::
+    :header: Value, Description
+    :widths: auto
+    :align: left
+
+    *yes*, "Enable deleted records recovery"
+    *resident*, "Enabled deleted resident records only recovery"
+    *no*,  "Do not try to recover deleted records"
+
 * **reportall** *(optional=yes, default=Inactive)*, ``/reportall`` option:
     When using limits, GetThis potentially does not collect files that would have been collected otherwise. Nevertheless, the ``reportall`` option can be added so that the output CSV file contains information about all matching data from the disk, and not just the collected ones. When using the command line, this switch can be activated with the option ``/reportall``, which takes no value. In an XML file, the attribute is written ``reportall=""``.
 * **flushregistry** *(optional=yes, default=Inactive)*, ``/flushregistry`` option:

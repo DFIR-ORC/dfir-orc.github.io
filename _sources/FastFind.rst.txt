@@ -235,6 +235,27 @@ In each of these sections, three additional elements can be specified:
     * ``registry_find`` elements for registry indicators. The syntax is detailed in the :ref:`RegInfo <RegInfo_Registryfind>`,
     * ``object_find`` elements for object indicators. The syntax is detailed in the :doc:`ObjInfo <ObjInfo>`.
 
+The ``<filesystem>`` element accept the following 'resurrect' attribute to specify that deleted entries should be parsed.
+
+* **resurrect** *(optional=yes, default=no)*, ``/ResurrectRecords=<yes|no|resident>`` Option
+
+The MFT parser can be configured to include deleted records. This option can provide information about recently deleted file system entries.
+This can, by design, incur unpredictable results (as we are using unreliable or partially deleted information).
+One can generally assume that resident attributes for those entries are valid unlike nonresident attributes that are most likely quickly invalidated after the entry deletion.
+Use the option value ``resident`` to limit parsed deleted entries to resident ones.
+
+..  csv-table::
+    :header: Value, Description
+    :widths: auto
+    :align: left
+
+    *yes*, "Enable deleted records recovery"
+    *resident*, "Enabled deleted resident records only recovery"
+    *no*,  "Do not try to recover deleted records"
+
+
+Others available command line options are:
+
 ``/out=<Path>`` Option
 -----------------------
 

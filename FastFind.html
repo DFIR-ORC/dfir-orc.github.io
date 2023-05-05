@@ -417,6 +417,33 @@ This element has an attribute <code class="docutils literal notranslate"><span c
 </dl>
 </li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;filesystem&gt;</span></code> element accept the following ‘resurrect’ attribute to specify that deleted entries should be parsed.</p>
+<ul class="simple">
+<li><p><strong>resurrect</strong> <em>(optional=yes, default=no)</em>, <code class="docutils literal notranslate"><span class="pre">/ResurrectRecords=&lt;yes|no|resident&gt;</span></code> Option</p></li>
+</ul>
+<p>The MFT parser can be configured to include deleted records. This option can provide information about recently deleted file system entries.
+This can, by design, incur unpredictable results (as we are using unreliable or partially deleted information).
+One can generally assume that resident attributes for those entries are valid unlike nonresident attributes that are most likely quickly invalidated after the entry deletion.
+Use the option value <code class="docutils literal notranslate"><span class="pre">resident</span></code> to limit parsed deleted entries to resident ones.</p>
+<table class="docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>yes</em></p></td>
+<td><p>Enable deleted records recovery</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>resident</em></p></td>
+<td><p>Enabled deleted resident records only recovery</p></td>
+</tr>
+<tr class="row-even"><td><p><em>no</em></p></td>
+<td><p>Do not try to recover deleted records</p></td>
+</tr>
+</tbody>
+</table>
+<p>Others available command line options are:</p>
 </section>
 <section id="out-path-option">
 <h3><code class="docutils literal notranslate"><span class="pre">/out=&lt;Path&gt;</span></code> Option<a class="headerlink" href="#out-path-option" title="Permalink to this heading">¶</a></h3>
