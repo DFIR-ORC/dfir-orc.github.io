@@ -280,6 +280,13 @@ Adds matching indicator information about the file system in a CSV file. File na
 
 Adds matching indicator information about Windows objects in a CSV file. File name provided in ``<Path>`` value must have a ``.csv`` extension and if a full path is not specified, file is created in the current directory.
 
+``/registry=<Path>`` Option
+-------------------------
+
+*optional=yes, default=N/A*
+
+Adds matching indicator information about the registry in a CSV file. File name provided in ``<Path>`` value must have a ``.csv`` extension and if a full path is not specified, file is created in the current directory.
+
 ``/SkipDeleted`` Option
 -----------------------
 
