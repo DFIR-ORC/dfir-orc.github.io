@@ -431,6 +431,8 @@ Attributes
 
 * **keyword** *(optional=no, default=N/A)*
         Uniquely identifies this task in the archive
+* **timeout** *(optional=yes, default=N/A)*
+        Terminate the command if the timeout is reached (in minutes).
 * **winver** *(optional=yes, default=always execute)*
         Limits the execution of this command to one or several specific versions of Windows.
         The valid values of this attribute are:
