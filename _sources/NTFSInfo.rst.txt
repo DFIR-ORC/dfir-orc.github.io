@@ -159,6 +159,15 @@ The Attributes column may contain the following flags:
         FILE_ATTRIBUTE_SYSTEM, S
         FILE_ATTRIBUTE_TEMPORARY, T
         FILE_ATTRIBUTE_VIRTUAL, V
+        FILE_ATTRIBUTE_DEVICE, d
+        FILE_ATTRIBUTE_NOT_CONTENT_INDEX, I
+        FILE_ATTRIBUTE_INTEGRITY_STREAM, s
+        FILE_ATTRIBUTE_NO_SCRUB_DATA, B
+        FILE_ATTRIBUTE_EA, e
+        FILE_ATTRIBUTE_PINNED, p
+        FILE_ATTRIBUTE_UNPINNED, u
+        FILE_ATTRIBUTE_RECALL_ON_OPEN, o
+        FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS, a
 
 Detailed documentation of these flags can be found at: https://docs.microsoft.com/en-us/windows/win32/fileio/file-attribute-constants
 
