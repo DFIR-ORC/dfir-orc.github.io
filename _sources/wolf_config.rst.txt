@@ -367,6 +367,10 @@ Attributes
         Per archive, override the global configured time (in minutes) the engine will wait for the last command(s) to complete. Upon timeout, the command engine will stop, kill any pending process and move on with archive completion.
 * **archive_timeout** *(optional=yes, default=5 minutes)*
         Per archive, override the global configured time (in minutes) the engine will wait for the archive to complete. Upon timeout, this archive will be canceled.
+* **physicalmemory** *(optional=yes, default=none)*
+        Per archive condition, do not execute commands if installed memory does not match (ex: "<=32GB" will trigger only if system has less than 32GB)
+* **diskfree** *(optional=yes, default=none)*
+        Per archive periodic check, stop commands execution if disk free space requirement is not satisfied anymore (ex: "10GB")
 * **childdebug** *(optional=yes, default=false)*
         Per archive, sets if the child process should be under the control of a debugger when running. If so, a mini dump file will be created if a crash occurs. If set to "no", explicitly disables the debugger, any other value activates the debugger. Please note that this setting is overridden by command line option or attribute attached to the wolf element.
 
@@ -455,6 +459,8 @@ Attributes
         * DomainController: for domain controllers
 
         Values can be combined with '|'. For example, Server|DomainController results in executing the command on all servers.
+* **diskfree** *(optional=yes, default=none)*
+        Stop command execution if disk free space requirement is not satisfied anymore (ex: "10GB")
 * **optional** *(optional=yes, default=false (command not optional))*
         Marks a command execution as optional (i.e. not executed by default)
 

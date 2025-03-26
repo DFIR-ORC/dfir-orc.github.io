@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Configuring Attributes of ntfs_find and ntfs_exclude Elements &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
-    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css?v=6a4e18a9" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=191e2fe5" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Configuring Console Output, Logging" href="configuring_console_output.html" />
@@ -43,10 +40,10 @@
           <li class="nav-item nav-item-2"><a href="info_tools.html" accesskey="U">Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+              <img class="logo" src="_static/logo.jpg" alt="Logo of DFIR ORC"/>
             </a></p>
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
@@ -91,9 +88,9 @@
           <div class="body" role="main">
             
   <section id="configuring-attributes-of-ntfs-find-and-ntfs-exclude-elements">
-<h1>Configuring Attributes of <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Elements<a class="headerlink" href="#configuring-attributes-of-ntfs-find-and-ntfs-exclude-elements" title="Permalink to this heading">¶</a></h1>
+<h1>Configuring Attributes of <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Elements<a class="headerlink" href="#configuring-attributes-of-ntfs-find-and-ntfs-exclude-elements" title="Link to this heading">¶</a></h1>
 <section id="search-algorithm-and-result-of-a-search">
-<h2>Search Algorithm and Result of a Search<a class="headerlink" href="#search-algorithm-and-result-of-a-search" title="Permalink to this heading">¶</a></h2>
+<h2>Search Algorithm and Result of a Search<a class="headerlink" href="#search-algorithm-and-result-of-a-search" title="Link to this heading">¶</a></h2>
 <p>FastFind, RegInfo and GetThis can select NTFS file system entries based on multiple indicators to allow the precise definition of wanted items. Those indicators are specified by using two elements:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> to search for an indicator,</p></li>
@@ -135,7 +132,7 @@ In general, only the NTFS attributes used for a record match are reported/collec
 For instance, for GetThis, if the only condition used is on the file name, the resulting set will have a name but no data so the tool will also retrieve the default <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> (the file contents). This is detailed below.</p>
 </section>
 <section id="possible-attributes-of-a-ntfs-find-element">
-<h2>Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> Element<a class="headerlink" href="#possible-attributes-of-a-ntfs-find-element" title="Permalink to this heading">¶</a></h2>
+<h2>Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_find</span></code> Element<a class="headerlink" href="#possible-attributes-of-a-ntfs-find-element" title="Link to this heading">¶</a></h2>
 <p>The list below enumerates the attributes that can be used to describe search indicators. The conditions are tested against MFT records. When an NTFS artefact matches a condition, it is registered. The whole MFT record has to match all conditions expressed in the scope of one element.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -451,7 +448,7 @@ The artefact registered is the attribute matching the condition.</p>
 </div>
 </section>
 <section id="possible-attributes-of-a-ntfs-exclude-element">
-<h2>Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Element<a class="headerlink" href="#possible-attributes-of-a-ntfs-exclude-element" title="Permalink to this heading">¶</a></h2>
+<h2>Possible Attributes of a <code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> Element<a class="headerlink" href="#possible-attributes-of-a-ntfs-exclude-element" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ntfs_exclude</span></code> elements can be used to exclude specific matches.
 As explained in <a class="reference external" href="#search-algorithm-and-result-of-a-search">the first section of this page</a>,
 when a record matches all attributes of an exclusion term, all NTFS artefacts related to this record are excluded from the matching set.</p>
@@ -462,7 +459,7 @@ when a record matches all attributes of an exclusion term, all NTFS artefacts re
 </div>
 </section>
 <section id="order-of-evaluation-of-attributes-in-clauses">
-<h2>Order of Evaluation of Attributes in Clauses<a class="headerlink" href="#order-of-evaluation-of-attributes-in-clauses" title="Permalink to this heading">¶</a></h2>
+<h2>Order of Evaluation of Attributes in Clauses<a class="headerlink" href="#order-of-evaluation-of-attributes-in-clauses" title="Link to this heading">¶</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Attributes evaluation order is based on cost. For instance, size is a very cheap indicator to evaluate whereas hash value is very expensive. If both are present, the evaluator will first test file size and then (if size matches) will evaluate the file’s hash value. <strong>This means that coupling a size indicator to a hash one will dramatically enhance the performance of the search</strong>.</p>
@@ -534,7 +531,7 @@ when a record matches all attributes of an exclusion term, all NTFS artefacts re
 </div></blockquote>
 </section>
 <section id="typical-usage-examples">
-<h2>Typical Usage Examples<a class="headerlink" href="#typical-usage-examples" title="Permalink to this heading">¶</a></h2>
+<h2>Typical Usage Examples<a class="headerlink" href="#typical-usage-examples" title="Link to this heading">¶</a></h2>
 <p>To specify the registry hives of the system, the element would be</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ntfs_find</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;\Windows\System32\config\SOFTWARE&quot;</span><span class="w"> </span><span class="na">header=</span><span class="s">&quot;regf&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;nffs_find</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;\Windows\System32\config\SYSTEM&quot;</span><span class="w"> </span><span class="na">header=</span><span class="s">&quot;regf&quot;</span><span class="nt">/&gt;</span>
@@ -596,7 +593,7 @@ when a record matches all attributes of an exclusion term, all NTFS artefacts re
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.4.7.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

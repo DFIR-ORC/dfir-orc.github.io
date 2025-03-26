@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Configuring Locations &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
-    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css?v=6a4e18a9" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=191e2fe5" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Configuring the Yara Scanner" href="configuring_yara.html" />
@@ -43,10 +40,10 @@
           <li class="nav-item nav-item-2"><a href="info_tools.html" accesskey="U">Common Options &amp; Properties</a> &#187;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+              <img class="logo" src="_static/logo.jpg" alt="Logo of DFIR ORC"/>
             </a></p>
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
@@ -91,7 +88,7 @@
           <div class="body" role="main">
             
   <section id="configuring-locations">
-<h1>Configuring Locations<a class="headerlink" href="#configuring-locations" title="Permalink to this heading">¶</a></h1>
+<h1>Configuring Locations<a class="headerlink" href="#configuring-locations" title="Link to this heading">¶</a></h1>
 <p>A location is an access path to a specific NTFS volume. Typically, an access path can be:</p>
 <ul>
 <li><p>a mounted volume path, such as:</p>
@@ -171,9 +168,9 @@
 <p>The locations specified in a file are all resolved before starting any actual parsing. Then, the most general locations to parse are determined.
 Possible location attributes documented below such as <code class="docutils literal notranslate"><span class="pre">altitude</span></code> and <code class="docutils literal notranslate"><span class="pre">shadows</span></code> are taken into account globally: their value apply on all locations. The last occurrence within an XML file sets the global value of the attribute.</p>
 <section id="locations">
-<h2>Locations<a class="headerlink" href="#locations" title="Permalink to this heading">¶</a></h2>
+<h2>Locations<a class="headerlink" href="#locations" title="Link to this heading">¶</a></h2>
 <section id="locations-for-mounted-volumes">
-<h3>Locations for Mounted Volumes<a class="headerlink" href="#locations-for-mounted-volumes" title="Permalink to this heading">¶</a></h3>
+<h3>Locations for Mounted Volumes<a class="headerlink" href="#locations-for-mounted-volumes" title="Link to this heading">¶</a></h3>
 <p>Locations are simply added using full path names:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>C:\Windows<span class="nt">&lt;/location&gt;</span>
 <span class="nt">&lt;location&gt;</span>D:\MyFiles<span class="nt">&lt;/location&gt;</span>
@@ -200,7 +197,7 @@ Possible location attributes documented below such as <code class="docutils lite
 </div></blockquote>
 </section>
 <section id="locations-for-physical-drives">
-<h3>Locations for Physical Drives<a class="headerlink" href="#locations-for-physical-drives" title="Permalink to this heading">¶</a></h3>
+<h3>Locations for Physical Drives<a class="headerlink" href="#locations-for-physical-drives" title="Link to this heading">¶</a></h3>
 <p>The MFT parser has the ability to parse the physical drive (non-mounted volumes).
 When the syntax <code class="docutils literal notranslate"><span class="pre">\\.\PhysicalDrive0</span></code> is used, then the partitions of the disk are enumerated and all NTFS volumes are parsed.
 One can also refer to a specific NTFS partition on a drive using the following convention:</p>
@@ -234,7 +231,7 @@ One can also refer to a specific NTFS partition on a drive using the following c
 </div>
 </section>
 <section id="locations-for-disk-images-dd">
-<h3>Locations for Disk Images (.dd)<a class="headerlink" href="#locations-for-disk-images-dd" title="Permalink to this heading">¶</a></h3>
+<h3>Locations for Disk Images (.dd)<a class="headerlink" href="#locations-for-disk-images-dd" title="Link to this heading">¶</a></h3>
 <p>The MFT parser has the ability to parse full disk images.</p>
 <p>On a command line, the appropriate syntax is:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo <span class="s2">&quot;F:\TestCases\disk_image.dd&quot;</span>
@@ -247,7 +244,7 @@ One can also refer to a specific NTFS partition on a drive using the following c
 <p>The partition table of the image is located, parsed, and then all NTFS partitions are parsed.</p>
 </section>
 <section id="locations-for-volumes-and-partitions-of-an-image-dd">
-<h3>Locations for Volumes and Partitions of an Image (.dd)<a class="headerlink" href="#locations-for-volumes-and-partitions-of-an-image-dd" title="Permalink to this heading">¶</a></h3>
+<h3>Locations for Volumes and Partitions of an Image (.dd)<a class="headerlink" href="#locations-for-volumes-and-partitions-of-an-image-dd" title="Link to this heading">¶</a></h3>
 <p>The MFT parser can parse partitions of raw or dd images. This requires the presence of the NTFS signature in the header of the image.</p>
 <p>The syntax below can be used as a command-line argument:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo <span class="s2">&quot;F:\TestCases\d_image.dd&quot;</span>
@@ -272,9 +269,9 @@ One can also refer to a specific NTFS partition on a drive using the following c
 </div>
 </section>
 <section id="locations-for-volume-shadow-copies">
-<h3>Locations for Volume Shadow Copies<a class="headerlink" href="#locations-for-volume-shadow-copies" title="Permalink to this heading">¶</a></h3>
+<h3>Locations for Volume Shadow Copies<a class="headerlink" href="#locations-for-volume-shadow-copies" title="Link to this heading">¶</a></h3>
 <section id="explicit-volume-shadow-copy">
-<h4>Explicit Volume Shadow Copy<a class="headerlink" href="#explicit-volume-shadow-copy" title="Permalink to this heading">¶</a></h4>
+<h4>Explicit Volume Shadow Copy<a class="headerlink" href="#explicit-volume-shadow-copy" title="Link to this heading">¶</a></h4>
 <p>The MFT parser has the ability to parse volume shadow copies (VSS).</p>
 <p>On a command line, one can use:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe NTFSInfo \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10
@@ -286,7 +283,7 @@ One can also refer to a specific NTFS partition on a drive using the following c
 </div>
 </section>
 <section id="automatic-shadow-copies-addition">
-<span id="configuring-locations-automatic-shadow"></span><h4>Automatic Shadow Copies Addition<a class="headerlink" href="#automatic-shadow-copies-addition" title="Permalink to this heading">¶</a></h4>
+<span id="configuring-locations-automatic-shadow"></span><h4>Automatic Shadow Copies Addition<a class="headerlink" href="#automatic-shadow-copies-addition" title="Link to this heading">¶</a></h4>
 <p>The volume shadow copies can be enumerated and added to the list of parsed locations.
 This feature can be enabled by adding the attribute <code class="docutils literal notranslate"><span class="pre">shadows=&quot;yes&quot;</span></code> in a <code class="docutils literal notranslate"><span class="pre">location</span></code> element:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span><span class="w"> </span><span class="na">shadows=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>c:\<span class="nt">&lt;/location&gt;</span>
@@ -305,7 +302,7 @@ This feature can be enabled by adding the attribute <code class="docutils litera
 <p>The <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> option can also be used on command lines and applies to all mounted volumes otherwise selected.</p>
 </section>
 <section id="shadow-copy-parser-engine">
-<h4>Shadow copy parser engine<a class="headerlink" href="#shadow-copy-parser-engine" title="Permalink to this heading">¶</a></h4>
+<h4>Shadow copy parser engine<a class="headerlink" href="#shadow-copy-parser-engine" title="Link to this heading">¶</a></h4>
 <p>As of v10.2.0, DFIR-Orc supports two engines for parsing volume shadow copy files that can be specified with the <code class="docutils literal notranslate"><span class="pre">shadows_parser</span></code> attribute.</p>
 <p>Until DFIR-Orc v10.2.0 the shadow copies were parsed using a volume created by Microsoft’s volsnap.sys named like <code class="docutils literal notranslate"><span class="pre">\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10</span></code>. An immediate drawback was that the <code class="docutils literal notranslate"><span class="pre">offline</span></code> DFIR-Orc mode did not handle shadow copies. A future one could be that Microsoft restricts the access to the shadow copy volumes.</p>
 <p>This why a custom shadow copy parser has been embedded and is now used as default.</p>
@@ -316,7 +313,7 @@ This feature can be enabled by adding the attribute <code class="docutils litera
 </section>
 </section>
 <section id="locations-for-offline-mft">
-<h3>Locations for Offline MFT<a class="headerlink" href="#locations-for-offline-mft" title="Permalink to this heading">¶</a></h3>
+<h3>Locations for Offline MFT<a class="headerlink" href="#locations-for-offline-mft" title="Link to this heading">¶</a></h3>
 <p>The MFT parser can be used to parse the Master File Table in an offline manner, that is to say, the volume does not have to be parsed - or even present.
 The following command allows to dump the MFT:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe GetThis /sample=$Mft /out=d:\temp C:
@@ -334,7 +331,7 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 </div>
 </section>
 <section id="location-variables">
-<h3>Location variables<a class="headerlink" href="#location-variables" title="Permalink to this heading">¶</a></h3>
+<h3>Location variables<a class="headerlink" href="#location-variables" title="Link to this heading">¶</a></h3>
 <p>Environment variables (ex: <code class="docutils literal notranslate"><span class="pre">SYSTEMROOT</span></code>) are resolved when executing DFIR-Orc.</p>
 <p>The syntax is as follows:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location&gt;</span>%SYSTEMROOT%<span class="nt">&lt;/location&gt;</span>
@@ -350,9 +347,9 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 </section>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <section id="altitude-attribute-altitude-strategy-option">
-<h3><code class="docutils literal notranslate"><span class="pre">altitude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Altitude=&lt;Strategy&gt;</span></code> Option<a class="headerlink" href="#altitude-attribute-altitude-strategy-option" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">altitude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Altitude=&lt;Strategy&gt;</span></code> Option<a class="headerlink" href="#altitude-attribute-altitude-strategy-option" title="Link to this heading">¶</a></h3>
 <p>The location altitude defines the strategy used to translate a given location into the optimal access path to the volume. There are three strategies available for the altitude selection:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Lowest</span></code> (default): translates the location to the lowest-level access path available for the volume,</p></li>
@@ -383,7 +380,7 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 </div>
 </section>
 <section id="knownlocations-attribute-knownlocations-option">
-<span id="configuring-locations-knowlocations"></span><h3><code class="docutils literal notranslate"><span class="pre">knownlocations</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/knownlocations</span></code> Option<a class="headerlink" href="#knownlocations-attribute-knownlocations-option" title="Permalink to this heading">¶</a></h3>
+<span id="configuring-locations-knowlocations"></span><h3><code class="docutils literal notranslate"><span class="pre">knownlocations</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/knownlocations</span></code> Option<a class="headerlink" href="#knownlocations-attribute-knownlocations-option" title="Link to this heading">¶</a></h3>
 <p>Some tools (NTFSInfo, FastFind, GetSamples, USNInfo, GetThis) provides the <code class="docutils literal notranslate"><span class="pre">/knownlocations</span></code> option in command line or the equivalent <code class="docutils literal notranslate"><span class="pre">&lt;knownlocations/&gt;</span></code> element in their XML configuration file.</p>
 <p>This option collects information on the following locations of interest:</p>
 <table class="docutils align-default">
@@ -493,7 +490,7 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 </div>
 </section>
 <section id="shadows-attribute-shadows-option">
-<span id="configuring-locations-shadows"></span><h3><code class="docutils literal notranslate"><span class="pre">shadows</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> Option<a class="headerlink" href="#shadows-attribute-shadows-option" title="Permalink to this heading">¶</a></h3>
+<span id="configuring-locations-shadows"></span><h3><code class="docutils literal notranslate"><span class="pre">shadows</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/shadows</span></code> Option<a class="headerlink" href="#shadows-attribute-shadows-option" title="Link to this heading">¶</a></h3>
 <p>This option enable the processing of the shadow copy volumes from all the specified <code class="docutils literal notranslate"><span class="pre">location</span></code>. Multiple of the following values can be assigned:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">no</span></code> (default): Disable every volume shadow copy processing.</p></li>
@@ -515,7 +512,7 @@ This allows the MFT to be parsed without malware potentially intervening in the 
 <p>See also <a class="reference internal" href="#configuring-locations-automatic-shadow"><span class="std std-ref">above</span></a>.</p>
 </section>
 <section id="exclude-attribute-exclude-drivelist-option">
-<span id="configuring-locations-exclude"></span><h3><code class="docutils literal notranslate"><span class="pre">exclude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Exclude=&quot;&lt;DriveList&gt;&quot;</span></code> Option<a class="headerlink" href="#exclude-attribute-exclude-drivelist-option" title="Permalink to this heading">¶</a></h3>
+<span id="configuring-locations-exclude"></span><h3><code class="docutils literal notranslate"><span class="pre">exclude</span></code> Attribute, <code class="docutils literal notranslate"><span class="pre">/Exclude=&quot;&lt;DriveList&gt;&quot;</span></code> Option<a class="headerlink" href="#exclude-attribute-exclude-drivelist-option" title="Link to this heading">¶</a></h3>
 <p>Specify volume(s) to exclude from any processing. This can be particularly helpful when <code class="docutils literal notranslate"><span class="pre">location</span></code> value is wildcard ‘*’. It is also possible to exclude a “normal” volume when only its shadow copy volumes must be processed.</p>
 <p>Example processing all volumes but the ‘D’:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;location</span><span class="w"> </span><span class="na">exclude=</span><span class="s">&quot;D:&quot;</span><span class="nt">&gt;</span>*<span class="nt">&lt;/location&gt;</span>
@@ -569,7 +566,7 @@ This allows the MFT to be parsed without malware potentially intervening in the 
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.4.7.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {

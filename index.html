@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Introduction &#8212; DFIR ORC  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/solar.css" />
-    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css?v=6a4e18a9" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=191e2fe5" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorial" href="tuto.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
@@ -33,10 +30,10 @@
         <li class="nav-item nav-item-0"><a href="#">DFIR ORC  documentation</a> &#187;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="#">
-              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+              <img class="logo" src="_static/logo.jpg" alt="Logo of DFIR ORC"/>
             </a></p>
 <h3><a href="#">Table of Contents</a></h3>
 <ul class="current">
@@ -68,7 +65,7 @@
           <div class="body" role="main">
             
   <section id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h1>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h1>
 <p>DFIR ORC, where ORC stands for “Outil de Recherche de Compromission” in French, is a <a class="reference internal" href="embedded_tool_suite.html"><span class="doc">collection of specialized tools</span></a> dedicated to reliably parse and collect critical artefacts such as the MFT, registry hives or event logs.
 It can also embed external tools and their configurations.</p>
 <p>DFIR ORC collects data, but does not analyze it: it is not meant to triage machines. It cannot spy on an attacker either, as an EDR or HIDS/HIPS would.
@@ -87,7 +84,7 @@ To get started building, check out this <a class="reference external" href="http
 </div>
 </section>
 <section id="table-of-contents">
-<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">¶</a></h1>
+<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
@@ -136,38 +133,38 @@ To get started building, check out this <a class="reference external" href="http
 </ul>
 </div>
 <section id="a-few-q-a-to-introduce-dfir-orc">
-<h2>A Few Q&amp;A to Introduce DFIR ORC<a class="headerlink" href="#a-few-q-a-to-introduce-dfir-orc" title="Permalink to this heading">¶</a></h2>
+<h2>A Few Q&amp;A to Introduce DFIR ORC<a class="headerlink" href="#a-few-q-a-to-introduce-dfir-orc" title="Link to this heading">¶</a></h2>
 <section id="what-is-dfir-orc">
-<h3>What is DFIR ORC?<a class="headerlink" href="#what-is-dfir-orc" title="Permalink to this heading">¶</a></h3>
+<h3>What is DFIR ORC?<a class="headerlink" href="#what-is-dfir-orc" title="Link to this heading">¶</a></h3>
 <p>DFIR ORC is a modular and scalable tool to collect artefacts on Microsoft Windows systems, in a decentralized manner.</p>
 </section>
 <section id="what-is-an-artefact-what-is-digital-forensics">
-<h3>What is an artefact? What is digital forensics?<a class="headerlink" href="#what-is-an-artefact-what-is-digital-forensics" title="Permalink to this heading">¶</a></h3>
+<h3>What is an artefact? What is digital forensics?<a class="headerlink" href="#what-is-an-artefact-what-is-digital-forensics" title="Link to this heading">¶</a></h3>
 <p>Digital forensics investigators study traces left by various activities on computing systems.
 These traces are named artefacts. Usually, analysts track traces of computer hacks or criminal activities.
 When incident responders analyze machines following a security breach, they use forensic investigation techniques to understand what happened and when. This helps restoring a safe production environment as quickly as possible.</p>
 </section>
 <section id="who-can-use-dfir-orc">
-<h3>Who can use DFIR ORC?<a class="headerlink" href="#who-can-use-dfir-orc" title="Permalink to this heading">¶</a></h3>
+<h3>Who can use DFIR ORC?<a class="headerlink" href="#who-can-use-dfir-orc" title="Link to this heading">¶</a></h3>
 <p>DFIR ORC is intended for computer security professionals wishing to collect forensically relevant data. The
 incident responders addressing security breaches on Microsoft Windows installed bases are the primary target audience.</p>
 </section>
 <section id="is-dfir-expertise-needed-to-run-dfir-orc">
-<h3>Is DFIR expertise needed to run DFIR ORC?<a class="headerlink" href="#is-dfir-expertise-needed-to-run-dfir-orc" title="Permalink to this heading">¶</a></h3>
+<h3>Is DFIR expertise needed to run DFIR ORC?<a class="headerlink" href="#is-dfir-expertise-needed-to-run-dfir-orc" title="Link to this heading">¶</a></h3>
 <p>Once configured, DFIR ORC is meant to be executed easily by any computer user. On large Microsoft Windows installed bases, administrators can deploy and gather the results as they would for any other binary.</p>
 <p>The DFIR ORC framework is the result of several years of development. It has been used in various contexts, from the investigation of a single desktop disk to incident response for a multinational corporation.</p>
 </section>
 <section id="can-dfir-orc-identify-compromised-machines">
-<h3>Can DFIR ORC identify compromised machines?<a class="headerlink" href="#can-dfir-orc-identify-compromised-machines" title="Permalink to this heading">¶</a></h3>
+<h3>Can DFIR ORC identify compromised machines?<a class="headerlink" href="#can-dfir-orc-identify-compromised-machines" title="Link to this heading">¶</a></h3>
 <p>DFIR ORC collects data, but does not perform any analysis. Strictly speaking, it cannot be used to determine whether
 a machine has been compromised. Diagnoses arise from analysis of artefacts by forensic investigators.</p>
 </section>
 <section id="why-has-anssi-developed-dfir-orc">
-<h3>Why has ANSSI developed DFIR ORC?<a class="headerlink" href="#why-has-anssi-developed-dfir-orc" title="Permalink to this heading">¶</a></h3>
+<h3>Why has ANSSI developed DFIR ORC?<a class="headerlink" href="#why-has-anssi-developed-dfir-orc" title="Link to this heading">¶</a></h3>
 <p>In the last decade, the DFIR community has had to deal with ever-growing installed bases and to address Advanced Persistent Threats (APTs). In an effort to face these challenges, ANSSI has revamped its investigation methodology and developed suitable tooling. DFIR ORC is a direct result of this change in the paradigm.</p>
 </section>
 <section id="what-is-released">
-<h3>What is released?<a class="headerlink" href="#what-is-released" title="Permalink to this heading">¶</a></h3>
+<h3>What is released?<a class="headerlink" href="#what-is-released" title="Link to this heading">¶</a></h3>
 <p>The release consists of three GitHub repositories, gathered in an <a class="reference external" href="https://github.com/dfir-orc">organization</a>. The repositories contain:</p>
 <blockquote>
 <div><ul class="simple">
@@ -188,17 +185,17 @@ a machine has been compromised. Diagnoses arise from analysis of artefacts by fo
 </div></blockquote>
 </section>
 <section id="why-is-dfir-orc-released">
-<h3>Why is DFIR ORC released?<a class="headerlink" href="#why-is-dfir-orc-released" title="Permalink to this heading">¶</a></h3>
+<h3>Why is DFIR ORC released?<a class="headerlink" href="#why-is-dfir-orc-released" title="Link to this heading">¶</a></h3>
 <p>As numerous institutions and private firms, ANSSI makes use of open-source software, and wishes to contribute back to the digital security community. The release of DFIR ORC, result of 8 years of active development, forms a significant  contribution.</p>
 <p>ANSSI developers of the DFIR ORC framework hope that a community of users and developers will emerge following this release, to help in the evolution of the tools.</p>
 </section>
 <section id="are-the-tools-still-maintained-will-there-be-other-releases">
-<h3>Are the tools still maintained? Will there be other releases?<a class="headerlink" href="#are-the-tools-still-maintained-will-there-be-other-releases" title="Permalink to this heading">¶</a></h3>
+<h3>Are the tools still maintained? Will there be other releases?<a class="headerlink" href="#are-the-tools-still-maintained-will-there-be-other-releases" title="Link to this heading">¶</a></h3>
 <p>Yes! Developers of DFIR ORC keep on improving the framework, fixing bugs and adding new features.
 New versions will be pushed in the appropriate repositories.</p>
 </section>
 <section id="why-is-it-written-in-c">
-<h3>Why is it written in C++?<a class="headerlink" href="#why-is-it-written-in-c" title="Permalink to this heading">¶</a></h3>
+<h3>Why is it written in C++?<a class="headerlink" href="#why-is-it-written-in-c" title="Link to this heading">¶</a></h3>
 <p>C++ suited the project when it was started, and it still does. Its main advantages are as follows :</p>
 <ul class="simple">
 <li><p>it is a low-level language allowing system programming,</p></li>
@@ -208,7 +205,7 @@ New versions will be pushed in the appropriate repositories.</p>
 </ul>
 </section>
 <section id="can-dfir-orc-be-used-in-malicious-ways">
-<h3>Can DFIR ORC be used in malicious ways?<a class="headerlink" href="#can-dfir-orc-be-used-in-malicious-ways" title="Permalink to this heading">¶</a></h3>
+<h3>Can DFIR ORC be used in malicious ways?<a class="headerlink" href="#can-dfir-orc-be-used-in-malicious-ways" title="Link to this heading">¶</a></h3>
 <p>ANSSI is mindful of potential hijacks of the code released in any situation.
 The publication of this code is intended to be useful to the forensics community.
 However, we must point out that, as any collection framework, DFIR ORC is meant to
@@ -223,7 +220,7 @@ DFIR ORC is meant to be modular, hence users should <strong>always run the speci
 “as is” without any kind of warranty, as is explicitly stated by its <a class="reference external" href="https://github.com/dfir-orc/dfir-orc/blob/master/LICENSE.txt">license</a>.</p>
 </section>
 <section id="what-makes-dfir-orc-a-forensically-sound-framework">
-<h3>What makes DFIR ORC a forensically sound framework?<a class="headerlink" href="#what-makes-dfir-orc-a-forensically-sound-framework" title="Permalink to this heading">¶</a></h3>
+<h3>What makes DFIR ORC a forensically sound framework?<a class="headerlink" href="#what-makes-dfir-orc-a-forensically-sound-framework" title="Link to this heading">¶</a></h3>
 <p>The framework has been developed to minimize its footprint on the system on which it runs.</p>
 <p>Firstly, the configuration allows influencing the order in which the tools are run : noisy tools can be scheduled last.</p>
 <p>Secondly, the published file system tools obey the following principles : write the minimum amount of data necessary,
@@ -231,7 +228,7 @@ create as few files as possible to avoid writing over entries in the MFT, restra
 <p>In a usual deployment, DFIR ORC writes results in a single directory and does not install any program on machines. When it is finished, only the archives remain, waiting to be collected.</p>
 </section>
 <section id="why-and-how-should-i-contribute">
-<h3>Why and how should I contribute?<a class="headerlink" href="#why-and-how-should-i-contribute" title="Permalink to this heading">¶</a></h3>
+<h3>Why and how should I contribute?<a class="headerlink" href="#why-and-how-should-i-contribute" title="Link to this heading">¶</a></h3>
 <p>As for any actively maintained open-source project, taking part in DFIR ORC helps it evolve towards an even more stable and useful tool set.
 Helping can be done at several levels :</p>
 <ul class="simple">
@@ -268,7 +265,7 @@ Helping can be done at several levels :</p>
  
     <div class="footer">
         &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.4.7.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
     </div>
  <script type="text/javascript">
     $(document).ready(function() {
