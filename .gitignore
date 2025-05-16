@@ -1,0 +1,4 @@
+.vscode/**
+**/build/**
+/.vs/doc-src/v16/TestStore/0
+/.vs

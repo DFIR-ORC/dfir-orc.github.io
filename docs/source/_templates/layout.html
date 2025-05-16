@@ -1,0 +1,29 @@
+{% extends "solar_theme/layout.html" %}
+  
+{%- macro relbar1() %}
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>{{ _('Navigation') }}</h3>
+      <ul>
+        {%- for rellink in rellinks %}
+        {% if rellink[3] != 'index' %}
+        <li class="right" {% if loop.first %}style="margin-right: 10px"{% endif %}>
+          <a href="{{ pathto(rellink[0]) }}" title="{{ rellink[1]|striptags|e }}"
+             {{ accesskey(rellink[2]) }}>{{ rellink[3] }}</a>
+          {% if rellink[3] != 'next' %}
+            {%- if not loop.first %}{{ reldelim2 }}{% endif %}</li>
+          {% endif %}
+        {% endif %}
+        {%- endfor %}
+        {%- block rootrellink %}
+        <li class="nav-item nav-item-0"><a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>{{ reldelim1 }}</li>
+        {%- endblock %}
+        {%- for parent in parents %}
+          <li class="nav-item nav-item-{{ loop.index }}"><a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>{{ reldelim1 }}</li>
+        {%- endfor %}
+        {%- block relbaritems %} {% endblock %}
+      </ul>
+    </div>
+{%- endmacro %}
+
+{%- block relbar1 %}{{ relbar1() }}{% endblock %}
+{%- block relbar2 %}{{ relbar1() }}{% endblock %}
