@@ -153,6 +153,6 @@ Helping can be done at several levels :
 * by having new ideas of elements to collect - using GitHub issues or pull requests in the `configuration repository <https://github.com/dfir-orc/dfir-orc-config>`_
 * by providing feedback on the documentation - using GitHub issues in the `documentation repository <https://github.com/dfir-orc/dfir-orc.github.io>`_. Pull requests will be possible soon.
 
-Any kind of general feedback or question can also be sent by e-mail : dfir-orc *at* ssi.gouv.fr.
+Any kind of general feedback or question can also be sent by e-mail: dfir-orc *at* ssi.gouv.fr.
 
 
