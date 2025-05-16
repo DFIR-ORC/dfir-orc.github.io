@@ -31,7 +31,7 @@ if "%1" == "singlehtml" goto singlehtml
 goto end
 
 :singlehtml
-%SPHINXBUILD% -b singlehtml %SOURCEDIR% %BUILDDIR%-singlehtml
+%SPHINXBUILD% -b singlehtml %SOURCEDIR% %BUILDDIR%/singlehtml
 goto end
 
 :help
