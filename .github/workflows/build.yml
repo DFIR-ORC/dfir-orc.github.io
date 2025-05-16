@@ -1,8 +1,5 @@
 name: CI
 
-permissions:
-  contents: write
-
 on:
   push:
     branches: [ master ]
@@ -19,36 +16,37 @@ jobs:
         run: |
           pip install sphinx
           pip install solar-theme
-          .\docs\make.bat html
-          .\docs\make.bat singlehtml
-      - name: Create archive artifact
+          .\make.bat html
+          .\make.bat singlehtml
+      - name: Create html archive artifact
         shell: pwsh
-        run: Copy-Item -Recurse .\docs\build\html .\docs\build\dfir-orc-doc
+        run: Copy-Item -Recurse .\build\html .\dfir-orc-doc
       - name: Upload archive artifact
         uses: actions/upload-artifact@v4
         with:
           name: dfir-orc-doc.zip
-          path: .\docs\build\dfir-orc-doc
-      - name: Create archive singlehtml artifact
+          path: .\build\html
+      - name: Create singlehtml archive artifact
         shell: pwsh
-        run: Copy-Item -Recurse .\docs\build-singlehtml .\docs\build\dfir-orc-doc-singlehtml
+        run: Copy-Item -Recurse .\build\singlehtml .\build\dfir-orc-doc-singlehtml
       - name: Upload singlehtml archive artifact
         uses: actions/upload-artifact@v4
         with:
           name: dfir-orc-doc-singlehtml.zip
-          path: .\docs\build\dfir-orc-doc-singlehtml
+          path: .\build\singlehtml\
       - name: Publish html pages
         if: github.ref == 'refs/heads/master'
         shell: pwsh
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          mv docs/build/html html
-          git add -f html
+          Move-Item build/html docs
+          git add -f docs
           git commit -m "Update by GitHub Action"
           git reset --hard
+          git clean -fdX
           git fetch origin
           git checkout gh-pages
-          Get-ChildItem -Filter html | Remove-Item -Recurse -Force
-          git cherry-pick master
+          Remove-Item -Recurse -Force docs/
+          git cherry-pick master -X theirs
           git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/DFIR-ORC/dfir-orc.github.io.git" gh-pages
