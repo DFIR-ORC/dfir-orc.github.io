@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Implementation Details About Parsers &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css?v=6a4e18a9" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=191e2fe5" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuring Locations" href="configuring_locations.html" />
+    <link rel="prev" title="Common Options &amp; Properties" href="info_tools.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="configuring_locations.html" title="Configuring Locations"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="info_tools.html" title="Common Options &amp; Properties"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" accesskey="U">Common Options &amp; Properties</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo of DFIR ORC"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="implementation-details-about-parsers">
+<h1>Implementation Details About Parsers<a class="headerlink" href="#implementation-details-about-parsers" title="Link to this heading">¶</a></h1>
+<section id="mft-parser">
+<h2>MFT Parser<a class="headerlink" href="#mft-parser" title="Link to this heading">¶</a></h2>
+<p>To circumvent strict ACLs or restrictive sharing status of files, we have implemented a Master File Table (MFT) parser allowing to directly open the volume itself (<code class="docutils literal notranslate"><span class="pre">\\.\C:</span></code>) and read disk geometry and information.
+From here, it is possible to locate the boot sector that provides information about the location of the $MFT
+extents (or segments). The MFT can then be read, record by record.</p>
+<p>The MFT records are parsed to read attributes like $FILE_NAME and $DATA ones.
+Using this data, NTFS metadata information can be deduced.
+One of the immediate benefits of using an MFT parser is the ability to compute cryptographic
+hashes of locked or secured (DACLed) files, as well as being able to read their contents.</p>
+</section>
+<section id="usn-parser">
+<h2>USN Parser<a class="headerlink" href="#usn-parser" title="Link to this heading">¶</a></h2>
+<p>The USN parser is based on a specific FSCTL called <code class="docutils literal notranslate"><span class="pre">FSCTL_ENUM_USN_DATA</span></code>.</p>
+<p>FSCTL_ENUM_USN_DATA does not walk through the change journal.
+It is a fallback path for when a change journal does not record all the information requested by an application.
+This call walks through the MFT to identify files changed between two USN identifiers.</p>
+<p>If the identifiers specified are zero and MAXLONGLONG, this effectively walks through every file on the volume (whether USN is active or not).</p>
+<p>The USN parser is now deprecated and should not be used (it was the first parser implemented).</p>
+<p>The MFT parser provides multiple benefits over the USN parser:</p>
+<ul class="simple">
+<li><p>Much faster</p></li>
+<li><p>Less fragile to malware interfering (does not rely on CreateFile or NtOpenFile)</p></li>
+<li><p>Feature complete</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="configuring_locations.html" title="Configuring Locations"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="info_tools.html" title="Common Options &amp; Properties"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" >Common Options &amp; Properties</a> &#187;</li> 
+      </ul>
+    </div>
+ 
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.4.7.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

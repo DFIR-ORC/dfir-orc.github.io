@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>WolfLauncher Configuration File &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css?v=6a4e18a9" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=191e2fe5" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ToolEmbed" href="ToolEmbed.html" />
+    <link rel="prev" title="DFIR ORC Command-line Options" href="cli_options.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="ToolEmbed.html" title="ToolEmbed"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="cli_options.html" title="DFIR ORC Command-line Options"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" accesskey="U">Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo of DFIR ORC"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="configuration.html">Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Referencing Resources in Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_options.html">DFIR ORC Command-line Options</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">WolfLauncher Configuration File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ToolEmbed.html">ToolEmbed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orc_local_config.html">DFIR ORC Local Configuration File</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="wolflauncher-configuration-file">
+<span id="wolf-config-ref"></span><h1>WolfLauncher Configuration File<a class="headerlink" href="#wolflauncher-configuration-file" title="Link to this heading">¶</a></h1>
+<p id="anchor-root">The index of this section consists in the following XML skeleton file, which features all the elements that can appear in a real configuration file.</p>
+<p>It is not a usable configuration, in the sense that it does not contain any attribute key or value, and <strong>can exhibit incompatible elements</strong>.
+Its point is to be exhaustive from the point of view of existing usable elements.</p>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#wolf-element">wolf</a> attributes=”…” &gt;</div>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#log-element">log</a> attributes=”…” &gt; <em>value</em> &lt;/log&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#console-element">console</a> attributes=”…” &gt; <em>value</em> &lt;/console&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#outline-element">outline</a> attributes=”…” &gt; &gt; <em>value</em> &lt;/outline&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#outcome-element">outcome</a> attributes=”…” &gt; &gt; <em>value</em> &lt;/outcome&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#recipient-element">recipient</a> attributes=”…”&gt; <em>value</em> &lt;/recipient&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#upload-element">upload</a> <em>attributes=”…”</em> /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#the-archive-element">archive</a> attributes=”…”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#restrictions-element">restrictions</a> attributes=”…” /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#command-element">command</a> attributes=”…” &gt;</div>
+<div class="line-block">
+<div class="line">&lt;<a class="reference external" href="#execute-element">execute</a> attributes=”…” /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#input-element">input</a> attributes=”…” /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#output-element">output</a> attributes=”…” /&gt;</div>
+<div class="line">&lt;<a class="reference external" href="#argument-element">argument</a> attributes=”…” /&gt;</div>
+</div>
+<div class="line">&lt;<a class="reference external" href="#command-element">/command</a>&gt;</div>
+</div>
+<div class="line">&lt;<a class="reference external" href="#the-archive-element">/archive</a>&gt;</div>
+</div>
+<div class="line">&lt;<a class="reference external" href="#wolf-element">/wolf</a>&gt;</div>
+</div>
+<section id="wolf-element">
+<span id="wolf-config-wolf-element"></span><h2><code class="docutils literal notranslate"><span class="pre">wolf</span></code> Element<a class="headerlink" href="#wolf-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=no, default=N/A</em></p>
+<p>Root element.</p>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>childdebug</strong> <em>(optional=yes, default=off)</em></dt><dd><p>Enables (or disables) the command engine to attach as a debugger to all created processes. Upon unhandled exceptions (i.e. application crashes), the command engine will capture the memory dump of the faulty process. This memory dump will then be collected to enable the analysis of the crash.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>command_timeout</strong> <em>(optional=yes, default=3 hours)</em></dt><dd><p>Configures the time (in minutes) the engine will wait for the last command(s) to complete. Upon timeout, the command engine will stop, kill any pending process and move on with archive completion.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>archive_timeout</strong> <em>(optional=yes, default=5 minutes)</em></dt><dd><p>Configures the time (in minutes) the engine will wait for the archive to complete. Upon timeout, this archive will be canceled.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>werdontshowui</strong> <em>(optional=yes, default=WER UI will appear)</em></dt><dd><p>Configures Windows Error Reporting to prevent blocking UI in case of a crash during DFIR ORC execution. WER previous configuration is restored at the end of DFIR ORC execution.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="log-element">
+<span id="wolf-config-log-element"></span><h2><code class="docutils literal notranslate"><span class="pre">log</span></code> Element<a class="headerlink" href="#log-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The log element can be used to create an optional log file of DFIR ORC execution. This file will be uploaded if an &lt;upload/&gt; element is specified in a <a class="reference internal" href="orc_local_config.html"><span class="doc">DFIR ORC local configuration file</span></a>.</p>
+<p>The log message are passing through “sinks” like ‘console’ or ‘file’. To configure log output a sink must be specified.</p>
+<section id="console-sink-element">
+<h3><code class="docutils literal notranslate"><span class="pre">Console</span></code> sink element<a class="headerlink" href="#console-sink-element" title="Link to this heading">¶</a></h3>
+<p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#log-element">parent element: log</a></p>
+<section id="id4">
+<h4>Attributes<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>level</strong> <em>(optional=yes, default=critical)</em></dt><dd><p>Log level, one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>backtrace</strong> <em>(optional=yes, default=off)</em></dt><dd><p>Specify a log level which will trigger a log backtrace which will contain logs up to level ‘debug’. Can also have the value ‘off’.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="file-sink-element">
+<h3><code class="docutils literal notranslate"><span class="pre">File</span></code> sink element<a class="headerlink" href="#file-sink-element" title="Link to this heading">¶</a></h3>
+<p><em>optional=yes, default=N/A</em>, <a class="reference external" href="#log-element">parent element: log</a></p>
+<section id="id6">
+<h4>Attributes<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>level</strong> <em>(optional=yes, default=info)</em></dt><dd><p>Log level, one of ‘trace’, ‘debug’, ‘info’ ‘error’, ‘warning’, ‘critical’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>backtrace</strong> <em>(optional=yes, default=error)</em></dt><dd><p>Specify a log level which will trigger a log backtrace which will contain logs up to level ‘debug’. Can also have the value ‘off’.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="output-element">
+<h4><code class="docutils literal notranslate"><span class="pre">output</span></code> Element<a class="headerlink" href="#output-element" title="Link to this heading">¶</a></h4>
+<p><em>optional=yes, default=N/A</em>, <cite>parent element: file</cite></p>
+<p>Path to the log file. Patterns are supported as with archive element (cf <a class="reference external" href="#the-archive-element">archive element</a>).</p>
+</section>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;log&gt;</span>
+<span class="w">    </span><span class="nt">&lt;console</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;critical&quot;</span><span class="w"> </span><span class="na">backtrace=</span><span class="s">&quot;off&quot;</span><span class="nt">&gt;&lt;/console&gt;</span>
+<span class="w">    </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;error&quot;</span><span class="w"> </span><span class="na">backtrace=</span><span class="s">&quot;error&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">disposition=</span><span class="s">&quot;truncate&quot;</span><span class="nt">&gt;</span>ORC_{SystemType}_{FullComputerName}_{TimeStamp}.dev.log<span class="nt">&lt;/output&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/log&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="console-element">
+<h2><code class="docutils literal notranslate"><span class="pre">console</span></code> Element<a class="headerlink" href="#console-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=no console output file</em>, <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>With a configurated Orc in can be convenient to capture console output to a file but keeping console output visible. This elements is complementary to the usual logs as it is intended to be as human readable as possible.</p>
+<section id="id9">
+<h3><code class="docutils literal notranslate"><span class="pre">output</span></code> Element<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p><em>optional=yes, default=N/A</em>, <cite>parent element: console</cite></p>
+<p>Path to the console output file. Patterns are supported as with archive element (cf <a class="reference external" href="#the-archive-element">archive element</a>).</p>
+</section>
+<section id="id11">
+<h3>Example<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;console&gt;</span>
+<span class="w">    </span><span class="nt">&lt;output&gt;</span>ORC_{SystemType}_{FullComputerName}_{TimeStamp}.log<span class="nt">&lt;/output&gt;</span>
+<span class="nt">&lt;/console&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>.\DFIR-Orc.exe /console:output=ORC_W7_COMPUTER_1010.log
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="outline-element">
+<h2><code class="docutils literal notranslate"><span class="pre">outline</span></code> Element<a class="headerlink" href="#outline-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=no outline file</em>, <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The <a class="reference internal" href="outline.html"><span class="doc">outline</span></a> element can be used to create an optional json file of DFIR ORC execution’s context.
+This file will also be uploaded if an &lt;upload/&gt; element is specified in a <a class="reference internal" href="orc_local_config.html"><span class="doc">DFIR ORC local configuration file</span></a>.</p>
+<section id="id14">
+<h3>Attributes<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<ul>
+<li><dl>
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Base file name of the outline file. The same patterns can be used as in the archive file names (cf <a class="reference external" href="#the-archive-element">archive element</a>).</p>
+<p>The following patterns will be automatically substituted:</p>
+<table class="docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{ComputerName}</p></td>
+<td><p>NetBIOS computer name</p></td>
+</tr>
+<tr class="row-odd"><td><p>{FullComputerName}</p></td>
+<td><p>Fully qualified DNS name of physical computer (per GetComputerNameEx())</p></td>
+</tr>
+<tr class="row-even"><td><p>{TimeStamp}</p></td>
+<td><p>The current date and time in the following form: YYYYMMDD_HHMMSS</p></td>
+</tr>
+<tr class="row-odd"><td><p>{SystemType}</p></td>
+<td><p>The Windows edition type running on this computer: WorkStation, Server, DomainController</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>disposition</strong> <em>(optional=yes, default=append)</em></dt><dd><p>Specifies if the outline file should:</p>
+<ul class="simple">
+<li><p>be appended to an existing file -&gt; use “append”</p></li>
+<li><p>be created as a new file (and logging should fail if file exists) -&gt; use “create_new”</p></li>
+<li><p>truncate any existing file or create a new file -&gt; use “truncate”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id16">
+<h3>Example<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outline</span><span class="w"> </span><span class="na">disposition=</span><span class="s">&#39;truncate&#39;</span><span class="w"> </span><span class="nt">&gt;</span>DFIR-ORC\_{SystemType}_{ComputerName}.json<span class="nt">&lt;/outline&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="outcome-element">
+<h2><code class="docutils literal notranslate"><span class="pre">outcome</span></code> Element<a class="headerlink" href="#outcome-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=no outcome file</em>, <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The <a class="reference internal" href="outcome.html"><span class="doc">outcome</span></a> element can be used to create an optional json file of DFIR ORC execution’s summary.
+This file will also be uploaded if an &lt;upload/&gt; element is specified in a <a class="reference internal" href="orc_local_config.html"><span class="doc">DFIR ORC local configuration file</span></a>.</p>
+<section id="id19">
+<h3>Attributes<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<ul>
+<li><dl>
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Base file name of the outcome file. The same patterns can be used as in the archive file names (cf <a class="reference external" href="#the-archive-element">archive element</a>).</p>
+<p>The following patterns will be automatically substituted:</p>
+<table class="docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{ComputerName}</p></td>
+<td><p>NetBIOS computer name</p></td>
+</tr>
+<tr class="row-odd"><td><p>{FullComputerName}</p></td>
+<td><p>Fully qualified DNS name of physical computer (per GetComputerNameEx())</p></td>
+</tr>
+<tr class="row-even"><td><p>{TimeStamp}</p></td>
+<td><p>The current date and time in the following form: YYYYMMDD_HHMMSS</p></td>
+</tr>
+<tr class="row-odd"><td><p>{SystemType}</p></td>
+<td><p>The Windows edition type running on this computer: WorkStation, Server, DomainController</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>disposition</strong> <em>(optional=yes, default=append)</em></dt><dd><p>Specifies if the outcome file should:</p>
+<ul class="simple">
+<li><p>be appended to an existing file -&gt; use “append”</p></li>
+<li><p>be created as a new file (and logging should fail if file exists) -&gt; use “create_new”</p></li>
+<li><p>truncate any existing file or create a new file -&gt; use “truncate”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id21">
+<h3>Example<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;outcome</span><span class="w"> </span><span class="na">disposition=</span><span class="s">&#39;truncate&#39;</span><span class="w"> </span><span class="nt">&gt;</span>DFIR-ORC\_{SystemType}_{ComputerName}.json<span class="nt">&lt;/outcome&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="recipient-element">
+<span id="wolf-config-recipient-element"></span><h2><code class="docutils literal notranslate"><span class="pre">recipient</span></code> Element<a class="headerlink" href="#recipient-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The recipient element is used to create the list of recipients able to open the CMS enveloped archives. It basically consists of a list of encoded certificates.</p>
+<section id="id24">
+<h3>Attributes<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Name of the recipient</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>archive</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Comma separated list of archive keyword specs to match against archive names. Specifies one or more archives encrypted in a CMS PKCS#7 message (cf <a class="reference external" href="http://tools.ietf.org/html/rfc2315">http://tools.ietf.org/html/rfc2315</a>).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id25">
+<h3>Example<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;recipient</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;certfr&#39;</span><span class="w"> </span><span class="na">archive=</span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">  </span>-----BEGIN<span class="w"> </span>CERTIFICATE-----
+<span class="w">    </span>...<span class="w"> </span>value<span class="w"> </span>...
+<span class="w">  </span>-----END<span class="w"> </span>CERTIFICATE-----
+<span class="nt">&lt;/recipient&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="upload-element">
+<span id="wolf-config-upload-element"></span><h2><code class="docutils literal notranslate"><span class="pre">upload</span></code> Element<a class="headerlink" href="#upload-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The upload element is used to configure an optional upload operation when an archive is created.</p>
+<section id="id28">
+<h3>Attributes<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>job</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Describes the upload operation.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>method</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Describes the method to upload the files. Currently only “filecopy” (uses SMB) or “BITS” are allowed values.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>server</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Specifies the server name (e.g. <cite>file://servername</cite> or <cite>http://servername</cite>, or <cite>https://servername</cite>) when using BITS or SMB.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>path</strong> <em>(optional=no, default= / or \ depending on the method)</em></dt><dd><p>Specifies the file share or folder for the upload</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>user</strong> <em>(optional=yes, default=the current user (executing DFIR ORC))</em></dt><dd><p>Specifies the user name to be used to connect to the remote server.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>password</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>Specifies the password to use (for the user defined above)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>authscheme</strong> <em>(optional=yes, default=Negotiate (if a user name is specified, anonymous otherwise))</em></dt><dd><p>Specifies the authentication scheme for the connection. Possible scheme values are:</p>
+<ul>
+<li><p>Anonymous</p></li>
+<li><p>Basic</p></li>
+<li><p>NTLM</p></li>
+<li><p>Kerberos</p></li>
+<li><p>Negotiate</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>operation</strong> <em>(optional=yes, default=copy)</em></dt><dd><p>“copy” or “move” the archives to the upload server.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>mode</strong> <em>(optional=yes, default=sync)</em></dt><dd><p>“sync” or “async”: upload can be synchronous or asynchronous (asynchronous allows DFIR ORC to exit prior to BITS jobs completes). “async” is <strong>not</strong> supported for “filecopy” method.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>include</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, that determine whether an output archive from <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> will be uploaded to the specified location. When missing, all archives are uploaded (if not explicitly excluded, see below). When specified, only archives whose name matches one of the patterns will be uploaded.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>exclude</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Specifies a comma (or semicolon) separated list of patterns, matching the file name of archives, that determine whether an output archive should not be uploaded. When excluded, an output archive is left intact in the output directory (i.e. regardless of the <code class="docutils literal notranslate"><span class="pre">operation</span></code> attribute). The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> attribute takes precedence over the <code class="docutils literal notranslate"><span class="pre">include</span></code> attribute, meaning an archive whose name matches both <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">exclude</span></code> patterns will be excluded.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id29">
+<h3>Example<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;upload</span><span class="w"> </span><span class="na">job=</span><span class="s">&quot;DFIR-ORC&quot;</span><span class="w"> </span><span class="na">method=</span><span class="s">&quot;BITS&quot;</span>
+<span class="w">  </span><span class="na">server=</span><span class="s">&quot;http://MyBits.MyOrg.com&quot;</span>
+<span class="w">  </span><span class="na">path=</span><span class="s">&quot;upload&quot;</span>
+<span class="w">  </span><span class="na">user=</span><span class="s">&quot;MyORG\BITSUploadClient&quot;</span><span class="w"> </span><span class="na">password=</span><span class="s">&quot;P@ssw0rd!&quot;</span>
+<span class="w">  </span><span class="na">operation=</span><span class="s">&quot;move&quot;</span>
+<span class="w">  </span><span class="na">include=</span><span class="s">&quot;DFIR-ORC_*_Hives.7z&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="wolf-config-archive-element">
+<span id="the-archive-element"></span><span id="id31"></span><h2><code class="docutils literal notranslate"><span class="pre">archive</span></code> Element<a class="headerlink" href="#wolf-config-archive-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=no, default=N/A,</em> <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>The archive element specifies the archives to be created during the execution of <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">WolfLauncher</span></code>.</p>
+<section id="id33">
+<h3>Attributes<a class="headerlink" href="#id33" title="Link to this heading">¶</a></h3>
+<ul>
+<li><dl>
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Configures the name of the archive</p>
+<p>The following patterns will be automatically substituted:</p>
+<table class="docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{ComputerName}</p></td>
+<td><p>NetBIOS computer name</p></td>
+</tr>
+<tr class="row-odd"><td><p>{FullComputerName}</p></td>
+<td><p>Fully qualified DNS name of physical computer (per GetComputerNameEx())</p></td>
+</tr>
+<tr class="row-even"><td><p>{TimeStamp}</p></td>
+<td><p>The current date and time in the following form: YYYYMMDD_HHMMSS</p></td>
+</tr>
+<tr class="row-odd"><td><p>{SystemType}</p></td>
+<td><p>The Windows edition type running on this computer: WorkStation, Server, DomainController</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>keyword</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Uniquely identifies this archive</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>concurrency</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Configures the number of concurrent executions</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>optional</strong> <em>(optional=yes, default=archive is generated)</em></dt><dd><p>Marks an archive as optional (i.e. not generated by default)</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>repeat</strong> <em>(optional=no, default=Once)</em></dt><dd><p>Configures the behavior of the engine upon rerun. Permitted values are:</p>
+<ul class="simple">
+<li><p>CreateNew: a new archive is created each time <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> is run, with names suffixed by _1.7z, _2.7z, etc. An alternative is to use the {TimeStamp} pattern in the archive name.</p></li>
+<li><p>Overwrite: previous archives are overwritten by new executions of <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code>.</p></li>
+<li><p>Once: if the target file already exists (and is not empty), then this archive is skipped.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is also taken into account when associated with the upload functionality.</p>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>compression</strong> <em>(optional=yes, default=normal)</em></dt><dd><p>Configures the compression level used by the compression engine (7zip &amp; zip only). Values can be: None, Fastest, Fast, Normal, Maximum, Ultra.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>command_timeout</strong> <em>(optional=yes, default=3 hours)</em></dt><dd><p>Per archive, override the global configured time (in minutes) the engine will wait for the last command(s) to complete. Upon timeout, the command engine will stop, kill any pending process and move on with archive completion.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>archive_timeout</strong> <em>(optional=yes, default=5 minutes)</em></dt><dd><p>Per archive, override the global configured time (in minutes) the engine will wait for the archive to complete. Upon timeout, this archive will be canceled.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>physicalmemory</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Per archive condition, do not execute commands if installed memory does not match (ex: “&lt;=32GB” will trigger only if system has less than 32GB)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>diskfree</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Per archive periodic check, stop commands execution if disk free space requirement is not satisfied anymore (ex: “10GB”)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>childdebug</strong> <em>(optional=yes, default=false)</em></dt><dd><p>Per archive, sets if the child process should be under the control of a debugger when running. If so, a mini dump file will be created if a crash occurs. If set to “no”, explicitly disables the debugger, any other value activates the debugger. Please note that this setting is overridden by command line option or attribute attached to the wolf element.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id34">
+<h3>Example<a class="headerlink" href="#id34" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;Quick\_{ComputerName}.7z&#39;</span><span class="w"> </span><span class="na">keyword=</span><span class="s">&#39;Basic&#39;</span><span class="w"> </span><span class="na">concurrency=</span><span class="s">&#39;2&#39;</span><span class="w"> </span><span class="na">repeat=</span><span class="s">&#39;Overwrite&#39;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;restrictions</span><span class="w"> </span><span class="na">JobMemoryLimit=</span><span class="s">&#39;3G&#39;</span><span class="w"> </span><span class="na">JobCPULimit=</span><span class="s">&#39;30&#39;</span><span class="w"> </span><span class="na">ProcessMemoryLimit=</span><span class="s">&#39;1G&#39;</span>
+<span class="w">      </span><span class="na">ElapsedTimeLimit=</span><span class="s">&#39;360&#39;</span><span class="w"> </span><span class="na">ProcessCPULimit=</span><span class="s">&#39;10&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span>...
+<span class="nt">&lt;/archive&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="restrictions-element">
+<h2><code class="docutils literal notranslate"><span class="pre">restrictions</span></code> Element<a class="headerlink" href="#restrictions-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#wolf-element">parent element: wolf</a></p>
+<p>This element configures the Windows job controlling the execution of subprocesses. Limits are set to the resources processes can consume. When a limit is reached, all remaining processes in the job will be terminated and the available output files will be collected into the archive.</p>
+<section id="id37">
+<h3>Attributes<a class="headerlink" href="#id37" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>JobMemoryLimit</strong> <em>(optional=yes, default=unlimited)</em></dt><dd><p>Memory limit (working set) which the processes created can collectively commit. Can be expressed with multipliers (K,M,G). Example 3G for 3GB.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>ProcessMemoryLimit</strong> <em>(optional=yes, default=unlimited)</em></dt><dd><p>Memory limit (working set) which the processes created can individually commit. Can be expressed with multipliers (K,M,G). Example 3G for 3GB.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>ElapsedTimeLimit</strong> <em>(optional=yes, default=unlimited)</em></dt><dd><p>Elapsed time (in minutes) the complete execution of the commands involved in this archive can take.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>JobCPULimit</strong> <em>(optional=yes, default=unlimited)</em></dt><dd><p>Limits the amount of CPU time which processes in the job can collectively consume before being stopped (in minutes).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>ProcessCPULimit</strong> <em>(optional=yes, default=unlimited)</em></dt><dd><p>Limits the amount of CPU time a process can use before being stopped (in minutes).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id38">
+<h3>Example<a class="headerlink" href="#id38" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;restrictions</span><span class="w"> </span><span class="na">JobMemoryLimit=</span><span class="s">&quot;3G&quot;</span><span class="w"> </span><span class="na">ProcessMemoryLimit=</span><span class="s">&quot;2G&quot;</span><span class="w"> </span><span class="na">ElapsedTimeLimit=</span><span class="s">&quot;360&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="command-element">
+<span id="wolf-config-command-element"></span><h2><code class="docutils literal notranslate"><span class="pre">command</span></code> Element<a class="headerlink" href="#command-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=no, default=N/A,</em> <a class="reference external" href="#the-archive-element">parent element: archive</a></p>
+<p>The command executed is created with the command element. This section of the configuration describes:</p>
+<ul class="simple">
+<li><p>the resources needed to execute: binary, prerequisites,</p></li>
+<li><p>the arguments passed to the command line, and</p></li>
+<li><p>the output expected upon completion of the task.</p></li>
+</ul>
+<section id="id40">
+<h3>Attributes<a class="headerlink" href="#id40" title="Link to this heading">¶</a></h3>
+<ul>
+<li><dl class="simple">
+<dt><strong>keyword</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Uniquely identifies this task in the archive</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>timeout</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>Terminate the command if the timeout is reached (in minutes).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>winver</strong> <em>(optional=yes, default=always execute)</em></dt><dd><p>Limits the execution of this command to one or several specific versions of Windows.
+The valid values of this attribute are:</p>
+<ul class="simple">
+<li><p>winver=”X.x”: this command will only execute on Windows major version X and minor x,</p></li>
+<li><p>winver=”X.x+”: this command will only execute on Windows version “X.x” and successors,</p></li>
+<li><p>winver=”X.x-”: this command will only execute on Windows version “X.x” and predecessors.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>queue</strong> <em>(optional=yes, default=queue)</em></dt><dd><p>Configures the behavior of the archive engine for the output of this command.
+The available values for this attribute are as follows.</p>
+<ul class="simple">
+<li><p>flush: the command produces a lot of output the engine must archive immediately,</p></li>
+<li><p>Any other value will configure the output of this command to be queued until the next flush or the end of all the commands.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>systemtype</strong> <em>(optional=yes, default=always execute)</em></dt><dd><p>Configures if a specific command should be run depending on the system type.
+The available values for this attribute are:</p>
+<ul class="simple">
+<li><p>WorkStation: for client workstations</p></li>
+<li><p>Server: for general purpose servers</p></li>
+<li><p>DomainController: for domain controllers</p></li>
+</ul>
+<p>Values can be combined with ‘|’. For example, Server|DomainController results in executing the command on all servers.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>diskfree</strong> <em>(optional=yes, default=none)</em></dt><dd><p>Stop command execution if disk free space requirement is not satisfied anymore (ex: “10GB”)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>optional</strong> <em>(optional=yes, default=false (command not optional))</em></dt><dd><p>Marks a command execution as optional (i.e. not executed by default)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id41">
+<h3>Example<a class="headerlink" href="#id41" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;command</span><span class="w"> </span><span class="na">keyword=</span><span class="s">&#39;NTFSInfo&#39;</span><span class="w">  </span><span class="na">queue=</span><span class="s">&#39;flush&#39;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;execute</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;DFIR-Orc.exe&#39;</span><span class="w"> </span><span class="na">run=</span><span class="s">&#39;self:#NTFSInfo&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;argument&gt;</span>/config=res:#ntfsinfo_basic<span class="nt">&lt;/argument&gt;</span>
+<span class="w">          </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;NTFSInfo&#39;</span>
+<span class="w">                  </span><span class="na">source=</span><span class="s">&#39;Directory&#39;</span><span class="w"> </span><span class="na">filematch=</span><span class="s">&#39;\*.csv&#39;</span>
+<span class="w">                  </span><span class="na">argument=</span><span class="s">&#39;/fileinfo={DirectoryName}&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;NTFSInfo.log&#39;</span><span class="w"> </span><span class="na">source=</span><span class="s">&#39;StdOut&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/command&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="execute-element">
+<span id="wolf-config-execute-element"></span><h2><code class="docutils literal notranslate"><span class="pre">execute</span></code> Element<a class="headerlink" href="#execute-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=no, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
+<p>Configures the program to be executed.
+It can be a local command from the file system or an embedded resource.
+On 64-bit platforms, the run64 attribute is evaluated first and used if available.
+If not, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">WolfLauncher</span></code> evaluates the run attribute.</p>
+<p>Similarly, on 32-bit platforms, the run32 attribute is evaluated first and used if available.
+If not, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span> <span class="pre">WolfLauncher</span></code> evaluates the run attribute.
+Attributes named run, run32 and run64 can use the <a class="reference internal" href="resources.html"><span class="doc">resource syntax</span></a> or directly reference a file on the live system (environment variables are expanded).</p>
+<section id="id43">
+<h3>Attributes<a class="headerlink" href="#id43" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Provides the name of a temporary file to be extracted (if need be)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>run</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>Provides the reference to the binary to execute (either on the file system or as a resource)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>run32</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>Provides the reference to the binary to execute on 32-bit platforms</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>run64</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>Provides the reference to the binary to execute on 64-bit platforms</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id44">
+<h3>Example<a class="headerlink" href="#id44" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;execute</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;ipconfig.exe&#39;</span><span class="w"> </span><span class="na">run=</span><span class="s">&#39;%windir%\System32\ipconfig.exe&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="input-element">
+<h2><code class="docutils literal notranslate"><span class="pre">input</span></code> Element<a class="headerlink" href="#input-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
+<p>Configures the files on which the execution depends (typically a configuration file or input file).
+Command-line arguments can be passed to a tool using the argument attribute.</p>
+<section id="id47">
+<h3>Attributes<a class="headerlink" href="#id47" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Name of the extracted file</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>source</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>Describes the source for this input. Typically this is a resource of the <code class="docutils literal notranslate"><span class="pre">DFIR-Orc.exe</span></code> PE file.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>argument</strong> <em>(optional=yes, default=empty)</em></dt><dd><p>A command line argument to specify this input file to the executed command. Order is preserved.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id48">
+<h3>Example<a class="headerlink" href="#id48" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;input</span><span class="w">  </span><span class="na">name=</span><span class="s">&#39;NTFSInfo_Config.xml&#39;</span><span class="w"> </span><span class="na">source=</span><span class="s">&#39;res:#NTFSINFO_Config&#39;</span>
+<span class="w">  </span><span class="na">argument=</span><span class="s">&#39;/config={FileName}&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="id50">
+<h2><code class="docutils literal notranslate"><span class="pre">output</span></code> Element<a class="headerlink" href="#id50" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
+<p>Configures the outputs of the command execution.
+Command-line arguments to further specify the output can be passed to a tool using the argument attribute.</p>
+<section id="id52">
+<h3>Attributes<a class="headerlink" href="#id52" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>name</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>This is the file name (relative to the temp dir) of the expected output of the execution</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>source</strong> <em>(optional=no, default=N/A)</em></dt><dd><p>This is the type of output:</p>
+<ul>
+<li><p>“StdOut” is the console output</p></li>
+<li><p>“StdErr” is the error console output</p></li>
+<li><p>“StdOutErr” represents the normal and error console outputs combined</p></li>
+<li><p>“File” is a single output file</p></li>
+<li><p>“Directory” is a list of files from a directory</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>argument</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>A command-line argument to specify this output to the executed command. Order is preserved.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>filematch</strong> <em>(optional=yes, default=N/A)</em></dt><dd><p>Filters the content of the directory to a subset of expected files matching a DOS pattern (for instance *.csv).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;NTFSInfo_AllRecords&#39;</span>
+<span class="w">          </span><span class="na">source=</span><span class="s">&#39;Directory&#39;</span><span class="w"> </span><span class="na">filematch=</span><span class="s">&#39;\*.csv&#39;</span>
+<span class="w">          </span><span class="na">argument=</span><span class="s">&#39;/fileinfo={DirectoryName}&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;output</span><span class="w">  </span><span class="na">name=</span><span class="s">&#39;USNInfo.log&#39;</span><span class="w"> </span><span class="na">source=</span><span class="s">&#39;StdOut&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+<section id="argument-element">
+<span id="anchor-argument"></span><h2><code class="docutils literal notranslate"><span class="pre">argument</span></code> Element<a class="headerlink" href="#argument-element" title="Link to this heading">¶</a></h2>
+<p><em>optional=yes, default=N/A,</em> <a class="reference external" href="#command-element">parent element: command</a></p>
+<p>This element will add an argument to the command line of the executed command.</p>
+<section id="id55">
+<h3>Attributes<a class="headerlink" href="#id55" title="Link to this heading">¶</a></h3>
+<p>None</p>
+</section>
+<section id="id56">
+<h3>Example<a class="headerlink" href="#id56" title="Link to this heading">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;argument&gt;</span>/config=MyConfig.xml<span class="w"> </span>/verbose<span class="nt">&lt;/argument&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="#anchor-root">Back to Root</a></p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="ToolEmbed.html" title="ToolEmbed"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="cli_options.html" title="DFIR ORC Command-line Options"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" >Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+ 
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.4.7.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Referencing Resources in Configurations &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css?v=6a4e18a9" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=191e2fe5" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DFIR ORC Command-line Options" href="cli_options.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="cli_options.html" title="DFIR ORC Command-line Options"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" accesskey="U">Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo of DFIR ORC"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="configuration.html">Configuration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Referencing Resources in Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_options.html">DFIR ORC Command-line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wolf_config.html">WolfLauncher Configuration File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ToolEmbed.html">ToolEmbed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orc_local_config.html">DFIR ORC Local Configuration File</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="referencing-resources-in-configurations">
+<h1>Referencing Resources in Configurations<a class="headerlink" href="#referencing-resources-in-configurations" title="Link to this heading">¶</a></h1>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Link to this heading">¶</a></h2>
+<p>The section <a class="reference internal" href="architecture.html#architecture-config-process"><span class="std std-ref">Configuration Process</span></a> explains the embedding of tools as resources of configured and unconfigured binaries.
+To reference an embedded resource, Mothership and WolfLauncher use the syntax below. Configuration files rely on these notations.</p>
+<ul>
+<li><p>For a resource directly available “in clear text” (as opposed to inside an archive like 7zip or cab):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="p">:</span><span class="c1">#ressource_name</span>
+</pre></div>
+</div>
+<p>For example, the string <code class="docutils literal notranslate"><span class="pre">res:#getthis_evt</span></code> references the resource named getthis_evt in the Embed configuration file for Mothership. Such a resource is created by the following <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> XML configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">file</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;getthis_evt&quot;</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;.\%ORC_CONFIG_FOLDER%\GetEvents_config.xml&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> for more examples.</p>
+</li>
+<li><p>To reference a resource via an entry into an archive embedded in Mothership:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">archive_format</span><span class="p">:</span><span class="c1">#archive_name|resource_name</span>
+</pre></div>
+</div>
+<p>For example, the string <code class="docutils literal notranslate"><span class="pre">7z:#Tools|autorunsc.exe</span></code> will reference the resource autorunsc.exe in the 7zip archive named Tools. Such a resource is created by the following <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> XML configuration:</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;archive</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Tools&quot;</span><span class="w"> </span><span class="na">format=</span><span class="s">&quot;7z&quot;</span><span class="w"> </span><span class="na">compression=</span><span class="s">&quot;Ultra&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;file</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;autorunsc.exe&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;.\tools\autorunsc.exe&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/archive&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>See <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> for more examples.</p>
+</li>
+<li><p>Lastly, it is possible to invoke one of the embedded tools, e.g. NTFSInfo, by writing <code class="docutils literal notranslate"><span class="pre">run=self:#NTFSInfo</span></code>. The <code class="docutils literal notranslate"><span class="pre">self:#</span></code> string
+refers to the unconfigured binary used to run WolfLauncher, e.g. <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code>. Thus, when <code class="docutils literal notranslate"><span class="pre">run=self:#NTFSInfo</span></code> is used
+in configurations, WolfLauncher creates a new process using its unconfigured binary, <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span></code> in our example, and passes it
+the name of the tool as argument. Hence, the command line of the new process would be <code class="docutils literal notranslate"><span class="pre">DFIR-Orc_x86.exe</span> <span class="pre">NTFSInfo</span></code>, with maybe other arguments added in the configuration. As explained in <a class="reference internal" href="architecture.html#architecture-tools-cli"><span class="std std-ref">Tools Invoked Directly From Command-line</span></a>, such a line runs the embedded tool NTFSInfo.</p></li>
+</ul>
+</section>
+<section id="well-known-resources-or-variables">
+<h2>Well-known Resources or Variables<a class="headerlink" href="#well-known-resources-or-variables" title="Link to this heading">¶</a></h2>
+<p>Below are listed well-known resources and variables defined in DFIR ORC.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Typical content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>WOLFLAUNCHER_CONFIG</p></td>
+<td><p>Default DFIR ORC configuration to execute</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>WOLFLAUNCHER_SQLSCHEMA</p></td>
+<td><p>DFIR ORC output’s schema</p></td>
+<td><p>WolfLauncherSqlSchema.xml</p></td>
+</tr>
+<tr class="row-even"><td><p>FASTFIND_SQLSCHEMA</p></td>
+<td><p>DFIR ORC output’s schema</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>GETSAMPLES_SQLSCHEMA</p></td>
+<td><p>GetSamples output’s schema</p></td>
+<td><p>GetSamplesSchema.xml</p></td>
+</tr>
+<tr class="row-even"><td><p>GETTHIS_SQLSCHEMA</p></td>
+<td><p>GetThis output’s schema</p></td>
+<td><p>GetThisSqlSchema.xml</p></td>
+</tr>
+<tr class="row-odd"><td><p>IMPORTCSV_SQLSCHEMA</p></td>
+<td><p>ImportCSV output’s schema</p></td>
+<td><p>empty</p></td>
+</tr>
+<tr class="row-even"><td><p>REGINFO_SQLSCHEMA</p></td>
+<td><p>RegInfo output’s schema</p></td>
+<td><p>RegInfoSqlSchema.xml</p></td>
+</tr>
+<tr class="row-odd"><td><p>USNINFO_SQLSCHEMA</p></td>
+<td><p>USNInfo output’s schema</p></td>
+<td><p>USNInfoSqlSchema.xml</p></td>
+</tr>
+<tr class="row-even"><td><p>NTFSINFO_SQLSCHEMA</p></td>
+<td><p>NTFSInfo output’s schema</p></td>
+<td><p>NTFSInfoSqlSchema.xml</p></td>
+</tr>
+<tr class="row-odd"><td><p>TOOLEMBED_SQLSCHEMA</p></td>
+<td><p>ToolEmbed output’s schema</p></td>
+<td><p>empty</p></td>
+</tr>
+<tr class="row-even"><td><p>OBJINFO_SCHEMA</p></td>
+<td><p>ObjInfo output’s schema</p></td>
+<td><p>ObjInfoSchema.xml</p></td>
+</tr>
+<tr class="row-odd"><td><p>DBGHELP_X86DLL</p></td>
+<td><p>Reference to the x86 dbgeng.dll resource</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>DBGHELP_X64DLL</p></td>
+<td><p>Reference to the x64 dbgeng.dll resource</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>XMLLITE_X86DLL</p></td>
+<td><p>XmlLite is missing on XP SP2. We embark it and this is the reference to it.</p></td>
+<td><p>res:#XMLLITE_X86_XPSP2</p></td>
+</tr>
+<tr class="row-even"><td><p>XMLLITE_X86_XPSP2</p></td>
+<td><p>This is XP SP2’s redistribution of xmllite.dll</p></td>
+<td><p>..\XmlLite\xmllite.dll</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="cli_options.html" title="DFIR ORC Command-line Options"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="configuration.html" >Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+ 
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.4.7.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>

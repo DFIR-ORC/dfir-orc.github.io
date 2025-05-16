@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuring the Yara Scanner &#8212; DFIR ORC  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/solar.css?v=6a4e18a9" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=191e2fe5" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuring Attributes of ntfs_find and ntfs_exclude Elements" href="configuring_ntfs_opt.html" />
+    <link rel="prev" title="Configuring Locations" href="configuring_locations.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="configuring_ntfs_opt.html" title="Configuring Attributes of ntfs_find and ntfs_exclude Elements"
+             accesskey="N">next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_locations.html" title="Configuring Locations"
+             accesskey="P">previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" accesskey="U">Common Options &amp; Properties</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo of DFIR ORC"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platforms.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_data_collection.html">Design and Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="embedded_tool_suite.html">Embedded Tool Suite</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="info_tools.html">Common Options &amp; Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FatInfo.html">FatInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FastFind.html">FastFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetThis.html">GetThis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSamples.html">GetSamples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GetSectors.html">GetSectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSInfo.html">NTFSInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NTFSUtil.html">NTFSUtil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjInfo.html">ObjInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RegInfo.html">RegInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="USNInfo.html">USNInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="configuring-the-yara-scanner">
+<h1>Configuring the Yara Scanner<a class="headerlink" href="#configuring-the-yara-scanner" title="Link to this heading">¶</a></h1>
+<p>FastFind, RegInfo and GetThis can use libyara to scan for matches on a disk.</p>
+<dl>
+<dt>This scan can be configured with a <code class="docutils literal notranslate"><span class="pre">&lt;yara</span> <span class="pre">/&gt;</span></code> element:</dt><dd><div class="line-block">
+<div class="line">&lt;yara</div>
+<div class="line-block">
+<div class="line"><a class="reference external" href="#configuring-yara-source">source=”…”</a></div>
+<div class="line"><a class="reference external" href="#configuring-yara-block">block=”…”</a></div>
+<div class="line"><a class="reference external" href="#configuring-yara-overlap">overlap=”…”</a></div>
+<div class="line"><a class="reference external" href="#configuring-yara-timeout">timeout=”…”</a></div>
+<div class="line"><a class="reference external" href="#configuring-yara-scan-method">scan_method=”…”</a></div>
+</div>
+<div class="line">/&gt;</div>
+</div>
+</dd>
+</dl>
+<p>A typical XML line for a <code class="docutils literal notranslate"><span class="pre">yara</span></code> element:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;yara</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;IOC.yara&quot;</span><span class="w"> </span><span class="na">block=</span><span class="s">&quot;2M&quot;</span><span class="w"> </span><span class="na">timeout=</span><span class="s">&quot;120&quot;</span><span class="w"> </span><span class="na">overlap=</span><span class="s">&quot;8192&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<section id="source-attribute">
+<span id="configuring-yara-source"></span><h2><code class="docutils literal notranslate"><span class="pre">source</span></code> Attribute<a class="headerlink" href="#source-attribute" title="Link to this heading">¶</a></h2>
+<p>Comma-separated or semicolon-separated list of yara files.
+This list can be actual file names or references to embedded resources or both.
+When specifying file names, the paths are relative to the folder from which the configured binary is executed.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>source=&quot;res:#MyYaraContent,rules\ruleset.yara&quot;
+</pre></div>
+</div>
+</section>
+<section id="scan-method-attribute">
+<span id="configuring-yara-scan-method"></span><h2><code class="docutils literal notranslate"><span class="pre">scan_method</span></code> Attribute<a class="headerlink" href="#scan-method-attribute" title="Link to this heading">¶</a></h2>
+<p>When scanning files, the Yara engine can read them in blocks or as one big chunk of data. Available methods are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">blocks</span></code> to read and scan files in blocks of size given by the <a class="reference external" href="#configuring-yara-block">block</a> attribute, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filemapping</span></code> to read and scan files in one chunk using a pagefile-backed file mapping. This is <em>not</em> the same behavior as the <code class="docutils literal notranslate"><span class="pre">yarac.exe</span></code> binary which uses a file-backed mapping implying a sharing lock on the file which would be hazardous during live system scanning.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>scan_method=&quot;blocks&quot;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">filemapping</span></code> value for this option is discouraged as it will consume a lot of memory for the scanning process when dealing with large files.</p>
+</div>
+</section>
+<section id="block-attribute">
+<span id="configuring-yara-block"></span><h2><code class="docutils literal notranslate"><span class="pre">block</span></code> Attribute<a class="headerlink" href="#block-attribute" title="Link to this heading">¶</a></h2>
+<p>Integer specifying the size in bytes of the buffer Yara will use to scan each file. The following multipliers can be suffixed to this number: K, M, G (for kilobyte, megabyte and gigabyte respectively).</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>block=&quot;2M&quot;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One should be aware that if a rule needs a file in its entirety to find a match (such as the Hash module or the <code class="docutils literal notranslate"><span class="pre">filesize</span></code> variable), the size given by this attribute should be at least the file size or matches will become unreliable.</p>
+</div>
+</section>
+<section id="overlap-attribute">
+<span id="configuring-yara-overlap"></span><h2><code class="docutils literal notranslate"><span class="pre">overlap</span></code> Attribute<a class="headerlink" href="#overlap-attribute" title="Link to this heading">¶</a></h2>
+<p>Integer specifying the size of the overlapping block created to scan for content that may match bytes in the region between two blocks. The following multipliers can be suffixed to this number: K, M, G (for kilobyte, megabyte and gigabyte respectively).</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>overlap=&quot;4K&quot;
+</pre></div>
+</div>
+</section>
+<section id="timeout-attribute">
+<span id="configuring-yara-timeout"></span><h2><code class="docutils literal notranslate"><span class="pre">timeout</span></code> Attribute<a class="headerlink" href="#timeout-attribute" title="Link to this heading">¶</a></h2>
+<p>Number of <em>seconds</em> after which the Yara engine will abort a file scan. This limit applies to each file individually.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>timeout=&quot;120&quot;
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        
+        
+        <li class="right" >
+          <a href="configuring_ntfs_opt.html" title="Configuring Attributes of ntfs_find and ntfs_exclude Elements"
+             >next</a>
+          
+        
+        
+        <li class="right" >
+          <a href="configuring_locations.html" title="Configuring Locations"
+             >previous</a>
+           |</li>
+          
+        
+        <li class="nav-item nav-item-0"><a href="index.html">DFIR ORC  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="embedded_tool_suite.html" >Embedded Tool Suite</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="info_tools.html" >Common Options &amp; Properties</a> &#187;</li> 
+      </ul>
+    </div>
+ 
+    <div class="footer">
+        &copy; Copyright 2019, ANSSI. The contents of this documentation is available under the Open License version 2.0 as published by Etalab (French task force for Open Data). The name DFIR ORC and the associated logo belong to ANSSI, no use is permitted without its express approval. Le contenu de cette documentation est disponible sous license Open License version 2.0 telle que publiée par Etalab (organisation francaise pour Open Data). Le nom DFIR ORC et le logo associé appartiennent à l&#39;ANSSI, tout usage doit être expressément autorisé par l&#39;ANSSI..
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.4.7.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+  </body>
+</html>
