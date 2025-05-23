@@ -355,9 +355,7 @@ Equivalent XML Syntax:
 
 .. code:: xml
 
-    <fatinfo walker="MFT">
-        <output>%TEMP%\test.csv</output>
-
+    <fatinfo>
         <location>F:\</location>
 
         <columns>

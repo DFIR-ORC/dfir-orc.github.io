@@ -391,6 +391,14 @@ Use the option value ``resident`` to limit parsed deleted entries to resident on
     *resident*, "Enabled deleted resident records only recovery"
     *no*,  "Do not try to recover deleted records"
 
+* **computer** *(optional=yes, default="Name of the machine on which the tool runs")*, ``/Computer=<ComputerName>``
+
+    Substitutes the content of the ComputerName column with a provided string.
+
+* **popsysobj** *(optional=yes, default=False)*, ``/PopSysObj``
+
+    Probes available system objects and looks for hidden NTFS filesystem. This can lead to unexpected behavior.
+
 
 ``location`` Element
 --------------------
