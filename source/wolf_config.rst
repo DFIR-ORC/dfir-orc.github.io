@@ -368,7 +368,7 @@ Attributes
 * **archive_timeout** *(optional=yes, default=5 minutes)*
         Per archive, override the global configured time (in minutes) the engine will wait for the archive to complete. Upon timeout, this archive will be canceled.
 * **physicalmemory** *(optional=yes, default=none)*
-        Per archive condition, do not execute commands if installed memory does not match (ex: "<=32GB" will trigger only if system has less than 32GB)
+        Per archive condition, do not execute commands if installed memory does not match (ex: "lt32GB" will trigger only if system has less than 32GB)
 * **diskfree** *(optional=yes, default=none)*
         Per archive periodic check, stop commands execution if disk free space requirement is not satisfied anymore (ex: "10GB")
 * **childdebug** *(optional=yes, default=false)*
