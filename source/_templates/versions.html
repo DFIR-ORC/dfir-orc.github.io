@@ -1,0 +1,16 @@
+{% if versions %}
+<div class="sidebar-version-selector">
+  <h3>Version</h3>
+  <ul>
+    {% for version in versions %}
+    <li>
+      {% if version.name == current_version.name %}
+        <strong>{{ version.name }} (current)</strong>
+      {% else %}
+        <a href="{{ version.url }}">{{ version.name }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
