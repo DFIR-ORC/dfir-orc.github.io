@@ -10,9 +10,10 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+import re
+import subprocess
 
 
 # -- Project information -----------------------------------------------------
@@ -28,7 +29,7 @@ author = 'ANSSI'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-  'sphinx.ext.todo',
+    'sphinx.ext.todo',
     'sphinx.ext.githubpages'
 ]
 
@@ -53,8 +54,7 @@ pygments_style = 'sphinx'
 html_theme = 'solar_theme'
 import solar_theme
 html_theme_path = [solar_theme.theme_path]
-html_sidebars = {'**': ['globaltoc.html', 'searchbox.html'] }
-
+html_sidebars = {'**': ['versions.html', 'globaltoc.html', 'searchbox.html'] }
 
 html_logo = '_static/logo.jpg'
 html_show_copyright = True
@@ -63,3 +63,48 @@ html_show_copyright = True
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# -- sphinx-multiversion ---------------------------------------------------
+
+def _get_latest_release_branch() -> str:   # <-- defined just before it is used
+    """
+    Returns the release/X.Y branch with the highest (X, Y) version tuple.
+    Returns an empty string if no release branches exist, which disables
+    smv_latest_version (no branch will be renamed to 'latest').
+    No exceptions are raised: subprocess errors yield an empty list.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "branch", "-r", "--format=%(refname:short)"],
+            capture_output=True, text=True, check=False
+        )
+        lines = result.stdout.splitlines()
+    except OSError:
+        lines = []
+
+    pattern = re.compile(r'^origin/release/(\d+)\.(\d+)$')
+    versions = []
+
+    for line in lines:
+        match = pattern.match(line.strip())
+        if match:
+            major, minor = int(match.group(1)), int(match.group(2))
+            versions.append((major, minor))
+
+    if not versions:
+        return ""
+
+    major, minor = max(versions)
+    return f"release/{major}.{minor}"
+
+extensions += ["sphinx_multiversion"]
+smv_tag_whitelist    = r'^$'
+smv_branch_whitelist = r'^release/\d+\.\d+$'  # release/X.Y only, no master
+smv_remote_whitelist = r'^origin$'
+
+#smv_latest_version   = 'master'
+#smv_rename_latest_version = 'latest'
+_latest = _get_latest_release_branch()
+if _latest:
+    smv_latest_version        = _latest
+    smv_rename_latest_version = "latest"

@@ -2,51 +2,86 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - 'release/*'
   pull_request:
     branches: [ master ]
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v4
-      - name: Build
+        with:
+          fetch-depth: 0  # required: sphinx-multiversion checks out every branch
+
+      - name: Install dependencies
         shell: pwsh
-        run: |
-          pip install sphinx
-          pip install solar-theme
-          .\make.bat html
-          .\make.bat singlehtml
-      - name: Create html archive artifact
+        run: pip install sphinx solar-theme sphinx-multiversion
+
+      # Builds one sub-folder per branch matching conf.py whitelist
+      - name: Build versioned HTML
         shell: pwsh
-        run: Copy-Item -Recurse .\build\html .\dfir-orc-doc
-      - name: Upload archive artifact
+        run: sphinx-multiversion . .\build\html
+
+      # Single-file build is version-agnostic: built from current checkout only
+      - name: Build singlehtml
+        shell: pwsh
+        run: .\make.bat singlehtml
+
+      # Root index.html redirects bare URL visitors to /latest/
+      - name: Write root redirect page
+        shell: pwsh
+        run: Copy-Item -Force .\source\_static\root_redirect.html .\build\html\index.html
+
+      - name: Upload html artifact
         uses: actions/upload-artifact@v4
         with:
           name: dfir-orc-doc.zip
           path: .\build\html
-      - name: Create singlehtml archive artifact
-        shell: pwsh
-        run: Copy-Item -Recurse .\build\singlehtml .\build\dfir-orc-doc-singlehtml
-      - name: Upload singlehtml archive artifact
+
+      - name: Upload singlehtml artifact
         uses: actions/upload-artifact@v4
         with:
           name: dfir-orc-doc-singlehtml.zip
-          path: .\build\singlehtml\
-      - name: Publish html pages
-        if: github.ref == 'refs/heads/master'
+          path: .\build\singlehtml
+
+      - name: Publish versioned pages
+        if: startsWith(github.ref, 'refs/heads/release/')
         shell: pwsh
         run: |
-          git config --global user.name "GitHub Actions"
+          git config --global user.name  "GitHub Actions"
           git config --global user.email "actions@github.com"
-          Move-Item build/html docs
-          git add -f docs
-          git commit -m "Update by GitHub Action"
-          git reset --hard
-          git clean -fdX
+
           git fetch origin
+
+          # Switch to gh-pages, isolated from source tree
           git checkout gh-pages
-          Remove-Item -Recurse -Force docs/
-          git cherry-pick master -X theirs
-          git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/DFIR-ORC/dfir-orc.github.io.git" gh-pages
+
+          # Copy each versioned folder (overwrites existing, keeps others intact)
+          Get-ChildItem -Directory .\build\html | ForEach-Object {
+            $dest = $_.Name
+            if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
+            Copy-Item -Recurse -Force $_.FullName $dest
+          }
+
+          # Copy root redirect
+          Copy-Item -Force .\build\html\index.html .\index.html
+
+          # Disable Jekyll so GitHub Pages serves Sphinx _static/_sources folders
+          New-Item -Force -ItemType File -Path ".nojekyll" | Out-Null
+
+          git add --all
+          git status
+
+          # Skip commit if nothing changed
+          $changes = git status --porcelain
+          if ($changes) {
+            git commit -m "Docs update: $env:GITHUB_REF ($env:GITHUB_SHA)"
+            git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/DFIR-ORC/dfir-orc.github.io.git" gh-pages
+          } else {
+            Write-Host "No documentation changes to publish."
+          }
