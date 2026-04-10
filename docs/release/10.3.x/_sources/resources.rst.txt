@@ -5,7 +5,7 @@ Syntax
 ------
 
 The section :ref:`architecture-config-process` explains the embedding of tools as resources of configured and unconfigured binaries.
-To reference an embedded resource, Mothership and WolfLauncher use the syntax below. Configuration files rely on these notations.
+To reference an embedded resource, OrcCapsule and WolfLauncher use the syntax below. Configuration files rely on these notations.
 
 * For a resource directly available "in clear text" (as opposed to inside an archive like 7zip or cab):
 
@@ -13,7 +13,7 @@ To reference an embedded resource, Mothership and WolfLauncher use the syntax be
 
     res:#ressource_name
 
-  For example, the string ``res:#getthis_evt`` references the resource named getthis_evt in the Embed configuration file for Mothership. Such a resource is created by the following :doc:`ToolEmbed` XML configuration:
+  For example, the string ``res:#getthis_evt`` references the resource named getthis_evt in the Embed configuration file for ``DFIR-ORC.exe`` (OrcCapsule). Such a resource is created by the following :doc:`ToolEmbed` XML configuration:
 
   .. code::
 
@@ -22,7 +22,7 @@ To reference an embedded resource, Mothership and WolfLauncher use the syntax be
   See :doc:`ToolEmbed` for more examples.
 
 
-* To reference a resource via an entry into an archive embedded in Mothership:
+* To reference a resource via an entry into an archive embedded in ``DFIR-ORC.exe`` (OrcCapsule):
 
   .. code::
 

@@ -300,27 +300,3 @@ Allows DFIR ORC to run concurrently multiple instances.
     /MultipleInstance
 
 .. note:: Multiple simultaneous instances of ``OrcOffline`` are allowed by default and do not require this option.
-
-Mothership Specific Command-line Options
-----------------------------------------
-
-The :ref:`Mothership mechanism <architecture-exec>` allows DFIR ORC to be executed in any compatible context (Scheduled Task, Logon Script, Startup script, x86/x64...). The configuration allows the Mothership to launch the subsequent execution which suits the context. Specific command-line options can be used to customize this behavior.
-
-``-NoWait`` Option
-``````````````````
-
-With this option, the mothership executes the command engine (i.e. WolfLauncher) with appropriate options (CREATE_SUSPENDED|CREATE_BREAKAWAY_FROM_JOB) and return immediately.
-This option is typically used in startup scripts which could limit the time ``DFIR-Orc.exe`` is allowed to run.
-
-``-WMI`` Option
-```````````````
-
-With this option, the mothership executes the command engine (i.e. WolfLauncher) using WMI (the ``Win32_Process::Create`` method).
-
-``-PreserveJob`` Option
-```````````````````````
-
-With this option, the mothership **does not** alter the job under which it executes.
-By default, the mothership attempts to modify the current job (if needed, typically to allow JOB_OBJECT_LIMIT_BREAKAWAY_OK).
-
-.. warning:: Using this option may lead to a failure in WolfLauncher command engine if BreakAwayFromJob is not allowed. See :doc:`platforms` for more details.

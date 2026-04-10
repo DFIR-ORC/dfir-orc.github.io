@@ -107,19 +107,19 @@
 <section id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">¶</a></h2>
 <p>The section <a class="reference internal" href="architecture.html#architecture-config-process"><span class="std std-ref">Configuration Process</span></a> explains the embedding of tools as resources of configured and unconfigured binaries.
-To reference an embedded resource, Mothership and WolfLauncher use the syntax below. Configuration files rely on these notations.</p>
+To reference an embedded resource, OrcCapsule and WolfLauncher use the syntax below. Configuration files rely on these notations.</p>
 <ul>
 <li><p>For a resource directly available “in clear text” (as opposed to inside an archive like 7zip or cab):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="p">:</span><span class="c1">#ressource_name</span>
 </pre></div>
 </div>
-<p>For example, the string <code class="docutils literal notranslate"><span class="pre">res:#getthis_evt</span></code> references the resource named getthis_evt in the Embed configuration file for Mothership. Such a resource is created by the following <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> XML configuration:</p>
+<p>For example, the string <code class="docutils literal notranslate"><span class="pre">res:#getthis_evt</span></code> references the resource named getthis_evt in the Embed configuration file for <code class="docutils literal notranslate"><span class="pre">DFIR-ORC.exe</span></code> (OrcCapsule). Such a resource is created by the following <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> XML configuration:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">file</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;getthis_evt&quot;</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;.\%ORC_CONFIG_FOLDER%\GetEvents_config.xml&quot;</span><span class="o">/&gt;</span>
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="ToolEmbed.html"><span class="doc">ToolEmbed</span></a> for more examples.</p>
 </li>
-<li><p>To reference a resource via an entry into an archive embedded in Mothership:</p>
+<li><p>To reference a resource via an entry into an archive embedded in <code class="docutils literal notranslate"><span class="pre">DFIR-ORC.exe</span></code> (OrcCapsule):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">archive_format</span><span class="p">:</span><span class="c1">#archive_name|resource_name</span>
 </pre></div>
 </div>
