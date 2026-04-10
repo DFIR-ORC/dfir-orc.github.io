@@ -64,6 +64,9 @@ jobs:
           # Switch to gh-pages, isolated from source tree
           git checkout gh-pages
 
+          # Remove legacy top-level directories from the old single-version build
+          @('docs') | ForEach-Object { if (Test-Path $_) { Remove-Item -Recurse -Force $_ } }
+
           # Copy each versioned folder (overwrites existing, keeps others intact)
           Get-ChildItem -Directory .\build\html | ForEach-Object {
             $dest = $_.Name
