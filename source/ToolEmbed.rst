@@ -181,7 +181,9 @@ Notation ``self:#`` and resources are documented in :doc:`resources`.
 .. deprecated:: 10.3
     The ``run32`` element (and its ``/run32`` command-line equivalent) is deprecated for specifying DFIR-ORC binaries. Use the new ``/embed`` option instead.
 
-*optional=yes, default=N/A* See :doc:`architecture` for details.
+*optional=yes, default=N/A*
+
+This element specifies the unconfigured binary which should run on 32-bit platforms. See :doc:`architecture` for details.
 When specified this element overrides a ``run`` element (or option).
 
 Attributes
