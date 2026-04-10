@@ -71,6 +71,12 @@ There are two  most classical ways to use ToolEmbed:
     
     DFIR-Orc.exe ToolEmbed /config=DFIR-Orc_embed.xml
 
+   Alternatively, the ``/embed`` option can be used as a more flexible replacement:
+
+.. code:: bat
+
+    DFIR-Orc.exe ToolEmbed /embed=DFIR-Orc_embed.xml /out=DFIR-Orc.exe
+
 * The line below allows to extract resources from a configured binary in a directory of choice.
 
 .. code:: bat
@@ -92,6 +98,9 @@ Root element.
 
 ``input`` Element, ``/input=<Path>`` Option
 ===========================================
+
+.. deprecated:: 10.3
+    The ``input`` element (and its ``/input`` command-line equivalent) is deprecated for use with DFIR-ORC binaries. Use the new ``/embed`` option instead, which provides a more flexible interface.
 
 *optional=no except with /dump option, default=N/A*
 
@@ -169,9 +178,10 @@ Notation ``self:#`` and resources are documented in :doc:`resources`.
 ``run32`` Element, ``/run32=<Ressource>`` Option
 ================================================
 
-*optional=yes, default=N/A*
+.. deprecated:: 10.3
+    The ``run32`` element (and its ``/run32`` command-line equivalent) is deprecated for specifying DFIR-ORC binaries. Use the new ``/embed`` option instead.
 
-This element specifies the unconfigured binary which should run on 32-bit platforms. See :doc:`architecture` for details.
+*optional=yes, default=N/A* See :doc:`architecture` for details.
 When specified this element overrides a ``run`` element (or option).
 
 Attributes
@@ -197,6 +207,9 @@ Notation ``self:#`` and resources are documented in :doc:`resources`.
 
 ``run64`` Element, ``/run64=<Ressource>`` Option
 ================================================
+
+.. deprecated:: 10.3
+    The ``run64`` element (and its ``/run64`` command-line equivalent) is deprecated for specifying DFIR-ORC binaries. Use the new ``/embed`` option instead.
 
 *optional=yes, default=N/A*
 
@@ -376,3 +389,31 @@ If this option is used without specifying a ``<Path>``, the resources of the exe
 .. code:: bat
     
     DFIR-Orc.exe toolembed /dump /out=dumpdir\
+
+``/embed=<Path>`` Option
+=========================
+
+*optional=yes, default=N/A*
+
+This option is a more flexible replacement for the combination of ``/input`` (or ``/fromdump``) and ``/config``. It accepts a path that can point to either:
+
+* a pre-configured binary from which resources are extracted, or
+* an XML configuration file describing the embedding operation.
+
+This option supersedes both ``/fromdump`` and ``/config`` and is the recommended way to configure a DFIR-ORC binary going forward.
+
+.. code:: bat
+
+    DFIR-Orc.exe ToolEmbed /embed=DFIR-Orc_embed.xml /out=DFIR-Orc.exe
+
+``/force`` Option
+=================
+
+*optional=yes, default=N/A*
+
+By default, ToolEmbed refuses to overwrite an existing output binary. The ``/force`` option disables this protection and allows overwriting an existing file.
+
+.. code:: bat
+
+    DFIR-Orc.exe ToolEmbed /config=DFIR-Orc_embed.xml /out=DFIR-Orc.exe /force
+

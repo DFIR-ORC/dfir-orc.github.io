@@ -169,6 +169,9 @@ Use the option value ``resident`` to limit parsed deleted entries to resident on
 
     The ``hash`` and ``fuzzyhash`` options are ignored when using ``/XOR``.
 
+* **SampleNameFormat** *(optional=yes, default=N/A)*, ``/SampleNameFormat=<Format>`` option:
+    Selects an alternative naming scheme for collected sample file names. When not specified, the default naming scheme is used (FRN-prefixed, as described in the `Output`_ section above).
+
 ``output`` Element, ``/out=<Path>`` Option
 ------------------------------------------
 

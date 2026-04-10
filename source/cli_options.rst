@@ -290,6 +290,18 @@ For example:
     dfir-orc.exe /key=GetFoo /nolimits
     dfir-orc.exe /key=GetFoo /nolimits:GetFoo
 
+``/MultipleInstance`` Option
+----------------------------
+
+By default, DFIR ORC prevents multiple simultaneous instances from running to avoid conflicting output.
+This option disables that protection and allows several instances of DFIR ORC to run concurrently.
+
+.. code:: bat
+
+    /MultipleInstance
+
+.. note:: Multiple simultaneous instances of ``OrcOffline`` are allowed by default and do not require this option.
+
 Mothership Specific Command-line Options
 ----------------------------------------
 

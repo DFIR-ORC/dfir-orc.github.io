@@ -15,6 +15,12 @@ Example
             "outcome": {
                 "timestamp": "2021-02-01T14:42:34Z",
                 "computer_name": "PC",
+                "timezoneinfo": {
+                    "bias": -60,
+                    "daylight_bias": -60,
+                    "standard_bias": 0,
+                    "timezone": "Romance Standard Time"
+                },
                 "mothership": {
                     "sha256": "E237F80302F43D0AC04A3B866E4FB6D11F0D6A115A7D93344BC4C9D8D05FE6D5",
                     "command_line": "\"c:\\orc.exe\" /key=GetEvt_Little /overwrite"
@@ -92,3 +98,14 @@ Example
             }
         }
     }
+
+Fields
+------
+
+* **timezoneinfo** *(added in v10.3.0)*: Contains timezone information for the host at the time of collection.
+
+  * **bias**: Total offset in minutes between the local time and UTC (negative values mean ahead of UTC).
+  * **daylight_bias**: Additional offset in minutes applied during daylight saving time.
+  * **standard_bias**: Offset in minutes applied during standard time (usually 0).
+  * **timezone**: The Windows timezone name (e.g. ``"Romance Standard Time"``).
+
