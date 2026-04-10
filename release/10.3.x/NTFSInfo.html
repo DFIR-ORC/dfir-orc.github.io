@@ -51,13 +51,13 @@
     
     <li>
       
-        <a href="../10.2.x/NTFSInfo.html">release/10.2.x</a>
+        <strong>release/10.3.x (current)</strong>
       
     </li>
     
     <li>
       
-        <strong>release/10.3.x (current)</strong>
+        <a href="../10.2.x/NTFSInfo.html">release/10.2.x</a>
       
     </li>
     
@@ -298,6 +298,7 @@ In particular, the <code class="docutils literal notranslate"><span class="pre">
 <li><p><strong>DataIndex:</strong> Index of this <code class="docutils literal notranslate"><span class="pre">$DATA</span></code> in this record</p></li>
 <li><p><strong>SnapshotID:</strong> Snapshot associated with this entry</p></li>
 <li><p><strong>SSDeep:</strong> Fuzzyhash SSDeep</p></li>
+<li><p><strong>TLSH:</strong> Trend Micro’s TLSH</p></li>
 <li><p><strong>SignedHash:</strong> Signed hash inside the security directory of the PE</p></li>
 </ul>
 <p>The Attributes column may contain the following flags:</p>
@@ -954,13 +955,16 @@ Use the option value <code class="docutils literal notranslate"><span class="pre
 <tr class="row-even"><td><p>TimeStamp</p></td>
 <td><p>PE Header timestamp</p></td>
 </tr>
-<tr class="row-odd"><td><p>USN</p></td>
+<tr class="row-odd"><td><p>TLSH</p></td>
+<td><p>Trend Micro’s TLSH</p></td>
+</tr>
+<tr class="row-even"><td><p>USN</p></td>
 <td><p>Update Sequence Number</p></td>
 </tr>
-<tr class="row-even"><td><p>Version</p></td>
+<tr class="row-odd"><td><p>Version</p></td>
 <td><p>VersionInfo file version</p></td>
 </tr>
-<tr class="row-odd"><td><p>VolumeID</p></td>
+<tr class="row-even"><td><p>VolumeID</p></td>
 <td><p>Volume ID</p></td>
 </tr>
 </tbody>
@@ -989,7 +993,7 @@ Use the option value <code class="docutils literal notranslate"><span class="pre
 <td><p>MD5, SHA1, SHA256</p></td>
 </tr>
 <tr class="row-even"><td><p>Fuzzy</p></td>
-<td><p>SSDeep</p></td>
+<td><p>SSDeep, TLSH</p></td>
 </tr>
 <tr class="row-odd"><td><p>PeHashes</p></td>
 <td><p>PeSHA1, PeSHA256, PeMD5</p></td>
@@ -1004,7 +1008,7 @@ Use the option value <code class="docutils literal notranslate"><span class="pre
 <td><p>AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, SignedHash</p></td>
 </tr>
 <tr class="row-odd"><td><p>All</p></td>
-<td><p>LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate, USN, FRN, ParentFRN, ExtendedAttribute, ADS, FilenameID, DataID, RecordInUse, ShortName, MD5, SHA1, FirstBytes, OwnerId, OwnerSid, Owner, Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS, FilenameFlags, SHA256, PeSHA1, PeSHA256, SecDescrID, EASize, SecurityDirectory, AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, PeMD5, FilenameIndex, DataIndex, SnapshotID, SSDeep, SignedHash</p></td>
+<td><p>LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate, USN, FRN, ParentFRN, ExtendedAttribute, ADS, FilenameID, DataID, RecordInUse, ShortName, MD5, SHA1, FirstBytes, OwnerId, OwnerSid, Owner, Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS, FilenameFlags, SHA256, PeSHA1, PeSHA256, SecDescrID, EASize, SecurityDirectory, AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, PeMD5, FilenameIndex, DataIndex, SnapshotID, SSDeep, TLSH, SignedHash</p></td>
 </tr>
 </tbody>
 </table>

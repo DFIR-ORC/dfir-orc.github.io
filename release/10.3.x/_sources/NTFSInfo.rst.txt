@@ -136,6 +136,7 @@ This file contains the following information on files and folders:
 * **DataIndex:** Index of this ``$DATA`` in this record
 * **SnapshotID:** Snapshot associated with this entry
 * **SSDeep:** Fuzzyhash SSDeep
+* **TLSH:** Trend Micro's TLSH
 * **SignedHash:** Signed hash inside the security directory of the PE
 
 The Attributes column may contain the following flags:
@@ -577,6 +578,7 @@ Here is a complete list of the available columns:
         SSDeep, "Fuzzyhash SSDeep"
         SubSystem, "PE Header SubSystem"
         TimeStamp, "PE Header timestamp"
+        TLSH, "Trend Micro's TLSH"
         USN, "Update Sequence Number"
         Version, "VersionInfo file version"
         VolumeID, "Volume ID"
@@ -594,12 +596,12 @@ Here is a complete list of available aliases:
         DeepScan, "File, ParentName, Extension, SizeInBytes, Attributes, CreationDate, LastModificationDate, LastAccessDate, ShortName, MD5, SHA1, Owner, Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS"
         Details, "Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS"
         Hashes, "MD5, SHA1, SHA256"
-        Fuzzy, "SSDeep"
+        Fuzzy, "SSDeep, TLSH"
         PeHashes, "PeSHA1, PeSHA256, PeMD5"
         Dates, "CreationDate, LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate"
         RefNums, "USN, FRN, ParentFRN"
         Authenticode, "AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, SignedHash"
-        All, "LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate, USN, FRN, ParentFRN, ExtendedAttribute, ADS, FilenameID, DataID, RecordInUse, ShortName, MD5, SHA1, FirstBytes, OwnerId, OwnerSid, Owner, Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS, FilenameFlags, SHA256, PeSHA1, PeSHA256, SecDescrID, EASize, SecurityDirectory, AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, PeMD5, FilenameIndex, DataIndex, SnapshotID, SSDeep, SignedHash"
+        All, "LastModificationDate, LastAccessDate, LastAttrChangeDate, FileNameCreationDate, FileNameLastModificationDate, FileNameLastAccessDate, FileNameLastAttrModificationDate, USN, FRN, ParentFRN, ExtendedAttribute, ADS, FilenameID, DataID, RecordInUse, ShortName, MD5, SHA1, FirstBytes, OwnerId, OwnerSid, Owner, Version, CompanyName, ProductName, OriginalFileName, Platform, TimeStamp, SubSystem, FileType, FileOS, FilenameFlags, SHA256, PeSHA1, PeSHA256, SecDescrID, EASize, SecurityDirectory, AuthenticodeStatus, AuthenticodeSigner, AuthenticodeSignerThumbprint, AuthenticodeCA, AuthenticodeCAThumbprint, PeMD5, FilenameIndex, DataIndex, SnapshotID, SSDeep, TLSH, SignedHash"
 
 ..  note::
 
