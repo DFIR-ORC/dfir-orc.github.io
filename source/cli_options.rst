@@ -116,7 +116,7 @@ The ``/Key=<Keyword>`` option allows the selection of specific commands to be ex
 
     /Key=<Keyword>
     /Key=Main
-    
+
 The ``/+Key=<Keyword>`` option enables an optional archive or command (cf. :ref:`archive element <wolf_config-archive-element>`, :ref:`command element <wolf_config-command-element>`).
 
 .. code:: bat
@@ -289,6 +289,17 @@ For example:
 
     dfir-orc.exe /key=GetFoo /nolimits
     dfir-orc.exe /key=GetFoo /nolimits:GetFoo
+
+``/MultipleInstance`` Option
+----------------------------
+
+Allows DFIR ORC to run concurrently multiple instances.
+
+.. code:: bat
+
+    /MultipleInstance
+
+.. note:: Multiple simultaneous instances of ``OrcOffline`` are allowed by default and do not require this option.
 
 Mothership Specific Command-line Options
 ----------------------------------------

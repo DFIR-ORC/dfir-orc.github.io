@@ -7,9 +7,9 @@ ToolEmbed
 ToolEmbed is used to add resources (binaries, configuration files) to a DFIR ORC binary. It takes an XML configuration file as input.
 To understand why this is needed and what happens when ``DFIR-Orc.exe`` is executed, please refer to :doc:`architecture`. A :doc:`tutorial <tuto>` presents how to configure and reconfigure binaries.
 
-In daily life, when using a repository as `DFIR ORC configuration GitHub <https://github.com/dfir-orc/dfir-orc-config>`_, one can directly edit configuration files and run the script ``Configure.cmd``, which essentially sets a few environment variables and runs ToolEmbed. 
+In daily life, when using a repository as `DFIR ORC configuration GitHub <https://github.com/dfir-orc/dfir-orc-config>`_, one can directly edit configuration files and run the script ``Configure.cmd``, which essentially sets a few environment variables and runs ToolEmbed.
 
-ToolEmbed is also able to extract all the resources from a configured binary, thanks to the ``/dump`` option. This can be useful to quickly edit a configuration and obtain a new configured binary.The :doc:`tutorial<tuto>` illustrates this scenario. 
+ToolEmbed is also able to extract all the resources from a configured binary, thanks to the ``/dump`` option. This can be useful to quickly edit a configuration and obtain a new configured binary.The :doc:`tutorial<tuto>` illustrates this scenario.
 
 The layout of the XML configuration file is as follows:
 
@@ -68,8 +68,16 @@ There are two  most classical ways to use ToolEmbed:
 *  The following command allows to obtain a configured binary, using an XML configuration file specifying all necessary elements.
 
 .. code:: bat
-    
+
     DFIR-Orc.exe ToolEmbed /config=DFIR-Orc_embed.xml
+
+Alternatively, the ``/embed`` option can be used as a more flexible replacement:
+
+.. code:: bat
+
+    DFIR-Orc.exe ToolEmbed /embed=c:\path\to\your\config\DFIR-Orc_embed.xml /out=DFIR-Orc.exe
+    ; Or
+    DFIR-Orc.exe ToolEmbed /embed=c:\path\to\your\config\ /out=DFIR-Orc.exe
 
 * The line below allows to extract resources from a configured binary in a directory of choice.
 
@@ -93,6 +101,9 @@ Root element.
 ``input`` Element, ``/input=<Path>`` Option
 ===========================================
 
+.. deprecated:: 10.3
+    The ``input`` element (and its ``/input`` command-line equivalent) is deprecated for use with DFIR-ORC binaries. Use the new ``/embed`` option instead, which provides a more flexible interface.
+
 *optional=no except with /dump option, default=N/A*
 
 This element contains the path to the binary which ToolEmbed uses as a **Mothership** (see :ref:`here<architecture-config-process>`).
@@ -109,7 +120,7 @@ Example
 
     <input>.\tools\DFIR-Orc_x86.exe</input>
 
- 
+
 `Back to Root <#anchor-root-toolembed>`_
 
 .. _toolembed-output-element:
@@ -169,6 +180,9 @@ Notation ``self:#`` and resources are documented in :doc:`resources`.
 ``run32`` Element, ``/run32=<Ressource>`` Option
 ================================================
 
+.. deprecated:: 10.3
+    The ``run32`` element (and its ``/run32`` command-line equivalent) is deprecated for specifying DFIR-ORC binaries. Use the new ``/embed`` option instead.
+
 *optional=yes, default=N/A*
 
 This element specifies the unconfigured binary which should run on 32-bit platforms. See :doc:`architecture` for details.
@@ -197,6 +211,9 @@ Notation ``self:#`` and resources are documented in :doc:`resources`.
 
 ``run64`` Element, ``/run64=<Ressource>`` Option
 ================================================
+
+.. deprecated:: 10.3
+    The ``run64`` element (and its ``/run64`` command-line equivalent) is deprecated for specifying DFIR-ORC binaries. Use the new ``/embed`` option instead.
 
 *optional=yes, default=N/A*
 
@@ -245,7 +262,7 @@ Example
    <file name="WOLFLAUNCHER_CONFIG" path=".\config\DFIR-ORC_config.xml"/>
 
 This creates a resource named WOLFLAUNCHER_CONFIG which contains the ``.\config\DFIR-ORC_config.xml`` file.
-On a command line, the equivalent resource is created by using ``/AddFile=.\config\DFIR-ORC_config.xml,WOLFLAUNCHER_CONFIG``. 
+On a command line, the equivalent resource is created by using ``/AddFile=.\config\DFIR-ORC_config.xml,WOLFLAUNCHER_CONFIG``.
 
 `Back to Root <#anchor-root-toolembed>`_
 
@@ -265,7 +282,7 @@ Attributes
     The name of the resource
 * **value** *(optional=no, default=N/A)*
     The string value of the resource.
-    
+
 Example
 -------
 
@@ -286,7 +303,7 @@ This line creates a resource named XMLLITE_X86DLL which contains the string "7z:
 
 The archive element provides the ability to embed files in a resource but in a compressed archive (to minimize the size of the resulting binary). This element is a container for ``file`` sub-elements used to define the archive (see below).
 
-This mechanism is deemed too complex to be described on a command line, there is no equivalent option. To use it, an XML configuration file must be passed as an argument through the ``/config`` option. 
+This mechanism is deemed too complex to be described on a command line, there is no equivalent option. To use it, an XML configuration file must be passed as an argument through the ``/config`` option.
 
 Attributes
 ----------
@@ -366,7 +383,7 @@ This option allows to extract the resources from a configured binary (stored at 
 This option has no equivalent XML element, it just exists as a switch to revert the behavior of ToolEmbed, and when extracting resources no configuration file is needed.
 
 .. code:: bat
-    
+
     DFIR-Orc.exe toolembed /dump=DFIR-Orc-1.exe /out=dumpdir\
 
 This command writes the unconfigured binaries and configurations embedded in ``dumpdir\``.
@@ -374,5 +391,34 @@ This command writes the unconfigured binaries and configurations embedded in ``d
 If this option is used without specifying a ``<Path>``, the resources of the executed DFIR ORC binary itself are dumped.
 
 .. code:: bat
-    
+
     DFIR-Orc.exe toolembed /dump /out=dumpdir\
+
+``/embed=<Path>`` Option
+=========================
+
+*optional=yes, default=N/A*
+
+This option is a more flexible replacement for the combination of ``/fromdump`` and ``/config``. It accepts a path that can point to either:
+
+* an XML configuration file describing the embedding operation.
+* an XML configuration directory with every XML inside.
+
+This option supersedes both ``/fromdump`` and ``/config`` and is the recommended way to configure a DFIR-ORC binary going forward.
+This option can be executed from any directory.
+
+.. code:: bat
+
+    DFIR-Orc.exe ToolEmbed /embed=DFIR-Orc_embed.xml /out=DFIR-Orc.exe
+
+``/force`` Option
+=================
+
+*optional=yes, default=N/A*
+
+Allow ToolEmbed to overwrite an existing output binary.
+
+.. code:: bat
+
+    DFIR-Orc.exe ToolEmbed /config=DFIR-Orc_embed.xml /out=DFIR-Orc.exe /force
+

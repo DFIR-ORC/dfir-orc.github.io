@@ -24,7 +24,7 @@ GetThis has the ability to bypass file system locks and permissions and therefor
 
 The copy is made by locating file extents (a.k.a. segments) on disk directly via the volume handle to avoid sharing violation and strict DACLs issues.
 
-To prevent interference from anti-virus software, it is recommended to store the samples in a password-protected archive. The encryption occurs  *in memory* when the data is extracted from the disk, before any temporary file is created (i.e. clear text samples do not hit the disk). 
+To prevent interference from anti-virus software, it is recommended to store the samples in a password-protected archive. The encryption occurs  *in memory* when the data is extracted from the disk, before any temporary file is created (i.e. clear text samples do not hit the disk).
 To use this feature, please refer to this documentation: :ref:`cfg-tool-output-pwd`.
 
 Output
@@ -32,8 +32,8 @@ Output
 
 When collecting a sample, GetThis creates a file in the output directory (or archive) with the logic below to compute its file name:
 
-* White space characters are replaced with underscore (_). 
-* (Deprecated) In case a XOR pattern was provided, a prefix is added to the file name with *XOR_<XORPATTERN>* to be able to unXOR the sample later. 
+* White space characters are replaced with underscore (_).
+* (Deprecated) In case a XOR pattern was provided, a prefix is added to the file name with *XOR_<XORPATTERN>* to be able to unXOR the sample later.
 * The file name is prefixed with the File Reference Number (a.k.a. FRN) of the **parent** of the file. This helps identifying samples from the same folder, while preserving a reasonable length for the sample names.
 * One of the keywords ``data``, ``strings`` or ``raw`` is appended at the end of the sample name, depending on what is retrieved. If the resulting file name already exists in the output directory, the suffix ``_1_data`` is added (and then  ``_2_data`` and so on).
 
@@ -68,7 +68,7 @@ This information is, by default, stored in a CSV file named ``GetThis.csv``, whi
     FileNameLastModificationDate, File name (hard link) last modification date (yyyy-MM-dd hh:mm:ss.SSS)
     FileNameLastAccessDate, File name (hard link) last read access date (yyyy-MM-dd hh:mm:ss.SSS)
     FileNameLastAttrModificationDate, File name (hard link) last attribute change date (yyyy-MM-dd hh:mm:ss.SSS)
-    AttrType, Type of the collected NTFS attribute 
+    AttrType, Type of the collected NTFS attribute
     AttrName, Name of the collected NTFS attribute
     AttrID, ID of the collected NTFS attribute
     SnapshotID, Snapshot associated with this entry
@@ -113,7 +113,7 @@ A typical XML configuration file looks like the following:
         </samples>
     </getthis>
 
-In this example, all samples collected using the ``<ntfs_find path="\Program Files\Git\bin\git.exe" />`` indicator will be added to a 7zip folder named "git", modulo the restrictions set in the attributes, which are documented below. 
+In this example, all samples collected using the ``<ntfs_find path="\Program Files\Git\bin\git.exe" />`` indicator will be added to a 7zip folder named "git", modulo the restrictions set in the attributes, which are documented below.
 
 The XML configuration file is supplied to GetThis with the ``/config`` option:
 
@@ -134,7 +134,7 @@ Attributes
 ``````````
 
 * **nolimits** *(optional=yes, default=Inactive)*, ``/nolimits`` option:
-    Specifies that there should be no limit when collecting the samples. The option ``/nolimits`` takes no value. In an XML file, the attribute is written ``nolimits=""``. 
+    Specifies that there should be no limit when collecting the samples. The option ``/nolimits`` takes no value. In an XML file, the attribute is written ``nolimits=""``.
 
 .. warning::
     Limits must be explicitly set, either by using ``nolimits`` or by using a meaningful combination of attributes of ``samples``. Details are provided :ref:`below <getthis-limits>`.
@@ -184,7 +184,7 @@ A XOR pattern can be provided to be applied to the collected sample (whether it 
 
     <output XOR="0x0BADF00D">
         PathToDirOrArchive
-    </output> 
+    </output>
 
 * Command-line option:
 
@@ -195,7 +195,7 @@ A XOR pattern can be provided to be applied to the collected sample (whether it 
 .. note::
 
     The ``/XOR`` option is **DEPRECATED**. To prevent interference from anti-viruses, one should use a password-protected archive.
-    
+
 ``location`` Element
 --------------------
 
@@ -215,7 +215,7 @@ When using the command line, this element must be provided as a comma-separated 
 *optional=yes, default=N/A*
 
 Used to specify yara rules. Please refer to :doc:`configuring_yara` for details on the ``yara`` element.
-The option should indicate the path to a file containing yara rules. 
+The option should indicate the path to a file containing yara rules.
 
 
 ``samples`` Element
@@ -245,7 +245,7 @@ Those can be specified using three attributes:
 * **MaxTotalBytes** *(optional=yes, default=N/A)*, ``/MaxTotalBytes="<Integer>"`` Option:
     Matching files are collected until their uncompressed cumulated file size reaches the specified value. The expected value is an integer that can be followed by one of these units: *B, KB, MB, GB*.
 
-Limits can be set globally on the ``samples`` element or locally on the ``sample`` element, documented below. When limits are evaluated, the closest attributes are taken into account first, and then the more general ones. If any criterion is not met, then the sample is not collected; otherwise, the sample is collected, and all the evaluated attributes take it into account for future restrictions.  
+Limits can be set globally on the ``samples`` element or locally on the ``sample`` element, documented below. When limits are evaluated, the closest attributes are taken into account first, and then the more general ones. If any criterion is not met, then the sample is not collected; otherwise, the sample is collected, and all the evaluated attributes take it into account for future restrictions.
 
 .. important:: The tool does not run unless limits are explicitly waived (using ``nolimits``) or a combination of the ``samples`` attributes that determine the maximum size of the collection.
 
@@ -260,7 +260,7 @@ Limits can be set globally on the ``samples`` element or locally on the ``sample
         <sample name="WSTCODEC" MaxSampleCount="15" >
             <ntfs_find path="\Windows\System32\DRIVERS\WSTCODEC.SYS" />
         </sample>
-    
+
     </samples>
 
 In this example, GetThis does not collect more than 150 files, but stops collecting the *WSTCODEC* group when 15 of them are found.
@@ -268,8 +268,16 @@ Additionally, a single match in the *git* group cannot be larger than 50 MB and 
 
 When examining :ref:`the XML file example at the top of this section <getthis-xml-example>`, one can notice that
 
-   * the restriction imposed on the size of an individual sample is bound to 80 MB by the last ``sample`` element and 50 MB by the global ``samples`` element. This still bounds any sample to 50 MB. 
+   * the restriction imposed on the size of an individual sample is bound to 80 MB by the last ``sample`` element and 50 MB by the global ``samples`` element. This still bounds any sample to 50 MB.
    * every time a sample is collected for the first ``sample`` element, its size is added to the total number of bytes collected for in the context of this ``sample`` element, but is also added to the number of bytes collected in the context of the global ``samples`` element.
+
+Sample naming format: the SampleNameFormat Attribute
+****************************************************
+* **SampleNameFormat** *(optional=yes, default=Default)*, ``/SampleNameFormat=<Format>`` option:
+    Selects an alternative naming scheme for collected sample file names. When not specified, the default naming scheme is used (FRN-prefixed, as described in the `Output`_ section above).
+
+    *Default*, "Usual naming format"
+    *QualifierThenFrn*, "Configured qualifier as directory then FRN with collision counter (ex: {qualifier}\{FRN}[_{counter}]")
 
 
 Retrieved Content: the Content Attribute
@@ -323,8 +331,8 @@ When using the command line, this switch can be activated with the option ``/con
 
 *optional=yes, default=N/A*
 
-This element allows to exclude NTFS attributes **from all the searches configured in the XML file**. 
-The complete specification of the search algorithm and the syntax to use are detailed in :doc:`configuring_ntfs_opt`. 
+This element allows to exclude NTFS attributes **from all the searches configured in the XML file**.
+The complete specification of the search algorithm and the syntax to use are detailed in :doc:`configuring_ntfs_opt`.
 While the most classical use of this element is path-related, a lot more precise NTFS constraints can be configured.
 
 .. warning:: The scope of an ``ntfs_exclude`` element is the whole configuration file.
@@ -339,7 +347,7 @@ This element regroups ``ntfs_find`` elements.
 This element can have the same attributes as ``samples``: ``MaxSampleCount``, ``MaxPerSampleBytes``, ``MaxTotalBytes`` and ``content``.
 Within a given ``sample`` element, the same restrictions apply.
 
-The samples matching this group can be stored in a single folder inside the output archive (or folder). 
+The samples matching this group can be stored in a single folder inside the output archive (or folder).
 The folder name is specified using the ``name`` attribute. This can be leveraged during triage.
 
 When used as an option on the command line, the supported values are:
@@ -355,9 +363,9 @@ When used as an option on the command line, the supported values are:
 
 *optional=no, default=N/A*
 
-It is this element which specifies a set of rules to identify the NTFS attributes to be collected. 
-The complete specification of the search algorithm and the syntax to use are detailed in :doc:`configuring_ntfs_opt`. 
-While the most classical use of this element is path-related, it is possible to search for alternate data streams, extended attributes, streams with specific hashes, etc. 
+It is this element which specifies a set of rules to identify the NTFS attributes to be collected.
+The complete specification of the search algorithm and the syntax to use are detailed in :doc:`configuring_ntfs_opt`.
+While the most classical use of this element is path-related, it is possible to search for alternate data streams, extended attributes, streams with specific hashes, etc.
 
 
 Additional Command-line Usage
@@ -431,7 +439,7 @@ Equivalent XML Syntax:
         <output>%TEMP%</output>
 
         <location>%SystemDrive%\</location>
-        
+
         <samples>
             <sample name="calc" >
                 <ntfs_find ads="calc.exe" />
@@ -455,7 +463,7 @@ Samples from an Extended Attribute
 The syntax for **Extended Attribute** sample collection is typically:
 
 .. code:: bat
-    
+
     DFIR-Orc.exe GetThis /sample=HostFileName.txt#Malware*.exe
 
 Equivalent XML Syntax:
@@ -467,7 +475,7 @@ Equivalent XML Syntax:
         <output>%TEMP%</output>
 
         <location>%SystemDrive%\temp</location>
-        
+
         <samples>
             <sample name="Malware" >
                 <ntfs_find name="HostFileName.txt" ea_match="Malware*.exe" />
