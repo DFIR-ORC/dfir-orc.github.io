@@ -110,7 +110,7 @@ Depending on what is specified in the :doc:`WolfLauncher configuration file <wol
 DFIR ORC on 64-bit Systems
 ---------------------------
 
-On 64-bit systems, the Mothership not being "native" to these systems, the extraction of ``DFIR-Orc_x64.exe`` is required.
+On 64-bit systems the extraction of ``DFIR-Orc_x64.exe`` is required.
 It is followed by the execution of ``DFIR-Orc_x64.exe WolfLauncher``.
 Depending on what is specified in the :doc:`WolfLauncher configuration file <wolf_config>`, it will then launch embedded tools and/or external tools to proceed with the data collection.
 
