@@ -202,6 +202,21 @@
          transform="scale(0.8)"
          inkscape:connector-curvature="0" />
     </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker2170"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutL">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(0.8)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path2168" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -211,7 +226,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="753.5"
+     inkscape:cx="753"
      inkscape:cy="323.5"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -911,5 +926,11 @@
          y="237.76912"
          style="font-style:italic;font-size:5.30334px;fill:#ffffff;fill-opacity:1;stroke-width:0.248594"
          id="tspan1-3">(x86)</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.795, 0.795;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker2170)"
+       d="m 67.360567,178.82189 c -31.834637,-21.33417 2.19354,-50.30119 2.23405,-49.21761"
+       id="path1748"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
