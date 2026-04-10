@@ -350,6 +350,17 @@ dfir-orc.exe /key=GetFoo /nolimits:GetFoo
 </pre></div>
 </div>
 </section>
+<section id="multipleinstance-option">
+<h2><code class="docutils literal notranslate"><span class="pre">/MultipleInstance</span></code> Option<a class="headerlink" href="#multipleinstance-option" title="Permalink to this heading">¶</a></h2>
+<p>Allows DFIR ORC to run concurrently multiple instances. This option is enable by default when running in “OffLine” mode.</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>/MultipleInstance
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Multiple simultaneous instances of <code class="docutils literal notranslate"><span class="pre">OrcOffline</span></code> are allowed by default and do not require this option.</p>
+</div>
+</section>
 <section id="mothership-specific-command-line-options">
 <h2>Mothership Specific Command-line Options<a class="headerlink" href="#mothership-specific-command-line-options" title="Permalink to this heading">¶</a></h2>
 <p>The <a class="reference internal" href="architecture.html#architecture-exec"><span class="std std-ref">Mothership mechanism</span></a> allows DFIR ORC to be executed in any compatible context (Scheduled Task, Logon Script, Startup script, x86/x64…). The configuration allows the Mothership to launch the subsequent execution which suits the context. Specific command-line options can be used to customize this behavior.</p>

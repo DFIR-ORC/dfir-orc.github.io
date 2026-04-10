@@ -426,6 +426,18 @@ Additionally, a single match in the <em>git</em> group cannot be larger than 50 
 </ul>
 </div></blockquote>
 </section>
+<section id="sample-naming-format-the-samplenameformat-attribute">
+<h5>Sample naming format: the SampleNameFormat Attribute<a class="headerlink" href="#sample-naming-format-the-samplenameformat-attribute" title="Permalink to this heading">¶</a></h5>
+<ul>
+<li><dl>
+<dt><strong>SampleNameFormat</strong> <em>(optional=yes, default=Default)</em>, <code class="docutils literal notranslate"><span class="pre">/SampleNameFormat=&lt;Format&gt;</span></code> option:</dt><dd><p>Selects an alternative naming scheme for collected sample file names. When not specified, the default naming scheme is used (FRN-prefixed, as described in the <a class="reference internal" href="#output">Output</a> section above).</p>
+<p><em>Default</em>, “Usual naming format”
+<em>QualifierThenFrn</em>, “Configured qualifier as directory then FRN with collision counter (ex: {qualifier}{FRN}[_{counter}]”)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 <section id="retrieved-content-the-content-attribute">
 <h5>Retrieved Content: the Content Attribute<a class="headerlink" href="#retrieved-content-the-content-attribute" title="Permalink to this heading">¶</a></h5>
 <p>The <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute allows to define an algorithm to retrieve the data to be collected.</p>
