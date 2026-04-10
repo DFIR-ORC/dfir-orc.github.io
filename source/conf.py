@@ -68,7 +68,9 @@ html_static_path = ['_static']
 
 def _get_latest_release_branch() -> str:   # <-- defined just before it is used
     """
-    Returns the release/X.Y[.z] branch name with the highest (X, Y) version tuple.
+    Returns the release/X.Y[.suffix] branch name (e.g. release/10.3.x, release/10.4.0)
+    with the highest (X, Y) version tuple.
+    Supports branch suffixes such as '.x', '.0', etc.
     Returns an empty string if no release branches exist.
     No exceptions are raised: subprocess errors yield an empty list.
     """
@@ -103,9 +105,6 @@ smv_tag_whitelist    = r'^$'
 smv_branch_whitelist = r'^release/\d+\.\d+'  # release/X.Y and release/X.Y.z
 smv_remote_whitelist = r'^origin$'
 
-#smv_latest_version   = 'master'
-#smv_rename_latest_version = 'latest'
 _latest = _get_latest_release_branch()
 if _latest:
-    smv_latest_version        = _latest
-    smv_rename_latest_version = "latest"
+    smv_latest_version = _latest

@@ -20,6 +20,8 @@ jobs:
 
       - name: Install dependencies
         shell: pwsh
+        # sphinx<7.0 required for compatibility with sphinx-multiversion 0.2.4
+        # (sphinx 7+ changed Config.read() signature, breaking sphinx-multiversion)
         run: pip install "sphinx<7.0" solar-theme sphinx-multiversion
 
       # Builds one sub-folder per branch matching conf.py whitelist

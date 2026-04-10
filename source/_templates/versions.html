@@ -2,12 +2,13 @@
 <div class="sidebar-version-selector">
   <h3>Version</h3>
   <ul>
-    {% for version in versions %}
+    {% for version in versions.branches | sort(attribute='name', reverse=True) %}
+    {% set display = version.name | replace("release/", "") %}
     <li>
       {% if version.name == current_version.name %}
-        <strong>{{ version.name }} (current)</strong>
+        <strong>{{ display }} (current)</strong>
       {% else %}
-        <a href="{{ version.url }}">{{ version.name }}</a>
+        <a href="{{ version.url }}">{{ display }}</a>
       {% endif %}
     </li>
     {% endfor %}
