@@ -71,7 +71,7 @@ There are two  most classical ways to use ToolEmbed:
 
     DFIR-Orc.exe ToolEmbed /config=DFIR-Orc_embed.xml
 
-   Alternatively, the ``/embed`` option can be used as a more flexible replacement:
+Alternatively, the ``/embed`` option can be used as a more flexible replacement:
 
 .. code:: bat
 

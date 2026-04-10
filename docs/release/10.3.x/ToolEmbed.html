@@ -162,11 +162,10 @@ To understand why this is needed and what happens when <code class="docutils lit
 <ul class="simple">
 <li><p>The following command allows to obtain a configured binary, using an XML configuration file specifying all necessary elements.</p></li>
 </ul>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span> DFIR-Orc.exe ToolEmbed /config=DFIR-Orc_embed.xml
-
-Alternatively, the ``/embed`` option can be used as a more flexible replacement:
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe ToolEmbed /config=DFIR-Orc_embed.xml
 </pre></div>
 </div>
+<p>Alternatively, the <code class="docutils literal notranslate"><span class="pre">/embed</span></code> option can be used as a more flexible replacement:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>DFIR-Orc.exe ToolEmbed /embed=c:\path\to\your\config\DFIR-Orc_embed.xml /out=DFIR-Orc.exe
 ; Or
 DFIR-Orc.exe ToolEmbed /embed=c:\path\to\your\config\ /out=DFIR-Orc.exe
