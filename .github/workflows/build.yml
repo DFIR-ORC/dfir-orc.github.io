@@ -20,19 +20,20 @@ jobs:
 
       - name: Install dependencies
         shell: pwsh
-        run: pip install sphinx solar-theme sphinx-multiversion
+        run: pip install "sphinx<7.0" solar-theme sphinx-multiversion
 
       # Builds one sub-folder per branch matching conf.py whitelist
       - name: Build versioned HTML
         shell: pwsh
-        run: sphinx-multiversion . .\build\html
+        run: sphinx-multiversion source .\build\html
 
       # Single-file build is version-agnostic: built from current checkout only
       - name: Build singlehtml
         shell: pwsh
         run: .\make.bat singlehtml
 
-      # Root index.html redirects bare URL visitors to /latest/
+      # Root index.html for the artifact: redirects to /latest/
+      # Note: the live gh-pages index.html is generated dynamically in the publish step.
       - name: Write root redirect page
         shell: pwsh
         run: Copy-Item -Force .\source\_static\root_redirect.html .\build\html\index.html
@@ -68,8 +69,32 @@ jobs:
             Copy-Item -Recurse -Force $_.FullName $dest
           }
 
-          # Copy root redirect
-          Copy-Item -Force .\build\html\index.html .\index.html
+          # Remove untracked build/ directory to avoid polluting gh-pages
+          if (Test-Path .\build) { Remove-Item -Recurse -Force .\build }
+
+          # Sort releases descending by (major, minor) for both redirect and version listing
+          $sortedReleases = if (Test-Path 'release') {
+            Get-ChildItem -Directory 'release' |
+              Sort-Object { $n = $_.Name -split '\.'; [int]$n[0] * 10000 + [int]$n[1] } -Descending
+          } else { @() }
+
+          # Determine the latest release version for the redirect
+          $latestVer = $sortedReleases | Select-Object -First 1 -ExpandProperty Name
+          $redirectTarget = if ($latestVer) { "release/$latestVer/index.html" } else { "versions.html" }
+
+          # Generate root index.html that redirects to the latest release
+          $rootHtml = "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Redirecting to latest documentation</title><meta http-equiv='refresh' content='0; url=$redirectTarget'><link rel='canonical' href='$redirectTarget'></head><body><p>Redirecting to <a href='$redirectTarget'>latest documentation</a>.</p></body></html>"
+          Set-Content -Path '.\index.html' -Value $rootHtml -Encoding UTF8
+
+          # Generate a versions index page listing all published releases
+          $versionItems = ''
+          $sortedReleases | ForEach-Object {
+            $ver = $_.Name
+            $label = if ($ver -eq $latestVer) { "$ver (latest)" } else { $ver }
+            $versionItems += "<li><a href='release/$ver/index.html'>$label</a></li>"
+          }
+          $versionsHtml = "<!DOCTYPE html><html><head><meta charset='utf-8'><title>DFIR ORC Documentation - All Versions</title><style>body{font-family:sans-serif;max-width:600px;margin:2em auto}li{margin:.5em 0;list-style:none}a{font-size:1.1em}</style></head><body><h1>DFIR ORC Documentation</h1><p>Select a version:</p><ul>$versionItems</ul><p><a href='$redirectTarget'>Go to latest</a></p></body></html>"
+          Set-Content -Path '.\versions.html' -Value $versionsHtml -Encoding UTF8
 
           # Disable Jekyll so GitHub Pages serves Sphinx _static/_sources folders
           New-Item -Force -ItemType File -Path ".nojekyll" | Out-Null

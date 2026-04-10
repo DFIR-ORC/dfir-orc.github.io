@@ -68,9 +68,8 @@ html_static_path = ['_static']
 
 def _get_latest_release_branch() -> str:   # <-- defined just before it is used
     """
-    Returns the release/X.Y branch with the highest (X, Y) version tuple.
-    Returns an empty string if no release branches exist, which disables
-    smv_latest_version (no branch will be renamed to 'latest').
+    Returns the release/X.Y[.z] branch name with the highest (X, Y) version tuple.
+    Returns an empty string if no release branches exist.
     No exceptions are raised: subprocess errors yield an empty list.
     """
     try:
@@ -82,24 +81,26 @@ def _get_latest_release_branch() -> str:   # <-- defined just before it is used
     except OSError:
         lines = []
 
-    pattern = re.compile(r'^origin/release/(\d+)\.(\d+)$')
+    # Match origin/release/X.Y or origin/release/X.Y.suffix (e.g. release/10.3.x, release/10.4.0)
+    pattern = re.compile(r'^origin/(release/(\d+)\.(\d+)(?:\.\w+)?)$')
     versions = []
 
     for line in lines:
         match = pattern.match(line.strip())
         if match:
-            major, minor = int(match.group(1)), int(match.group(2))
-            versions.append((major, minor))
+            branch_name = match.group(1)
+            major, minor = int(match.group(2)), int(match.group(3))
+            versions.append((major, minor, branch_name))
 
     if not versions:
         return ""
 
-    major, minor = max(versions)
-    return f"release/{major}.{minor}"
+    _, _, branch_name = max(versions, key=lambda x: (x[0], x[1]))
+    return branch_name
 
 extensions += ["sphinx_multiversion"]
 smv_tag_whitelist    = r'^$'
-smv_branch_whitelist = r'^release/\d+\.\d+$'  # release/X.Y only, no master
+smv_branch_whitelist = r'^release/\d+\.\d+'  # release/X.Y and release/X.Y.z
 smv_remote_whitelist = r'^origin$'
 
 #smv_latest_version   = 'master'
