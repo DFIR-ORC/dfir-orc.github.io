@@ -293,7 +293,7 @@ For example:
 ``/MultipleInstance`` Option
 ----------------------------
 
-Allows DFIR ORC to run concurrently multiple instances. This option is enable by default when running in "OffLine" mode.
+Allows DFIR ORC to run concurrently multiple instances.
 
 .. code:: bat
 
