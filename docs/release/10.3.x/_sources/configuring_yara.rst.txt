@@ -39,12 +39,29 @@ When specifying file names, the paths are relative to the folder from which the 
 
 When scanning files, the Yara engine can read them in blocks or as one big chunk of data. Available methods are:
 
-* ``blocks`` to read and scan files in blocks of size given by the `block <#configuring-yara-block>`_ attribute, and
+* ``blocks`` this is the newest 'blocks' method using Yara's streaming api to avoid mapping the whole file at once. Attribute 'block' and 'overlap' are ignored.
+  ``blocks_legacy`` to read and scan files in blocks of size given by the `block <#configuring-yara-block>`_ attribute
 * ``filemapping`` to read and scan files in one chunk using a pagefile-backed file mapping. This is *not* the same behavior as the ``yarac.exe`` binary which uses a file-backed mapping implying a sharing lock on the file which would be hazardous during live system scanning.
 
 .. code:: xml
 
     scan_method="blocks"
+
+.. note::
+
+   The ``blocks`` scan method currently relies on YARA's streaming API, but several
+   core YARA modules — including the ``pe`` module — are not fully compatible with
+   streaming mode. To preserve rule correctness, the effective behavior of
+   ``blocks`` is temporarily aligned with ``filemapping``. As a result:
+
+   * true streaming behavior is not enabled
+   * ``block`` and ``overlap`` attributes are ignored
+   * behavior is similar to ``filemapping`` but without the file‑backed mapping
+     used by ``yarac.exe``
+
+   This is a temporary compatibility measure while waiting for upstream fixes or
+   potential YARA-X support. The ``blocks_legacy`` method remains available but is
+   also not fully compatible with all YARA modules.
 
 .. note:: The ``filemapping`` value for this option is discouraged as it will consume a lot of memory for the scanning process when dealing with large files.
 

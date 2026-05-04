@@ -143,11 +143,28 @@ When specifying file names, the paths are relative to the folder from which the 
 <span id="configuring-yara-scan-method"></span><h2><code class="docutils literal notranslate"><span class="pre">scan_method</span></code> Attribute<a class="headerlink" href="#scan-method-attribute" title="Permalink to this heading">¶</a></h2>
 <p>When scanning files, the Yara engine can read them in blocks or as one big chunk of data. Available methods are:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">blocks</span></code> to read and scan files in blocks of size given by the <a class="reference external" href="#configuring-yara-block">block</a> attribute, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blocks</span></code> this is the newest ‘blocks’ method using Yara’s streaming api to avoid mapping the whole file at once. Attribute ‘block’ and ‘overlap’ are ignored.
+<code class="docutils literal notranslate"><span class="pre">blocks_legacy</span></code> to read and scan files in blocks of size given by the <a class="reference external" href="#configuring-yara-block">block</a> attribute</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">filemapping</span></code> to read and scan files in one chunk using a pagefile-backed file mapping. This is <em>not</em> the same behavior as the <code class="docutils literal notranslate"><span class="pre">yarac.exe</span></code> binary which uses a file-backed mapping implying a sharing lock on the file which would be hazardous during live system scanning.</p></li>
 </ul>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>scan_method=&quot;blocks&quot;
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">blocks</span></code> scan method currently relies on YARA’s streaming API, but several
+core YARA modules — including the <code class="docutils literal notranslate"><span class="pre">pe</span></code> module — are not fully compatible with
+streaming mode. To preserve rule correctness, the effective behavior of
+<code class="docutils literal notranslate"><span class="pre">blocks</span></code> is temporarily aligned with <code class="docutils literal notranslate"><span class="pre">filemapping</span></code>. As a result:</p>
+<ul class="simple">
+<li><p>true streaming behavior is not enabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">block</span></code> and <code class="docutils literal notranslate"><span class="pre">overlap</span></code> attributes are ignored</p></li>
+<li><p>behavior is similar to <code class="docutils literal notranslate"><span class="pre">filemapping</span></code> but without the file‑backed mapping
+used by <code class="docutils literal notranslate"><span class="pre">yarac.exe</span></code></p></li>
+</ul>
+<p>This is a temporary compatibility measure while waiting for upstream fixes or
+potential YARA-X support. The <code class="docutils literal notranslate"><span class="pre">blocks_legacy</span></code> method remains available but is
+also not fully compatible with all YARA modules.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
